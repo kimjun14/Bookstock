@@ -4,13 +4,16 @@ function MainPage() {
     return (
         <wrapper>
         <header>
+            {/* 메인상단로고 */}
             <div id="logo">
                 <Link to="/"><img class="logoImg" src="https://placeholder.com/163x38" /></Link>
             </div>
             <div>
-                <div id="login">
+                {/* 로그인 */}
+                <div id="login"> 
                     <Link to="/"><img class="loginImg" src="https://placeholder.com/150x38" /></Link>
                 </div>
+                {/* 회원가입 */}
                 <div id="register">
                     <Link to="/"><img class="registerImg" src="https://placeholder.com/150x38" /></Link>
                 </div>
@@ -18,6 +21,7 @@ function MainPage() {
         </header>
 
         <section>
+            {/* 본문상단배너 */}
             <div id="topSector">
                 <h1>소비자 중심의 역경매 시스템의 시작 북스탁</h1>
                 <input id="mainSearchbar" type="search" />
@@ -26,6 +30,7 @@ function MainPage() {
                     <button id="buying">삽니다</button>
                     <button id="selling">팝니다</button>
                 </div>
+                {/* 본문상단네비게이터 */}
                 <div id="mainNavigator">
                     <Link to="/" class="1"><img src="https://placeholder.com/85x76" /></Link>
                     <Link to="/" class="2"><img src="https://placeholder.com/85x76" /></Link>
@@ -36,7 +41,7 @@ function MainPage() {
                     <Link to="/" class="7"><img src="https://placeholder.com/85x76" /></Link>
                 </div>
             </div>
-
+            
             <div id="middleSector">
                 <div id="middleSectorTopbar">
                     <h1 id="middleSectorTitle">최신상품안내</h1>
