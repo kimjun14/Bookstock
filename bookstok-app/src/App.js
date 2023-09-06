@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import SignIn from "./pages/signIn";
+import SearchResult from "./pages/searchResult";
 
 function App() {
   return (
     <Router>
       <Routes>
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/searchResult" element={<SearchResult />} />
       </Routes>
     </Router>
   );
