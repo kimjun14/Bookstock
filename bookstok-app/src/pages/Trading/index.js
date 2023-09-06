@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import "./index.css";
 
 function Trading(){
-    <div>
-        <header>
+    return(
+    <>
+    <header>
         <div className="logoImg">
-            <Link to="/"><img style={{width: '200px', height: '180px'}} src="./logoImg.jpg" alt="Logo" /></Link>
+            <Link to="/"><img style={{"width": '200px', "height": '180px'}} src="http://placeholder.com/120x80" alt="Logo" /></Link>
         </div>
 
         <div className="HeaderNav">
@@ -18,13 +20,14 @@ function Trading(){
     <article>
         <div className="item">
             <div className="itemImg">
-                <img style={{width: '480px', height: '500px'}} src="./bookImage.jpg" />
+                <img style={{"width" : '480px', "height" : '500px'}} src="http://placeholder.com/480x480" alt='bookImg' />
             </div>
             <div className="itemInfo">
                 <h2>
                     <span className="badge text-bg-dark">팝니다</span>
                     <span className="itemTitle">도시와 그 불확실한 벽</span>
                 </h2>
+
                 <p>무라카미 하루키 장편소설</p>
                 <p>저자 : 무라카미 하루키</p>
                 <p>출판사 : 문학동네 </p>
@@ -56,14 +59,12 @@ function Trading(){
 
         <div className="bidsection">
             <div className="card-footer">
-                <form onsubmit="">
-                    <div className="bid">
-                        <div className="form-group">
-                            <input type="text" className="form-control" placeholder="입찰 가격을 입력하세요" />
-                            <button type="submit" className="btn btn-success">입찰하기</button>
-                        </div>
+                <div className="bid">
+                    <div className="form-group">
+                        <input type="text" className="form-control" placeholder="입찰 가격을 입력하세요" />
+                        <button type="button" className="btn btn-success">입찰하기</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </article>
@@ -85,7 +86,8 @@ function Trading(){
             <span>COPYRIGHT(C) 2023 북스탁 RIGHTS RESERVED</span>
         </div>
     </footer>
-</div>
+    </>
+    )
 }
 
 export default Trading;
