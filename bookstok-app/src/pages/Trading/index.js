@@ -20,7 +20,7 @@ function Trading(){
     <article>
         <div className="item">
             <div className="itemImg">
-                <img style={{"width" : '480px', "height" : '500px'}} src="http://placeholder.com/480x480" alt='bookImg' />
+                <img style={{"width" : '480px', "height" : '500px'}} src="https://shopping-phinf.pstatic.net/main_4229259/42292599622.20230906071147.jpg?type=w300" alt='bookImg' />
             </div>
             <div className="itemInfo">
                 <h2>
