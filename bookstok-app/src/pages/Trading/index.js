@@ -6,15 +6,6 @@ function Trading(){
     return(
     <>
     <header>
-        <div className="logoImg">
-            <Link to="/"><img style={{"width": '200px', "height": '180px'}} src="http://placeholder.com/120x80" alt="Logo" /></Link>
-        </div>
-
-        <div className="HeaderNav">
-            <Link to="/" className="login">LOGIN</Link>
-            <Link to="/" className="signup">SIGNUP</Link>
-            <Link to="/" className="mypage">MYPAGE</Link>
-        </div>
     </header>
 
     <article>
