@@ -1,0 +1,21 @@
+:root {
+    /* color */
+    --background-color: #fff;
+    --gray-color: #bcbdbe;
+    --sign-color: #1187CF;
+    
+    /* Size */
+    --xs-margin: 7px;       /* 도서와 도서사이 마진 */
+    --s-margin: 15px;       /* 소제목과 컨텐츠 사이 마진 */
+    --m-margin: 35px;       /* 컨텐츠와 컨텐츠 사이 마진 */
+    --l-margin: 45px;       /* 박스와 박스 사이 마진 */
+    --main-margin: 165px;   /* 메인 컨텐츠와 바디 사이 마진 */
+
+    /* Font Size */
+    --s-font: 14px;         /* 작가 폰트 크기 */
+    --m-font: 16px;         /* 제목 폰트 크기 */
+    --l-font: 22px;         /* 소제목 폰트 크기 */
+    
+    /* Font */
+
+}
