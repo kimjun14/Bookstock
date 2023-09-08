@@ -77,7 +77,7 @@ function MainPage() {
                 </div>
             </div>
 
-            <div style={{ marginTop: '20px', margin: '20px' }}>
+            <div style={{ marginTop: '5rem', marginLeft: '3rem' , marginBottom: '3rem'}}>
                 <h2>인기 경매 도서</h2>
             </div>
 
@@ -103,7 +103,7 @@ function MainPage() {
                 </div>
 
                 {/* 2번 책 */}
-                <div className="card" style={{ width: '18rem' }}>
+                <div className="card ms-3" style={{ width: '18rem' }}>
                     <a className='text-decoration-none text-black' href='/'>
                     <img
                         className='card-img-top'
@@ -120,7 +120,7 @@ function MainPage() {
                 </div>
 
                 {/* 3번 책 */}
-                <div className="card" style={{ width: '18rem' }}>
+                <div className="card ms-3" style={{ width: '18rem' }}>
                     <a className='text-decoration-none text-black' href='/'>
                     <img
                         className='card-img-top'
@@ -137,7 +137,7 @@ function MainPage() {
                 </div>
 
                 {/* 4번 책 */}
-                <div className="card" style={{ width: '18rem' }}>
+                <div className="card ms-3" style={{ width: '18rem' }}>
                     <a className='text-decoration-none text-black' href='/'>
                     <img
                         className='card-img-top'
