@@ -36,21 +36,21 @@ function MainPage() {
                     <div className="carousel-inner" style={{ height: '100%' }}>
                         <div className="carousel-item active">
                             <img
-                                src="https://via.placeholder.com/800x400"
+                                src="https://via.placeholder.com/800x300"
                                 className="d-block w-100"
                                 alt="Slide 1"
                             />
                         </div>
                         <div className="carousel-item">
                             <img
-                                src="https://via.placeholder.com/800x400"
+                                src="https://via.placeholder.com/800x300"
                                 className="d-block w-100"
                                 alt="Slide 2"
                             />
                         </div>
                         <div className="carousel-item">
                             <img
-                                src="https://via.placeholder.com/800x400"
+                                src="https://via.placeholder.com/800x300"
                                 className="d-block w-100"
                                 alt="Slide 3"
                             />
@@ -86,75 +86,71 @@ function MainPage() {
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
                 {/* 1번 책 */}
-                <div className="booklist1" style={{ marginRight: '100px' }}>
+                <div className="card" style={{ width: '18rem' }}>
+                    <a className='text-decoration-none text-black' href='/'>
                     <img
-                        style={{ width: '200px' }}
+                        className='card-img-top'
                         src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                        alt="."
+                        alt="book1"
                     />
-                    <p>
-                        어린왕자
-                        <button style={{ border: 'none', background: 'none', padding: '0' }}>
-                            <i className="fa-regular fa-heart" style={{ color: '#000000' }}></i>
-                        </button>
-                    </p>
-                    <span>시작 가격: 5000원</span>
-                    <p>현재 가격: 4000원</p>
-                    <p>찜: 3</p>
+                    <div className='card-text text-center'>
+                        <p>어린왕자</p>
+                        <span>시작 가격: 5000원</span>
+                        <p>현재 가격: 4000원</p>
+                        <p>찜: 3</p>
+                    </div>
+                    </a>
                 </div>
 
                 {/* 2번 책 */}
-                <div className="booklist2" style={{ marginRight: '100px' }}>
+                <div className="card" style={{ width: '18rem' }}>
+                    <a className='text-decoration-none text-black' href='/'>
                     <img
-                        style={{ width: '200px' }}
+                        className='card-img-top'
                         src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                        alt="."
+                        alt="book1"
                     />
-                    <p>
-                        어린왕자
-                        <button style={{ border: 'none', background: 'none', padding: '0' }}>
-                            <i className="fa-regular fa-heart" style={{ color: '#000000' }}></i>
-                        </button>
-                    </p>
-                    <span>시작 가격: 5000원</span>
-                    <p>현재 가격: 4000원</p>
-                    <p>찜: 3</p>
+                    <div className='card-text text-center'>
+                        <p>도시와 그 불확실한 벽</p>
+                        <span>시작 가격: 5000원</span>
+                        <p>현재 가격: 4000원</p>
+                        <p>찜: 3</p>
+                    </div>
+                    </a>
                 </div>
 
                 {/* 3번 책 */}
-                <div className="booklist3" style={{ marginRight: '100px' }}>
+                <div className="card" style={{ width: '18rem' }}>
+                    <a className='text-decoration-none text-black' href='/'>
                     <img
-                        style={{ width: '200px' }}
+                        className='card-img-top'
                         src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                        alt="."
+                        alt="book1"
                     />
-                    <p>
-                        어린왕자
-                        <button style={{ border: 'none', background: 'none', padding: '0' }}>
-                            <i className="fa-regular fa-heart" style={{ color: '#000000' }}></i>
-                        </button>
-                    </p>
-                    <span>시작 가격: 5000원</span>
-                    <p>현재 가격: 4000원</p>
-                    <p>찜: 3</p>
+                    <div className='card-text text-center'>
+                        <p>어린왕자</p>
+                        <span>시작 가격: 5000원</span>
+                        <p>현재 가격: 4000원</p>
+                        <p>찜: 3</p>
+                    </div>
+                    </a>
                 </div>
 
                 {/* 4번 책 */}
-                <div className="booklist4">
+                <div className="card" style={{ width: '18rem' }}>
+                    <a className='text-decoration-none text-black' href='/'>
                     <img
-                        style={{ width: '200px' }}
+                        className='card-img-top'
                         src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                        alt="."
+                        alt="book1"
                     />
-                    <p>
-                        어린왕자
-                        <button style={{ border: 'none', background: 'none', padding: '0' }}>
-                            <i className="fa-regular fa-heart" style={{ color: '#000000' }}></i>
-                        </button>
-                    </p>
-                    <span>시작 가격: 5000원</span>
-                    <p>현재 가격: 4000원</p>
-                    <p>찜: 3</p>
+                    <div className='card-text text-center'>
+                        <p>어린왕자</p>
+                        <span>시작 가격: 5000원</span>
+                        <p>현재 가격: 4000원</p>
+                        <p>찜: 3</p>
+                    </div>
+                    </a>
                 </div>
             </div>
         </div>
