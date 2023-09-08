@@ -8,7 +8,7 @@ const Header = function () {
         <nav className="navbar bg-white">
             {/* <!-- logo --> */}
             <div className="container mb-3">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="/">
                 <img src={logo2} alt="logo" width="150" height="130" />
             </a>
             {/* <!-- searchbar --> */}

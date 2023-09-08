@@ -4,7 +4,7 @@ const Register = () => {
     return (
         <div className="container">
             <div className="input-form-backgroud row">
-                <div className="input-form col-md-12 mx-auto">
+                <div style={{maxWidth: '680px', padding: '32px'}} className="input-form col-md-12 mx-auto">
                     <h4 className="mb-3">회원가입</h4>
                     <form className="validation-form" noValidate>
                         <div className="row">
@@ -45,27 +45,8 @@ const Register = () => {
                             <input type="text" className="form-control" id="address2" placeholder="상세주소를 입력해주세요." />
                         </div>
 
-                        <div className="row">
-                            <div className="col-md-8 mb-3">
-                                <label htmlFor="root">가입 경로</label>
-                                <select className="custom-select d-block w-100" id="root">
-                                    <option value=""></option>
-                                    <option>검색</option>
-                                    <option>카페</option>
-                                </select>
-                                <div className="invalid-feedback">
-                                    가입 경로를 선택해주세요.
-                                </div>
-                            </div>
-                            <div className="col-md-4 mb-3">
-                                <label htmlFor="code">추천인 코드</label>
-                                <input type="text" className="form-control" id="code" placeholder="" required />
-                                <div className="invalid-feedback">
-                                    추천인 코드를 입력해주세요.
-                                </div>
-                            </div>
-                        </div>
-                        <hr className="mb-4" />
+
+                        <hr className="mt-5 mb-4" />
                         <div className="custom-control custom-checkbox">
                             <input type="checkbox" className="custom-control-input" id="agreement" required />
                             <label className="custom-control-label" htmlFor="agreement">개인정보 수집 및 이용에 동의합니다.</label>
