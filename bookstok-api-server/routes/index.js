@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+const userRouter = require('./users');
+// const AuctionRouter = require('./aucboard'); 경매기능
+
+router.use('/users', userRouter);
+// router.use('/aucboards', aucRouter);
 
 module.exports = router;

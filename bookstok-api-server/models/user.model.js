@@ -1,0 +1,42 @@
+const pool = require('./pool');
+const crypto=require('crypto');
+// nodejs에서 제공하는 crypto 모듈을 이용하여
+// 암호를 해시값으로 변경하여 저장, 확인 관리하도록 함
+
+const userModel = {
+  // 회원 목록 조회
+  async find(){
+    try{
+      const sql = `select * from user`;
+      const [ result ] = await pool.query(sql);
+      return result;
+    }catch(err){
+      throw new Error('DB Error', { cause: err });
+    }
+  },
+  // 회원 가입
+  async create(user){
+    try{
+      // crypto 모듈로 비번을 sha1
+      user.pwd=crypto.createHash('sha1').update(user.pwd).digest('base64');
+      const sql = `insert into user set ?`;
+      const [ result ]  = await pool.query(sql, [user]);
+      return result.insertId;
+    }catch(err){
+      throw new Error('DB Error', { cause: err });
+    }
+  },
+  async signin(user){
+    try{
+      const sha1=crypto.createHash('sha1').update(user.pwd).digest('base64');
+      user.pwd = sha1;
+      const sql = `select * from user where userId = ? and pwd = ?`;
+      const [ result ] = await pool.query(sql, [user.userId, user.pwd]);
+      return result.length === 1;
+    }catch(err){
+      throw new Error('DB Error', { cause: err });
+    }
+  }
+}
+
+module.exports = userModel;
