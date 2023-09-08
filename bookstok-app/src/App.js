@@ -5,6 +5,7 @@ import SignIn from "./pages/signIn";
 import SearchResult from "./pages/searchResult";
 import Trading from "./pages/Trading";
 import MainPage from "./pages/mainPage";
+import Register from "./pages/register";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/searchResult" element={<SearchResult />} />
           <Route path="/trading" element={<Trading />} />
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </Router>
