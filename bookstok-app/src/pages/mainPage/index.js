@@ -1,5 +1,5 @@
 import React from 'react';
-
+import banner from '../../img/banner.jpg'
 function MainPage() {
     return (
         <div>
@@ -36,14 +36,14 @@ function MainPage() {
                     <div className="carousel-inner" style={{ height: '100%' }}>
                         <div className="carousel-item active">
                             <img
-                                src="https://via.placeholder.com/800x300"
+                                src={banner}
                                 className="d-block w-100"
                                 alt="Slide 1"
                             />
                         </div>
                         <div className="carousel-item">
                             <img
-                                src="https://via.placeholder.com/800x300"
+                                src={banner}
                                 className="d-block w-100"
                                 alt="Slide 2"
                             />
