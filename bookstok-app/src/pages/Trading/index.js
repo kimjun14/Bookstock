@@ -59,24 +59,6 @@ function Trading(){
             </div>
         </div>
     </article>
-
-    <footer>
-        <div className="footerNav">
-            <h5>
-                <Link to="/">서비스안내</Link>
-                <Link to="/">이용약관 </Link>
-                <Link to="/">메일무단수집거부 </Link>
-                <Link to="/">개인정보처리방침 </Link>
-                <Link to="/">고객센터 </Link>
-                <Link to="/">관리자쪽지</Link>
-            </h5>
-        </div>
-
-        <div className="footerInfo">
-            <p>북스탁     사업자등록번호:111-11-11111    대표번호 : 1111-1111</p>
-            <span>COPYRIGHT(C) 2023 북스탁 RIGHTS RESERVED</span>
-        </div>
-    </footer>
     </>
     )
 }

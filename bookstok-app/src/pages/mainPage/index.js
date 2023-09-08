@@ -157,29 +157,6 @@ function MainPage() {
                     <p>찜: 3</p>
                 </div>
             </div>
-
-            {/* 푸터 */}
-            <footer
-                style={{
-                    textAlign: 'center',
-                    fontSize: 'smaller',
-                    backgroundColor: '#f8f9fa',
-                }}
-            >
-                <div id="footerNav">
-                    <a href="/">서비스안내</a>
-                    <a href="/">이용약관</a>
-                    <a href="/">메일무단수집거부</a>
-                    <a href="/">개인정보처리방침</a>
-                    <a href="/">고객센터</a>
-                    <a href="/">관리자쪽지</a>
-                </div>
-                <div id="companyInfo">
-                    <p>북스탁 사업자등록번호:514-81-28277 대표번호:1900-2896</p>
-                    <br />
-                    <span>COPYRIGHT(C) 2023 북스탁 RIGHTS RESERVED</span>
-                </div>
-            </footer>
         </div>
     );
 }

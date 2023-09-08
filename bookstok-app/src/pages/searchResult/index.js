@@ -10,19 +10,6 @@ return (
   integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
   crossorigin="anonymous"
 />
-{/* header -> 네비게이션 */}
-<div className='container p-2'>
-  <div className='row d-flex align-items-end'>
-    <div className='col-6 d-flex align-items-end'>
-      <img className='mt-1' src='http://via.placeholder.com/160x38' alt='img-logo' /> 로고넣기
-    </div>
-    <div className="col-6 d-flex justify-content-end">
-      <span className='me-1'>[ Home ]</span>
-      <span className='me-1'>[ My Page ]</span>
-      <span className='me-1'>[ Login ]</span>
-    </div>
-  </div>
-</div>
 {/* Body , 검색 결과 제공*/ }
 <div className='container bg-light'>
   {/* 검색 창 표시 row */ }
@@ -180,18 +167,6 @@ return (
         <span className='col-10'>: 9791158394332</span>
       </div>
       <div>TypeScript/React/Next.js로 실전적인...</div>
-    </div>
-  </div>
-</div>
-{/* Footer */ }
-<div className='container bg-light-subtle'>
-  <div className='p-3'>
-    <div>Bookstock 카피라이트~~ contact ~~ 하이퍼링크</div>
-    <div>Designed by 라리북스 팀</div>
-    <div className="d-flex justify-content-center">
-      <img alt='sns1' />
-      <img alt='sns2' />
-      <img alt='sns3' />
     </div>
   </div>
 </div>
