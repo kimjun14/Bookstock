@@ -31,7 +31,7 @@ const Header = function () {
                                     <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
                                     <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
                                 </svg>
-                                <span style={{ fontSize: '14px', marginTop: '7px' }}>HOME</span>
+                                <span style={{ fontSize: '12px', marginTop: '6px' }}>HOME</span>
                             </a>
                         </li>
                         <li className="nav-item">
@@ -39,7 +39,7 @@ const Header = function () {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-door-open-fill" viewBox="0 0 16 16">
                                     <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
                                 </svg>
-                                <span style={{ fontSize: '14px', marginTop: '7px' }}>LOGIN</span>
+                                <span style={{ fontSize: '12px', marginTop: '6px' }}>LOGIN</span>
                             </a>
                         </li>
 
@@ -56,7 +56,7 @@ const Header = function () {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-person-fill" viewBox="0 0 16 16">
                                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                                 </svg>
-                                <span style={{ fontSize: '14px', marginTop: '7px' }}>MYPAGE</span>
+                                <span style={{ fontSize: '12px', marginTop: '6px' }}>MYPAGE</span>
 
                             </a>
                         </li>
@@ -66,10 +66,11 @@ const Header = function () {
                                 <span className="text-body-tertiary">Toggleable via the navbar brand.</span>
                             </div>
                         </div>
-
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" >
-                            <span className="navbar-toggler-icon" ></span>
+                        <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '3px', color:'black' }}>
+                            <span className="navbar-toggler-icon"></span>
+                            <div style={{ fontSize: '12px',marginTop:'3.2px' }}>CATEGORY</div>
                         </button>
+
                     </ul>
                 </div>
             </nav>
