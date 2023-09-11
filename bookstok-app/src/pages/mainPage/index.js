@@ -6,12 +6,14 @@ function MainPage() {
     return (
         <div>
             {/* 본문 상단 슬라이드 배너 */}
-            <div id="topSector" style={{ height: '80%' }}>
+            <div id="topSector" style={{ height: '80%' }}> 
+            {/* 체크 */}
                 <div
                     id="carouselExampleIndicators"
                     className="carousel slide"
                     data-bs-ride="carousel"
                     style={{ height: '450px' }}
+                    // 체크
                 >
                     <div className="carousel-indicators">
                         <button
@@ -36,6 +38,7 @@ function MainPage() {
                         ></button>
                     </div>
                     <div className="carousel-inner" style={{ height: '100%' }}>
+                        {/* 체크 */}
                         <div className="carousel-item active">
                             <img
                                 src={banner}
@@ -80,6 +83,7 @@ function MainPage() {
             </div>
 
             <div style={{ marginTop: '5rem', marginLeft: '3rem' , marginBottom: '3rem'}}>
+                {/* 체크 */}
                 <h2>인기 경매 도서</h2>
             </div>
 
