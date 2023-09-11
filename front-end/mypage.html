@@ -8,6 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <style>
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -45,9 +51,79 @@
             </div>
 
             <div class="col-md-9" style="margin-top: 5rem;">
-                <div class="col-md-10" style="border: solid 2.5px black; height: 18rem;">
-                    <div class="col-md-3" style="background-color: #c9deee; height: 17.65rem;">
-                        <a class="m-5 text-decoration-none" style="color: black; font-size: 1.6em;" href="/">userId ></a>
+                <div class="col-md-12 p-4 rounded d-flex flex-row" style="border: 1px solid #bcbdbe;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="#bcbdbe" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+
+                    <div class="ms-4 mt-2" style="border: 0px solid blue;">
+                        <span>
+                            <b class="fs-5">userId</b>
+                        </span><br />
+                        <span class="text-black-50">
+                            email
+                        </span><br />
+                        <button class="mt-1 btn btn-secondary btn-sm">프로필 관리</button>
+                    </div>
+
+                    <div style="border-right: 1px solid #bcbdbe; line-height: 5.9rem; margin-left: 27rem;">
+                        <p class="mx-5">
+                            <b>일반회원</b>
+                        </p>
+                    </div>
+
+                    <div style="line-height: 5.9rem; margin-left: 3rem;">
+                        <p>
+                            <b>예치금</b>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="fs-4 mt-5 mb-4 ms-2 fw-bold">경매 진행 내역</div>
+
+                <div class="border rounded">
+                    <div class="d-flex flex-row mb-3 justify-content-around">
+                        <div class="p-2 ms-4">
+                            <a href="#">
+                                <p class="fs-5 mt-4">입찰중</p>
+                                <p class="text-center">0</p>
+                            </a>
+                        </div>
+
+                        <div class="p-2 ms-4">
+                            <a href="#">
+                                <p class="fs-5 mt-4">판매완료</p>
+                                <p class="text-center">0</p>
+                            </a>
+                        </div>
+
+                        <div class="p-2 ms-4">
+                            <a href="#">
+                                <p class="fs-5 mt-4">역경매등록</p>
+                                <p class="text-center">0</p>
+                            </a>
+                        </div>
+
+                        <div class="p-2 ms-4">
+                            <a href="#">
+                                <p class="fs-5 mt-4">구매중</p>
+                                <p class="text-center">0</p>
+                            </a>
+                        </div>
+
+                        <div class="p-2 ms-4">
+                            <a href="#">
+                                <p class="fs-5 mt-4">구매완료</p>
+                                <p class="text-center">0</p>
+                            </a>
+                        </div>    
+                    </div>
+                </div>
+
+                <div class="mt-5 ">
+                    <div>
+                        <p class="text-center">거래 내역이 없습니다.</p>
                     </div>
                 </div>
             </div>

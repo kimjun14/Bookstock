@@ -6,6 +6,7 @@ import SearchResult from "./pages/searchResult";
 import Trading from "./pages/Trading";
 import MainPage from "./pages/mainPage";
 import Register from "./pages/register";
+import MyPage from "./pages/myPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/searchResult" element={<SearchResult />} />
           <Route path="/trading" element={<Trading />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/mypage" element={<MyPage />} />
         </Route>
       </Routes>
     </Router>
