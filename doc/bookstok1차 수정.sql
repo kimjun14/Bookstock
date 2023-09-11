@@ -15,7 +15,7 @@ USE `bookstock`;
 DROP TABLE IF EXISTS `bookstock`.`user`;
 CREATE TABLE IF NOT EXISTS `bookstock`.`user` (
   `userId` VARCHAR(30) NOT NULL COMMENT '이메일',
-  `pwd` VARCHAR(20) NOT NULL COMMENT '비밀번호',
+  `pwd` VARCHAR(40) NOT NULL COMMENT '비밀번호',
   `nick` VARCHAR(30) NOT NULL COMMENT '닉네임',
   `userPhone` INT(11) NULL COMMENT '가입자 핸드폰번호',
   `userAddr` VARCHAR(1000) NULL COMMENT '가입자 주소',
