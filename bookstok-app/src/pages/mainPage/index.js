@@ -1,5 +1,7 @@
 import React from 'react';
 import banner from '../../img/banner.jpg'
+import banner2 from '../../img/banner2.jpg'
+import banner3 from '../../img/banner3.jpg'
 function MainPage() {
     return (
         <div>
@@ -43,14 +45,14 @@ function MainPage() {
                         </div>
                         <div className="carousel-item">
                             <img
-                                src={banner}
+                                src={banner2}
                                 className="d-block w-100"
                                 alt="Slide 2"
                             />
                         </div>
                         <div className="carousel-item">
                             <img
-                                src="https://via.placeholder.com/800x300"
+                                src={banner3}
                                 className="d-block w-100"
                                 alt="Slide 3"
                             />
