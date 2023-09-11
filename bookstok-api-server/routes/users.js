@@ -34,4 +34,28 @@ router.post('/signin', async (req, res, next) => {
   }
 });
 
+// 회원정보 수정
+// 비밀번호 변경 페이지에 들어가기 전에 id(userNO)를 받았다 가정
+router.put('/:id', async (req, res, next) => {
+  try{
+    const id = Number(req.params.id);
+    const count = await user.update(id, req.body);
+    res.json({ count });
+  }catch(err){
+    next(err);
+  }
+});
+
+// 비밀번호 변경
+// 비밀번호 변경 페이지에 들어가기 전에 id(userNO)를 받았다 가정
+router.put('/:id/pwd', async (req, res, next) => {
+  try{
+    const id = Number(req.params.id);
+    const count = await user.changepwd(id, req.body);
+    res.json({ count });
+  }catch(err){
+    next(err);
+  }
+});
+
 module.exports = router;
