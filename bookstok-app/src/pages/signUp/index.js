@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const Register = () => {
     const [data, setData] = useState({
         userId: '',
-        pwd: '',
+        pwd: '1',
         nick: '',
         userPhone: '',
         userAccount: '',
@@ -18,7 +18,8 @@ const Register = () => {
         });
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
             const response = await axios.post('http://220.127.80.225:12345/api/users', data, {
                 headers: {
@@ -47,7 +48,7 @@ const Register = () => {
                             </div>
                             <div className="col-md-6 mb-3">
                                 <label htmlFor="email">이메일</label>
-                                <input type="email" className="form-control" id="email" placeholder="you@example.com" name="userId" value={data.userId} onChange={handleChange} required />
+                                <input type="email" className="form-control" id="userId" placeholder="you@example.com" name="userId" value={data.userId} onChange={handleChange} required />
                                 <div className="invalid-feedback">
                                     이메일을 입력해주세요.
                                 </div>
@@ -57,7 +58,7 @@ const Register = () => {
                         <div className="row">
                             <div className="col-md-6 mb-3">
                                 <label htmlFor="address">주소</label>
-                                <input type="text" className="form-control" id="address" placeholder="서울특별시 강남구" name="userAddr" value={data.userAddr} onChange={handleChange} required />
+                                <input type="text" className="form-control" id="userAddr" placeholder="서울특별시 강남구" name="userAddr" value={data.userAddr} onChange={handleChange} required />
                                 <div className="invalid-feedback">
                                     주소를 입력해주세요.
                                 </div>
@@ -72,13 +73,16 @@ const Register = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="address2">상세주소<span className="text-muted"> (필수 아님)</span></label>
-                            <input type="text" className="form-control" id="address2" placeholder="상세주소를 입력해주세요." />
+                            <label htmlFor="userAccount">계좌번호</label>
+                            <input type="text" className="form-control" id="userAccount" placeholder="계좌번호를 입력해주세요." name="userAccount" value={data.userAccount} onChange={handleChange} required />
+                            <div className="invalid-feedback">
+                                계좌번호를 입력해주세요.
+                            </div>
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="userAccount">계좌번호</label>
-                            <input type="text" className="form-control" id="userAccount" placeholder="계좌번호를 입력해주세요." name="userAccount" value={data.userAccount} onChange={handleChange} required />
+                            <label htmlFor="userAccount">비밀번호</label>
+                            <input type="text" className="form-control" id="pwd" placeholder="" name="pwd" value={data.pwd} onChange={handleChange} required />
                             <div className="invalid-feedback">
                                 계좌번호를 입력해주세요.
                             </div>
