@@ -20,7 +20,7 @@ const SignIn = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://http://220.127.80.225/:12345/api/users', data, {
+      const response = await axios.post('http://220.127.80.225:12345/api/users', data, {
         headers: {
           'Content-Type': 'application/json'
         }
