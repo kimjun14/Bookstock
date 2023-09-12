@@ -8,10 +8,13 @@ const SignIn = function () {
 
   const chechId = function (ch) {
     let ascii = ch.charCodeAt(0);
+    if (33 /* ! */ <= ascii && ascii <= 47 /* / */) return true;
     if (48 /* 0 */ <= ascii && ascii <= 57 /* 9 */) return true;
+    if (58 /* : */ <= ascii && ascii <= 64 /* @ */) return true;
     if (65 /* A */ <= ascii && ascii <= 90 /* Z */) return true;
+    if (91 /* [ */ <= ascii && ascii <= 96 /* ` */) return true;
     if (97 /* a */ <= ascii && ascii <= 122 /* z */) return true;
-    if (ch === ".") return true;
+    if (123 /* { */ <= ascii && ascii <= 126 /* ~ */) return true;
 
     return false;
   };

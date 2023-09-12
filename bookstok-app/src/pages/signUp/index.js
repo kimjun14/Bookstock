@@ -3,7 +3,25 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 const Register = () => {
+
+    const checkNick = function (ch) {
+        let ascii = ch.charCodeAt(0);
+        if (33 /* ! */ <= ascii && ascii <= 47 /* / */) return true;
+        if (48 /* 0 */ <= ascii && ascii <= 57 /* 9 */) return true;
+        if (58 /* : */ <= ascii && ascii <= 64 /* @ */) return true;
+        if (65 /* A */ <= ascii && ascii <= 90 /* Z */) return true;
+        if (91 /* [ */ <= ascii && ascii <= 96 /* ` */) return true;
+        if (97 /* a */ <= ascii && ascii <= 122 /* z */) return true;
+        if (123 /* { */ <= ascii && ascii <= 126 /* ~ */) return true;
+
+        if (ch === ".") return true;
+    
+        return false;
+      };
+
+
     const navigation = useNavigate();
+    //data.userId
 
     const [data, setData] = useState({
         userId: '',
@@ -15,9 +33,21 @@ const Register = () => {
     });
 
     const handleChange = (e) => {
+        // 이메일 확인
+        let value = e.target.value;
+      
+        if (value === "") {
+          setData(value);
+          return;
+        }
+      
+        let length = value.length;
+        if (checkNick(value[length - 1]) === false) return;
+      
+        // 데이터 업데이트
         setData({
-            ...data,
-            [e.target.name]: e.target.value
+          ...data,
+          [e.target.name]: e.target.value
         });
     };
 
