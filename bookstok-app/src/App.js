@@ -5,7 +5,7 @@ import SignIn from "./pages/signIn";
 import SearchResult from "./pages/searchResult";
 import Trading from "./pages/Trading";
 import MainPage from "./pages/mainPage";
-import Register from "./pages/register";
+import Register from "./pages/register/register.js"; // <- 임시 작업본
 import MyPage from "./pages/myPage";
 
 function App() {
