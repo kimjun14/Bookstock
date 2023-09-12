@@ -7,6 +7,7 @@ import Trading from "./pages/Trading";
 import MainPage from "./pages/mainPage";
 import SignUp from "./pages/signUp";
 import MyPage from "./pages/myPage";
+import BookSignUp from "./pages/bookSignUp";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/trading" element={<Trading />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/booksignup" element={<BookSignUp />} />
         </Route>
       </Routes>
     </Router>

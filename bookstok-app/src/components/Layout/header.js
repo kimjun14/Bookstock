@@ -24,7 +24,7 @@ const Header = function () {
             <nav className="navbar bg-white">
                 {/* 첫 번째 줄 */}
                 <div className="container mb-3 d-flex justify-content-between align-items-center">
-                    <Link to="/" className="navbar-brand"> 
+                    <Link to="/" className="navbar-brand">
                         <img src={logo2Cut} alt="logo" width="180" />
                     </Link>
                     <form className="d-flex" role="search" style={{ backgroundColor: '', height: '40px' }} onSubmit={handleSearchSubmit}>
@@ -72,7 +72,7 @@ const Header = function () {
                 {/* 두 번째 줄 */}
                 
                 <div className="container mb-3 d-flex">
-                    <Link to="/" type="button" className="btn btn-outline-secondary" >도서 등록하기</Link> 
+                    <Link to="/booksignup" type="button" className="btn btn-outline-secondary" >도서 등록하기</Link> 
                     <ul className="nav">
                     </ul>
                     <div className="collapse" id="navbarToggleExternalContent" data-bs-theme="bg-white">
