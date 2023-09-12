@@ -27,7 +27,7 @@ const Header = function () {
                     <Link to="/" className="navbar-brand"> 
                         <img src={logo2Cut} alt="logo" width="180" />
                     </Link>
-                    <form className="d-flex" role="search" style={{ backgroundColor: '', height: '40px' }}>
+                    <form className="d-flex" role="search" style={{ backgroundColor: '', height: '40px' }} onSubmit={handleSearchSubmit}>
                     {/* <!-- searchbar --> */}
                         <div className="input-group">
                             <span className="input-group-text" style={{ backgroundColor: '#FFF', height: '40px' }}>
