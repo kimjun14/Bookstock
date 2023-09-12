@@ -2,6 +2,7 @@ import React from 'react';
 import banner from '../../img/banner.jpg';
 import banner2 from '../../img/banner2.jpg';
 import banner3 from '../../img/banner3.jpg';
+import { Link } from 'react-router-dom';
 
 function MainPage() {
     return (
@@ -84,7 +85,7 @@ function MainPage() {
                 <div className="d-flex flex-wrap justify-content-center">
                     {/* 1번 책 */}
                     <div className="card m-3" style={{ width: '18rem' }}>
-                        <a className='text-decoration-none text-black' href='/'>
+                        <Link className='text-decoration-none text-black' to='/trading'>
                             <img
                                 className='card-img-top'
                                 src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
@@ -96,12 +97,12 @@ function MainPage() {
                                 <p className='card-text'>현재 가격: 4000원</p>
                                 <p className='card-text'>찜: 3</p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
 
                     {/* 2번 책 */}
                     <div className="card m-3" style={{ width: '18rem' }}>
-                        <a className='text-decoration-none text-black' href='/'>
+                        <Link className='text-decoration-none text-black' to='trading'>
                             <img
                                 className='card-img-top'
                                 src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
@@ -113,12 +114,12 @@ function MainPage() {
                                 <p className='card-text'>현재 가격: 4000원</p>
                                 <p className='card-text'>찜: 3</p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
 
                     {/* 3번 책 */}
                     <div className="card m-3" style={{ width: '18rem' }}>
-                        <a className='text-decoration-none text-black' href='/'>
+                        <Link className='text-decoration-none text-black' to='/trading'>
                             <img
                                 className='card-img-top'
                                 src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
@@ -130,12 +131,12 @@ function MainPage() {
                                 <p className='card-text'>현재 가격: 4000원</p>
                                 <p className='card-text'>찜: 3</p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
 
                     {/* 4번 책 */}
                     <div className="card m-3" style={{ width: '18rem' }}>
-                        <a className='text-decoration-none text-black' href='/'>
+                        <Link className='text-decoration-none text-black' to='/trading'>
                             <img
                                 className='card-img-top'
                                 src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
@@ -147,12 +148,12 @@ function MainPage() {
                                 <p className='card-text'>현재 가격: 4000원</p>
                                 <p className='card-text'>찜: 3</p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
 
                     {/* 5번 책 */}
                     <div className="card m-3" style={{ width: '18rem' }}>
-                        <a className='text-decoration-none text-black' href='/'>
+                        <Link className='text-decoration-none text-black' to='/trading'>
                             <img
                                 className='card-img-top'
                                 src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
@@ -164,12 +165,12 @@ function MainPage() {
                                 <p className='card-text'>현재 가격: 4000원</p>
                                 <p className='card-text'>찜: 3</p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
 
                     {/* 6번 책 */}
                     <div className="card m-3" style={{ width: '18rem' }}>
-                        <a className='text-decoration-none text-black' href='/'>
+                        <Link className='text-decoration-none text-black' to='/trading'>
                             <img
                                 className='card-img-top'
                                 src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
@@ -181,7 +182,7 @@ function MainPage() {
                                 <p className='card-text'>현재 가격: 4000원</p>
                                 <p className='card-text'>찜: 3</p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

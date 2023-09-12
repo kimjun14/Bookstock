@@ -1,5 +1,7 @@
 // 검색 페이지 제작
 
+import { Link } from "react-router-dom";
+
 function SearchResult() {
 return (
 <>
@@ -27,7 +29,9 @@ return (
   {/* 검색 내용 표시 row 1 */ }
   <div className='row p-2 d-flex align-items-center'>
     <div className='col-3'>
-      <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      <Link to ='/trading'>
+        <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      </Link>
     </div>
     <div className='col-9'>
       <div className='d-flex align-items-start'>
@@ -56,7 +60,9 @@ return (
   {/* 검색 내용 표시 row 2 */ }
   <div className='row p-2 d-flex align-items-center'>
     <div className='col-3'>
-      <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      <Link to ='/trading'>
+        <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      </Link>
     </div>
     <div className='col-9'>
       <div className='d-flex align-items-start'>
@@ -85,7 +91,9 @@ return (
   {/* 검색 내용 표시 row 3 */ }
   <div className='row p-2 d-flex align-items-center'>
     <div className='col-3'>
-      <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      <Link to ='/trading'>
+          <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      </Link>
     </div>
     <div className='col-9'>
       <div className='d-flex align-items-start'>
@@ -114,7 +122,9 @@ return (
   {/* 검색 내용 표시 row 4 */ }
   <div className='row p-2 d-flex align-items-center'>
     <div className='col-3'>
-      <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      <Link to ='/trading'>
+          <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      </Link>
     </div>
     <div className='col-9'>
       <div className='d-flex align-items-start'>
@@ -143,7 +153,9 @@ return (
   {/* 검색 내용 표시 row 5 */ }
   <div className='row p-2 d-flex align-items-center'>
     <div className='col-3'>
-      <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      <Link to ='/trading'>
+        <img className='img-fluid' alt='searchImg' src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg" />
+      </Link>
     </div>
     <div className='col-9'>
       <div className='d-flex align-items-start'>
