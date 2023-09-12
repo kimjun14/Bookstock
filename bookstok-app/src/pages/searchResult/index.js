@@ -1,17 +1,57 @@
-import React from 'react';
-import { Link , useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function SearchResult() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get("query");
 
-  // query
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
+  async function QuerySend(query) {
+    try {
+      const response = await axios.post('http://220.127.80.225:12345/api/search', { query });
+      return response.data;
+    } catch (error) {
+      console.error("쿼리 전송 실패", error);
+      setError(error); // 에러 상태 설정
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await QuerySend(query);
+      setData(result);
+    }
+    fetchData();
+  }, [query]);
+
+  if (error) {
+    return <div>검색 중 오류가 발생했습니다: {error.message}</div>;
+  }
+
+  if (!data) {
+    return <div>데이터를 로드 중입니다...</div>;
+  }  
+
+  // 이하 코드는 header에서 쓴 코드 재사용
+    // 1. 검색창 핸들러
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    }
+
+    // 2. 폼 제출 핸들러
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        navigate(`?query=${searchTerm}`);
+    };
 
   return (
     <>
-      {query?`-- 쿼리값 [ ${query} ] 전달 받음 --`:"쿼리값 없음"}
       {/* 부트스트랩 css 라이브러리 이용 */}
       <link
         rel="stylesheet"
@@ -22,15 +62,17 @@ function SearchResult() {
       {/* Body, 검색 결과 제공 */}
       <div className="container bg-light">
         {/* 검색 창 표시 row */}
-        {/* 검색 버튼 누르면 ?query(key)=검색내용(value)를 get으로 던짐 */}
+        {/* 검색 버튼 누르면 ?query(key)=검색내용(value)를 post으로 던짐 */}
         <div className="row">
-          <form action="/" method="get">
+          <form action="/" onSubmit={handleSearchSubmit}>
             <div className="input-group p-3 d-flex justify-content-center">
               <input
                 className="w-75 me-2"
                 type="text"
                 placeholder={query||"책 이름 검색"}
                 name="title"
+                value={searchTerm} 
+                onChange={handleSearchChange}
               />
               <span className="input-group-append">
                 <button className="btn btn-primary" type="submit">
@@ -41,45 +83,45 @@ function SearchResult() {
           </form>
         </div>
         {/* 검색 내용 표시 row */}
-        {/* {[1, 2, 3, 4, 5].map((item) => (
+        {data.items.map((book, index) => (
           <div
-            key={item}
+            key={index}
             className="row p-2 d-flex align-items-center"
           >
             <div className="col-md-3 col-sm-6">
               <Link to="/trading">
                 <img
                   className="img-fluid"
-                  alt="searchImg"
-                  src="https://shopping-phinf.pstatic.net/main_4019202/40192022618.20230620100239.jpg"
+                  alt={book.title}
+                  src={book.image}
                 />
               </Link>
             </div>
             <div className="col-md-9 col-sm-6">
               <div className="d-flex align-items-start">
                 <span className="col-2">제목</span>
-                <span className="col-10">: 타입스크립트, 리액트, Next.js...</span>
+                <span className="col-10">: {book.title}</span>
               </div>
               <div className="d-flex align-items-start">
                 <span className="col-2">작가</span>
-                <span className="col-10">: 테지마 타쿠야...</span>
+                <span className="col-10">: {book.author}</span>
               </div>
               <div className="d-flex align-items-start">
                 <span className="col-2">출판사</span>
-                <span className="col-10">: 위키북스</span>
+                <span className="col-10">: {book.publisher}</span>
               </div>
               <div className="d-flex align-items-start">
                 <span className="col-2">출판일</span>
-                <span className="col-10">: 20230530</span>
+                <span className="col-10">: {book.pubdate}</span>
               </div>
               <div className="d-flex align-items-start">
                 <span className="col-2">ISBN</span>
-                <span className="col-10">: 9791158394332</span>
+                <span className="col-10">: {book.isbn}</span>
               </div>
-              <div>TypeScript/React/Next.js로 실전적인...</div>
+              <div>{book.description}</div>
             </div>
           </div>
-        ))} */}
+        ))}
       </div>
     </>
   );
