@@ -4,7 +4,7 @@ const Register = () => {
     return (
         <div className="container">
             <div className="input-form-background row">
-                <div style={{ maxWidth: '100%', padding: '16px' }} className="input-form col-lg-8 col-md-10 mx-auto">
+                <div className="input-form col-lg-8 col-md-10 mx-auto">
                     <h4 className="mb-3">회원가입</h4>
                     <form className="validation-form" noValidate>
                         <div className="row">
