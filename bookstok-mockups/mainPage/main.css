@@ -1,0 +1,116 @@
+body {
+    border: 1px solid red;
+    width: 100%;
+    margin: 0px auto;
+}
+
+header {
+    border: 0px solid blue;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+header .logoImg{
+    border: 0px solid yellow;
+    width: 150px;
+    height: 110px;
+
+    margin-left: 40px;
+}
+
+header #headerNav{
+    border: 0px solid green;
+    display: flex;
+    line-height: 90px;
+    margin-right: 40px;
+}
+#headerNav .register{
+    margin-right: 40px;
+}
+
+#headerNav a{
+    text-decoration: none;
+    color: black;
+}
+
+section{
+    border: 0px solid green;
+}
+
+section #middleSection{
+    border: 0px solid brown;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    background-color: rgb(240, 240, 240);
+}
+
+section #welcomeText{
+    border: 0px solid red;
+    text-align: center;
+}
+
+section #sectionImg{
+    border: 0px solid blue;
+    display: flex;
+    justify-content: center;
+}
+
+section #sectionImg > .welcomeimage{
+    margin-top: 50px;
+    margin-right: 35px;
+    margin-left: 35px;
+    text-align: center;
+}
+
+section #carousel2{
+    border: solid 0px red;
+    width: 33%;
+    margin-top: 80px;
+    margin-left: 495px;
+}
+
+section #carousel2 > .middleCarousel{
+    text-align: center;
+    border: 0px solid yellow;
+}
+
+section #sectionText {
+    text-align: center;
+    border: 0px solid blue;
+}
+
+section #bottomSection{
+    margin-top: 125px;
+    margin-bottom: 300px;
+}
+
+section #popularText{
+    text-align: center;
+}
+
+section #popularItem{
+    margin-top: 120px;
+    display: flex;
+    justify-content: space-between;
+}
+
+section #popularItem .itemlist{
+    border: 1px solid gray;
+    width: 250px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+section p,span {
+    margin-left: 5px;
+}
+
+section #bootStockLink{
+    margin-top: 80px;
+    text-align: center;
+}
+
+section #bootStockLink a{
+    text-decoration: none;
+    color: black;
+}

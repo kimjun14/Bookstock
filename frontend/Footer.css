@@ -1,0 +1,33 @@
+footer {
+  background-color: #fff;
+  color: gray;
+  padding: 20px 0;
+  margin-left: 160px;
+  display: flex;
+  font-size: smaller;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  float: left;
+  margin-right: 110px;
+}
+
+.footer-section ul li:first-child {
+  font-weight: bold;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.footer-bottom {
+  text-align: left;
+}
+
+button {
+  border-style: none;
+  background-color: #fff;
+  color: gray;
+}
