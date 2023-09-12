@@ -28,6 +28,8 @@ router.post('/', async (req, res, next) => {
 router.post('/signin', async (req, res, next) => {
   try{
     const ok = await user.signin(req.body);
+    req.session.userId=req.body.userId;
+    res.send('signin successful');
     res.json({ ok });
   }catch(err){
     next(err);
