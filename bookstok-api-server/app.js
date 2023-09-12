@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -6,12 +7,21 @@ const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 
+
 var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.json());
+app.use(session({
+    cookie: { maxAge: 1000*60*60*2 },
+    secret: 'sometext',
+    rolling: true,  // 매 응답마다 쿠키 시간 초기화
+    resave: false,  // 세션값이 수정되지 않으면 서버에 다시 저장하지 않음
+    saveUninitialized: false// 세션에 값이 없으면 쿠키를 전송하지 않음
+}));  // req.session 속성을 만들어서 세션 객체를 저장
 
 app.use(cors());
 app.use('/api', indexRouter);
