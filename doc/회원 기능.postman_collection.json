@@ -45,7 +45,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userId\":\"postmantest005\",\r\n    \"pwd\":\"testpwd3\", \r\n    \"nick\":\"postman3\",\r\n    \"userPhone\":\"01011112224\",\r\n    \"userAccount\":\"123333344455\",\r\n    \"userAddr\":\"서울시 어딘가 대충 주소3\"\r\n}",
+					"raw": "{\r\n    \"userId\":\"postmantest009\",\r\n    \"pwd\":\"testpwd3\", \r\n    \"nick\":\"postman9\",\r\n    \"userPhone\":\"01011112245\",\r\n    \"userAccount\":\"123333334555\",\r\n    \"userAddr\":\"주소...이거 비번 testpwd3임\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -73,7 +73,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userId\":\"postmantest005\",\r\n    \"pwd\":\"testpwd3\" \r\n}",
+					"raw": "{\r\n    \"userId\":\"postmantest006\",\r\n    \"pwd\":\"testpwd3\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -90,6 +90,65 @@
 						"api",
 						"users",
 						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "비번 변경",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pwd\":\"pwdtest003\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:12345/api/users/2/pwd",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"users",
+						"2",
+						"pwd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "회원정보 수정",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nick\":\"닉수정태스트\",\r\n    \"userPhone\":\"01011119876\",\r\n    \"userAccount\":\"129999977777\",\r\n    \"userAddr\":\"주소 수정 태스트\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:12345/api/users/2",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"users",
+						"2"
 					]
 				}
 			},
