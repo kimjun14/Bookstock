@@ -41,8 +41,7 @@ const SignIn = function () {
     if (loginPassword === "") {
       alert("비밀번호를 입력해주세요.");
     } 
-  }
-
+  };
 
     return(
     <div id="container">
@@ -52,15 +51,15 @@ const SignIn = function () {
         <div id="inputBox">
 
           <div className="input-form-box"><span>아이디 </span>
-            <input type="text" name="uid" className="form-control" value={loginId} onChange={(e) => getLoginId(e)}/>
+            <input type="text" id="loginId" name="loginId" className="form-control" value={loginId} onChange={(e) => getLoginId(e)}/>
           </div>
 
           <div className="input-form-box"><span>비밀번호 </span>
-            <input value = {loginPassword} type="password" name="upw" className="form-control"/>
+            <input type="password" id="loginPassword" name="loginPassword" className="form-control" value = {loginPassword} onChange={(e) => setLoginPassword(e.target.value)}/>
           </div>
          
           <div className="button-login-box" >
-            <button type="button" className="btn btn-primary btn-xs" style={{"width" :" 30%"}} onClick={login}>로그인</button>
+            <button type="button" className="btn btn-primary btn-xs" style={{"width" :" 30%"}} onClick={login} >로그인</button>
           </div>
 
           <div>
