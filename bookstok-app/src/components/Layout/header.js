@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import React from "react";
 import { Link } from "react-router-dom"; // react-router-dom에서 Link 가져오기
-=======
-import React, { useState } from "react";
->>>>>>> 4409481b558662b3f00c9d3d9d5b8c4c6f6e3d87
 import logo2Cut from "../../img/logo2Cut.jpg";
 import { useNavigate } from "react-router";
 
@@ -30,14 +26,8 @@ const Header = function () {
                 <div className="container mb-3 d-flex justify-content-between align-items-center">
                     <Link to="/" className="navbar-brand"> 
                         <img src={logo2Cut} alt="logo" width="180" />
-<<<<<<< HEAD
                     </Link>
                     <form className="d-flex" role="search" style={{ backgroundColor: '', height: '40px' }}>
-=======
-                    </a>
-                    {/* <!-- searchbar --> */}
-                    <form className="d-flex ms-auto" role="search" onSubmit={handleSearchSubmit}>
->>>>>>> 4409481b558662b3f00c9d3d9d5b8c4c6f6e3d87
                         <div className="input-group">
                             <span className="input-group-text" style={{ backgroundColor: '#FFF', height: '40px' }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
