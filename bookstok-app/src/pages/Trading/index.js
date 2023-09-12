@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
 
 function Trading() {
+    const [bidAmount, setBidAmount] = useState("");
+
+    const handleBidChange = (e) => {
+        setBidAmount(e.target.value);
+    }
+
+    const handleBidSubmit = () => {
+        console.log("입찰금액:", bidAmount);
+    }
+
     return (
         <>
             <article>
@@ -84,10 +94,15 @@ function Trading() {
                             <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} ></textarea>
                             <label for="floatingTextarea2">상품 정보를 입력하세요</label>
                         </div>
+                    </div>
 
+                    <div className="row">
                         <div className="input-group mt-2">
-                            <input type="file" className="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
-                            <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04">입찰 하기</button>
+                            <input type="file" className="form-control" id="inputGroupFile04" />
+                            <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" value={bidAmount} onChange={handleBidChange} />
+                            <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
+                                입찰 하기
+                            </button>
                         </div>
                     </div>
                 </div>
