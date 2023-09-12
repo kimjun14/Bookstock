@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const Register = () => {
     const [data, setData] = useState({
         userId: '',
-        pwd: '1',
+        pwd: '',
         nick: '',
         userPhone: '',
         userAccount: '',
@@ -33,8 +33,9 @@ const Register = () => {
         }
     };
     return (
-        <div className="container">
+        <div className="container-fluid">
             <div className="row justify-content-center align-items-center vh-100">
+                <div className='col-md-3'></div>
                 <div className="col-md-6">
                     <h4 className="mb-3">회원가입</h4>
                     <form className="validation-form" noValidate>
@@ -97,13 +98,16 @@ const Register = () => {
                                 </div>
                             </div>
                         </div>
-                            <hr className="my-4" />
+
+                        <div className='row'>
+                        <hr className="my-4 col-md-6 mb-3" />
                             <div className="custom-control custom-checkbox">
                                 <input type="checkbox" className="custom-control-input" id="agreement" required />
-                                <label className="custom-control-label" htmlFor="agreement">개인정보 수집 및 이용에 동의합니다.</label>
+                                <label className="custom-control-label" htmlFor="agreement">&nbsp;개인정보 수집 및 이용에 동의합니다.</label>
                             </div>
                             <div className="my-4"></div>
-                            <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handleSubmit}>가입 완료</button>
+                            <button className="col-md-6 mb-3 btn btn-primary btn-lg btn-block" type="submit" onClick={handleSubmit}>가입 완료</button>
+                        </div>
                     </form>
                 </div>
             </div>
