@@ -1,9 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useLocation } from 'react-router-dom';
 
 function SearchResult() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get("query");
+
+  // query
+
+
   return (
     <>
+      {query?`-- 쿼리값 [ ${query} ] 전달 받음 --`:"쿼리값 없음"}
       {/* 부트스트랩 css 라이브러리 이용 */}
       <link
         rel="stylesheet"
@@ -14,14 +22,14 @@ function SearchResult() {
       {/* Body, 검색 결과 제공 */}
       <div className="container bg-light">
         {/* 검색 창 표시 row */}
-        {/* 검색 버튼 누르면 ?title(key)=검색내용(value)를 get으로 던짐 */}
+        {/* 검색 버튼 누르면 ?query(key)=검색내용(value)를 get으로 던짐 */}
         <div className="row">
           <form action="/" method="get">
             <div className="input-group p-3 d-flex justify-content-center">
               <input
                 className="w-75 me-2"
                 type="text"
-                placeholder="책 이름 검색"
+                placeholder={query||"책 이름 검색"}
                 name="title"
               />
               <span className="input-group-append">
@@ -33,7 +41,7 @@ function SearchResult() {
           </form>
         </div>
         {/* 검색 내용 표시 row */}
-        {[1, 2, 3, 4, 5].map((item) => (
+        {/* {[1, 2, 3, 4, 5].map((item) => (
           <div
             key={item}
             className="row p-2 d-flex align-items-center"
@@ -71,7 +79,7 @@ function SearchResult() {
               <div>TypeScript/React/Next.js로 실전적인...</div>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
     </>
   );

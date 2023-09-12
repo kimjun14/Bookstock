@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import logo2Cut from "../../img/logo2Cut.jpg";
+import { useNavigate } from "react-router";
 
 
 const Header = function () {
+    // 1. 상태 생성
+    const [searchTerm, setSearchTerm]=useState("");
+    const navigate = useNavigate();
+
+    // 2. 검색창 핸들러
+    const handleSearchChange = (e) => {             
+        setSearchTerm(e.target.value);
+    }
+
+    // 3. 폼 제출 핸들러
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        navigate(`searchResult?query=${searchTerm}`);
+    };
+
     return (
         <>
             <nav className="navbar bg-white">
@@ -12,14 +28,14 @@ const Header = function () {
                         <img src={logo2Cut} alt="logo" width="180" />
                     </a>
                     {/* <!-- searchbar --> */}
-                    <form className="d-flex ms-auto" role="search">
+                    <form className="d-flex ms-auto" role="search" onSubmit={handleSearchSubmit}>
                         <div className="input-group">
                             <span className="input-group-text" style={{ backgroundColor: '#FFF' }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                 </svg>
                             </span>
-                            <input className="form-control me-2" type="search" placeholder="" style={{ borderLeft: 'none' }} />
+                            <input className="form-control me-2" type="search" placeholder="" style={{ borderLeft: 'none' }} value={searchTerm} onChange={handleSearchChange} />
                         </div>
                     </form>
 
