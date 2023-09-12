@@ -92,7 +92,7 @@ function Trading() {
                     <div className="row">
                         <div className="form-floating">
                             <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} ></textarea>
-                            <label for="floatingTextarea2">상품 정보를 입력하세요</label>
+                            <label htmlFor="floatingTextarea2">상품 정보를 입력하세요</label>
                         </div>
                     </div>
 
