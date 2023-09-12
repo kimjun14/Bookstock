@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SignIn = function () {
 
   const [loginId, setLoginId] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
   const chechId = function (ch) {
     let ascii = ch.charCodeAt(0);
@@ -14,8 +16,7 @@ const SignIn = function () {
     return false;
   };
 
-  const getLoginId = function (event) {
-    
+  const getLoginId = (event) => {
     let value = event.target.value;
   
     if (value === "") {
@@ -31,20 +32,43 @@ const SignIn = function () {
     return;
   };
 
+  const login = function () {
+    console.log({ loginId, loginPassword });
+
+    if (loginId === "") {
+      alert("아이디를 입력해주세요.");
+    }
+    if (loginPassword === "") {
+      alert("비밀번호를 입력해주세요.");
+    } 
+  }
+
+
     return(
     <div id="container">
       <div id="loginBox">
       
         <div id="loginBoxTitle"><span style={{ "fontSize" : "30px", "color" : "$teal-500" }}>bookstock Login</span></div>
         <div id="inputBox">
+
           <div className="input-form-box"><span>아이디 </span>
-            <input type="text" name="uid" className="form-control" value={loginId} onChange={(e) => getLoginId(e)}/></div>
+            <input type="text" name="uid" className="form-control" value={loginId} onChange={(e) => getLoginId(e)}/>
+          </div>
 
           <div className="input-form-box"><span>비밀번호 </span>
-            <input type="password" name="upw" className="form-control"/></div>
-          <div className="button-login-box" >
-            <button type="button" className="btn btn-primary btn-xs" style={{"width" :" 30%"}}>로그인</button>
+            <input value = {loginPassword} type="password" name="upw" className="form-control"/>
           </div>
+         
+          <div className="button-login-box" >
+            <button type="button" className="btn btn-primary btn-xs" style={{"width" :" 30%"}} onClick={login}>로그인</button>
+          </div>
+
+          <div>
+            <Link to="/signUp">
+              <span className="bold">회원가입</span>
+            </Link>
+          </div>
+
         </div>
       </div>
     </div>
