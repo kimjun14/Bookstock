@@ -34,8 +34,8 @@ const Register = () => {
     };
     return (
         <div className="container">
-            <div className="input-form-background row">
-                <div style={{ maxWidth: '100%', padding: '16px' }} className="input-form col-md-12 mx-auto">
+            <div className="row justify-content-center align-items-center vh-100">
+                <div className="col-md-6">
                     <h4 className="mb-3">회원가입</h4>
                     <form className="validation-form" noValidate>
                         <div className="row">
@@ -46,6 +46,19 @@ const Register = () => {
                                     닉네임을 입력해주세요.
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="userAccount">비밀번호</label>
+                                <input type="password" className="form-control" id="pwd" placeholder="비밀번호를 입력해주세요." name="pwd" value={data.pwd} onChange={handleChange} required />
+                                <div className="invalid-feedback">
+                                    계좌번호를 입력해주세요.
+                                </div>
+                            </div>
+                        </div>    
+
+                        <div className="row">
                             <div className="col-md-6 mb-3">
                                 <label htmlFor="email">이메일</label>
                                 <input type="email" className="form-control" id="userId" placeholder="you@example.com" name="userId" value={data.userId} onChange={handleChange} required />
@@ -63,6 +76,9 @@ const Register = () => {
                                     주소를 입력해주세요.
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div className="row">
                             <div className="col-md-6 mb-3">
                                 <label htmlFor="userPhone">전화번호</label>
                                 <input type="text" className="form-control" id="userPhone" placeholder="-빼고 입력해주세요" name="userPhone" value={data.userPhone} onChange={handleChange} required />
@@ -72,29 +88,22 @@ const Register = () => {
                             </div>
                         </div>
 
-                        <div className="mb-3">
-                            <label htmlFor="userAccount">계좌번호</label>
-                            <input type="text" className="form-control" id="userAccount" placeholder="계좌번호를 입력해주세요." name="userAccount" value={data.userAccount} onChange={handleChange} required />
-                            <div className="invalid-feedback">
-                                계좌번호를 입력해주세요.
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="userAccount">계좌번호</label>
+                                <input type="text" className="form-control" id="userAccount" placeholder="계좌번호를 입력해주세요." name="userAccount" value={data.userAccount} onChange={handleChange} required />
+                                <div className="invalid-feedback">
+                                    계좌번호를 입력해주세요.
+                                </div>
                             </div>
                         </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="userAccount">비밀번호</label>
-                            <input type="text" className="form-control" id="pwd" placeholder="" name="pwd" value={data.pwd} onChange={handleChange} required />
-                            <div className="invalid-feedback">
-                                계좌번호를 입력해주세요.
+                            <hr className="my-4" />
+                            <div className="custom-control custom-checkbox">
+                                <input type="checkbox" className="custom-control-input" id="agreement" required />
+                                <label className="custom-control-label" htmlFor="agreement">개인정보 수집 및 이용에 동의합니다.</label>
                             </div>
-                        </div>
-
-                        <hr className="my-4" />
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="agreement" required />
-                            <label className="custom-control-label" htmlFor="agreement">개인정보 수집 및 이용에 동의합니다.</label>
-                        </div>
-                        <div className="my-4"></div>
-                        <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handleSubmit}>가입 완료</button>
+                            <div className="my-4"></div>
+                            <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={handleSubmit}>가입 완료</button>
                     </form>
                 </div>
             </div>
