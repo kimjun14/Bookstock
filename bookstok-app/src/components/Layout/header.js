@@ -1,5 +1,5 @@
 import React from "react";
-import logo2 from "../../img/logo2.jpg";
+import logo2Cut from "../../img/logo2Cut.jpg";
 
 
 const Header = function () {
@@ -9,7 +9,7 @@ const Header = function () {
                 {/* <!-- logo --> */}
                 <div className="container mb-3">
                     <a className="navbar-brand" href="/">
-                        <img src={logo2} alt="logo" width="150" height="130" />
+                        <img src={logo2Cut} alt="logo" width="180" />
                     </a>
                     {/* <!-- searchbar --> */}
                     <form className="d-flex ms-auto" role="search">
