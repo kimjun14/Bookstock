@@ -1,45 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from './../../AuthContext';
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const SignIn = function () {
-  const [loginId, setLoginId] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const { setIsLoggedIn } = useAuth();
+  const realId = "test@naver.com";  //DB아이디
+  const realPassword = "123456789"; //DB패스워드
+  const [loginId, setLoginId] = useState(""); //입력받은 아이디
+  const [loginPassword, setLoginPassword] = useState(""); //입력받은 패스워드
+  //const [isLogIn, setIsLogIn] = useState(false); //로그인 상태 
+  const [button, setButton] = useState(false); //버튼 활성화 여부
+  const Navigate = useNavigate();
 
-  const checkId = function (ch) {
-    let ascii = ch.charCodeAt(0);
-    if (33 /* ! */ <= ascii && ascii <= 47 /* / */) return true;
-    if (48 /* 0 */ <= ascii && ascii <= 57 /* 9 */) return true;
-    if (58 /* : */ <= ascii && ascii <= 64 /* @ */) return true;
-    if (65 /* A */ <= ascii && ascii <= 90 /* Z */) return true;
-    if (91 /* [ */ <= ascii && ascii <= 96 /* ` */) return true;
-    if (97 /* a */ <= ascii && ascii <= 122 /* z */) return true;
-    if (123 /* { */ <= ascii && ascii <= 126 /* ~ */) return true;
-
-    return false;
+  const goToMain = () => {
+    Navigate('/')
+    console.log('로그인 성공 메인 페이지로 이동')
   };
 
-  const getLoginId = function (event) {
-    let value = event.target.value;
 
-    if (!value) {
-      setLoginId(value);
-      return;
-    }
-
-    let length = value.length;
-
-    // 마지막으로 입력된 문자가 유효한 아이디 문자인지 확인하고 유효하지 않으면 함수를 종료합니다.
-    if (!checkId(value[length - 1])) {
-      return;
-    }
-
-    // 모든 검증을 통과한 경우에만 state를 업데이트합니다.
-    setLoginId(value);
-  };
-
-  const login = function () {
+  const handleLogin = (e) => {
+    e.preventDefault();
     console.log({ loginId, loginPassword });
 
     // 아이디와 비밀번호 필드가 비어있는지 확인하고 비어있으면 알림을 띄웁니다.
@@ -53,8 +31,12 @@ const SignIn = function () {
       return;
     }
 
-    setIsLoggedIn(true); // 로그인 상태 업데이트
-
+    if (realId == loginId && realPassword == loginPassword) {
+      setButton(true); // 버튼 비활성화
+      goToMain();
+    } else {
+      alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
+    }
   };
 
   return (
@@ -63,18 +45,20 @@ const SignIn = function () {
 
         <div id="loginBoxTitle"><span style={{ "fontSize": "30px", "color": "$teal-500" }}>bookstock Login</span></div>
         <div id="inputBox">
-
+          <form onSubmit={handleLogin}>
           <div className="input-form-box"><span>아이디 </span>
-            <input type="text" id="loginId" name="loginId" className="form-control" value={loginId} onChange={(e) => getLoginId(e)} />
+            {/* <input type="text" id="loginId" name="loginId" className="form-control" value={loginId} onChange={(e) => getLoginId(e)} /> */}
+            <input type="text" id="loginId" name="loginId" className="form-control" value={loginId} onChange={(e) => setLoginId(e.target.value)} />
           </div>
 
           <div className="input-form-box"><span>비밀번호 </span>
-            <input type="password" id="loginPassword" name="loginPassword" className="form-control" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+            <input type="password" id="loginPassword" name="loginPassword" className="form-control" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}  />
           </div>
 
           <div className="button-login-box" >
-            <button type="button" className="btn btn-primary btn-xs" style={{ "width": " 30%" }} onClick={login} >로그인</button>
+            <button type="submit" className="loginButton"	disabled={button}  style={{ "width": " 30%" }} onClick={handleLogin}>로그인</button>
           </div>
+          </form>
 
           <div>
             <Link to="/signUp">
