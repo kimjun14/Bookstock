@@ -6,19 +6,17 @@ var router = express.Router();
 router.post('/', async (req, res, next) => {
   const { query } = req.body;
 
-  const apiId = "H38Bmj5zQN_R3r2xt1w0";
-  const apiKey = "qcEHvvlOdU";
+  const apiKey = "e1380f087a4c7fe6f2b44760c10067321066aed7d8916320d9be31b5801ea783";
   try {
     // 외부 API에 요청
-    const response = await axios.get('https://openapi.naver.com/v1/search/book.json',{
+    const response = await axios.get('https://www.nl.go.kr/seoji/SearchApi.do',{
       params: 
-      { query: query,
-        start: 1,
-        display:10  
-      },
-      headers: {
-        "X-Naver-Client-Id" : apiId,
-        "X-Naver-Client-Secret" : apiKey
+      { 
+        cert_key: apiKey,
+        result_style:"json",
+        page_no: 1,
+        page_size:10,
+        title: query
       }
     })
     console.log(response.data);

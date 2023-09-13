@@ -49,6 +49,7 @@ function SearchResult() {
         e.preventDefault();
         navigate(`?query=${searchTerm}`);
     };
+    console.log(data);
 
   return (
     <>
@@ -83,7 +84,7 @@ function SearchResult() {
           </form>
         </div>
         {/* 검색 내용 표시 row */}
-        {data.items.map((book, index) => (
+        {data.docs.map((book,index) => (
           <div
             key={index}
             className="row p-2 d-flex align-items-center"
@@ -92,33 +93,33 @@ function SearchResult() {
               <Link to="/trading">
                 <img
                   className="img-fluid"
-                  alt={book.title}
-                  src={book.image}
+                  alt={book.TITLE}
+                  src={book.TITLE_URL}
                 />
               </Link>
             </div>
             <div className="col-md-9 col-sm-6">
               <div className="d-flex align-items-start">
                 <span className="col-2">제목</span>
-                <span className="col-10">: {book.title}</span>
+                <span className="col-10">: {book.TITLE}</span>
               </div>
               <div className="d-flex align-items-start">
                 <span className="col-2">작가</span>
-                <span className="col-10">: {book.author}</span>
+                <span className="col-10">: {book.AUTHOR}</span>
               </div>
               <div className="d-flex align-items-start">
                 <span className="col-2">출판사</span>
-                <span className="col-10">: {book.publisher}</span>
+                <span className="col-10">: {book.PUBLISHER}</span>
               </div>
               <div className="d-flex align-items-start">
                 <span className="col-2">출판일</span>
-                <span className="col-10">: {book.pubdate}</span>
+                <span className="col-10">: {book.PUBLISH_PREDATE}</span>
               </div>
               <div className="d-flex align-items-start">
                 <span className="col-2">ISBN</span>
-                <span className="col-10">: {book.isbn}</span>
+                <span className="col-10">: {book.EA_ISBN?book.EA_ISBN:book.SET_ISBN}</span>
               </div>
-              <div>{book.description}</div>
+              <div>내용 분류를 위한 부가기호 : {book.EA_ADD_CODE ? book.EA_ADD_CODE : book.SET_ADD_CODE}</div>
             </div>
           </div>
         ))}
