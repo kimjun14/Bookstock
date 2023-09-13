@@ -32,7 +32,7 @@ const Header = function () {
                         <img src={logo2Cut} alt="logo" width="180" />
                     </Link>
                     <form className="d-flex" role="search" style={{ backgroundColor: '', height: '40px' }} onSubmit={handleSearchSubmit}>
-                        {/* <!-- searchbar --> */}
+                        {/* <!-- searchbar start--> */}
                         <div className="input-group">
                             <span className="input-group-text" style={{ backgroundColor: '#FFF', height: '40px' }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
@@ -41,6 +41,7 @@ const Header = function () {
                             </span>
                             <input className="form-control me-2" type="search" placeholder="" style={{ borderLeft: 'none' }} value={searchTerm} onChange={handleSearchChange} />
                         </div>
+                        {/* <!-- searchbar end--> */}
                         <div className="container mb-3">
                             <ul className="nav justify-content-end">
                                 <li className="nav-item">
