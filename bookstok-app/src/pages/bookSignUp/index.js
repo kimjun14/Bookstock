@@ -2,8 +2,7 @@ import { useState } from "react";
 
 
 const BookSignUp = () => {
-    const [showPopup, setShowPopup] = useState(false); // New state for popup visibility
-    const [popupContent, setPopupContent] = useState(""); // New state for popup content
+    const [showModal, setShowModal] = useState(false);
     const [product, setProduct] = useState({
         name: '',
         description: '',
@@ -30,32 +29,18 @@ const BookSignUp = () => {
             price: '',
             category: '',
         });
+        closeModal();
     };
 
-    const handlePopUp = () => {
-        console.log("팝업구현");
-        // Set the popup content here (e.g., a form, additional information, etc.)
-        setPopupContent(
-            <div className="popup">
-                <div className="popup-content">
-                    <h2>팝업 제목</h2>
-                    <p>팝업 내용</p>
-                    <button onClick={closePopup}>닫기</button>
-                </div>
-            </div>
-        );
-
-        // Show the popup by setting showPopup to true
-        setShowPopup(true);
+    const openModal = () => {
+        setShowModal(true);
     };
 
-    const closePopup = () => {
-        // Close the popup by setting showPopup to false
-        setShowPopup(false);
-    
-        // Optionally, you can clear the popup content
-        setPopupContent("");
+    const closeModal = () => {
+        setShowModal(false);
     };
+
+
 
 
     return (
@@ -114,16 +99,77 @@ const BookSignUp = () => {
                             <div className="d-flex justify-content-row">
                                 <div className="col-md-6 mt-5">
                                     <div>
-                                        <button
-                                            onClick={handlePopUp}
-                                            className="btn btn-info btn-lg text-white"
-                                        >
-                                            도서 검색
-                                        </button>
+                                        <button type="button" className="btn btn-success" onClick={openModal}>도서검색</button>
+
+                                        <div className={`modal ${showModal ? 'show' : ''} popup`} tabIndex="-1" role="dialog" style={{ display: showModal ? 'block' : 'none' }}>
+                                            <div className="modal-dialog" role="document">
+                                                <div className="modal-content popup-content">
+                                                    <div className="modal-header">
+                                                        <h4 className="modal-title">도서검색</h4>
+                                                        <button type="button" className="close" onClick={closeModal}>
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <div className="container-fluid">
+                                                            <div className="row align-items-center">
+                                                                <div className="col-md-12">
+                                                                    <form className="validation-form" noValidate>
+                                                                        <div className="row justify-content-end">
+                                                                            <div className="col-md-6 mb-3">
+                                                                                <label htmlFor="email">도서제목</label>
+                                                                                <input type="email" className="form-control" id="userId" placeholder="you@example.com" name="userId" value="도서제목" onChange={handleChange} required />
+                                                                                <div className="invalid-feedback">
+                                                                                    이메일을 입력해주세요.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div className="row justify-content-end">
+                                                                            <div className="col-md-6 mb-3">
+                                                                                <label htmlFor="userAccount">출판사</label>
+                                                                                <input type="password" className="form-control" id="pwd" placeholder="비밀번호를 입력해주세요." name="pwd" value="출판사" onChange={handleChange} required />
+                                                                                <div className="invalid-feedback">
+                                                                                    비밀번호를 입력해주세요.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div className="row justify-content-end">
+                                                                            <div className="col-md-6 mb-3">
+                                                                                <label htmlFor="name">출판일</label>
+                                                                                <input type="text" className="form-control" id="nick" placeholder="닉네임을 입력해주세요." name="nick" value="출판일" onChange={handleChange} required />
+                                                                                <div className="invalid-feedback">
+                                                                                    닉네임을 입력해주세요.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div className="row justify-content-end">
+                                                                            <div className="col-md-6 mb-3">
+                                                                                <label htmlFor="address">작가</label>
+                                                                                <input type="text" className="form-control" id="userAddr" placeholder="서울특별시 강남구" name="userAddr" value="작가" onChange={handleChange} required />
+                                                                                <div className="invalid-feedback">
+                                                                                    주소를 입력해주세요.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" onClick={closeModal}>닫기</button>
+                                                        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>등록하기</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            {showPopup && popupContent}
                         </form>
                     </div>
                 </div>
