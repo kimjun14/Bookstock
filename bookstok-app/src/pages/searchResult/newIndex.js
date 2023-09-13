@@ -12,6 +12,7 @@ function BookSearchResult() {
       startDate: '2023-09-12',
       endDate: '2023-09-27',
       views: 10,
+      interest: 0
     }
   ]);
 
@@ -57,7 +58,7 @@ function BookSearchResult() {
                     alt=""
                   />
                 </button>
-                0
+                {book.interest}
               </td>
             </tr>
           ))}
