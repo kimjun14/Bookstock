@@ -49,10 +49,10 @@ function BookSearchResult() {
             <tr key={book.id}>
               <th scope="row">{book.id}</th>
               <td><img src={book.coverImage} alt="" /></td>
-              <td><Link to={`/book/${book.id}`}>{book.title}</Link></td>
+              <td><Link to={`/${book.id}`}>{book.title}</Link></td>
               <td>시작가: {book.startPrice}원
                 <br />현재가: {book.updatePrice}원</td>
-              <td><Link to={`/author/${book.author}`}>{book.userId}</Link></td>
+              <td><Link to={`/${book.userId}`}>{book.userId}</Link></td>
               <td>{book.startDate} /<br />{book.endDate}</td>
               <td>{book.views}</td>
               <td>
