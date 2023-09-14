@@ -3,7 +3,7 @@ import Layout from "./components/Layout";
 import './App.css';
 import SignIn from "./pages/signIn";
 import { AuthProvider } from './AuthContext';
-import SearchResult from "./pages/searchResult";
+import SearchResult from "./pages/searchResult/newIndex";
 import Trading from "./pages/Trading";
 import MainPage from "./pages/mainPage";
 import SignUp from "./pages/signUp";
