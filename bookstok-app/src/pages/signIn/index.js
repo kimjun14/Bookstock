@@ -7,14 +7,12 @@ const SignIn = function () {
   const [loginId, setLoginId] = useState(""); // 입력받은 아이디
   const [loginPassword, setLoginPassword] = useState(""); // 입력받은 패스워드
   const [button, setButton] = useState(false); // 버튼 활성화 여부
-  const [savedLoginId, setSavedLoginId] = useState("");
-  const [savedLoginPassword, setSavedLoginPassword] = useState("");
-
-  const sessionStorage = window.sessionStorage;
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const Navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = async function (e) {
     e.preventDefault();
 
     if (!loginId) {
@@ -35,6 +33,7 @@ const SignIn = function () {
 
       const goToMain = () => {
         Navigate('/');
+        console.log(response);
         console.log('로그인 성공 메인 페이지로 이동');
       };
 
@@ -42,6 +41,7 @@ const SignIn = function () {
         const responseData = response.data;
         if (responseData.message === 'SUCCESS') {
           // 서버로부터 'SUCCESS' 메시지를 받으면 로그인 성공 처리를 수행합니다.
+          setIsLoggedIn(true);
           setButton(true);
           goToMain();
         } else {
