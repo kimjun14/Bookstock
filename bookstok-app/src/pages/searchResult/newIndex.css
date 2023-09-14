@@ -26,3 +26,7 @@ a{
 }
 
 /* 관심 등록 버튼 스타일 */
+.interestBtn {
+    background-color: transparent;
+    border-style: none;
+}
