@@ -7,7 +7,7 @@ import Trading from "./pages/Trading";
 import MainPage from "./pages/mainPage";
 import SignUp from "./pages/signUp";
 import MyPage from "./pages/myPage";
-import BookSignUp from "./pages/bookSignUp";
+import BookSignUp from "./pages/bookSignUp/variant";
 
 function App() {
 
