@@ -4,6 +4,7 @@ const crypto=require('crypto');
 
 
 const user = require('../models/user.model');
+const { clear } = require('console');
 
 // 사용자 목록 조회 [get] ip:12345/api/users/
 router.get('/', async (req, res, next) => {
@@ -38,8 +39,10 @@ router.post('/signin', async (req, res, next) => {
     if (ok) {
       // 아이디와 비밀번호가 일치하는 경우 세션에 사용자 아이디를 저장
       req.session.userId = userId;
-
+      console.log("새션 생성", req.session);
       res.status(200).send({ message: 'SUCCESS' });
+      req.session = clear()
+      console.log("새션 삭제", req.session);
     } else {
       // 아이디 또는 비밀번호가 일치하지 않는 경우
       res.status(401).send({ message: '아이디 또는 비밀번호가 일치하지 않습니다.' });
