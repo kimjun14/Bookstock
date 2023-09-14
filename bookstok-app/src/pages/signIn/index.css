@@ -1,52 +1,81 @@
-* { padding: 0; margin: 0; }
-
-html, body {
-  height: 100%;
-  background: #ffffff;
-}
-
-#container {
+/* 로그인부분 박스 */
+.login-container {
+  border: 1px solid #dedede;
+  border-radius: 10px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  width: 60%;
+  height: 16rem;
+  margin: auto;
   align-items: center;
-  height: 100%;
 }
 
-#loginBox {
-  width: 300px;
-  text-align: center;
-  background-color: #ffffff;
+/* 왼쪽 로그인 박스 */
+.leftLogin {
+  margin-left: 2rem;
+  border-right: 1px solid #dedede;
+  padding-right: 2.5rem;
 }
-.input-form-box {
-  border: 0px solid #ff0000;
+
+/* 인풋박스 + 로그인버튼 */
+.idpwdSubmit {
+  margin-top: 2rem;
+  border: 0px solid violet;
   display: flex;
-  margin-bottom: 5px;
-}
-.input-form-box > span {
-  display: block;
-  text-align: left;
-  padding-top: 5px;
-  min-width: 65px;
-}
-.button-login-box {
-  margin: 10px 0;
-}
-#loginBoxTitle {
-  color:#000000;
-  font-weight: bold;
-  font-size: 32px;
-  text-transform: uppercase;
-  padding: 5px;
-  margin-bottom: 20px;
-  background: linear-gradient(to right, #270a09, #8ca6ce);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-#inputBox {
-  margin: 10px;
 }
 
-#inputBox button {
-  padding: 3px 5px;
+/* 아이디패스워드 인풋박스만 */
+.idpwdInput {
+  border: 0px solid blue;
+  width: 15rem;
+}
+
+/* 로그인 버튼 */
+.loginBtn button {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 0.5rem;
+  border-style: none;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+/* 체크박스 + 찾기 */
+.checkSearch {
+  display: flex;
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.idpwdSearch button {
+  border-style: none;
+  border-radius: 5px;
+  background-color: transparent;
+  margin-left: 0.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.checkSearch input {
+  margin-left: 0.2rem;
+  font-weight: bold;
+}
+
+/* sns 간편로그인 */
+.sns-login {
+  border: 0px solid red;
+  text-align: center;
+  
+}
+
+.sns-login img {
+  width: 300px;
+  height: 40px;
+}
+
+.sns-login button {
+  border-style: none;
+  margin-right: 2rem;
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import './index.css'
 
 const SignIn = function () {
   const [loginId, setLoginId] = useState(""); // 입력받은 아이디
@@ -57,36 +58,54 @@ const SignIn = function () {
   };
 
   return (
-    <div id="container">
-      <div id="loginBox">
+    <>
+      <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>LOGIN</h1>
+      <p style={{ marginLeft: '21%' }}>다양한 서비스를 이용하시려면 회원 로그인이 필요합니다.</p>
+      <div className="login-container">
+        <div className="form-group">
+          {/* <div id="loginBoxTitle"><span style={{ "fontSize": "30px", "color": "$teal-500" }}>bookstock Login</span></div>
+        <div id="inputBox"> */}
+          <div className="leftLogin">
+            <div className="idpwdSubmit">
+              <form className='idpwdInput' onSubmit={handleLogin}>
+                <div className="input-form-box">
+                  <input type="text" id="loginId" name="loginId" placeholder='아이디를 입력하세요' className="form-control" value={loginId} onChange={(e) => setLoginId(e.target.value)} />
+                </div>
 
-        <div id="loginBoxTitle"><span style={{ "fontSize": "30px", "color": "$teal-500" }}>bookstock Login</span></div>
-        <div id="inputBox">
-          <form onSubmit={handleLogin}>
-          <div className="input-form-box"><span>아이디 </span>
-            {/* <input type="text" id="loginId" name="loginId" className="form-control" value={loginId} onChange={(e) => getLoginId(e)} /> */}
-            <input type="text" id="loginId" name="loginId" className="form-control" value={loginId} onChange={(e) => setLoginId(e.target.value)} />
+                <div className="input-form-box">
+                  <input type="password" id="loginPassword" name="loginPassword" placeholder='비밀번호를 입력하세요' className="form-control" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                </div>
+              </form>
+              <div className="loginBtn">
+                <button type="submit">로그인<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></button>
+              </div>
+            </div>
+            <div className="checkSearch">
+              <input type="checkbox" id="remember" name="remember" />
+              <label htmlFor="remember">ID저장하기</label>
+              <input type="checkbox" id="remember" name="remember" />
+              <label htmlFor="remember">자동로그인</label>
+              <div className="idpwdSearch">
+                <button>아이디 찾기</button> | 
+                <button>비밀번호 찾기</button>
+              </div>
+            </div>
+            <p>
+              아직 회원이 아니세요? <a href="./../signUp" style={{color:'#1187cf'}}>회원가입</a>
+            </p>
           </div>
-
-          <div className="input-form-box"><span>비밀번호 </span>
-            <input type="password" id="loginPassword" name="loginPassword" className="form-control" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}  />
-          </div>
-
-          <div className="button-login-box" >
-            <button type="submit" className="loginButton"	disabled={button}  style={{ "width": " 30%" }} >로그인</button>
-          </div>
-          </form>
-
-          <div>
-            <Link to="/signUp">
-              <span className="bold">회원가입</span>
-            </Link>
-          </div>
-
+        </div>
+        <div className="sns-login">
+          <p style={{textAlign:'center'}}>SNS으로 간편로그인</p>
+          <button style={{marginBottom:'0.5rem'}}><img src="https://cheolsusee.com/img/es_img/btn_kakao_login2.png"></img></button>
+          <br></br><button><img src="https://cheolsusee.com/img/es_img/btn_naver_login2.png"></img></button>
         </div>
       </div>
-    </div>
+    </>
   );
+
 };
 
 export default SignIn;
