@@ -1,0 +1,28 @@
+/* 정렬 버튼 스타일 */
+.btn-group{
+    float: right;
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+  color: black;
+  background: transparent;
+  border: 1px solid gainsboro;
+}
+
+.btn-primary:hover {
+  background-color: #1187cf;
+}
+
+/* 표 스타일 */
+.searchTable {
+  width: 100%; 
+  text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+/* 관심 등록 버튼 스타일 */

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './newIndex.css'
 
 function BookSearchResult() {
+  // eslint-disable-next-line
   const [books, setBooks] = useState([
     {
       id: 1,
@@ -18,7 +20,7 @@ function BookSearchResult() {
 
   return (
     <div>
-      <h1>도서 검색 결과</h1>
+      <h1 style={{textAlign:'center'}}>도서 검색 결과</h1>
       {/* 정렬 버튼 */}
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-primary">최신순</button>
@@ -27,7 +29,8 @@ function BookSearchResult() {
       </div>
       {/* 검색 결과 표 */}
       <table className="searchTable">
-        <thead>
+        <thead style={{backgroundColor:'#f3f3f3' 
+}}>
           <tr>
             <th scope="col"></th>
             <th scope="col">표지</th>
