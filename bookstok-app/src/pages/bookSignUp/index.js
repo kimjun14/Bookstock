@@ -1,8 +1,9 @@
 import { useState } from "react";
-import BookResearch from "./bookReseach";
+import BookResearch from './bookInfo';
 
 
-const BookSignUp = ({ closeModal }) => {
+
+const BookSignUp = () => {
     // 1. 상태 생성
     const [product, setProduct] = useState({
         auctionTitle: '',
@@ -30,7 +31,6 @@ const BookSignUp = ({ closeModal }) => {
             auctionPrice: '',
             auctionEnd: '',
         });
-        closeModal();
     };
 
 
