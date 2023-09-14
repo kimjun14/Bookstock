@@ -6,18 +6,16 @@ const SignIn = function () {
   const [loginId, setLoginId] = useState(""); // 입력받은 아이디
   const [loginPassword, setLoginPassword] = useState(""); // 입력받은 패스워드
   const [button, setButton] = useState(false); // 버튼 활성화 여부
-  const Navigate = useNavigate();
+  const [savedLoginId, setSavedLoginId] = useState("");
+  const [savedLoginPassword, setSavedLoginPassword] = useState("");
 
-  const goToMain = () => {
-    Navigate('/');
-    console.log('로그인 성공 메인 페이지로 이동');
-  };
+  const sessionStorage = window.sessionStorage;
+
+  const Navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log({ loginId, loginPassword });
 
-    // 아이디와 비밀번호 필드가 비어있는지 확인하고 비어있으면 알림.
     if (!loginId) {
       alert("아이디를 입력해주세요.");
       return;
@@ -29,16 +27,20 @@ const SignIn = function () {
     }
 
     try {
-      // axios를 사용하여 서버에 POST 요청을 보냅니다.
       const response = await axios.post('http://localhost:12345/api/users/signin', {
         userId: loginId,
-        pwd: loginPassword,
+        pwd: loginPassword
       });
 
-      // 서버에서의 응답을 확인합니다.
+      const goToMain = () => {
+        Navigate('/');
+        console.log('로그인 성공 메인 페이지로 이동');
+      };
+
       if (response.status === 200) {
         const responseData = response.data;
         if (responseData.message === 'SUCCESS') {
+          // 서버로부터 'SUCCESS' 메시지를 받으면 로그인 성공 처리를 수행합니다.
           setButton(true);
           goToMain();
         } else {

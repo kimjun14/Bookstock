@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const crypto=require('crypto');
+
 
 const user = require('../models/user.model');
 
@@ -26,15 +28,27 @@ router.post('/', async (req, res, next) => {
 // 로그인
 // 제대로 구현 하려면 토큰도 돌려줘야하지만 id pwd 검증만 함
 router.post('/signin', async (req, res, next) => {
-  try{
-    const ok = await user.signin(req.body);
-    req.session.userId=req.body.userId;
-    res.send({message : 'SUCCESS'});
-    res.json({ ok });
-  }catch(err){
+  try {
+    const { userId, pwd } = req.body; // 클라이언트에서 보낸 아이디와 비밀번호
+
+    // 클라이언트로부터 받은 비밀번호를 해싱
+    const sha1 = crypto.createHash('sha1').update(pwd).digest('base64');
+
+    const ok = await user.signin({ userId, pwd : sha1 });
+    if (ok) {
+      // 아이디와 비밀번호가 일치하는 경우 세션에 사용자 아이디를 저장
+      req.session.userId = userId;
+
+      res.status(200).send({ message: 'SUCCESS' });
+    } else {
+      // 아이디 또는 비밀번호가 일치하지 않는 경우
+      res.status(401).send({ message: '아이디 또는 비밀번호가 일치하지 않습니다.' });
+    }
+  } catch (err) {
     next(err);
   }
 });
+
 
 // 회원정보 수정
 // 비밀번호 변경 페이지에 들어가기 전에 id(userNO)를 받았다 가정

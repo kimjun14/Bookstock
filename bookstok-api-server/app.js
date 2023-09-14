@@ -17,10 +17,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(session({
     cookie: { maxAge: 1000*60*60*2 },
-    secret: 'sometext',
+    secret: 'sometext', // 세션 데이터 암호화를 위한 비밀 키 (보안 목적)
     rolling: true,  // 매 응답마다 쿠키 시간 초기화
     resave: false,  // 세션값이 수정되지 않으면 서버에 다시 저장하지 않음
-    saveUninitialized: false// 세션에 값이 없으면 쿠키를 전송하지 않음
+    saveUninitialized: true,   // 초기화되지 않은 세션도 저장할지 여부
 }));  // req.session 속성을 만들어서 세션 객체를 저장
 
 app.use(cors());
