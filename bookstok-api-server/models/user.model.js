@@ -29,8 +29,8 @@ const userModel = {
   // 로그인
   async signin(user){
     try{
-      const sha1=crypto.createHash('sha1').update(user.pwd).digest('base64');
-      user.pwd = sha1;
+      //const sha1=crypto.createHash('sha1').update(user.pwd).digest('base64');
+      //user.pwd = sha1;
       const sql = `select * from user where userId = ? and pwd = ?`;
       const [ result ] = await pool.query(sql, [user.userId, user.pwd]);
       // 로그인 후 접속 시간 업데이트 쿼리를 넘겨줌
