@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const user = require('../models/user.model');
+const user = require('../models/aucboard.model');
 
 // 경매 목록 조회 [get] ip:12345/api/auctions/
 router.get('/', async (req, res, next) => {

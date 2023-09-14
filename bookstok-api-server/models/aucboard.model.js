@@ -1,6 +1,4 @@
 const pool = require('./pool');
-// nodejs에서 제공하는 crypto 모듈을 이용하여
-// 암호를 해시값으로 변경하여 저장, 확인 관리하도록 함
 
 const userModel = {
   // 경매 목록 조회
@@ -10,17 +8,21 @@ const userModel = {
       const [result] = await pool.query(sql);
       return result;
     } catch (err) {
-      throw new Error('DB Error', { cause: err });
+      console.error(err);
+      throw new Error('DB Error');
     }
   },
   // 경매 등록
   async create(user) {
     try {
+      const day = 7 ; // 하드코딩으로 7일 뒤 경매종료 넣음
       const sql = `insert into auction set ?`;
-      const [result] = await pool.query(sql, [user]);
+      const [result] = await pool.query(sql,[user]);
+      await pool.query(`update auction set auctionEnd =  CURRENT_TIMESTAMP+INTERVAL ? DAY where auctionId = ?`,[day,result.insertId]);
       return result.insertId;
     } catch (err) {
-      throw new Error('DB Error', { cause: err });
+      console.error(err);
+      throw new Error('DB Error');
     }
   }
 }
