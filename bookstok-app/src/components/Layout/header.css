@@ -1,0 +1,9 @@
+
+.btn-outline-secondary {
+  color: black;
+  background: transparent;
+  border:  1px solid gainsboro;
+}
+.btn-outline-secondary:hover {
+  background-color: #1187cf;
+}
