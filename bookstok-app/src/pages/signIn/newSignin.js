@@ -6,7 +6,6 @@ import axios from "axios";
 const SignIn = function () {
   const [loginId, setLoginId] = useState(""); // 입력받은 아이디
   const [loginPassword, setLoginPassword] = useState(""); // 입력받은 패스워드
-  const [button, setButton] = useState(false); // 버튼 활성화 여부
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -42,7 +41,6 @@ const SignIn = function () {
         if (responseData.message === 'SUCCESS') {
           // 서버로부터 'SUCCESS' 메시지를 받으면 로그인 성공 처리를 수행합니다.
           setIsLoggedIn(true);
-          setButton(true);
           goToMain();
         } else {
           alert('아이디 또는 비밀번호가 일치하지 않습니다.');
