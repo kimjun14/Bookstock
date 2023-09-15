@@ -2,8 +2,8 @@
 
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import './newIndex.css'
-import KakaoLogin from "../../components/socialLogin/kakaoLogin";
+import './index.css'
+import KakaoLogin from "../../components/socialLogin/KakaoLogin";
 
 function SignUp() {
     return (

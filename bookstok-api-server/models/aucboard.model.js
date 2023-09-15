@@ -1,10 +1,21 @@
 const pool = require('./pool');
 
 const userModel = {
-  // 경매 목록 조회
+  // 경매번호와 연관된 정보 조회
   async auctionSearch(auctionId) {
     try {
       const sql = `select * from auction where auctionId = ?`;
+      const [result] = await pool.query(sql,auctionId);
+      return result;
+    } catch (err) {
+      console.error(err);
+      throw new Error('DB Error');
+    }
+  },
+  // 경매번호와 연관된 입찰 목록 조회
+  async auctionBidSearch(auctionId) {
+    try {
+      const sql = `select * from bid where aId = ? order by bidPrice ASC`;
       const [result] = await pool.query(sql,auctionId);
       return result;
     } catch (err) {

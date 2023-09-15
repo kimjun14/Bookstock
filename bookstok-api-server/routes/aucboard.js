@@ -14,6 +14,17 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// 입찰 목록 조회 [get] ip:12345/api/auctions/경매번호/bids
+router.get('/:id/bids', async (req, res, next) => {
+  try{
+    const id = Number(req.params.id);
+    const list = await user.auctionBidSearch(id);
+    res.json(list);
+  }catch(err){
+    next(err);
+  }
+});
+
 // 경매등록  [post] ip:12345/api/auctions/
 router.post('/', async (req, res, next) => {
   try{

@@ -10,24 +10,38 @@ function Trading() {
         bidImgSrc:"",
         bidContext:""
     });
-    const [auctionData, setAuctionData] = useState("null");
+    const [auctionData, setAuctionData] = useState([]);
+    const [auctionBidData, setAuctionBidData] = useState([])
     const URLquery = useLocation();
     const queryParams = new URLSearchParams(URLquery.search);
     // location.search      =>  URL? query... 이후부분받음
     // URLSearchParams      =>  쿼리 문자열의 key, value 쌍을 생성자로 저장
     // {queryParams.get('id')} => auctionId 검색을 위해 던져 줄 거
-    useEffect(()=>{
-        const fetchData = async () => {
-            try{
-                const response=await axios.get(`http://220.127.80.225:12345/api/auctions/${queryParams.get('id')}`)
-                // console.log(response.data[0]);   // auctionData에 어떤 값이 들어가는지 확인하는 용도
-                setAuctionData(response.data[0]);
-            }catch(err){
-                console.error(err);
-            }
+    
+    const fetchAuctionData = async () => {
+        try{
+            const response=await axios.get(`http://220.127.80.225:12345/api/auctions/${queryParams.get('id')}`)
+            // console.log(response.data[0]);   // auctionData에 어떤 값이 들어가는지 확인하는 용도
+            setAuctionData(response.data[0]);
+        }catch(err){
+            console.error(err);
         }
+    }
+
+    const fetchBidData = async () => {
+        try{
+            const response=await axios.get(`http://220.127.80.225:12345/api/auctions/${queryParams.get('id')}/bids`)
+            setAuctionBidData(response.data);
+            console.log(response.data);
+        }catch(err){
+            console.error(err);
+        }
+    }
+    
+    useEffect(()=>{
         if(queryParams.get('id')){          // id 쿼리의 값이 있으면 위의 fetchData 함수 실행
-            fetchData();
+            fetchAuctionData();
+            fetchBidData();
         }
         else{
             alert("잘못 된 접근입니다.");    // id쿼리 없이 들어가면 오류 메세지 나오고
@@ -52,6 +66,8 @@ function Trading() {
             console.log(bidData,queryParams.get('id'),response);    
         }catch(err){
             console.error(err);
+        }finally{
+            fetchBidData();
         }
     }
 
@@ -64,7 +80,7 @@ function Trading() {
                             <div className="item">
                                 <div className="itemImg">
                                     <img
-                                        src="https://shopping-phinf.pstatic.net/main_4229259/42292599622.20230906071147.jpg?type=w300"
+                                        src={auctionData.bookImgSrc && auctionData.bookImgSrc}
                                         alt="bookImg"
                                         className="img-fluid" // 이미지 플루이드 반응형
                                     />
@@ -74,11 +90,11 @@ function Trading() {
                         <div className="col-md-6">
                             <div className="itemInfo">
                                 <h2>
-                                    <span className="badge text-bg-dark">~~~팝니다~~~</span>
+                                    <span className="badge text-bg-dark">~~~삽니다~~~</span>
                                     <span className="itemTitle"> {auctionData.auctionTitle && auctionData.auctionTitle}</span>
                                 </h2>
 
-                                <p>{/* 책 정보 넣을거면 DB 수정하고 여기에 넣으면 될 듯?*/}</p>
+                                <p>{auctionData.bookTitle && auctionData.bookTitle}</p>
                                 <p>작가: {auctionData.bookAuthor && auctionData.bookAuthor}</p>
                                 <p>출판사: {auctionData.bookPub && auctionData.bookPub}</p>
                                 <p>경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</p>
@@ -101,35 +117,22 @@ function Trading() {
                         <h2>역경매 입찰</h2>
                     </div>
                     <div className='d-flex flex'>
-                        <div className="card mb-3" style={{ minWidth: "50%" }}>
-                            <div className="row g-0">
-                                <div className="col-md-4">
-                                    <img src="..." className="img-fluid rounded-start" alt="..." />
-                                </div>
-                                <div className="col-md-8">
-                                    <div className="card-body">
-                                        <h5 className="card-title">15,000원</h5>
-                                        <p className="card-text">상태 : a급, 포토카드 같이 드려요</p>
-                                        <p className="card-text"><small className="text-body-secondary">3분전 업데이트 됨</small></p>
+                        {auctionBidData.map((bid,index)=>(
+                            <div className="card mb-3" style={{ minWidth: "25%" }}>
+                                <div className="row g-0">
+                                    <div className="col-md-4">
+                                        <img src="..." className="img-fluid rounded-start" alt="..." />
+                                    </div>
+                                    <div className="col-md-8">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{bid.bidPrice}</h5>
+                                            <p className="card-text">{bid.bidContext}</p>
+                                            <p className="card-text"><small className="text-body-secondary">{bid.bidCreated}</small></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="card mb-3" style={{ minWidth: "50%" }}>
-                            <div className="row g-0">
-                                <div className="col-md-4">
-                                    <img src="..." className="img-fluid rounded-start" alt="..." />
-                                </div>
-                                <div className="col-md-8">
-                                    <div className="card-body">
-                                        <h5 className="card-title">14,000원</h5>
-                                        <p className="card-text">상태좋음</p>
-                                        <p className="card-text"><small className="text-body-secondary">1분전 업데이트 됨</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
 
                     <div className="row">

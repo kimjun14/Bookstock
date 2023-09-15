@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './newIndex.css'
+import './index.css'
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useAuth } from "../../AuthContext";
