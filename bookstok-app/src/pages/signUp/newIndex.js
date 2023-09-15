@@ -1,8 +1,19 @@
-import React from "react";
+/* global Kakao */
+
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import './newIndex.css'
 
 function SignUp() {
+    const Rest_api_key = '861d57b9824340a31ae9c887397ac901' //REST API KEY
+    const redirect_uri = 'http://localhost:3000/auth' //Redirect URI
+    // oauth 요청 URL
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
+
+    const handleLogin = () => {
+        window.location.href = kakaoURL
+    }
+
     return (
         <div className="container-fluid px-2 px-md-4 py-5 mx-auto">
             <div className="col-lg-7" style={{ margin: 'auto' }}>
@@ -13,11 +24,11 @@ function SignUp() {
                         </Link>
                     </small>
                     <h3 className="mb-1" >회원가입</h3>
-                    <div className="row px-3" style={{marginTop:'1rem'}}>
+                    <div className="row px-3" style={{ marginTop: '1rem' }}>
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">닉네임</h6>
                         </label>
-                        <input type="text" name="nick" placeholder="RaLiBooks" style={{width:'50%'}}/>
+                        <input type="text" name="nick" placeholder="RaLiBooks" style={{ width: '50%' }} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
@@ -68,7 +79,7 @@ function SignUp() {
                     <div className="row text-center">
                         <div className="col-sm-6">
                             <p className="social-connect1">
-                                <button className="btn text-center mb-1 py-2">카카오 계정으로 로그인하기</button>
+                                <button className="btn text-center mb-1 py-2" onClick={handleLogin}>카카오 계정으로 로그인하기</button>
                             </p>
                         </div>
                         <div className="col-sm-6">
@@ -87,7 +98,6 @@ function SignUp() {
                 </div>
             </div>
         </div>
-
     );
 }
 
