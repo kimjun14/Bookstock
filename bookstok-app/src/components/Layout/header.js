@@ -4,7 +4,7 @@ import logo2Cut from "../../img/logo2Cut.jpg";
 import { useNavigate } from "react-router";
 import './header.css'
 import Home from "./header/Home";
-import SignIn from "./header/SignIn";
+import SignIn from "./header/signIn";
 import MyPage from "./header/MyPage";
 import SignUp from "./header/SignUp";
 
