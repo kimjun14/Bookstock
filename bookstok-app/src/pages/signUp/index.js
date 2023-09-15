@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import './index.css'
-import KakaoLogin from "../../components/socialLogin/KakaoLogin";
+// import KakaoLogin from "./socialLogin/KakaoLogin";
 
 function SignUp() {
     return (
@@ -69,7 +69,7 @@ function SignUp() {
                     </div>
 
                     <div className="row text-center">
-                        <KakaoLogin />
+                        {/* <KakaoLogin /> */}
                         <div className="col-sm-6">
                             <p className="social-connect2">
                                 <span className="fa fa-google-plus"></span>
