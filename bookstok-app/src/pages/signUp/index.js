@@ -1,155 +1,92 @@
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import React, { useState } from 'react';
+/* global Kakao */
 
-const Register = () => {
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import './newIndex.css'
+import KakaoLogin from "../../components/socialLogin/kakaoLogin";
 
-    const checkNick = function (ch) {
-        let ascii = ch.charCodeAt(0);
-        if (33 /* ! */ <= ascii && ascii <= 47 /* / */) return true;
-        if (48 /* 0 */ <= ascii && ascii <= 57 /* 9 */) return true;
-        if (58 /* : */ <= ascii && ascii <= 64 /* @ */) return true;
-        if (65 /* A */ <= ascii && ascii <= 90 /* Z */) return true;
-        if (91 /* [ */ <= ascii && ascii <= 96 /* ` */) return true;
-        if (97 /* a */ <= ascii && ascii <= 122 /* z */) return true;
-        if (123 /* { */ <= ascii && ascii <= 126 /* ~ */) return true;
-
-        if (ch === ".") return true;
-    
-        return false;
-      };
-
-
-    const navigation = useNavigate();
-    //data.userId
-
-    const [data, setData] = useState({
-        userId: '',
-        pwd: '',
-        nick: '',
-        userPhone: '',
-        userAccount: '',
-        userAddr: ''
-    });
-
-    const handleChange = (e) => {
-        // 이메일 확인
-        let value = e.target.value;
-      
-        if (value === "") {
-          setData(value);
-          return;
-        }
-      
-        let length = value.length;
-        if (checkNick(value[length - 1]) === false) return;
-      
-        // 데이터 업데이트
-        setData({
-          ...data,
-          [e.target.name]: e.target.value
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://220.127.80.225:12345/api/users', data, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            console.log('Response:', response.data);
-            window.alert("회원가입이 완료되었습니다.");
-            navigation('/signin');
-        } catch (error) {
-            console.error('Error sending data:', error);
-        }
-    };
-
-
+function SignUp() {
     return (
-        <div className="container-fluid">
-            <div className="row justify-content-center align-items-center vh-100">
-                <div className='col-md-3'></div>
-                <div className="col-md-6">
-                    <h4 className="mb-3">회원가입</h4>
-                    <form className="validation-form" noValidate>
-                    <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <label htmlFor="email">이메일</label>
-                                <input type="email" className="form-control" id="userId" placeholder="you@example.com" name="userId" value={data.userId} onChange={handleChange} required />
-                                <div className="invalid-feedback">
-                                    이메일을 입력해주세요.
-                                </div>
-                            </div>
+        <div className="container-fluid px-2 px-md-4 py-5 mx-auto">
+            <div className="col-lg-7" style={{ margin: 'auto' }}>
+                <div className="card2 card border-0 px-4 px-sm-5 py-5">
+                    <small className="text-right mb-3">
+                        <Link to="./../signIn/newSignin.js">
+                            <u>북스탁 계정이 이미 있나요?</u>
+                        </Link>
+                    </small>
+                    <h3 className="mb-1" >회원가입</h3>
+                    <div className="row px-3" style={{ marginTop: '1rem' }}>
+                        <label className="mb-0">
+                            <h6 className="mb-0 text-sm">닉네임</h6>
+                        </label>
+                        <input type="text" name="nick" placeholder="RaLiBooks" style={{ width: '50%' }} />
+                    </div>
+                    <div className="row px-3">
+                        <label className="mb-0">
+                            <h6 className="mb-0 text-sm">이메일 주소(아이디)</h6>
+                        </label>
+                        <input type="text" name="email" placeholder="BookStock@email.com" />
+                    </div>
+                    <div className="row px-3">
+                        <label className="mb-0">
+                            <h6 className="mb-0 text-sm">비밀번호</h6>
+                        </label>
+                        <input type="password" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" />
+                    </div>
+                    <div className="row px-3">
+                        <label className="mb-0">
+                            <h6 className="mb-0 text-sm">주소</h6>
+                        </label>
+                        <input type="text" name="adress" placeholder="주소를 입력하세요" />
+                    </div>
+                    <div className="row px-3">
+                        <label className="mb-0">
+                            <h6 className="mb-0 text-sm">전화번호</h6>
+                        </label>
+                        <input type="text" name="phone" placeholder="-(하이픈)을 제외하고 입력하세요" />
+                    </div>
+                    <div className="row px-3">
+                        <label className="mb-0">
+                            <h6 className="mb-0 text-sm">계좌번호</h6>
+                        </label>
+                        <input type="text" name="acount" placeholder="-(하이픈)을 제외하고 입력하세요" />
+                    </div>
+                    <div className="row px-3 mb-3">
+                        <small className="text-muted">
+                            북스탁에 가입함으로써 <Link to="/terms" className="text-primary">서비스 약관</Link> 및 <Link to="/privacy" className="text-primary"> 및 개인 정보 보호 정책</Link>에 동의합니다.
+                        </small>
+                    </div>
+                    <div className="row mb-4">
+                        <div className="col-md-6">
+                            <button className="btn btn-blue text-center mb-1 py-2" >계정 만들기</button>
                         </div>
+                    </div>
+                    <div className="row px-3 mb-4 d-flex align-items-center">
+                        <div className="line"></div>
+                        <small className="text-muted or text-center">OR</small>
+                        <div className="line"></div>
+                    </div>
 
-                        <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <label htmlFor="userAccount">비밀번호</label>
-                                <input type="password" className="form-control" id="pwd" placeholder="비밀번호를 입력해주세요." name="pwd" value={data.pwd} onChange={handleChange} required />
-                                <div className="invalid-feedback">
-                                    비밀번호를 입력해주세요.
-                                </div>
-                            </div>
-                        </div>    
-
-                        <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <label htmlFor="name">닉네임</label>
-                                <input type="text" className="form-control" id="nick" placeholder="닉네임을 입력해주세요." name="nick" value={data.nick} onChange={handleChange} required />
-                                <div className="invalid-feedback">
-                                    닉네임을 입력해주세요.
-                                </div>
-                            </div>
+                    <div className="row text-center">
+                        <KakaoLogin />
+                        <div className="col-sm-6">
+                            <p className="social-connect2">
+                                <span className="fa fa-google-plus"></span>
+                                <button className="btn text-center mb-1 py-2">네이버 계정으로 로그인하기</button>
+                            </p>
                         </div>
-                        
-                        <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <label htmlFor="address">주소</label>
-                                <input type="text" className="form-control" id="userAddr" placeholder="서울특별시 강남구" name="userAddr" value={data.userAddr} onChange={handleChange} required />
-                                <div className="invalid-feedback">
-                                    주소를 입력해주세요.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <label htmlFor="userPhone">전화번호</label>
-                                <input type="text" className="form-control" id="userPhone" placeholder="-빼고 입력해주세요" name="userPhone" value={data.userPhone} onChange={handleChange} required />
-                                <div className="invalid-feedback">
-                                    전화번호를 입력해주세요.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <label htmlFor="userAccount">계좌번호</label>
-                                <input type="text" className="form-control" id="userAccount" placeholder="계좌번호를 입력해주세요." name="userAccount" value={data.userAccount} onChange={handleChange} required />
-                                <div className="invalid-feedback">
-                                    계좌번호를 입력해주세요.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='row'>
-                        <hr className="my-4 col-md-6 mb-3" />
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="agreement" required />
-                                <label className="custom-control-label" htmlFor="agreement">&nbsp;개인정보 수집 및 이용에 동의합니다.</label>
-                            </div>
-                            <div className="my-4"></div>
-                            <button className="col-md-6 mb-3 btn btn-primary btn-lg btn-block" type="submit" onClick={handleSubmit}>가입 완료</button>
-                        </div>
-                    </form>
+                        {/* <div className="col-sm-6">
+                            <p className="social-connect">
+                                <span className="fa fa-google-plus"></span>
+                                <small className="pl-3 pr-1">구글계정으로 로그인하기</small>
+                            </p>
+                        </div> */}
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
 
-export default Register;
+export default SignUp;
