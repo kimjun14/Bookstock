@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchBookResult from "./searchBookResult";
 
-const PopUp = ({ isOpen, onClose, handleSubmit, infoToPopup }) => {
+const PopUp = ({ isOpen, onClose, infoToPopup }) => {
     const [searchTerm, setSearchTerm] = useState("");
     // 검색창 핸들러
     const handleSearchChange = (e) => {
@@ -37,7 +37,7 @@ const PopUp = ({ isOpen, onClose, handleSubmit, infoToPopup }) => {
                     </form>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" onClick={onClose}>닫기</button>
-                        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>등록하기</button>
+                        <button type="submit" className="btn btn-primary">등록하기</button>
                     </div>
                 </div>
             </div>

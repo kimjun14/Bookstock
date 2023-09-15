@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const SearchBookResult = ( {query, popupToResult } ) => {
+const SearchBookResult = ( { query, popupToResult } ) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [selectedBook, setSelectedBook] = useState({
