@@ -2,10 +2,10 @@ const pool = require('./pool');
 
 const userModel = {
   // 경매 목록 조회
-  async find() {
+  async auctionSearch(auctionId) {
     try {
-      const sql = `select * from auction`;
-      const [result] = await pool.query(sql);
+      const sql = `select * from auction where auctionId = ?`;
+      const [result] = await pool.query(sql,auctionId);
       return result;
     } catch (err) {
       console.error(err);

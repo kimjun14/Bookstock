@@ -32,7 +32,9 @@ button:focus {
   border-color: #1187cf;
   color: #1187cf;
   border-radius: 6px;
-  width: 100%;
+  width: 39.3rem;
+  margin: auto;
+
 }
 
 .btn-blue:hover {
@@ -40,25 +42,39 @@ button:focus {
   color: #fff;
   cursor: pointer;
 }
+.line {
+    height: 1px;
+    width: 45%;
+    background-color: #E0E0E0;
+    margin-top: 10px;
+    margin-bottom: 1rem;
+}
 
-.social-connect1 .btn-blue {
+.or {
+    width: 10%
+}
+
+.social-connect1 .btn {
   background-color: #fff;
   border-color: #ffcd00;
   color: #ffcd00;
+  width: 100%;
 }
 
-.social-connect1 .btn-blue:hover {
+.social-connect1 .btn:hover {
   background-color: #ffcd00;
   color: #fff;
 }
 
-.social-connect2 .btn-blue {
+.social-connect2 .btn {
   background-color: #fff;
   border-color: #03c75a;
   color: #03c75a;
+  width: 100%;
+
 }
 
-.social-connect2 .btn-blue:hover {
+.social-connect2 .btn:hover {
   background-color: #03c75a;
   color: #fff;
 }
