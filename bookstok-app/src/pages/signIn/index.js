@@ -67,6 +67,7 @@ const SignIn = function () {
         <div id="inputBox"> */}
           <div className="leftLogin">
             <div className="idpwdSubmit">
+              
               <form className='idpwdInput' onSubmit={handleLogin}>
                 <div className="input-form-box">
                   <input type="text" id="loginId" name="loginId" placeholder='아이디를 입력하세요' className="form-control" value={loginId} onChange={(e) => setLoginId(e.target.value)} />
@@ -76,11 +77,13 @@ const SignIn = function () {
                   <input type="password" id="loginPassword" name="loginPassword" placeholder='비밀번호를 입력하세요' className="form-control" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                 </div>
               </form>
+
               <div className="loginBtn">
                 <button type="submit">로그인<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-</svg></button>
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg></button>
               </div>
+
             </div>
             <div className="checkSearch">
               <input type="checkbox" id="remember" name="remember" />
