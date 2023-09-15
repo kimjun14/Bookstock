@@ -7,13 +7,11 @@ import Home from "./header/Home";
 import SignIn from "./header/SignIn";
 import MyPage from "./header/MyPage";
 import SignUp from "./header/SignUp";
-
+import {useAuth} from '../../AuthContext'
 
 const Header = function () {
-    // 로그인 상태 저장 state
-    // eslint-disable-next-line 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+    const { isLoggedIn, login, logout } = useAuth(); // 로그인 상태와 로그인/로그아웃 함수 가져오기
+    
     // 1. 상태 생성
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
@@ -50,15 +48,17 @@ const Header = function () {
                         {/* <!-- searchbar end--> */}
                         <div className="container mb-3">
                             <ul className="nav justify-content-end">
-                                <Home/>
-                                <SignIn/>
-                                {
-                                    isLoggedIn ? (
-                                <MyPage/>
-                                    ) : (
-                                <SignUp/>
-                                    )
-                                }
+                            <Home />
+                                {isLoggedIn ? (
+                                    <>
+                                        <MyPage />
+                                    </>
+                                ) : (
+                                    <>
+                                        <SignIn />
+                                        <SignUp />
+                                    </>
+                                )}
                             </ul>
                         </div>
                     </form>

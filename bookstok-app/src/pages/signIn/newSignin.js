@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import './newIndex.css'
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { useAuth } from "../../AuthContext";
 
 const SignIn = function () {
   const [loginId, setLoginId] = useState(""); // 입력받은 아이디
   const [loginPassword, setLoginPassword] = useState(""); // 입력받은 패스워드
   
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, login, logout } = useAuth(); // 로그인 상태와 로그인/로그아웃 함수 가져오기
 
   const Navigate = useNavigate();
 
@@ -40,7 +41,7 @@ const SignIn = function () {
         const responseData = response.data;
         if (responseData.message === 'SUCCESS') {
           // 서버로부터 'SUCCESS' 메시지를 받으면 로그인 성공 처리를 수행합니다.
-          setIsLoggedIn(true);
+          login();//로그인 상태 업데이트
           goToMain();
         } else {
           alert('아이디 또는 비밀번호가 일치하지 않습니다.');
@@ -54,6 +55,8 @@ const SignIn = function () {
       alert('로그인 중 오류가 발생하였습니다.');
     }
   };
+
+
   return (
     <div className="wrapper bg-white">
       <div className="h2 text-center">BookStock</div>
