@@ -1,0 +1,64 @@
+.container-fluid {
+  color: #000;
+  overflow-x: hidden;
+  height: 100%;
+  background-color: #fff;
+}
+
+.card2 {
+  border-radius: 20px;
+  box-shadow: 20px 20px 80px rgb(206, 206, 206);
+}
+
+.text-sm {
+  font-size: 14px !important;
+}
+
+input {
+  padding: 10px 12px 10px 12px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  margin-top: 2px;
+  width: 100%;
+}
+
+button:focus {
+  outline-width: 0;
+}
+
+.btn-blue {
+  background-color: #fff;
+  border-color: #1187cf;
+  color: #1187cf;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.btn-blue:hover {
+  background-color: #1187cf;
+  color: #fff;
+  cursor: pointer;
+}
+
+.social-connect1 .btn-blue {
+  background-color: #fff;
+  border-color: #ffcd00;
+  color: #ffcd00;
+}
+
+.social-connect1 .btn-blue:hover {
+  background-color: #ffcd00;
+  color: #fff;
+}
+
+.social-connect2 .btn-blue {
+  background-color: #fff;
+  border-color: #03c75a;
+  color: #03c75a;
+}
+
+.social-connect2 .btn-blue:hover {
+  background-color: #03c75a;
+  color: #fff;
+}
