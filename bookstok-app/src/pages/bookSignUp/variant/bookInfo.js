@@ -42,14 +42,13 @@ const BookResearch = ({ aucToInfo }) => {
         }));
     }, [aucToInfo]);
 
-
     return (
         <div className="container-fluid mt-5">
             <div className="row align-items-center">
                 <form className="validation-form" noValidate>
                     <div className="row justify-content-around">
-                        <div className="col-md-auto">
-                            <img src={bookInfo.title_url} alt="bookimg" name="bookImgSrc" className="col-md-4"/>
+                        <div className="col-md-3">
+                            <img src={bookInfo.title_url} alt="bookimg" name="bookImgSrc" className="col-md-12"/>
                         </div>
                         <div className="col-md-6 mb-3">
                             <div className="row justify-content-between mb-3">
@@ -58,16 +57,16 @@ const BookResearch = ({ aucToInfo }) => {
                                 <PopUp isOpen={showModal} onClose={closeModal} infoToPopup={popupCallback} />
                             </div>
                             <label htmlFor="email">도서제목:</label>
-                            <input type="text" className="form-control" id="bookTitle" name="bookTitle" value={bookInfo.title} readOnly/>
+                            <input type="text" className="form-control" id="bookTitle" name="bookTitle" value={bookInfo.title} />
 
-                            <label htmlFor="userAccount">출판사</label>
-                            <input type="text" className="form-control" id="bookPub" name="bookPub" value={bookInfo.pub} readOnly/>
+                            <label htmlFor="userAccount">출판사:</label>
+                            <input type="text" className="form-control" id="bookPub" name="bookPub" value={bookInfo.pub} />
 
-                            <label htmlFor="name">출판일</label>
-                            <input type="text" className="form-control" id="bookPubDate" name="bookPubDate" value={bookInfo.pubDate} readOnly/>
+                            <label htmlFor="name">출판일:</label>
+                            <input type="text" className="form-control" id="bookPubDate" name="bookPubDate" value={bookInfo.pubDate} />
 
-                            <label htmlFor="address">작가</label>
-                            <input type="text" className="form-control" id="bookAuthor" name="bookAuthor" value={bookInfo.author} readOnly/>
+                            <label htmlFor="address">작가:</label>
+                            <input type="text" className="form-control" id="bookAuthor" name="bookAuthor" value={bookInfo.author} />
                         </div>
                     </div>
                 </form>

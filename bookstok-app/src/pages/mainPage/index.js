@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
 
 function MainPage() {
+
     return (
         <div>
             {/* 본문 상단 슬라이드 배너 */}
@@ -40,7 +41,7 @@ function MainPage() {
                 <div className="d-flex flex-wrap justify-content-center">
                     {/* 1번 책 */}
                     <div className="card m-3" style={{ width: '18rem' }}>
-                        <Link className='text-decoration-none text-black' to='/trading'>
+                        <Link className='text-decoration-none text-black' to='/trading?id=17'>
                             <img
                                 className='card-img-top'
                                 src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"

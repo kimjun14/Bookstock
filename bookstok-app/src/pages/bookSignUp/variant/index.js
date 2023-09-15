@@ -28,7 +28,7 @@ const BookSignUp = () => {
             bookImgSrc:book.TITLE_URL
         }));
     }
-    
+
     useEffect(() => {
         console.log(product);
     }, [product]);
@@ -75,9 +75,6 @@ const BookSignUp = () => {
             <div className="container-fluid mt-5">
                 <form onSubmit={handleSubmit}>
                     <div className="row justify-content-around">
-                        <div className="col-md-auto">
-                            <img src="http://placeholder.com/450x420" alt="bookimg" />
-                        </div>
                         <div className="col-md-6">
                             <h2 className="mb-3">도서 역경매 등록</h2>
                             <div className="form-group">
@@ -122,7 +119,7 @@ const BookSignUp = () => {
                         </div>
                     </div>
                     <hr className="mt-5" />
-                    <BookResearch aucToInfo={infoCallback} />
+                    <BookResearch aucToInfo={infoCallback}/>
 
                     <div className="d-grid gap-2 col-11 mx-auto mt-5">
                         <button type="submit" className="btn btn-primary btn-lg mt-5">
