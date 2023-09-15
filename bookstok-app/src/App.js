@@ -1,13 +1,15 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import './App.css';
-import SignIn from "./pages/signIn/newSignin";
+import SignIn from "./pages/SignIn/newSignin";
 import SearchResult from "./pages/searchResult/newIndex";
 import Trading from "./pages/Trading";
 import MainPage from "./pages/mainPage";
-import SignUp from "./pages/signUp";
+import SignUp from "./pages/signUp/newIndex";
 import MyPage from "./pages/myPage";
 import BookSignUp from "./pages/bookSignUp/variant";
+import KakaoLogin from './components/socialLogin/kakaoLogin';
 
 function App() {
 
@@ -21,6 +23,7 @@ function App() {
           <Route path="/searchResult" element={<SearchResult />} />
           <Route path="/trading" element={<Trading />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/oauth/callback/kakao" element={<KakaoLogin/>} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/booksignup" element={<BookSignUp />} />
         </Route>
