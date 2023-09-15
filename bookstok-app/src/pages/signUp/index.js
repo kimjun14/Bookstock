@@ -3,9 +3,17 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import './index.css'
-// import KakaoLogin from "./socialLogin/KakaoLogin";
 
 function SignUp() {
+    const Rest_api_key = '861d57b9824340a31ae9c887397ac901' //REST API KEY
+    const redirect_uri = 'http://localhost:3000/oauth/callback/kakao' //Redirect URI
+    // oauth 요청 URL
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
+
+    const handleLogin = () => {
+        window.location.href = kakaoURL
+    }
+
     return (
         <div className="container-fluid px-2 px-md-4 py-5 mx-auto">
             <div className="col-lg-7" style={{ margin: 'auto' }}>
@@ -69,7 +77,12 @@ function SignUp() {
                     </div>
 
                     <div className="row text-center">
-                        {/* <KakaoLogin /> */}
+                        <div className="col-sm-6">
+                            <p className="social-connect1">
+                                <span className="fa fa-google-plus"></span>
+                                <button className="btn text-center mb-1 py-2" onClick={handleLogin}>카카오 계정으로 로그인하기</button>
+                            </p>
+                        </div>
                         <div className="col-sm-6">
                             <p className="social-connect2">
                                 <span className="fa fa-google-plus"></span>
@@ -90,3 +103,4 @@ function SignUp() {
 }
 
 export default SignUp;
+
