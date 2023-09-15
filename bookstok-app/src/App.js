@@ -5,7 +5,7 @@ import SignIn from "./pages/signIn/newSignin";
 import SearchResult from "./pages/searchResult/newIndex";
 import Trading from "./pages/Trading";
 import MainPage from "./pages/mainPage";
-import SignUp from "./pages/signUp";
+import SignUp from "./pages/signUp/newIndex";
 import MyPage from "./pages/myPage";
 import BookSignUp from "./pages/bookSignUp/variant";
 
