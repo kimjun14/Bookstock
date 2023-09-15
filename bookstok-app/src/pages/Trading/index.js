@@ -5,10 +5,14 @@ import axios from 'axios';
 
 function Trading() {
     const navigation = useNavigate();
-    const [bidAmount, setBidAmount] = useState("");
+    const [bidData, setBidData] = useState({
+        bidPrice:"",
+        bidImgSrc:"",
+        bidContext:""
+    });
     const [auctionData, setAuctionData] = useState("null");
     const URLquery = useLocation();
-    const queryParams = new URLSearchParams(URLquery.search);   
+    const queryParams = new URLSearchParams(URLquery.search);
     // location.search      =>  URL? query... 이후부분받음
     // URLSearchParams      =>  쿼리 문자열의 key, value 쌍을 생성자로 저장
     // {queryParams.get('id')} => auctionId 검색을 위해 던져 줄 거
@@ -27,16 +31,28 @@ function Trading() {
         }
         else{
             alert("잘못 된 접근입니다.");    // id쿼리 없이 들어가면 오류 메세지 나오고
-            navigation('/');                // 등록화면으로 보내버림
+            navigation('/');                // 홈('/')화면으로 보내버림 (추후 변경 할 수도)
         }
     },[]);     // 컴포넌트가 처음 마운트 되면 axios 통신을 하여 id값의 경매 데이터를 받아옴
 
     const handleBidChange = (e) => {
-        setBidAmount(e.target.value);
+        setBidData({
+            ...bidData,
+            [e.target.name]: e.target.value
+        });
     }
 
-    const handleBidSubmit = () => {
-        console.log("입찰금액:", bidAmount);
+    useEffect(() => {
+        console.log(bidData);
+    }, [bidData]);  //bidData가 변경 되었는지 확인하기위한 용도
+
+    const handleBidSubmit = async () => {
+        try{
+            const response=await axios.post(`http://220.127.80.225:12345/api/auctions/${queryParams.get('id')}`,bidData)
+            console.log(bidData,queryParams.get('id'),response);    
+        }catch(err){
+            console.error(err);
+        }
     }
 
     return (
@@ -118,15 +134,15 @@ function Trading() {
 
                     <div className="row">
                         <div className="form-floating">
-                            <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} ></textarea>
+                            <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} name="bidContext" value={bidData.bidContext} onChange={handleBidChange} ></textarea>
                             <label htmlFor="floatingTextarea2">상품 정보를 입력하세요</label>
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="input-group mt-2">
-                            <input type="file" className="form-control" id="inputGroupFile04" />
-                            <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" value={bidAmount} onChange={handleBidChange} />
+                            <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" value={bidData.bidImgSrc} onChange={handleBidChange} />
+                            <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" name="bidPrice" value={bidData.bidPrice} onChange={handleBidChange} />
                             <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
                                 입찰 하기
                             </button>
