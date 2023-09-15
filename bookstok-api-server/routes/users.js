@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const crypto=require('crypto');
 
 
@@ -26,6 +26,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+
 // 로그인
 // 제대로 구현 하려면 토큰도 돌려줘야하지만 id pwd 검증만 함
 router.post('/signin', async (req, res, next) => {
@@ -43,6 +44,8 @@ router.post('/signin', async (req, res, next) => {
       res.status(200).send({ message: 'SUCCESS' });
       req.session = clear()
       console.log("새션 삭제", req.session);
+      const a = 10
+      return (console.log("데이터 돌려줌"), a);
     } else {
       // 아이디 또는 비밀번호가 일치하지 않는 경우
       res.status(401).send({ message: '아이디 또는 비밀번호가 일치하지 않습니다.' });

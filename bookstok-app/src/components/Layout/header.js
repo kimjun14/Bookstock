@@ -3,14 +3,16 @@ import { Link } from "react-router-dom"; // react-router-dom에서 Link 가져�
 import logo2Cut from "../../img/logo2Cut.jpg";
 import { useNavigate } from "react-router";
 import './header.css'
-import SignIn from "./header/signIn";
 import Home from "./header/Home";
+import SignIn from "./header/SignIn";
 import MyPage from "./header/MyPage";
-import SigUp from "./header/SignUp";
+import SignUp from "./header/SignUp";
 
-const Header = function ({isLoggedIn}) {
+
+const Header = function () {
     // 로그인 상태 저장 state
     // eslint-disable-next-line 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // 1. 상태 생성
     const [searchTerm, setSearchTerm] = useState("");
@@ -49,11 +51,12 @@ const Header = function ({isLoggedIn}) {
                         <div className="container mb-3">
                             <ul className="nav justify-content-end">
                                 <Home/>
-                                <SignIn />
-                                {isLoggedIn ? (
+                                <SignIn/>
+                                {
+                                    isLoggedIn ? (
                                 <MyPage/>
                                     ) : (
-                                <SigUp/>
+                                <SignUp/>
                                     )
                                 }
                             </ul>
