@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom'
 import './index.css';
 import axios from 'axios';
+import moment from 'moment';
 
 function Trading() {
     const navigation = useNavigate();
@@ -71,6 +72,11 @@ function Trading() {
         }
     }
 
+    const formatBidCreateAt = (dateString) => {
+        const formattedDate = moment(dateString).format('YYYY-MM-DD HH:mm:ss');
+        return formattedDate;
+    }
+
     return (
         <>
             <article>
@@ -123,7 +129,9 @@ function Trading() {
                                     <div className="col-md-12">
                                         <div className="card-body row align-items-center">
                                             <h3 className="card-title col-sm-1 ms-4">{bid.uId}</h3>
-                                            <p className="card-title col-sm-2"><small className="text-body-secondary">{bid.bidCreateAt}</small></p>
+                                            <p className="card-title col-sm-2">
+                                                <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
+                                            </p>
                                             <h6 className="card-title col-sm-1">{bid.bidPrice} 원</h6>
                                             <div className='col-sm-5'></div>
                                             <button type="button" className="btn btn-primary col-sm-1 mt-1">즉시구매</button>
@@ -146,17 +154,19 @@ function Trading() {
                     <div className="row">
                         <div className="form-floating">
                             <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} name="bidContext" value={bidData.bidContext} onChange={handleBidChange} ></textarea>
-                            <label htmlFor="floatingTextarea2">상품 정보를 입력하세요</label>
+                            <label htmlFor="floatingTextarea2" className='ms-1'>상품 정보를 입력하세요</label>
                         </div>
                     </div>
 
                     <div className="row">
-                        <div className="input-group mt-2">
-                            <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" value={bidData.bidImgSrc} onChange={handleBidChange} />
-                            <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" name="bidPrice" value={bidData.bidPrice} onChange={handleBidChange} />
-                            <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
-                                입찰 하기
-                            </button>
+                        <div className="col-md-6 offset-md-6">
+                            <div className="input-group mt-2">
+                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" value={bidData.bidImgSrc} onChange={handleBidChange} />
+                                <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" name="bidPrice" value={bidData.bidPrice} onChange={handleBidChange} />
+                                <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
+                                    입찰 하기
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

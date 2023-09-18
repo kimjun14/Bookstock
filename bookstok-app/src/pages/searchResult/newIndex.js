@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './newIndex.css'
 import axios from 'axios';
+import moment from 'moment';
 
 function BookSearchResult() {
   // eslint-disable-next-line
@@ -29,6 +30,11 @@ function BookSearchResult() {
       navigation('/');                // 홈('/')화면으로 보내버림 (추후 변경 할 수도)
     }
   },[searchKey]);
+
+  const AuctionCreateAt = (dateString) => {
+    const Date = moment(dateString).format("YYYY-MM-DD HH:mm:ss");
+    return Date;
+  }
 
   return (
     <div>
@@ -64,7 +70,7 @@ function BookSearchResult() {
               <td>시작가: {book.auctionPrice}원
               <br />현재가: 추후 구현 예정</td>
               <td><Link to={`/${book.uId}`}>{book.uId} 추후 닉네임으로 구현 예정</Link></td>
-              <td>{book.auctionStart} /<br />{book.auctionEnd}</td>
+              <td>{AuctionCreateAt(book.auctionStart)} /<br />{AuctionCreateAt(book.auctionEnd)}</td>
               <td>추후 구현 예정</td>
               <td>
 
