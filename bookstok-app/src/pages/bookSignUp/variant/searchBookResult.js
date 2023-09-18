@@ -5,24 +5,6 @@ const SearchBookResult = ({ query, popupToResult }) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [bookBackGround, setBookBackGround] = useState(-1);
-    const [selectedBook, setSelectedBook] = useState({
-        TITLE: '',
-        AUTHOR: '',
-        PUBLISHER: '',
-        TITLE_URL: '',
-        PUBLISH_PREDATE: ''
-    });
-
-    const handleBookClick = (book) => {
-        setSelectedBook({
-            TITLE: book.TITLE,
-            AUTHOR: book.AUTHOR,
-            PUBLISHER: book.PUBLISHER,
-            TITLE_URL: book.TITLE_URL,
-            PUBLISH_PREDATE: book.PUBLISH_PREDATE
-        });
-        popupToResult(selectedBook); // 상위 컴포넌트로 선택한 책 정보 전달
-    };
 
     // 도서 선택시 음영을 추가하는 함수
     const addShadowToBook = (index) => {
@@ -64,7 +46,13 @@ const SearchBookResult = ({ query, popupToResult }) => {
                     className={`row p-2 d-flex align-items-center ${index === bookBackGround ? "selected-book" : ""
                         }`}
                     onClick={() => {
-                        handleBookClick(book);
+                        popupToResult({
+                            TITLE: book.TITLE,
+                            AUTHOR: book.AUTHOR,
+                            PUBLISHER: book.PUBLISHER,
+                            TITLE_URL: book.TITLE_URL,
+                            PUBLISH_PREDATE: book.PUBLISH_PREDATE
+                        });
                         addShadowToBook(index); // 선택된 도서에 음영 추가
                     }}
                 >
