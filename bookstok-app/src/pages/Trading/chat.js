@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import io from 'socket.io-client';
 
 function Chat({ isOpen, bid, onClose }) {
     const [chatMessage, setChatMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
+    const socketRef = useRef(null);
 
     const handleInputChange = (e) => {
         setChatMessage(e.target.value);
@@ -12,10 +14,24 @@ function Chat({ isOpen, bid, onClose }) {
         if (chatMessage.trim() !== '') {
             // 메시지를 채팅 기록에 추가
             setChatHistory([...chatHistory, { text: chatMessage, sender: 'user' }]);
+            // 웹소켓을 통해 서버에 메시지 전송
+            socketRef.current.emit('chat message', { text: chatMessage, sender: 'user' });
             // 메시지 입력 필드 초기화
             setChatMessage('');
         }
     };
+
+    useEffect(() => {
+        socketRef.current = io.connect('http://localhost:54321');
+    
+        socketRef.current.on('chat message', (message) => {
+            setChatHistory((prevLog) => [...prevLog, message]);
+        });
+    
+        return () => {
+          socketRef.current.disconnect();
+        };
+    }, []);    
 
     return (
         <div
