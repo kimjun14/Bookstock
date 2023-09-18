@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import './index.css';
 import axios from 'axios';
 import moment from 'moment';
+import Chat from './chat';
 
 function Trading() {
     const navigation = useNavigate();
@@ -77,6 +78,21 @@ function Trading() {
         return formattedDate;
     }
 
+    // 1:1 채팅 모달 관련 상태
+    const [chatPopUp, setChatPopUp] = useState(false);
+    const [selectBid, setSelectBid] = useState(null);
+
+    // 1:1 채팅 모달 열기
+    const openChatPopUp = (bid) => {
+        setSelectBid(bid);
+        setChatPopUp(true);
+    };
+
+    const closeChatPopUp = () => {
+        setSelectBid(null);
+        setChatPopUp(false);
+    };
+
     return (
         <>
             <article>
@@ -135,7 +151,7 @@ function Trading() {
                                             <h6 className="card-title col-sm-1">{bid.bidPrice} 원</h6>
                                             <div className='col-sm-5'></div>
                                             <button type="button" className="btn btn-primary col-sm-1 mt-1">즉시구매</button>
-                                            <button type="button" className="btn btn-info col-sm-1 mt-1">1:1 채팅</button>
+                                            <button type="button" className="btn btn-info col-sm-1 mt-1" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
                                         </div>
 
                                         <div className='card-body row'>
@@ -170,6 +186,7 @@ function Trading() {
                         </div>
                     </div>
                 </div>
+                <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
             </article>
         </>
     );
