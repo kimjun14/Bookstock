@@ -18,15 +18,8 @@ function Chat({ isOpen, bid, onClose }) {
     };
 
     return (
-        <div
-            className={`modal fade ${isOpen ? 'show' : ''}`}
-            tabIndex="-1"
-            role="dialog"
-            aria-hidden={!isOpen}
-            style={{ display: isOpen ? 'block' : 'none' }}
-        >
-            {/* 모달 내용 */}
-            <div className="modal-dialog modal-dialog-centered">
+        <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: isOpen ? 'block' : 'none' }}>
+            <div className="modal-dialog modal-dialog-centered" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">1:1 채팅</h5>
@@ -41,24 +34,23 @@ function Chat({ isOpen, bid, onClose }) {
                                     {chatHistory.map((message, index) => (
                                         <div
                                             key={index}
-                                            className={`chat-message ${message.sender === 'user' ? 'user' : 'seller'}`}
+                                            className={`d-flex flex-row justify-content-${message.sender === 'user' ? 'start' : 'end'} mb-4`}
                                         >
-                                            {message.text}
+                                            {message.sender === 'user' ? (
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style={{ width: '45px', height: '100%' }} />
+                                            ) : null}
+                                            <div className={`p-3 ${message.sender === 'user' ? 'ms-3' : 'me-3'} ${message.sender === 'user' ? 'bg-info' : 'bg-light'}`} style={{ borderRadius: '15px' }}>
+                                                <p className="small mb-0">{message.text}</p>
+                                            </div>
+                                            {message.sender !== 'user' ? (
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp" alt="avatar 2" style={{ width: '45px', height: '100%' }} />
+                                            ) : null}
                                         </div>
                                     ))}
                                 </div>
-                                {/* 채팅 입력 필드와 전송 버튼 가로로 정렬 */}
-                                <div className="chat-input d-flex">
-                                    <input
-                                        type="text"
-                                        placeholder="메시지 입력"
-                                        value={chatMessage}
-                                        onChange={handleInputChange}
-                                        className="form-control"
-                                    />
-                                    <button type="button" onClick={handleSendMessage} className="btn btn-primary">
-                                        전송
-                                    </button>
+                                {/* 채팅 입력 필드 */}
+                                <div className="form-outline">
+                                    <textarea className="form-control" rows="2" value={chatMessage} onChange={handleInputChange}></textarea>
                                 </div>
                             </div>
                         )}
@@ -67,10 +59,14 @@ function Chat({ isOpen, bid, onClose }) {
                         <button type="button" className="btn btn-secondary" onClick={onClose}>
                             닫기
                         </button>
+                        <button type="button" className="btn btn-primary" onClick={handleSendMessage}>
+                            전송
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
     );
 }
 
