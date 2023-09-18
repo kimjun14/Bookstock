@@ -17,7 +17,7 @@ const PopUp = ({ isOpen, onClose, infoToPopup }) => {
             document.body.style.overflow ="auto";
         };
     }, [isOpen]);
-    
+
     // 검색창 핸들러
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -51,8 +51,7 @@ const PopUp = ({ isOpen, onClose, infoToPopup }) => {
                         <SearchBookResult query={searchTerm} popupToResult={resultCallback} />
                     </form>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" onClick={onClose}>닫기</button>
-                        <button type="submit" className="btn btn-primary">등록하기</button>
+                        <button type="button" className="btn btn-primary" onClick={onClose}>등록하기</button>
                     </div>
                 </div>
             </div>

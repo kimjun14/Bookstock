@@ -1,26 +1,32 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const SearchBookResult = ( { query, popupToResult } ) => {
+const SearchBookResult = ({ query, popupToResult }) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
+    const [bookBackGround, setBookBackGround] = useState(-1);
     const [selectedBook, setSelectedBook] = useState({
-        TITLE:'',
-        AUTHOR:'',
-        PUBLISHER:'',
-        TITLE_URL:'',
-        PUBLISH_PREDATE:''
+        TITLE: '',
+        AUTHOR: '',
+        PUBLISHER: '',
+        TITLE_URL: '',
+        PUBLISH_PREDATE: ''
     });
 
     const handleBookClick = (book) => {
         setSelectedBook({
-            TITLE:book.TITLE,
-            AUTHOR:book.AUTHOR,
-            PUBLISHER:book.PUBLISHER,
-            TITLE_URL:book.TITLE_URL,
-            PUBLISH_PREDATE:book.PUBLISH_PREDATE
+            TITLE: book.TITLE,
+            AUTHOR: book.AUTHOR,
+            PUBLISHER: book.PUBLISHER,
+            TITLE_URL: book.TITLE_URL,
+            PUBLISH_PREDATE: book.PUBLISH_PREDATE
         });
         popupToResult(selectedBook); // 상위 컴포넌트로 선택한 책 정보 전달
+    };
+
+    // 도서 선택시 음영을 추가하는 함수
+    const addShadowToBook = (index) => {
+        setBookBackGround(index);
     };
 
     async function fetchData(query) {
@@ -41,7 +47,7 @@ const SearchBookResult = ( { query, popupToResult } ) => {
             return () => clearTimeout(timer);
         }
     }, [query]);
-    
+
     if (error) {
         return <div>검색 중 오류가 발생했습니다: {error.message}</div>;
     }
@@ -55,8 +61,12 @@ const SearchBookResult = ( { query, popupToResult } ) => {
             {data.docs.map((book, index) => (
                 <div
                     key={index}
-                    className={`row p-2 d-flex align-items-center ${book === selectedBook ? "bg-secondary" : ""}`}
-                    onClick={() => handleBookClick(book)}
+                    className={`row p-2 d-flex align-items-center ${index === bookBackGround ? "selected-book" : ""
+                        }`}
+                    onClick={() => {
+                        handleBookClick(book);
+                        addShadowToBook(index); // 선택된 도서에 음영 추가
+                    }}
                 >
                     <div className="col-md-3 col-sm-6">
                         <img
@@ -83,7 +93,7 @@ const SearchBookResult = ( { query, popupToResult } ) => {
                             <span className="col-10">: {book.PUBLISH_PREDATE}</span>
                         </div>
                     </div>
-                </div>
+                </div >
             ))}
         </>
     );
