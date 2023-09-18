@@ -1,5 +1,27 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../AuthContext';
+
+const RequireLogin = ({ children }) => {
+    // useAuth를 사용하여 로그인 상태 확인
+    const { isLoggedIn } = useAuth();
+
+    if (!isLoggedIn) {
+        // 사용자가 로그인하지 않은 경우, 마이페이지 접근 거부
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <p>로그인이 필요합니다.</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // 사용자가 로그인한 경우 자식 컴포넌트 렌더링
+    return children;
+}
 
 const MyPage = () => {
     return (
@@ -38,40 +60,41 @@ const MyPage = () => {
                 </div>
 
                 <div className="col-md-9" style={{ marginTop: "10px" }}>
-                    <div className="col-md-12 p-4 rounded d-flex flex-row" style={{ border: "1px solid #bcbdbe" }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="#bcbdbe" className="bi bi-person-circle" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                        </svg>
+                    <RequireLogin>
+                        <div className="col-md-12 p-4 rounded d-flex flex-row" style={{ border: "1px solid #bcbdbe" }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="#bcbdbe" className="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                            </svg>
 
-                        <div className="ms-4 mt-2" style={{ border: "0px solid blue" }}>
-                            <span>
-                                <b className="fs-5">userId</b>
-                            </span><br />
-                            <span className="text-black-50">
-                                email
-                            </span><br />
-                            <button className="mt-1 btn btn-secondary btn-sm">프로필 관리</button>
-                        </div>
-
-                        <div className="col-md-2" style={{ marginLeft: "auto", marginRight: "4rem", display: "flex", alignItems: "center" }}>
-                            <div style={{ borderRight: "1px solid #bcbdbe", paddingRight: "1rem" }}>
-                                <span className="mx-5">
-                                    <div>일반회원</div>
-                                    <div>다음 등급까지 0페이지 남았습니다.</div>
-                                </span>
+                            <div className="ms-4 mt-2" style={{ border: "0px solid blue" }}>
+                                <span>
+                                    <b className="fs-5">userId</b>
+                                </span><br />
+                                <span className="text-black-50">
+                                    email
+                                </span><br />
+                                <button className="mt-1 btn btn-secondary btn-sm">프로필 관리</button>
                             </div>
-                            {/* 일반회원이랑 예치금 박스안으로 들어가게 반응형으로 수정했어요. 그런데 일반회원 텍스트가 왜저러는지 모르겠네요ㅜㅜ */}
 
-                            <div style={{ marginLeft: "3rem" }}>
-                            <span >
-                                    <div>예치금</div>
-                                    <div>10,000</div>
-                                </span>
+                            <div className="col-md-2" style={{ marginLeft: "auto", marginRight: "4rem", display: "flex", alignItems: "center" }}>
+                                <div style={{ borderRight: "1px solid #bcbdbe", paddingRight: "1rem" }}>
+                                    <span className="mx-5">
+                                        <div>일반회원</div>
+                                        <div>다음 등급까지 0페이지 남았습니다.</div>
+                                    </span>
+                                </div>
+                                {/* 일반회원이랑 예치금 박스안으로 들어가게 반응형으로 수정했어요. 그런데 일반회원 텍스트가 왜저러는지 모르겠네요ㅜㅜ */}
+
+                                <div style={{ marginLeft: "3rem" }}>
+                                    <span >
+                                        <div>예치금</div>
+                                        <div>10,000</div>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-
-                    </div>
+                    </RequireLogin>
 
                     <div className="fs-4 mt-5 mb-4 ms-2 fw-bold">경매 진행 내역</div>
 

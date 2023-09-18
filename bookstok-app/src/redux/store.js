@@ -1,12 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./userSlice";
-import boardSlice from "./boardSlice";
+// src/redux/store.js
 
-const store = configureStore({
-  reducer: {
-    userStore: userSlice.reducer,
-    boardStore: boardSlice.reducer
-  }
-});
+import { createStore } from 'redux';
+import rootReducer from './reducers'; // 수정된 import 문
+
+// 스토어 생성
+const store = createStore(rootReducer);
 
 export default store;

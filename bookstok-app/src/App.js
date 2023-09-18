@@ -9,13 +9,14 @@ import MainPage from './pages/mainPage';
 import SignUp from './pages/signUp';
 import MyPage from './pages/myPage';
 import BookSignUp from './pages/bookSignUp/variant';
-
-import { AuthProvider } from './AuthContext'; // AuthContext 파일 경로에 따라 수정
+import PrivateRoute from './routes/PrivateRoute';
+import { AuthProvider } from './AuthContext';
+import RequireLogin from './RequireLogin';
 
 function App() {
   return (
     <Router>
-      <AuthProvider> {/* AuthProvider 컴포넌트를 사용하여 하위 컴포넌트에서 상태를 공유할 수 있습니다. */}
+      <AuthProvider> {/* AuthProvider로 AuthContext를 제공 */}
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
@@ -23,11 +24,11 @@ function App() {
             <Route path="/searchResult" element={<SearchResult />} />
             <Route path="/trading" element={<Trading />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/mypage" element={<MyPage />} />
             <Route path="/booksignup" element={<BookSignUp />} />
+            <Route path="/mypage" element={<RequireLogin><MyPage /></RequireLogin>} />
           </Route>
         </Routes>
-      </AuthProvider> 
+      </AuthProvider>
     </Router>
   );
 }
