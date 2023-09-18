@@ -5,14 +5,24 @@ import { Link } from "react-router-dom";
 import './index.css'
 
 function SignUp() {
-    const Rest_api_key = '861d57b9824340a31ae9c887397ac901' //REST API KEY
-    const redirect_uri = 'http://localhost:3000/oauth/callback/kakao' //Redirect URI
-    // oauth 요청 URL
-    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
+    const KakaoRestApiKey = '861d57b9824340a31ae9c887397ac901'; // Kakao REST API Key
+    const KakaoRedirectUri = 'http://localhost:3000/oauth/callback/kakao'; // Kakao Redirect URI
 
-    const handleLogin = () => {
-        window.location.href = kakaoURL
+    const NaverClientId = 'YP_J3Qwb0dVPZzak0x8Q'; // Naver Client ID
+    const NaverRedirectUri = 'http://localhost:3000/auth/naver/callback'; // Naver Redirect URI
+
+    // OAuth 요청 URL
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${KakaoRestApiKey}&redirect_uri=${KakaoRedirectUri}&response_type=code`;
+    const naverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${NaverClientId}&redirect_uri=${NaverRedirectUri}&response_type=code`;
+
+    const handleLoginWithKakao = () => {
+        window.location.href = kakaoURL;
     }
+
+    const handleLoginWithNaver = () => {
+        window.location.href = naverURL;
+    }
+
 
     return (
         <div className="container-fluid px-2 px-md-4 py-5 mx-auto">
@@ -80,13 +90,13 @@ function SignUp() {
                         <div className="col-sm-6">
                             <p className="social-connect1">
                                 <span className="fa fa-google-plus"></span>
-                                <button className="btn text-center mb-1 py-2" onClick={handleLogin}>카카오 계정으로 로그인하기</button>
+                                <button className="btn text-center mb-1 py-2" onClick={handleLoginWithKakao}>카카오 계정으로 로그인하기</button>
                             </p>
                         </div>
                         <div className="col-sm-6">
                             <p className="social-connect2">
                                 <span className="fa fa-google-plus"></span>
-                                <button className="btn text-center mb-1 py-2">네이버 계정으로 로그인하기</button>
+                                <button className="btn text-center mb-1 py-2" onClick={handleLoginWithNaver}>네이버 계정으로 로그인하기</button>
                             </p>
                         </div>
                         {/* <div className="col-sm-6">
@@ -101,6 +111,7 @@ function SignUp() {
         </div>
     );
 }
+
 
 export default SignUp;
 
