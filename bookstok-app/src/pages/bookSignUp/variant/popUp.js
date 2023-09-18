@@ -1,8 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBookResult from "./searchBookResult";
 
 const PopUp = ({ isOpen, onClose, infoToPopup }) => {
     const [searchTerm, setSearchTerm] = useState("");
+
+    // 팝업이 열릴 때 body 스크롤 비활성화
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+
+        // 팝업이 닫힐 때 스크롤 스타일을 다시 원래대로 돌려놓기 위한 clean up 함수
+        return () => {
+            document.body.style.overflow ="auto";
+        };
+    }, [isOpen]);
+    
     // 검색창 핸들러
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
