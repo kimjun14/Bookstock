@@ -8,6 +8,7 @@ import SignIn from "./header/signIn";
 import MyPage from "./header/MyPage";
 import SignUp from "./header/SignUp";
 import {useAuth} from '../../AuthContext'
+import SignOut from "./header/SignOut";
 
 const Header = function () {
     const { isLoggedIn, login, logout } = useAuth(); // 로그인 상태와 로그인/로그아웃 함수 가져오기
@@ -50,8 +51,10 @@ const Header = function () {
                             <ul className="nav justify-content-end">
                             <Home />
                                 {isLoggedIn ? (
-                                    <>
+                                    <>  
+                                        <SignOut/>
                                         <MyPage />
+
                                     </>
                                 ) : (
                                     <>
