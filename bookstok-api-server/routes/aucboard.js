@@ -3,11 +3,22 @@ var router = express.Router();
 
 const user = require('../models/aucboard.model');
 
+// 경매 목록 조회 [get] ip:12345/api/auctions/search?query(key)=value [req.body에 query]
+router.get('/search', async (req, res, next) => {
+  try{
+    const query = req.query.query;
+    const list = await user.auctionSearch(query);
+    res.json(list);
+  }catch(err){
+    next(err);
+  }
+});
+
 // 경매 목록 조회 [get] ip:12345/api/auctions/경매번호
 router.get('/:id', async (req, res, next) => {
   try{
     const id = Number(req.params.id);
-    const list = await user.auctionSearch(id);
+    const list = await user.auctionIdSearch(id);
     res.json(list);
   }catch(err){
     next(err);
@@ -18,7 +29,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/:id/bids', async (req, res, next) => {
   try{
     const id = Number(req.params.id);
-    const list = await user.auctionBidSearch(id);
+    const list = await user.auctionIdBidSearch(id);
     res.json(list);
   }catch(err){
     next(err);
