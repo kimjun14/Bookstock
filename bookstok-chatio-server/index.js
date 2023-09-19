@@ -35,24 +35,26 @@ io.on('connection', (socket) => {
   console.log('a user connected');
 
   // 기존의 채팅 내역 로드
-  (async () => {
+  socket.on('check chatId', async (msg) => {
+    const { bId, aId } = msg;
     try {
-      const [rows] = await pool.execute('SELECT * FROM chats ORDER BY timestamp DESC LIMIT 20');
+      const [rows] = await pool.execute(`SELECT * FROM chats where aId=${aId} and bId=${bId} ORDER BY timestamp DESC LIMIT 20`);
       // 처음으로 접속한 유저에게만 이전 채팅 내역 전송
       socket.emit('load previous messages', rows.reverse());
     } catch (error) {
         console.error('DB 에러:', error);
-    }
-  })();
+    } 
+  });
 
   socket.on('chat message', async (msg) => {
-    const { text, sender } = msg;
-
+    const { text, sender, bId, aId } = msg;
     try {
       // DB에 메시지 저장
       const [rows, fields] = await pool.execute(
-        'INSERT INTO chats (text, sender) VALUES (?, ?)',
-        [text, sender]
+        `INSERT INTO chats 
+        (text, sender, bId, aId) 
+        VALUES (?, ?, ?, ? )`,
+        [text, sender, bId, aId]
       );
 
       // 모든 클라이언트에게 메시지 전송

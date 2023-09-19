@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router';
 import io from 'socket.io-client';
 
 function Chat({ isOpen, bid, onClose }) {
     const [chatMessage, setChatMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
     const socketRef = useRef(null);
+    const URLquery = useLocation();
+    const queryParams = new URLSearchParams(URLquery.search);
 
     const handleInputChange = (e) => {  // 입력 한 내용을 chatMessage로 반영하는 이벤트 핸들러
         setChatMessage(e.target.value);
@@ -20,7 +23,7 @@ function Chat({ isOpen, bid, onClose }) {
     const handleSendMessage = () => {
         if (chatMessage.trim() !== '') {
             // 웹소켓을 통해 서버에 메시지 전송
-            socketRef.current.emit('chat message', { text: chatMessage, sender: 'user' });
+            socketRef.current.emit('chat message', { text: chatMessage, sender: 'user', bId: bid.bidId, aId:queryParams.get('id') });
             // 메시지 입력 필드 초기화
             setChatMessage('');
         }
@@ -28,10 +31,11 @@ function Chat({ isOpen, bid, onClose }) {
 
     useEffect(() => {
         socketRef.current = io.connect('http://220.127.80.225:54321');
-
-        socketRef.current.on('load previous messages', (previousMessages) => {
-            setChatHistory(previousMessages);
-        });
+        if(bid!=null){  // bid값이 null인 초기엔 채팅 이력을 받아오지 않음
+            socketRef.current.emit('check chatId', { aId:queryParams.get('id'), bId: bid.bidId });
+            socketRef.current.on('load previous messages', (previousMessages) => {
+                setChatHistory(previousMessages);
+        })};
 
         socketRef.current.on('new message', (message) => {
             setChatHistory((prevLog) => [...prevLog, message]);
@@ -40,7 +44,7 @@ function Chat({ isOpen, bid, onClose }) {
         return () => {
           socketRef.current.disconnect();
         };
-    }, []);    
+    }, [bid]);    
 
     return (
         <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: isOpen ? 'block' : 'none' }}>
