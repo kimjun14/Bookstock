@@ -22,6 +22,7 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/searchResult" element={<SearchResult />} />
+            <Route path="/login" element={<SignIn />} />
             <Route path="/trading" element={<Trading />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/booksignup" element={<BookSignUp />} />

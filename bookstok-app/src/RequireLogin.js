@@ -1,21 +1,20 @@
-import React from 'react';
-import { useAuth } from './AuthContext';
+// RequireLogin.js
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 const RequireLogin = ({ children }) => {
-    const navigate = useNavigate();
-    const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
-    if (!isLoggedIn) {
-        // 사용자에게 확인 메시지를 표시하고, 확인을 누르면 로그인 페이지로 이동
-        const confirmed = window.confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?');
-        if (confirmed) {
-            navigate('/signin');
-        }
-        return null;
-    }
+  if (!isLoggedIn) {
+    alert("로그인이 필요합니다."); // 알림창 추가
+    navigate("/signin"); // 로그인 페이지로 리다이렉션
 
-    return children;
+    return null; 
+  }
+
+  return children;
 }
+
 
 export default RequireLogin;
