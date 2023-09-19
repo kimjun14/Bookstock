@@ -28,8 +28,12 @@ function Chat({ isOpen, bid, onClose }) {
 
     useEffect(() => {
         socketRef.current = io.connect('http://220.127.80.225:54321');
-        console.log(socketRef.current);
-        socketRef.current.on('chat message', (message) => {
+
+        socketRef.current.on('load previous messages', (previousMessages) => {
+            setChatHistory(previousMessages);
+        });
+
+        socketRef.current.on('new message', (message) => {
             setChatHistory((prevLog) => [...prevLog, message]);
         });
     
