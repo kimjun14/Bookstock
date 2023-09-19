@@ -39,8 +39,8 @@ function MainPage() {
             <div className="container mt-5 mb-3">
                 <h2 className="text-center">인기 경매 도서</h2>
                 <div className="d-flex flex-wrap justify-content-center">
-                    {/* 1번 책 */}
-                    <div className="card m-3" style={{ width: '18rem' }}>
+                        {/* 1번 책 */}
+                        <div className="card m-3" style={{ width: '18rem' }}>
                         <Link className='text-decoration-none text-black' to='/trading?id=17'>
                             <img
                                 className='card-img-top'
