@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import './App.css';
-import SignIn from './pages/signIn/newSignin';
+import SignIn from './pages/signIn/index';
 import SearchResult from './pages/searchResult/newIndex';
 import Trading from './pages/Trading';
 import MainPage from './pages/mainPage';
@@ -21,6 +21,7 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/searchResult" element={<SearchResult />} />
+            <Route path="/login" element={<SignIn />} />
             <Route path="/trading" element={<Trading />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/booksignup" element={<BookSignUp />} />

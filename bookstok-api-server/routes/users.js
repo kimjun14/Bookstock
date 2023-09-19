@@ -75,4 +75,30 @@ router.put('/:id/pwd', async (req, res, next) => {
   }
 });
 
+// 로그아웃
+router.post('/logout', (req, res, next) => {
+  try {
+    if (req.session.userId) {
+      // 사용자가 로그인한 상태인 경우에만 세션을 파기합니다.
+      req.session.destroy((err) => {
+        if (err) {
+          console.error('세션 파기 오류:', err);
+          return res.status(500).send({ message: '세션 파기 오류' });
+        }
+        
+        console.log('세션 파기 성공');
+        res.status(200).send({ message: '로그아웃 성공' });
+      });
+    } else {
+      // 사용자가 로그인하지 않은 상태인 경우
+      res.status(401).send({ message: '로그인한 사용자만 로그아웃할 수 있습니다.' });
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
+
 module.exports = router;

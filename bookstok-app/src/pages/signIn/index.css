@@ -3,14 +3,15 @@
 * {
     padding: 0;
     margin: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
+    background-color: white;
 }
 
 body {
     background-color: #eee;
     height: 100vh;
     font-family: 'Poppins', sans-serif;
-    background: #fff;
+    background: linear-gradient(to top, #fff 10%,  90%) no-repeat
 }
 
 .wrapper {
@@ -21,16 +22,10 @@ body {
     box-shadow: 20px 20px 80px rgb(206, 206, 206)
 }
 
-.h2 {
-    font-family: 'Kaushan Script', cursive;
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: #1187cf;
-    font-style: italic
-}
-
-.h4 {
-    font-family: 'Poppins', sans-serif
+.logo img {
+    width: 18rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .input-field {
@@ -39,13 +34,13 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
-    border: 1px solid #1187cf;
-    color: #1187cf
+    color: #1187cf;
+    height: auto;
 }
 
 .input-field:hover {
-    color: #1187cf;
-    border: 1px solid #1187cf
+    color: #18A8F1;
+    border: 1px solid #18A8F1
 }
 
 input {
@@ -71,7 +66,7 @@ a {
 
 a:hover {
     text-decoration: none;
-    color: #1187cf
+    color: #18A8F1
 }
 
 .option {
@@ -110,7 +105,7 @@ a:hover {
     width: 13px;
     height: 13px;
     display: block;
-    background: #1187cf;
+    background: #18A8F1;
     position: absolute;
     top: 48%;
     left: 53%;
@@ -122,7 +117,7 @@ a:hover {
 .option input[type="radio"]:checked~.checkmark {
     background: #fff;
     transition: 300ms ease-in-out 0s;
-    border: 1px solid #1187cf
+    border: 1px solid #18A8F1
 }
 
 .option input[type="radio"]:checked~.checkmark:after {
@@ -131,14 +126,16 @@ a:hover {
 
 .btn.btn-block {
     border-radius: 20px;
-    background-color:transparent;
-    border-color: #1187cf;
-    color: #1187cf
+    background-color: #1187cf;
+    color: #fff;
+    border-style: none;
+    width: 100%;
 }
 
 .btn.btn-block:hover {
-    background-color: #1187cf;
-    color:#fff;
+    background-color: #18A8F1;
+    border-style: none;
+
 }
 
 @media(max-width: 575px) {

@@ -1,10 +1,10 @@
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react'; // useEffect 가져오기
+import { useEffect } from 'react';
 
 const RequireLogin = ({ children }) => {
-    const navigate = useNavigate();
     const { isLoggedIn } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -14,7 +14,7 @@ const RequireLogin = ({ children }) => {
         }
     }, [isLoggedIn, navigate]);
 
-    return children;
+    return null;
 }
 
 export default RequireLogin;

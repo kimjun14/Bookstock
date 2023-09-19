@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '../../../AuthContext'; // AuthContext 경로 수정
+import axios from "axios";
 
 const SignOut = function () {
   const { isLoggedIn, logout } = useAuth(); // 로그인 상태와 로그아웃 함수 가져오기
@@ -16,7 +17,7 @@ const SignOut = function () {
           navigate('/'); // 메인 페이지로 이동
           console.log('로그아웃 성공 메인페이지로 이동');
       } else {
-        alert('서버 오류')
+        alert('로그인한 상태에서 로그아웃할 수 있습니다.');
       }
     } catch (error) {
       console.error('로그아웃 오류:', error);
