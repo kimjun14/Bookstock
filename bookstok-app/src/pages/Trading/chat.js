@@ -6,14 +6,19 @@ function Chat({ isOpen, bid, onClose }) {
     const [chatHistory, setChatHistory] = useState([]);
     const socketRef = useRef(null);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e) => {  // 입력 한 내용을 chatMessage로 반영하는 이벤트 핸들러
         setChatMessage(e.target.value);
+    };
+
+    const handleKeyPress = (e) => {     // 엔터키를 입력하면 메세지 전송 함수가 실행하게 하는 이벤트 핸들러
+        if (e.key === 'Enter' && !e.shiftKey) {
+            handleSendMessage();
+            e.preventDefault(); // Enter 키에 의한 기본 동작(예: 폼 제출)을 방지
+        }
     };
 
     const handleSendMessage = () => {
         if (chatMessage.trim() !== '') {
-            // 메시지를 채팅 기록에 추가
-            setChatHistory([...chatHistory, { text: chatMessage, sender: 'user' }]);
             // 웹소켓을 통해 서버에 메시지 전송
             socketRef.current.emit('chat message', { text: chatMessage, sender: 'user' });
             // 메시지 입력 필드 초기화
@@ -22,8 +27,8 @@ function Chat({ isOpen, bid, onClose }) {
     };
 
     useEffect(() => {
-        socketRef.current = io.connect('http://localhost:54321');
-    
+        socketRef.current = io.connect('http://220.127.80.225:54321');
+        console.log(socketRef.current);
         socketRef.current.on('chat message', (message) => {
             setChatHistory((prevLog) => [...prevLog, message]);
         });
@@ -66,7 +71,7 @@ function Chat({ isOpen, bid, onClose }) {
                                 </div>
                                 {/* 채팅 입력 필드 */}
                                 <div className="form-outline">
-                                    <textarea className="form-control" rows="2" value={chatMessage} onChange={handleInputChange}></textarea>
+                                    <textarea className="form-control" rows="2" value={chatMessage} onChange={handleInputChange} onKeyPress={handleKeyPress}></textarea>
                                 </div>
                             </div>
                         )}
