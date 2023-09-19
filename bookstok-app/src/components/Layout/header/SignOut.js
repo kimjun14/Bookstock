@@ -12,19 +12,9 @@ const SignOut = function () {
     try {
       if (isLoggedIn) {
         // 서버에 로그아웃 요청
-        const response = await fetch('/logout', {
-          method: 'POST',
-        });
-
-        if (response.status === 200) {
-          // 세션 파기 성공
-          localStorage.removeItem('token');
           logout(); // 로그아웃 함수 호출
           navigate('/'); // 메인 페이지로 이동
           console.log('로그아웃 성공 메인페이지로 이동');
-        } else {
-          alert('서버 오류')
-        }
       } else {
         alert('서버 오류')
       }

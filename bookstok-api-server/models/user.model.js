@@ -40,6 +40,7 @@ const userModel = {
       throw new Error('DB Error', { cause: err });
     }
   },
+
   // 회원정보 수정
   async update(id, user){
     try{

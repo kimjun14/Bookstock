@@ -17,8 +17,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(session({
     cookie: { maxAge: 1000*60*60*2 
-        //httpOnly : true, 스크립트로 쿠키 탈취 방지(XSS)
-        //secure : false  https을 사용하지 않는 사이트에 대해 쿠키 전송 방지 
     },
     secret: 'sometext', // 세션 데이터 암호화를 위한 비밀 키 (보안 목적)
     rolling: true,  // 매 응답마다 쿠키 시간 초기화

@@ -41,7 +41,8 @@ const SignIn = function () {
           console.log(responseData)
           // 서버로부터 'SUCCESS' 메시지를 받으면 로그인 성공 처리를 수행합니다.
           localStorage.setItem('token', responseData.token); // 받은 토큰 저장
-          console.log(responseData.token)
+          console.log(localStorage)
+          console.log(responseData.token);
 
           login(); // 로그인 상태 업데이트
           goToMain();

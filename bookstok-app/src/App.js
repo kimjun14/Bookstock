@@ -9,7 +9,6 @@ import MainPage from './pages/mainPage';
 import SignUp from './pages/signUp';
 import MyPage from './pages/myPage';
 import BookSignUp from './pages/bookSignUp/variant';
-import PrivateRoute from './routes/PrivateRoute';
 import { AuthProvider } from './AuthContext';
 import RequireLogin from './RequireLogin';
 

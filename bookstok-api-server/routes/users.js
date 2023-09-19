@@ -42,10 +42,6 @@ router.post('/signin', async (req, res, next) => {
       req.session.userId = userId;
       console.log("새션 생성", req.session);
       res.status(200).send({ message: 'SUCCESS' });
-      req.session = clear()
-      console.log("새션 삭제", req.session);
-      const a = 10
-      return (console.log("데이터 돌려줌"), a);
     } else {
       // 아이디 또는 비밀번호가 일치하지 않는 경우
       res.status(401).send({ message: '아이디 또는 비밀번호가 일치하지 않습니다.' });
@@ -54,7 +50,6 @@ router.post('/signin', async (req, res, next) => {
     next(err);
   }
 });
-
 
 // 회원정보 수정
 // 비밀번호 변경 페이지에 들어가기 전에 id(userNO)를 받았다 가정
