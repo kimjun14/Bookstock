@@ -1,80 +1,112 @@
-.container-fluid {
-  color: #000;
-  overflow-x: hidden;
-  height: 100%;
-  background-color: #fff;
+/* LoginPage.css */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.card2 {
-  border-radius: 20px;
-  box-shadow: 20px 20px 80px rgb(206, 206, 206);
+body {
+  background-color: #eee;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to top, #fff 10%, rgba(17, 135, 207, 0.4) 90%) no-repeat;
 }
 
-.text-sm {
-  font-size: 14px !important;
+.wrapper {
+  max-width: 500px;
+  border-radius: 10px;
+  margin: 50px auto;
+  padding: 30px 40px;
+  box-shadow: 20px 20px 80px rgba(206, 206, 206);
 }
+
+.h2 {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #1187cf; /* 보라색 변경 */
+  font-style: italic;
+  margin-bottom: 20px; /* 높이 조정 */
+}
+
+.h4 {
+  font-family: 'Poppins', sans-serif;
+}
+
+.input-field {
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #1187cf; /* 보라색 변경 */
+  color: #1187cf; /* 보라색 변경 */
+  margin-bottom: 15px; /* 높이 조정 */
+}
+
 
 input {
-  padding: 10px 12px 10px 12px;
-  border: 1px solid lightgrey;
-  border-radius: 10px;
-  margin-bottom: 25px;
-  margin-top: 2px;
+  border: none;
+  outline: none;
+  box-shadow: none;
   width: 100%;
+  padding: 10px 2px; /* 높이 조정 */
+  font-family: 'Poppins', sans-serif;
 }
 
-button:focus {
-  outline-width: 0;
+.fa-eye-slash.btn {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer; /* 커서 추가 */
+  color: #1187cf; /* 아이콘 색상 추가 */
+  font-size: 20px; /* 아이콘 크기 추가 */
+  margin-left: 10px; /* 아이콘과 입력 필드 사이의 간격 추가 */
 }
 
-.btn-blue {
-  background-color: #fff;
-  border-color: #1187cf;
-  color: #1187cf;
-  border-radius: 6px;
-  width: 39.3rem;
-  margin: auto;
-
+a {
+  text-decoration: none;
+  color: #1187cf; /* 링크 색상 변경 */
+  font-weight: 700;
 }
 
-.btn-blue:hover {
-  background-color: #1187cf;
-  color: #fff;
-  cursor: pointer;
-}
-.line {
-    height: 1px;
-    width: 45%;
-    background-color: #E0E0E0;
-    margin-top: 10px;
-    margin-bottom: 1rem;
+a:hover {
+  text-decoration: underline; /* 링크에 밑줄 추가 */
 }
 
-.or {
-    width: 10%
+.option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; /* 높이 조정 */
 }
 
-.social-connect1 .btn {
-  background-color: #fff;
-  border-color: #ffcd00;
-  color: #ffcd00;
-  width: 100%;
+.option label.text-muted {
+  font-size: 0.95rem;
+  margin-left: 10px; /* 라벨과 텍스트 간격 추가 */
 }
 
-.social-connect1 .btn:hover {
-  background-color: #ffcd00;
-  color: #fff;
+.checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px; /* 체크박스와 텍스트 간격 추가 */
 }
 
-.social-connect2 .btn {
-  background-color: #fff;
-  border-color: #03c75a;
-  color: #03c75a;
-  width: 100%;
-
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
 }
 
-.social-connect2 .btn:hover {
-  background-color: #03c75a;
-  color: #fff;
+.option input[type="radio"]:checked ~ .checkmark:after {
+  display: block;
+  width: 13px;
+  height: 13px;
+  background: #1187cf; /* 체크 시 색상 변경 */
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
 }
+
+/* ... 나머지 스타일링 ... */
