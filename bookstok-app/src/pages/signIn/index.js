@@ -5,6 +5,21 @@ import axios from "axios";
 import { useAuth } from '../../AuthContext';
 import logo from '../../img/logo2Cut.jpg'
 
+// 이 함수들을 컴포넌트 외부에서 정의하고 내보냅니다.
+export const handleLoginWithKakao2 = () => {
+  const KakaoRestApiKey2 = '861d57b9824340a31ae9c887397ac901'; // Kakao REST API Key
+  const KakaoRedirectUri2 = 'http://localhost:3000/oauth/callback/kakao'; // Kakao Redirect URI
+  const kakaoURL2 = `https://kauth.kakao.com/oauth/authorize?client_id=${KakaoRestApiKey2}&redirect_uri=${KakaoRedirectUri2}&response_type=code`;
+  window.location.href = kakaoURL2;
+}
+
+export const handleLoginWithNaver2 = () => {
+  const NaverClientId2 = 'YP_J3Qwb0dVPZzak0x8Q'; // Naver Client ID
+  const NaverRedirectUri2 = 'http://localhost:3000/auth/naver/callback'; // Naver Redirect URI
+  const naverURL2 = `https://nid.naver.com/oauth2.0/authorize?client_id=${NaverClientId2}&redirect_uri=${NaverRedirectUri2}&response_type=code`;
+  window.location.href = naverURL2;
+}
+
 const SignIn = function () {
   const [loginId, setLoginId] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -87,7 +102,6 @@ const SignIn = function () {
             </button>
           </div>
         </div>
-
         <div className="d-flex justify-content-between align-items-center">
           <div className="remember">
             <label className="option text-muted">
@@ -102,12 +116,25 @@ const SignIn = function () {
             </a>
           </div>
         </div>
-
         <button className="btn btn-block btn-primary text-center my-3">
           로그인
         </button>
+        <div className="socialLogin">
+          <div className="col-sm-6">
+            <p className="social-connect1">
+              <span className="fa fa-kakao-plus"></span>
+              <button className="btn text-center mb-1 py-2" onClick={handleLoginWithKakao2}>카카오 계정으로 로그인하기</button>
+            </p>
+          </div>
+          <div className="col-sm-6">
+            <p className="social-connect2">
+              <span className="fa fa-naver-plus"></span>
+              <button className="btn text-center mb-1 py-2" onClick={handleLoginWithNaver2}>네이버 계정으로 로그인하기</button>
+            </p>
+          </div>
+        </div>
         <div className="text-center pt-3 text-muted">
-          북스탁 회원이 아닌가요? <a href="./../signUp">회원가입</a>
+          북스탁 회원이 아닌가요? <span className="signup"><a vhref="./../signUp">회원가입</a></span>
         </div>
       </form>
     </div>
