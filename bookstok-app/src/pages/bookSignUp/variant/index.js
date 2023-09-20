@@ -48,7 +48,7 @@ const BookSignUp = () => {
         console.log('Product Data:', product);
         // 폼 데이터를 서버로 던지기
         try {
-            const response = await axios.post('http://220.127.80.225:12345/api/auctions',product,{
+            const response = await axios.post('http://localhost:12345/api/auctions',product,{
                 headers: {
                     'Content-Type': 'application/json'
                 }

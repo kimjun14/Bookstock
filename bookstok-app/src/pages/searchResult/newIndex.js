@@ -15,7 +15,7 @@ function BookSearchResult() {
 
   const fetchSearchList = async () => {
     try{
-        const response=await axios.get(`http://220.127.80.225:12345/api/auctions/search?query=${searchKey}`)
+        const response=await axios.get(`http://localhost:12345/api/auctions/search?query=${searchKey}`)
         setBooks(response.data);
     }catch(err){
         console.error(err);

@@ -13,7 +13,7 @@ const SearchBookResult = ({ query, popupToResult }) => {
 
     async function fetchData(query) {
         try {
-            const response = await axios.post('http://220.127.80.225:12345/api/search', { query });
+            const response = await axios.post('http://localhost:12345/api/search', { query });
             setData(response.data);
         } catch (error) {
             console.error("쿼리 전송 실패", error);

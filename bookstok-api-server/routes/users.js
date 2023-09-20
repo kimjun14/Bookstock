@@ -48,7 +48,11 @@ router.post('/signin', async (req, res, next) => {
     }
   } catch (err) {
     next(err);
-  }
+  } 
+  // finally {
+  //   cookie=res.getHeaders()['set-cookie']
+  //   console.log("헤더 내용 확인", cookie);    
+  // }  // response의 헤더 확인하려면 이렇게
 });
 
 // 회원정보 수정

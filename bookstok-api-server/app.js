@@ -7,9 +7,13 @@ const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 
-
 var app = express();
 
+app.use(cors({
+    origin:'http://localhost:3000', // 클라이언트 도메인 주소
+    methods: ['GET', 'POST', 'OPTIONS'],
+    credentials: true
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -20,12 +24,19 @@ app.use(session({
     },
     secret: 'sometext', // 세션 데이터 암호화를 위한 비밀 키 (보안 목적)
     rolling: true,  // 매 응답마다 쿠키 시간 초기화
-    resave: false,  // 세션값이 수정되지 않으면 서버에 다시 저장하지 않음
+    resave: false,  // false : 세션값이 수정되지 않으면 서버에 다시 저장하지 않음 // true : 매 응답마다 세션 저장
     saveUninitialized: true,   // 초기화되지 않은 세션도 저장할지 여부
 }));  // req.session 속성을 만들어서 세션 객체를 저장
 
-app.use(cors());
 app.use('/api', indexRouter);
+
+app.get('/getname', (req, res, next) => {
+    if (req.session && req.session.userId) {
+        res.json({ username: req.session.userId });
+    } else {
+        res.status(401).send('Not logged in');
+    }
+});
 
 // 404 에러 처리
 app.use((req, res, next) => {
