@@ -19,7 +19,6 @@ function Trading() {
     // location.search      =>  URL? query... 이후부분받음
     // URLSearchParams      =>  쿼리 문자열의 key, value 쌍을 생성자로 저장
     // {queryParams.get('id')} => auctionId 검색을 위해 던져 줄 거
-
     const fetchAuctionData = async () => {
         try {
             const response = await axios.get(`http://220.127.80.225:12345/api/auctions/${queryParams.get('id')}`)
@@ -49,7 +48,7 @@ function Trading() {
             alert("잘못 된 접근입니다.");    // id쿼리 없이 들어가면 오류 메세지 나오고
             navigation('/');                // 홈('/')화면으로 보내버림 (추후 변경 할 수도)
         }
-    }, []);     // 컴포넌트가 처음 마운트 되면 axios 통신을 하여 id값의 경매 데이터를 받아옴
+    });     // 컴포넌트가 처음 마운트 되면 axios 통신을 하여 id값의 경매 데이터를 받아옴
 
     const handleBidChange = (e) => {
         setBidData({
@@ -177,9 +176,10 @@ function Trading() {
                     <div className="row">
                         <div className="col-md-6 offset-md-6">
                             <div className="input-group mt-2">
-                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" value={bidData.bidImgSrc} onChange={handleBidChange} />
+                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" onChange={null} accept='image/jpeg, image/jp, image/png'/>
                                 <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" name="bidPrice" value={bidData.bidPrice} onChange={handleBidChange} />
-                                <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
+                                    이미지 업로드
+                                <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>    
                                     입찰 하기
                                 </button>
                             </div>
