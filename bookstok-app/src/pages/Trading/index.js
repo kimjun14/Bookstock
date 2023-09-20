@@ -60,7 +60,7 @@ function Trading() {
             alert("잘못 된 접근입니다.");    // id쿼리 없이 들어가면 오류 메세지 나오고
             navigation('/');                // 홈('/')화면으로 보내버림 (추후 변경 할 수도)
         }
-    });     // 컴포넌트가 처음 마운트 되면 axios 통신을 하여 id값의 경매 데이터를 받아옴
+    },[]);     // 컴포넌트가 처음 마운트 되면 axios 통신을 하여 id값의 경매 데이터를 받아옴
 
     const handleBidChange = (e) => {
         setBidData({
