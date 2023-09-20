@@ -14,6 +14,7 @@ function Trading() {
     });
     const [auctionData, setAuctionData] = useState([]);
     const [auctionBidData, setAuctionBidData] = useState([])
+    // const [userName,setUserName]= useState([])
     const URLquery = useLocation();
     const queryParams = new URLSearchParams(URLquery.search);
     // location.search      =>  URL? query... 이후부분받음
@@ -22,7 +23,7 @@ function Trading() {
 
     const fetchAuctionData = async () => {
         try {
-            const response = await axios.get(`http://220.127.80.225:12345/api/auctions/${queryParams.get('id')}`)
+            const response = await axios.get(`http://localhost:12345/api/auctions/${queryParams.get('id')}`)
             // console.log(response.data[0]);   // auctionData에 어떤 값이 들어가는지 확인하는 용도
             setAuctionData(response.data[0]);
         } catch (err) {
@@ -32,18 +33,29 @@ function Trading() {
 
     const fetchBidData = async () => {
         try {
-            const response = await axios.get(`http://220.127.80.225:12345/api/auctions/${queryParams.get('id')}/bids`)
+            const response = await axios.get(`http://localhost:12345/api/auctions/${queryParams.get('id')}/bids`)
             setAuctionBidData(response.data);
             console.log(response.data);
         } catch (err) {
             console.error(err);
         }
     }
+    
+    // const getUserName = async ()=>{
+    //     try{
+    //         const response = await axios.get(`http://localhost:12345/getname`);
+    //         setUserName(response);
+    //         console.log(userName);
+    //     }catch(err){
+    //         console.error(err);
+    //     }
+    // }
 
     useEffect(() => {
         if (queryParams.get('id')) {          // id 쿼리의 값이 있으면 위의 fetchData 함수 실행
             fetchAuctionData();
             fetchBidData();
+            // getUserName()
         }
         else {
             alert("잘못 된 접근입니다.");    // id쿼리 없이 들어가면 오류 메세지 나오고
@@ -64,7 +76,7 @@ function Trading() {
 
     const handleBidSubmit = async () => {
         try {
-            const response = await axios.post(`http://220.127.80.225:12345/api/auctions/${queryParams.get('id')}`, bidData)
+            const response = await axios.post(`http://localhost:12345/api/auctions/${queryParams.get('id')}`, bidData)
             console.log(bidData, queryParams.get('id'), response);
         } catch (err) {
             console.error(err);

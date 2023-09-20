@@ -46,9 +46,11 @@ const SignIn = function () {
     };
 
     try {
-      const response = await axios.post('http://220.127.80.225:12345/api/users/signin', {
+      const response = await axios.post('http://localhost:12345/api/users/signin', {
         userId: loginId,
         pwd: loginPassword
+      },{
+        withCredentials: true
       });
 
       if (response.status === 200) {
@@ -58,7 +60,7 @@ const SignIn = function () {
           localStorage.setItem('token', responseData.token); // 받은 토큰 저장
           login(); // 로그인 상태 업데이트
           navigate('/'); // 메인 페이지로 이동
-          console.log('로그인 성공 메인 페이지로 이동');
+          console.log('로그인 성공 메인 페이지로 이동',response);
         } else {
           alert('아이디 또는 비밀번호가 일치하지 않습니다.');
         }
