@@ -96,13 +96,13 @@ a:hover {
   transition: 300ms ease-in-out 0s;
 }
 
-.option input[type='radio']:checked ~ .checkmark {
+.option input[type='checkbox']:checked ~ .checkmark {
   background: #fff;
   transition: 300ms ease-in-out 0s;
   border: 1px solid #1187cf;
 }
 
-.option input[type='radio']:checked ~ .checkmark:after {
+.option input[type='checkbox']:checked ~ .checkmark:after {
   transform: translate(-50%, -50%) scale(1);
 }
 #forgot {

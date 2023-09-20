@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './index.css'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -38,6 +38,12 @@ const SignIn = function () {
       alert("비밀번호를 입력해주세요.");
       return;
     }
+    //아이지 저장에 체크돼 있을 경우
+    if (true /* 로그인 성공 했을 때 */) {
+      if(saveId) {
+        localStorage.setItem(LS_KEY_ID, loginId);
+      }
+    };
 
     try {
       const response = await axios.post('http://220.127.80.225:12345/api/users/signin', {
@@ -66,6 +72,33 @@ const SignIn = function () {
       navigate('/'); // 오류 발생 시 메인 페이지로 이동
     }
   };
+
+  //아이디 저장
+  const LS_KEY_ID = 'LS_KEY_ID';
+  const LS_KEY_SAVE_ID_FLAG = 'LS_KEY_SAVE_ID_FLAG';
+
+  const [saveId, setSaveId] = useState(false);
+
+  
+  const handleSaveId = function () {
+    localStorage.setItem(LS_KEY_SAVE_ID_FLAG, !saveId);
+    setSaveId(!saveId);
+  };
+
+  useEffect(() => {
+    let idFlag = JSON.parse(localStorage.getItem(LS_KEY_SAVE_ID_FLAG));
+    if (idFlag !== null) {
+      setSaveId(idFlag);
+    } 
+    if (idFlag ===false) {
+      localStorage.setItem(LS_KEY_ID, "");
+    } 
+    let data = localStorage.getItem(LS_KEY_ID);
+    if (data !== null) {
+      setLoginId(data);
+    }
+  },[])
+
 
   return (
     <div className="wrapper bg-white">
@@ -106,7 +139,7 @@ const SignIn = function () {
           <div className="remember">
             <label className="option text-muted">
               아이디 기억하기
-              <input type="radio" name="radio" />
+              <input type="checkbox" name="checkbox" checked={saveId} onChange={handleSaveId}/>
               <span className="checkmark"></span>
             </label>
           </div>

@@ -2,7 +2,7 @@ import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-const RequireLogin = ({ children }) => {
+const RequireLogin = () => {
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
 
