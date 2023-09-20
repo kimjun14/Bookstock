@@ -77,8 +77,8 @@ function BookSearchResult() {
                 {/* 관심등록 버튼 */}
                 <button className='interestBtn'>
                   <img
-                    src="https://cheolsusee.com/img/es_img/btn_rows_scrap_add_05.png"
-                    alt=""
+                    src=""
+                    alt="이미지 구현 예정"
                   />
                 </button>
                 숫자 구현
