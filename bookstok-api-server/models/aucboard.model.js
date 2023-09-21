@@ -50,14 +50,13 @@ const userModel = {
     }
   },
   // 입찰 등록
-  async addBid(Bidinfo,auctionId,userId) {
+  async addBid(Bidinfo,auctionId,userId,nick) {
     try {
-      const [uId]= await pool.query(`select userNo from user where userId = ?`,[userId])
+      Bidinfo.uId=userId
       Bidinfo.aId=auctionId;
-      Bidinfo.uId=uId[0].userNo;
+      Bidinfo.nickname=nick;
       const query = `insert into bid set ?`;
-      const [result] = await pool.query(query,[Bidinfo]);
-      return result.insertId;
+      await pool.query(query,[Bidinfo]);
     } catch (err) {
       console.error(err);
       throw new Error('DB Error');

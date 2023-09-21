@@ -65,14 +65,9 @@ function Trading() {
         });
     }
 
-    useEffect(() => {
-        console.log(bidData);
-    }, [bidData]);  //bidData가 변경 되었는지 확인하기위한 용도
-
     const handleBidSubmit = async () => {
         try {
-            const response = await axiosConnect.post(`/auctions/${queryParams.get('id')}`, bidData)
-            console.log(bidData, queryParams.get('id'), response);
+            await axiosConnect.post(`/auctions/${queryParams.get('id')}`, bidData)
         } catch (err) {
             console.error(err);
         } finally {
@@ -151,7 +146,7 @@ function Trading() {
                                 <div className="row g-0">
                                     <div className="col-md-12">
                                         <div className="card-body row align-items-center">
-                                            <h3 className="card-title col-sm-1 ms-4">{bid.uId}</h3>
+                                            <h3 className="card-title col-sm-1 ms-4">{bid.nickname}</h3>
                                             <p className="card-title col-sm-2">
                                                 <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
                                             </p>

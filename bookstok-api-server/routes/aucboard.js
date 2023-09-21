@@ -50,9 +50,11 @@ router.post('/', async (req, res, next) => {
 router.post('/:id', async (req, res, next) => {
   try{
     const auctionid = Number(req.params.id);
-    const userId=req.session.userId;
-    const result = await user.addBid(req.body,auctionid,userId);
-    res.json({ result });
+    const userId=req.session.userNo;
+    const nick=req.session.nick
+    const result = await user.addBid(req.body,auctionid,userId,nick);
+    res.status(200).send(result);
+    console.log("확인하려는 지점");
   }catch(err){
     next(err);
   }

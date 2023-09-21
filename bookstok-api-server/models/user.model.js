@@ -35,7 +35,12 @@ const userModel = {
       const [ result ] = await pool.query(sql, [user.userId, user.pwd]);
       // 로그인 후 접속 시간 업데이트 쿼리를 넘겨줌
       pool.query(`UPDATE user SET userUpdaAt = CURRENT_TIMESTAMP WHERE userId = ?;`,user.userId);
-      return result.length === 1;
+      // 세션정보리턴
+      console.log(result)
+      return {
+        nick:result[0].nick,
+        userNo:result[0].userNo
+      };
     }catch(err){
       throw new Error('DB Error', { cause: err });
     }

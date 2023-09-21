@@ -36,10 +36,13 @@ router.post('/signin', async (req, res, next) => {
     // 클라이언트로부터 받은 비밀번호를 해싱
     const sha1 = crypto.createHash('sha1').update(pwd).digest('base64');
 
-    const ok = await user.signin({ userId, pwd : sha1 });
-    if (ok) {
+    const loginResult = await user.signin({ userId, pwd : sha1 });
+    console.log(loginResult);
+    if (loginResult) {
       // 아이디와 비밀번호가 일치하는 경우 세션에 사용자 아이디를 저장
       req.session.userId = userId;
+      req.session.userNo = loginResult.userNo;
+      req.session.nick = loginResult.nick;
       console.log("새션 생성", req.session);
       console.log("새션 아이디", req.sessionID);
       res.status(200).send({ message: 'SUCCESS' });
