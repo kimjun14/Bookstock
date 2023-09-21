@@ -3,6 +3,13 @@ import BookResearch from './bookInfo';
 import axios from "axios";
 import { useNavigate } from "react-router";
 
+// axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
+const axiosConnect = axios.create({
+    baseURL: 'http://localhost:12345/api',
+    withCredentials: true
+});
+  
+
 const BookSignUp = () => {
     // 1. 상태 생성
     const [product, setProduct] = useState({
@@ -48,7 +55,7 @@ const BookSignUp = () => {
         var newAuctionId
         // 폼 데이터를 서버로 던지기
         try {
-            const response = await axios.post('http://localhost:12345/api/auctions',product,{
+            const response = await axiosConnect.post('/api/auctions',product,{
                 headers: {
                     'Content-Type': 'application/json'
                 }

@@ -5,6 +5,12 @@ import axios from 'axios';
 import moment from 'moment';
 import Chat from './chat';
 
+// axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
+const axiosConnect = axios.create({
+    baseURL: 'http://localhost:12345/api',
+    withCredentials: true
+});
+
 function Trading() {
     const navigation = useNavigate();
     const [bidData, setBidData] = useState({
@@ -23,7 +29,7 @@ function Trading() {
 
     const fetchAuctionData = async () => {
         try {
-            const response = await axios.get(`http://localhost:12345/api/auctions/${queryParams.get('id')}`)
+            const response = await axiosConnect.get(`/auctions/${queryParams.get('id')}`)
             // console.log(response.data[0]);   // auctionData에 어떤 값이 들어가는지 확인하는 용도
             setAuctionData(response.data[0]);
         } catch (err) {
@@ -33,29 +39,18 @@ function Trading() {
 
     const fetchBidData = async () => {
         try {
-            const response = await axios.get(`http://localhost:12345/api/auctions/${queryParams.get('id')}/bids`)
+            const response = await axiosConnect.get(`/auctions/${queryParams.get('id')}/bids`)
             setAuctionBidData(response.data);
             console.log(response.data);
         } catch (err) {
             console.error(err);
         }
     }
-    
-    // const getUserName = async ()=>{
-    //     try{
-    //         const response = await axios.get(`http://localhost:12345/getname`);
-    //         setUserName(response);
-    //         console.log(userName);
-    //     }catch(err){
-    //         console.error(err);
-    //     }
-    // }
 
     useEffect(() => {
         if (queryParams.get('id')) {          // id 쿼리의 값이 있으면 위의 fetchData 함수 실행
             fetchAuctionData();
             fetchBidData();
-            // getUserName()
         }
         else {
             alert("잘못 된 접근입니다.");    // id쿼리 없이 들어가면 오류 메세지 나오고
@@ -76,7 +71,7 @@ function Trading() {
 
     const handleBidSubmit = async () => {
         try {
-            const response = await axios.post(`http://localhost:12345/api/auctions/${queryParams.get('id')}`, bidData)
+            const response = await axiosConnect.post(`/auctions/${queryParams.get('id')}`, bidData)
             console.log(bidData, queryParams.get('id'), response);
         } catch (err) {
             console.error(err);
@@ -189,7 +184,7 @@ function Trading() {
                     <div className="row">
                         <div className="col-md-6 offset-md-6">
                             <div className="input-group mt-2">
-                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" onChange={null} accept='image/jpeg, image/jp, image/png'/>
+                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" /*onChange={handleFileChnage}*/ accept='image/jpeg, image/jp, image/png'/>
                                 <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" name="bidPrice" value={bidData.bidPrice} onChange={handleBidChange} />
                                 <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={null}>    
                                     이미지 업로드

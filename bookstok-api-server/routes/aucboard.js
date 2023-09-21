@@ -49,8 +49,9 @@ router.post('/', async (req, res, next) => {
 // 입찰등록  [post] ip:12345/api/auctions/경매번호
 router.post('/:id', async (req, res, next) => {
   try{
-    const id = Number(req.params.id);
-    const result = await user.addBid(req.body,id);
+    const auctionid = Number(req.params.id);
+    const userId=req.session.userId;
+    const result = await user.addBid(req.body,auctionid,userId);
     res.json({ result });
   }catch(err){
     next(err);

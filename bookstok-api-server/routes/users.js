@@ -41,6 +41,7 @@ router.post('/signin', async (req, res, next) => {
       // 아이디와 비밀번호가 일치하는 경우 세션에 사용자 아이디를 저장
       req.session.userId = userId;
       console.log("새션 생성", req.session);
+      console.log("새션 아이디", req.sessionID);
       res.status(200).send({ message: 'SUCCESS' });
     } else {
       // 아이디 또는 비밀번호가 일치하지 않는 경우
@@ -50,8 +51,8 @@ router.post('/signin', async (req, res, next) => {
     next(err);
   } 
   // finally {
-  //   cookie=res.getHeaders()['set-cookie']
-  //   console.log("헤더 내용 확인", cookie);    
+  //   // cookie=res.getHeaders()['set-cookie']
+  //   console.log("입력한 userId 확인", req.session.userId);    
   // }  // response의 헤더 확인하려면 이렇게
 });
 
