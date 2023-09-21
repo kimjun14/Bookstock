@@ -26,7 +26,7 @@ function Trading() {
     // location.search      =>  URL? query... 이후부분받음
     // URLSearchParams      =>  쿼리 문자열의 key, value 쌍을 생성자로 저장
     // {queryParams.get('id')} => auctionId 검색을 위해 던져 줄 거
-    
+
     const fetchAuctionData = async () => {
         try {
             const response = await axiosConnect.get(`/auctions/${queryParams.get('id')}`)
