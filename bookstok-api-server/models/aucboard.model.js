@@ -4,7 +4,7 @@ const userModel = {
   // 경매 조회(기본값은 책 제목임)
   async auctionSearch(bookName) {
     try {
-      const sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%'`;
+      const sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' order by auctionPrice DESC`;
       const [result] = await pool.query(sql);
       return result;
     } catch (err) {
@@ -36,10 +36,12 @@ const userModel = {
   },
   // 경매 등록
   async addAuction(auctionInfo) {
+    console.log(auctionInfo.session.userId)
     try {
       const day = 7 ; // 하드코딩으로 7일 뒤 경매종료 넣음
+      auctionInfo.body.uId=58;
       const sql = `insert into auction set ?`;
-      const [result] = await pool.query(sql,[auctionInfo]);
+      const [result] = await pool.query(sql,[auctionInfo.body]);
       await pool.query(`update auction set auctionEnd =  CURRENT_TIMESTAMP+INTERVAL ? DAY where auctionId = ?`,[day,result.insertId]);
       return result.insertId;
     } catch (err) {

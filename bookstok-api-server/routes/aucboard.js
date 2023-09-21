@@ -39,7 +39,7 @@ router.get('/:id/bids', async (req, res, next) => {
 // 경매등록  [post] ip:12345/api/auctions/
 router.post('/', async (req, res, next) => {
   try{
-    const id = await user.addAuction(req.body);
+    const id = await user.addAuction(req);
     res.json({ id });
   }catch(err){
     next(err);

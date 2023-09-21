@@ -7,12 +7,15 @@ import Home from "./header/Home";
 import SignIn from "./header/signIn";
 import MyPage from "./header/MyPage";
 import SignUp from "./header/SignUp";
-import {useAuth} from '../../AuthContext'
+import { useAuth } from '../../AuthContext'
 import SignOut from "./header/SignOut";
+import { Button } from 'react-bootstrap';
+import CategoryModal from '.././Category/CategoryModal'; 
+
 
 const Header = function () {
     const { isLoggedIn, login, logout } = useAuth(); // 로그인 상태와 로그인/로그아웃 함수 가져오기
-    
+
     // 1. 상태 생성
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
@@ -28,13 +31,23 @@ const Header = function () {
         navigate(`searchResult?query=${searchTerm}`);
     };
 
+    const [showModal, setShowModal] = useState(false);
+
+    const handleShowModal = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
     return (
         <>
             <nav className="navbar bg-white">
                 {/* 첫 번째 줄 */}
                 <div className="container mb-3 d-flex justify-content-between align-items-center">
                     <Link to="/" className="navbar-brand" >
-                        <img src={logo2Cut} alt="logo" width="180"/>
+                        <img src={logo2Cut} alt="logo" width="180" />
                     </Link>
                     <form className="d-flex" role="search" style={{ backgroundColor: '', height: '40px' }} onSubmit={handleSearchSubmit}>
                         {/* <!-- searchbar start--> */}
@@ -49,10 +62,10 @@ const Header = function () {
                         {/* <!-- searchbar end--> */}
                         <div className="container mb-3">
                             <ul className="nav justify-content-end">
-                            <Home />
+                                <Home />
                                 {isLoggedIn ? (
-                                    <>  
-                                        <SignOut/>
+                                    <>
+                                        <SignOut />
                                         <MyPage />
 
                                     </>
@@ -81,10 +94,13 @@ const Header = function () {
                             <span className="text-body-tertiary">Toggleable via the navbar brand.</span>
                         </div>
                     </div>
-                    <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style={{ color: 'black' }}>
-                        <span className="navbar-toggler-icon"></span>
-                        <span style={{ fontSize: '14px', marginLeft: '7px', marginRight: '14px' }}>전체 카테고리</span>
-                    </button>
+                    <Button variant="primary" onClick={handleShowModal}>
+                        도서 카테고리
+                    </Button>
+
+                    {/* CategoryModal 컴포넌트를 렌더링하고 showModal 상태를 전달합니다 */}
+                    <CategoryModal show={showModal} onHide={handleCloseModal} />
+
                 </div>
             </nav>
         </>

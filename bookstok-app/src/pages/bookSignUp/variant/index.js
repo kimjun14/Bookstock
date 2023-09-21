@@ -9,7 +9,7 @@ const BookSignUp = () => {
         auctionTitle: '',
         auctionContext: '',
         auctionPrice: '',
-        uId:'58',   // 나중에 세션 아이디 받으면 API 서버 쿼리문과 같이 교체할 예정
+        uId:'',   // 나중에 세션 아이디 받으면 API 서버 쿼리문과 같이 교체할 예정
         bookImgSrc:'',
         bookTitle:'',
         bookAuthor:'',
@@ -45,7 +45,7 @@ const BookSignUp = () => {
     // 3. 폼 제출 핸들러
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Product Data:', product);
+        var newAuctionId
         // 폼 데이터를 서버로 던지기
         try {
             const response = await axios.post('http://localhost:12345/api/auctions',product,{
@@ -53,19 +53,19 @@ const BookSignUp = () => {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response);
+            newAuctionId=response.data.id
+            console.log(response.data.id);
         }catch(error){
-            console.error('Error sending data:', error);
+            console.error('책 등록 전송 실패:', error);
         }
-        console.log('Product Data:', product);
         window.alert("경매 등록이 완료되었습니다.");
-        navigation('/trading');
+        navigation(`/trading?id=${newAuctionId}`);
         // 제출 후에 폼 지우기
         setProduct({
             auctionTitle: '',
             auctionContext: '',
             auctionPrice: '',
-            uId:'58',
+            uId:'',
         });
     };
 
