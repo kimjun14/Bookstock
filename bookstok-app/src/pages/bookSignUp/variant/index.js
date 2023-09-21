@@ -55,7 +55,7 @@ const BookSignUp = () => {
         var newAuctionId
         // 폼 데이터를 서버로 던지기
         try {
-            const response = await axiosConnect.post('/api/auctions',product,{
+            const response = await axiosConnect.post('/auctions',product,{
                 headers: {
                     'Content-Type': 'application/json'
                 }
