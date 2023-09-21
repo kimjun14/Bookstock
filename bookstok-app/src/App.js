@@ -11,6 +11,7 @@ import MyPage from './pages/myPage';
 import BookSignUp from './pages/bookSignUp/variant';
 import { AuthProvider } from './AuthContext';
 import RequireLogin from './RequireLogin';
+import LostPwd from './pages/lostPwd';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/booksignup" element={<BookSignUp />} />
             <Route path="/mypage" element={<RequireLogin><MyPage /></RequireLogin>} />
+            <Route path="/lostPwd" element={<LostPwd />} />
+            
           </Route>
         </Routes>
       </AuthProvider>

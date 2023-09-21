@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './index.css'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from '../../AuthContext';
 import logo from '../../img/logo2Cut.jpg'
@@ -150,9 +150,9 @@ const SignIn = function () {
             </label>
           </div>
           <div className="ml-auto">
-            <a href="#" id="forgot">
+            <Link to="/lostPwd" id="forgot">
               비밀번호를 잊어버렸나요?
-            </a>
+            </Link>
           </div>
         </div>
         <button className="btn btn-block btn-primary text-center my-3">
@@ -173,7 +173,7 @@ const SignIn = function () {
           </div>
         </div>
         <div className="text-center pt-3 text-muted">
-          북스탁 회원이 아닌가요? <span className="signup"><a vhref="./../signUp">회원가입</a></span>
+          북스탁 회원이 아닌가요? <span className="signup"><Link to="./../signUp">회원가입</Link></span>
         </div>
       </form>
     </div>

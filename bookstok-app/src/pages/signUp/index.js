@@ -29,7 +29,7 @@ function SignUp() {
             <div className="col-lg-7" style={{ margin: 'auto' }}>
                 <div className="card2 card border-0 px-4 px-sm-5 py-5">
                     <small className="text-right mb-3">
-                        <Link to="./../signIn/newSignin.js">
+                        <Link to="./../signIn/index.js">
                             <u style={{color:'gray', textDecoration:'none'}}>북스탁 계정이 이미 있나요?</u>
                         </Link>
                     </small>
