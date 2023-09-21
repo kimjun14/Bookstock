@@ -4,6 +4,12 @@ import './newIndex.css'
 import axios from 'axios';
 import moment from 'moment';
 
+// axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
+const axiosConnect = axios.create({
+  baseURL: 'http://localhost:12345/api',
+  withCredentials: true
+});
+
 function BookSearchResult() {
   // eslint-disable-next-line
   const navigation = useNavigate();
@@ -15,7 +21,7 @@ function BookSearchResult() {
 
   const fetchSearchList = async () => {
     try{
-        const response=await axios.get(`http://localhost:12345/api/auctions/search?query=${searchKey}`)
+        const response=await axiosConnect.get(`/auctions/search?query=${searchKey}`)
         setBooks(response.data);
     }catch(err){
         console.error(err);

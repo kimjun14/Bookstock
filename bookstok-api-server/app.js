@@ -11,7 +11,6 @@ var app = express();
 
 app.use(cors({
     origin:'http://localhost:3000', // 클라이언트 도메인 주소
-    methods: ['GET', 'POST', 'OPTIONS'],
     credentials: true
 }));
 app.use(logger('dev'));
@@ -20,7 +19,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    cookie: { maxAge: 1000*60*60*2 
+    cookie: { 
+        maxAge: 1000*60*60*24*7,
+        httpOnly: false,
+        SameSite:'None'
     },
     secret: 'sometext', // 세션 데이터 암호화를 위한 비밀 키 (보안 목적)
     rolling: true,  // 매 응답마다 쿠키 시간 초기화
@@ -29,14 +31,6 @@ app.use(session({
 }));  // req.session 속성을 만들어서 세션 객체를 저장
 
 app.use('/api', indexRouter);
-
-app.get('/getname', (req, res, next) => {
-    if (req.session && req.session.userId) {
-        res.json({ username: req.session.userId });
-    } else {
-        res.status(401).send('Not logged in');
-    }
-});
 
 // 404 에러 처리
 app.use((req, res, next) => {
