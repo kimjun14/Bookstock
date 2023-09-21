@@ -1,9 +1,18 @@
-
 .btn-outline-secondary {
   color: black;
   background: transparent;
-  border:  1px solid gainsboro;
+  border: 1px solid gainsboro;
 }
 .btn-outline-secondary:hover {
   background-color: #1187cf;
+}
+
+.navbar-brand img {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  width: 15rem;
+}
+
+.bibi-book{
+  background-color: transparent;
 }
