@@ -20,6 +20,7 @@ function Trading() {
     // location.search      =>  URL? query... 이후부분받음
     // URLSearchParams      =>  쿼리 문자열의 key, value 쌍을 생성자로 저장
     // {queryParams.get('id')} => auctionId 검색을 위해 던져 줄 거
+    
     const fetchAuctionData = async () => {
         try {
             const response = await axios.get(`http://localhost:12345/api/auctions/${queryParams.get('id')}`)
@@ -188,9 +189,11 @@ function Trading() {
                     <div className="row">
                         <div className="col-md-6 offset-md-6">
                             <div className="input-group mt-2">
-                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" onChange={null} accept='image/jpeg, image/jp, image/png'/>
+                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" onChange={handleFileChnage} accept='image/jpeg, image/jp, image/png'/>
                                 <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" name="bidPrice" value={bidData.bidPrice} onChange={handleBidChange} />
+                                <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={null}>    
                                     이미지 업로드
+                                </button>
                                 <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>    
                                     입찰 하기
                                 </button>
