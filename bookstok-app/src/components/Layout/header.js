@@ -47,7 +47,7 @@ const Header = function () {
                 {/* 첫 번째 줄 */}
                 <div className="container mb-3 d-flex justify-content-between align-items-center">
                     <Link to="/" className="navbar-brand" >
-                        <img src={logo2Cut} alt="logo" width="180" />
+                        <img src={logo2Cut} alt="logo" />
                     </Link>
                     <form className="d-flex" role="search" style={{ backgroundColor: '', height: '40px' }} onSubmit={handleSearchSubmit}>
                         {/* <!-- searchbar start--> */}

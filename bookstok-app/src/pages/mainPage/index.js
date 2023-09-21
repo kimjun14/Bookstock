@@ -4,6 +4,8 @@ import banner2 from '../../img/banner2.jpg';
 import banner3 from '../../img/banner3.jpg';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
+import './style.css'
+import MainRanking from '../../components/MainRanking/MainRanking';
 
 function MainPage() {
 
@@ -39,8 +41,8 @@ function MainPage() {
             <div className="container mt-5 mb-3">
                 <h2 className="text-center">인기 경매 도서</h2>
                 <div className="d-flex flex-wrap justify-content-center">
-                        {/* 1번 책 */}
-                        <div className="card m-3" style={{ width: '18rem' }}>
+                    {/* 1번 책 */}
+                    <div className="card m-3" style={{ width: '18rem' }}>
                         <Link className='text-decoration-none text-black' to='/trading?id=17'>
                             <img
                                 className='card-img-top'
@@ -141,6 +143,7 @@ function MainPage() {
                         </Link>
                     </div>
                 </div>
+                <MainRanking />
             </div>
         </div>
     );
