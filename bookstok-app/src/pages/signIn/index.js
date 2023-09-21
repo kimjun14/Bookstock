@@ -52,7 +52,7 @@ const SignIn = function () {
     };
 
     try {
-      const response = await axiosConnect.post('/api/users/signin', {
+      const response = await axiosConnect.post('/users/signin', {
         userId: loginId,
         pwd: loginPassword
       });
