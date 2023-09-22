@@ -1,19 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap');
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  background-color: white;
-}
-
-body {
-  background-color: #eee;
-  height: 100vh;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to top, #fff 10%, 90%) no-repeat;
-}
-
 .wrapper {
   max-width: 500px;
   border-radius: 10px;
