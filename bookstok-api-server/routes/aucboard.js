@@ -39,7 +39,9 @@ router.get('/:id/bids', async (req, res, next) => {
 // 경매등록  [post] ip:12345/api/auctions/
 router.post('/', async (req, res, next) => {
   try{
-    const id = await user.addAuction(req);
+    const userId=req.session.userNo;
+    const nick=req.session.nick
+    const id = await user.addAuction(req.body,userId,nick);
     res.json({ id });
   }catch(err){
     next(err);
@@ -50,9 +52,10 @@ router.post('/', async (req, res, next) => {
 router.post('/:id', async (req, res, next) => {
   try{
     const auctionid = Number(req.params.id);
-    const userId=req.session.userId;
-    const result = await user.addBid(req.body,auctionid,userId);
-    res.json({ result });
+    const userId=req.session.userNo;
+    const nick=req.session.nick
+    const result = await user.addBid(req.body,auctionid,userId,nick);
+    res.status(200).send(result);
   }catch(err){
     next(err);
   }

@@ -1,3 +1,36 @@
-.grid-item {
-    display: flex;
+.container h2 {
+  margin-top: 5rem;
+  margin-left: 2rem;
+  text-align: left;
+  color: black;
+}
+
+.custom-card {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}
+
+.rank-badge {
+  position: absolute;
+  top: -0.9rem; /* 순위 위치 조정 가능 */
+  left: 2.7rem; /* 순위 위치 조정 가능 */
+  color: #fff;
+  font-size: 3.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.btn-blue {
+  background-color: #fff;
+  border-color: #1187cf;
+  color: #1187cf;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.btn-blue:hover {
+  background-color: #1187cf;
+  color: #fff;
+  cursor: pointer;
 }

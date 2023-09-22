@@ -4,7 +4,7 @@ const userModel = {
   // 경매 조회(기본값은 책 제목임)
   async auctionSearch(bookName) {
     try {
-      const sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' order by auctionPrice DESC`;
+      const sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' order by auctionId DESC`;
       const [result] = await pool.query(sql);
       return result;
     } catch (err) {
@@ -17,6 +17,7 @@ const userModel = {
     try {
       const sql = `select * from auction where auctionId = ?`;
       const [result] = await pool.query(sql,auctionId);
+      await pool.query(`UPDATE auction SET viewCount = viewCount + 1 WHERE auctionId = ?`,auctionId)
       return result;
     } catch (err) {
       console.error(err);
@@ -35,13 +36,13 @@ const userModel = {
     }
   },
   // 경매 등록
-  async addAuction(auctionInfo) {
-    console.log(auctionInfo.session.userId)
+  async addAuction(auctionInfo,userId,nick) {
     try {
       const day = 7 ; // 하드코딩으로 7일 뒤 경매종료 넣음
-      auctionInfo.body.uId=58;
+      auctionInfo.uId = userId;
+      auctionInfo.nickname = nick;
       const sql = `insert into auction set ?`;
-      const [result] = await pool.query(sql,[auctionInfo.body]);
+      const [result] = await pool.query(sql,[auctionInfo]);
       await pool.query(`update auction set auctionEnd =  CURRENT_TIMESTAMP+INTERVAL ? DAY where auctionId = ?`,[day,result.insertId]);
       return result.insertId;
     } catch (err) {
@@ -50,14 +51,13 @@ const userModel = {
     }
   },
   // 입찰 등록
-  async addBid(Bidinfo,auctionId,userId) {
+  async addBid(Bidinfo,auctionId,userId,nick) {
     try {
-      const [uId]= await pool.query(`select userNo from user where userId = ?`,[userId])
+      Bidinfo.uId=userId
       Bidinfo.aId=auctionId;
-      Bidinfo.uId=uId[0].userNo;
+      Bidinfo.nickname=nick;
       const query = `insert into bid set ?`;
-      const [result] = await pool.query(query,[Bidinfo]);
-      return result.insertId;
+      await pool.query(query,[Bidinfo]);
     } catch (err) {
       console.error(err);
       throw new Error('DB Error');

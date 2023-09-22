@@ -12,6 +12,8 @@ import BookSignUp from './pages/bookSignUp/variant';
 import { AuthProvider } from './AuthContext';
 import RequireLogin from './RequireLogin';
 import LostPwd from './pages/lostPwd';
+import ModalComponent from './pages/Trading/buying';
+import BuyingSuccess from './pages/Trading/buyingSuccess';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
             <Route path="/booksignup" element={<BookSignUp />} />
             <Route path="/mypage" element={<RequireLogin><MyPage /></RequireLogin>} />
             <Route path="/lostPwd" element={<LostPwd />} />
+            <Route path="/buying" element={<ModalComponent />} />
+            <Route path='/buyingSuccess' element={<BuyingSuccess />} />
             
           </Route>
         </Routes>
