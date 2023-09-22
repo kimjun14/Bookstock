@@ -4,3 +4,4 @@ bookstok-chatio-server/node_modules/
 
 /node_modules
 bookstok-chatio-server/logs/access.log
+bookstok-api-server/public/

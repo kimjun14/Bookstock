@@ -4,7 +4,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/images/');
+    cb(null, 'public/images/bidimg');
   },
   filename: (req, file, cb) => {
     const timestamp = Date.now();
@@ -15,8 +15,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/', upload.single('image'), (req, res) => {
-  res.json({ message: 'Image uploaded successfully' });
+router.post('/', upload.single('image'), (req, res, next) => {
+  const path=req.file.filename
+  res.json({ bidImgSrc: path});
 });
 
 module.exports = router;
