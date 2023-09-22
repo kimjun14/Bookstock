@@ -6,6 +6,10 @@ var logger = require('morgan');
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 939883c7f7d74fd9fc832580e1542e55adae64a7
 var app = express();
 
 app.use(cors({
@@ -29,6 +33,7 @@ app.use(session({
     saveUninitialized: true,   // 초기화되지 않은 세션도 저장할지 여부
 }));  // req.session 속성을 만들어서 세션 객체를 저장
 
+app.use('/images', express.static('public/images'));
 app.use('/api', indexRouter);
 app.use(express.static('public'));
 
