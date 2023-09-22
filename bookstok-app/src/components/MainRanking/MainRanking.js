@@ -9,7 +9,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 2,
@@ -17,7 +17,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 3,
@@ -25,7 +25,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 4,
@@ -33,7 +33,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 5,
@@ -41,7 +41,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 6,
@@ -49,7 +49,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 7,
@@ -57,7 +57,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 8,
@@ -65,7 +65,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 9,
@@ -73,7 +73,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 10,
@@ -81,7 +81,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 11,
@@ -89,7 +89,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
     {
         id: 12,
@@ -97,7 +97,7 @@ const exampleData = [
         author: '서말 외 3명',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115',
+        coverImage: 'https://picsum.photos/80/115',
     },
 
 ];
@@ -146,8 +146,8 @@ function MainRanking() {
             <div className="row row-cols-1 row-cols-md-2 g-4">
                 {currentData.map((book, index) => (
                     <div className="col" key={book.id} style={{ position: "relative" }}>
-                        <Link to={`/auction/${book.id}`} className="card-link"> {/* 경매 건 상세 페이지로 이동 */}
-                            <div className="card custom-card"> {/* 최대 너비를 조절 */}
+                        <Link to={`/auction/${book.id}`} className="card-link"> 
+                            <div className="card custom-card"> 
                                 <div className="row no-gutters">
                                     <div className="col-md-4">
                                         <img src={book.coverImage} className="card-img" alt={book.title} />
