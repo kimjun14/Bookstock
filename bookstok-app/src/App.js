@@ -14,6 +14,7 @@ import RequireLogin from './RequireLogin';
 import LostPwd from './pages/lostPwd';
 import ModalComponent from './pages/Trading/buying';
 import BuyingSuccess from './pages/Trading/buyingSuccess';
+import RecentSearch from './pages/myPage/recentSearch'
 
 function App() {
   return (
@@ -28,11 +29,11 @@ function App() {
             <Route path="/trading" element={<Trading />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/booksignup" element={<BookSignUp />} />
-            <Route path="/mypage" element={<RequireLogin><MyPage /></RequireLogin>} />
+            <Route path="/mypage" element={<MyPage />} />
             <Route path="/lostPwd" element={<LostPwd />} />
             <Route path="/buying" element={<ModalComponent />} />
             <Route path='/buyingSuccess' element={<BuyingSuccess />} />
-            
+            <Route path='/recentSearch' element={<RecentSearch />} />
           </Route>
         </Routes>
       </AuthProvider>
