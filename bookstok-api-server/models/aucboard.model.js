@@ -12,6 +12,17 @@ const userModel = {
       throw new Error('DB Error');
     }
   },
+  // 마이페이지 기능 테스트용 (분리예정)
+  async mypageRecentSearch(data) {
+    try {
+      const sql = `SELECT * FROM auction WHERE auctionId in (?) order by auctionId DESC`;
+      const [result] = await pool.query(sql,[data]);
+      return result;
+    } catch (err) {
+      console.error(err);
+      throw new Error('DB Error');
+    }
+  },
   // 경매번호와 연관된 정보 조회
   async auctionIdSearch(auctionId) {
     try {
