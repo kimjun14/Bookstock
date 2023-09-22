@@ -3,6 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '../../../AuthContext'; // AuthContext 경로 수정
 import axios from "axios";
 
+// axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
+const axiosConnect = axios.create({
+  baseURL: 'http://localhost:12345/api',
+  withCredentials: true
+});
+
 const SignOut = function () {
   const { isLoggedIn, logout } = useAuth(); // 로그인 상태와 로그아웃 함수 가져오기
   const navigate = useNavigate(); // useNavigate 추가
@@ -13,11 +19,12 @@ const SignOut = function () {
     try {
       if (isLoggedIn) {
         // 서버에 로그아웃 요청
-          logout(); // 로그아웃 함수 호출
-          navigate('/'); // 메인 페이지로 이동
-          console.log('로그아웃 성공 메인페이지로 이동');
+        const response = await axiosConnect.post('/users/logout')
+        logout(); // 로그아웃 함수 호출
+        navigate('/'); // 메인 페이지로 이동
+        console.log(response.data.message,response);
       } else {
-        alert('로그인한 상태에서 로그아웃할 수 있습니다.');
+        alert('로그인한 상태에서만 로그아웃할 수 있습니다.');
       }
     } catch (error) {
       console.error('로그아웃 오류:', error);

@@ -44,7 +44,7 @@ const MyPage = () => {
                     <br />
 
                     <Link to="/" className="ms-4 text-decoration-none text-black">선호상품</Link><br />
-                    <Link to="/" className="ms-4 text-decoration-none text-black">최근 조회한 상품</Link><br />
+                    <Link to="/recentSearch" className="ms-4 text-decoration-none text-black">최근 조회한 상품</Link><br />
                     <hr />
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className="bi bi-person-fill" viewBox="0 0 16 16">

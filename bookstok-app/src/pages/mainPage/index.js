@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
 import './style.css'
 import MainRanking from '../../components/MainRanking/MainRanking';
+import NewBooks from '../../components/NewBooks/NewBooks'
 
 function MainPage() {
 
     return (
         <div>
-            {/* 본문 상단 슬라이드 배너 */}
+            {/* 상단 슬라이드 배너 */}
             <div id="topSector" className="container-fluid">
                 <Carousel>
                     <Carousel.Item>
@@ -38,113 +39,9 @@ function MainPage() {
                 </Carousel>
             </div>
 
-            <div className="container mt-5 mb-3">
-                <h2 className="text-center">새로 나온 도서</h2>
-                <div className="d-flex flex-wrap justify-content-center">
-                    {/* 1번 책 */}
-                    <div className="card m-3" style={{ width: '18rem' }}>
-                        <Link className='text-decoration-none text-black' to='/trading?id=17'>
-                            <img
-                                className='card-img-top'
-                                src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                                alt="book1"
-                            />
-                            <div className='card-body text-center'>
-                                <p className='card-title'>어린왕자</p>
-                                <span className='card-text'>시작 가격: 5000원</span>
-                                <p className='card-text'>현재 가격: 4000원</p>
-                                <p className='card-text'>찜: 3</p>
-                            </div>
-                        </Link>
-                    </div>
-
-                    {/* 2번 책 */}
-                    <div className="card m-3" style={{ width: '18rem' }}>
-                        <Link className='text-decoration-none text-black' to='trading'>
-                            <img
-                                className='card-img-top'
-                                src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                                alt="book2"
-                            />
-                            <div className='card-body text-center'>
-                                <p className='card-title'>도시와 그 불확실한 벽</p>
-                                <span className='card-text'>시작 가격: 5000원</span>
-                                <p className='card-text'>현재 가격: 4000원</p>
-                                <p className='card-text'>찜: 3</p>
-                            </div>
-                        </Link>
-                    </div>
-
-                    {/* 3번 책 */}
-                    <div className="card m-3" style={{ width: '18rem' }}>
-                        <Link className='text-decoration-none text-black' to='/trading'>
-                            <img
-                                className='card-img-top'
-                                src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                                alt="book3"
-                            />
-                            <div className='card-body text-center'>
-                                <p className='card-title'>어린왕자</p>
-                                <span className='card-text'>시작 가격: 5000원</span>
-                                <p className='card-text'>현재 가격: 4000원</p>
-                                <p className='card-text'>찜: 3</p>
-                            </div>
-                        </Link>
-                    </div>
-
-                    {/* 4번 책 */}
-                    <div className="card m-3" style={{ width: '18rem' }}>
-                        <Link className='text-decoration-none text-black' to='/trading'>
-                            <img
-                                className='card-img-top'
-                                src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                                alt="book4"
-                            />
-                            <div className='card-body text-center'>
-                                <p className='card-title'>어린왕자</p>
-                                <span className='card-text'>시작 가격: 5000원</span>
-                                <p className='card-text'>현재 가격: 4000원</p>
-                                <p className='card-text'>찜: 3</p>
-                            </div>
-                        </Link>
-                    </div>
-
-                    {/* 5번 책 */}
-                    <div className="card m-3" style={{ width: '18rem' }}>
-                        <Link className='text-decoration-none text-black' to='/trading'>
-                            <img
-                                className='card-img-top'
-                                src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                                alt="book4"
-                            />
-                            <div className='card-body text-center'>
-                                <p className='card-title'>어린왕자</p>
-                                <span className='card-text'>시작 가격: 5000원</span>
-                                <p className='card-text'>현재 가격: 4000원</p>
-                                <p className='card-text'>찜: 3</p>
-                            </div>
-                        </Link>
-                    </div>
-
-                    {/* 6번 책 */}
-                    <div className="card m-3" style={{ width: '18rem' }}>
-                        <Link className='text-decoration-none text-black' to='/trading'>
-                            <img
-                                className='card-img-top'
-                                src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fko%2Fthumb%2F0%2F05%2FLittleprince.JPG%2F200px-Littleprince.JPG&type"
-                                alt="book4"
-                            />
-                            <div className='card-body text-center'>
-                                <p className='card-title'>어린왕자</p>
-                                <span className='card-text'>시작 가격: 5000원</span>
-                                <p className='card-text'>현재 가격: 4000원</p>
-                                <p className='card-text'>찜: 3</p>
-                            </div>
-                        </Link>
-                    </div>
-                </div>
-                <MainRanking />
-            </div>
+            {/* 새로 나온 도서, 인기 도서 */}
+            <NewBooks />
+            <MainRanking />
         </div>
     );
 }
