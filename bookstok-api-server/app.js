@@ -6,10 +6,6 @@ var logger = require('morgan');
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
-<<<<<<< HEAD
-=======
-
->>>>>>> 939883c7f7d74fd9fc832580e1542e55adae64a7
 var app = express();
 
 app.use(cors({
