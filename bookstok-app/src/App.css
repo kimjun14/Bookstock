@@ -1,9 +1,8 @@
 /* 여기부터 로그인 창 css*/
 
-* { padding: 0; margin: 0; }
+* { padding: 0; margin: 0;}
 
 html, body {
-  height: 100%;
   background: #ffffff;
 }
 

@@ -3,7 +3,6 @@
 
 /* 전체 폰트 스타일 설정 */
 body {
-  margin: 0;
   font-family: 'Noto Sans KR', sans-serif; /* 한국어 폰트 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
