@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './MainRanking.css';
 
@@ -8,66 +7,99 @@ const exampleData = [
         id: 1,
         title: '상수리나무 아래',
         author: '서말 외 3명',
-        episode: '4화 무료',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115', // 책 표지 이미지 URL
+        coverImage: 'https://placekitten.com/80/115',
     },
     {
         id: 2,
         title: '상수리나무 아래',
         author: '서말 외 3명',
-        episode: '4화 무료',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115', // 책 표지 이미지 URL
+        coverImage: 'https://placekitten.com/80/115',
     },
     {
         id: 3,
         title: '상수리나무 아래',
         author: '서말 외 3명',
-        episode: '4화 무료',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115', // 책 표지 이미지 URL
+        coverImage: 'https://placekitten.com/80/115',
     },
     {
         id: 4,
         title: '상수리나무 아래',
         author: '서말 외 3명',
-        episode: '4화 무료',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115', // 책 표지 이미지 URL
+        coverImage: 'https://placekitten.com/80/115',
     },
     {
         id: 5,
         title: '상수리나무 아래',
         author: '서말 외 3명',
-        episode: '4화 무료',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115', // 책 표지 이미지 URL
+        coverImage: 'https://placekitten.com/80/115',
     },
     {
         id: 6,
         title: '상수리나무 아래',
         author: '서말 외 3명',
-        episode: '4화 무료',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115', // 책 표지 이미지 URL
+        coverImage: 'https://placekitten.com/80/115',
     },
     {
         id: 7,
         title: '상수리나무 아래',
         author: '서말 외 3명',
-        episode: '4화 무료',
         rating: 4.9,
         views: 41783,
-        coverImage: 'https://placekitten.com/80/115', // 책 표지 이미지 URL
+        coverImage: 'https://placekitten.com/80/115',
     },
-    // 다른 책 데이터도 추가할 수 있습니다.
+    {
+        id: 8,
+        title: '상수리나무 아래',
+        author: '서말 외 3명',
+        rating: 4.9,
+        views: 41783,
+        coverImage: 'https://placekitten.com/80/115',
+    },
+    {
+        id: 9,
+        title: '상수리나무 아래',
+        author: '서말 외 3명',
+        rating: 4.9,
+        views: 41783,
+        coverImage: 'https://placekitten.com/80/115',
+    },
+    {
+        id: 10,
+        title: '상수리나무 아래',
+        author: '서말 외 3명',
+        rating: 4.9,
+        views: 41783,
+        coverImage: 'https://placekitten.com/80/115',
+    },
+    {
+        id: 11,
+        title: '상수리나무 아래',
+        author: '서말 외 3명',
+        rating: 4.9,
+        views: 41783,
+        coverImage: 'https://placekitten.com/80/115',
+    },
+    {
+        id: 12,
+        title: '상수리나무 아래',
+        author: '서말 외 3명',
+        rating: 4.9,
+        views: 41783,
+        coverImage: 'https://placekitten.com/80/115',
+    },
+
 ];
 
 function MainRanking() {
@@ -86,8 +118,14 @@ function MainRanking() {
     // 현재 페이지의 데이터를 가져옵니다.
     const currentData = getPageData(exampleData, itemsPerPage, currentPage);
 
+    // 현재 페이지의 순위를 계산합니다.
+    const currentRanking = (currentPage - 1) * itemsPerPage;
+
+    // 전체 페이지 수 계산
+    const totalPages = Math.ceil(exampleData.length / itemsPerPage);
+
     // 다음 버튼 활성화 여부 확인
-    const hasNextPage = exampleData.length > currentPage * itemsPerPage;
+    const hasNextPage = currentPage < totalPages;
 
     // 이전 버튼 활성화 여부 확인
     const hasPrevPage = currentPage > 1;
@@ -99,45 +137,53 @@ function MainRanking() {
 
     // 이전 페이지로 이동하는 함수
     const prevPage = () => {
-        setCurrentPage((prev) => Math.max(prev - 1, 0));
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
     };
 
     return (
         <div>
-            <h2>실시간 인기 경매</h2>
-            <Container>
-                <Row>
-                    {currentData.map((book, index) => (
-                        <Col xs={12} sm={6} md={4} lg={4} key={book.id}>
-                            <Link to={`/auction/${book.id}`} className="grid-item">
-                                <div className="item-content">
-                                    {/* 사진 */}
-                                    <img src={book.coverImage} alt={book.title} width="80" height="115" />
-                                    {/* 순위 */}
-                                    <p className='ranking'>{itemsPerPage * (currentPage - 1) + index + 1}</p>
-                                    {/* 설명 */}
-                                    <p className='bookDesc'>
-                                        <strong>{book.title}</strong>
-                                        <br />
-                                        {book.author}
-                                        <br />
-                                        {book.episode}
-                                        <br />
-                                        평점: {book.rating}
-                                        <br />
-                                        조회수: {book.views}
-                                    </p>
+            <h2>실시간 인기 도서</h2>
+            <div className="row row-cols-1 row-cols-md-2 g-4">
+                {currentData.map((book, index) => (
+                    <div className="col" key={book.id} style={{ position: "relative" }}>
+                        <Link to={`/auction/${book.id}`} className="card-link"> {/* 경매 건 상세 페이지로 이동 */}
+                            <div className="card custom-card"> {/* 최대 너비를 조절 */}
+                                <div className="row no-gutters">
+                                    <div className="col-md-4">
+                                        <img src={book.coverImage} className="card-img" alt={book.title} />
+                                    </div>
+                                    <div className="col-md-8">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{book.title}</h5>
+                                            <p className="card-text">{book.author}</p>
+                                            <p className="card-text">평점: {book.rating}</p>
+                                            <p className="card-text">조회수: {book.views}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </Link>
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
-            <div className="pagination">
-                <button onClick={() => prevPage()} disabled={!hasPrevPage}>
+                            </div>
+                        </Link>
+                        <div className="rank-badge">{currentRanking + index + 1}</div> {/* 순위 표시 */}
+                    </div>
+                ))}
+            </div>
+
+            {/* 이전 다음버튼 */}
+            <div className="d-flex justify-content-center my-3">
+                <button
+                    onClick={() => prevPage()}
+                    disabled={!hasPrevPage}
+                    className="btn btn btn-blue mx-1"
+                    style={{ width: "10%" }}
+                >
                     이전
                 </button>
-                <button onClick={() => nextPage()} disabled={!hasNextPage} className="mx-2">
+                <button
+                    onClick={() => nextPage()}
+                    disabled={!hasNextPage}
+                    className="btn btn btn-blue mx-1"
+                    style={{ width: "10%" }}
+                >
                     다음
                 </button>
             </div>

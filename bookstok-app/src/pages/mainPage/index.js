@@ -39,7 +39,7 @@ function MainPage() {
             </div>
 
             <div className="container mt-5 mb-3">
-                <h2 className="text-center">인기 경매 도서</h2>
+                <h2 className="text-center">새로 나온 도서</h2>
                 <div className="d-flex flex-wrap justify-content-center">
                     {/* 1번 책 */}
                     <div className="card m-3" style={{ width: '18rem' }}>

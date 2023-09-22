@@ -1,27 +1,36 @@
 .container h2 {
   margin-top: 5rem;
+  margin-left: 2rem;
   text-align: left;
   color: black;
 }
 
-.grid-item {
-  display: flex;
-  padding: 1rem; /* 내부 패딩 */
-  margin-bottom: 1rem; /* 하단 마진 */
-  border-radius: 0.5rem; /* 모서리 둥글게 */
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* 그림자 효과 */
+.custom-card {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
 }
 
-.grid-item img {
-  margin-right: 1rem; /* 이미지 오른쪽 마진 */
+.rank-badge {
+  position: absolute;
+  top: -0.9rem; /* 순위 위치 조정 가능 */
+  left: 2.7rem; /* 순위 위치 조정 가능 */
+  color: #fff;
+  font-size: 3.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
-.ranking {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #1187cf; /* Bootstrap primary color */
+.btn-blue {
+  background-color: #fff;
+  border-color: #1187cf;
+  color: #1187cf;
+  border-radius: 6px;
+  margin-top: 1rem;
 }
 
-.bookDesc {
-  flex-grow: 1; /* 설명 부분이 남은 공간 모두 차지*/
+.btn-blue:hover {
+  background-color: #1187cf;
+  color: #fff;
+  cursor: pointer;
 }
