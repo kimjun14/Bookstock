@@ -4,6 +4,7 @@ import './index.css';
 import axios from 'axios';
 import moment from 'moment';
 import Chat from './chat';
+import Buying from './buying';
 
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
@@ -19,8 +20,9 @@ function Trading() {
         bidContext: ""
     });
     const [auctionData, setAuctionData] = useState([]);
-    const [auctionBidData, setAuctionBidData] = useState([])
+    const [auctionBidData, setAuctionBidData] = useState([]);
     // const [userName,setUserName]= useState([])
+    const [showModal, setShowModal] = useState(false);
     const URLquery = useLocation();
     const queryParams = new URLSearchParams(URLquery.search);
     // location.search      =>  URL? query... 이후부분받음
@@ -56,7 +58,7 @@ function Trading() {
             alert("잘못 된 접근입니다.");    // id쿼리 없이 들어가면 오류 메세지 나오고
             navigation('/');                // 홈('/')화면으로 보내버림 (추후 변경 할 수도)
         }
-    },[]);     // 컴포넌트가 처음 마운트 되면 axios 통신을 하여 id값의 경매 데이터를 받아옴
+    }, []);     // 컴포넌트가 처음 마운트 되면 axios 통신을 하여 id값의 경매 데이터를 받아옴
 
     const handleBidChange = (e) => {
         setBidData({
@@ -94,6 +96,9 @@ function Trading() {
         setSelectBid(null);
         setChatPopUp(false);
     };
+
+    const openModal = () => setShowModal(true);
+    const closeModal = () => setShowModal(false);
 
     return (
         <>
@@ -146,21 +151,26 @@ function Trading() {
                                 <div className="row g-0">
                                     <div className="col-md-12">
                                         <div className="card-body row align-items-center">
-                                            <h3 className="card-title col-sm-1 ms-4">{bid.nickname}</h3>
-                                            <p className="card-title col-sm-2">
+                                            <h3 className="card-title col-sm-1 ms-4 mt-4">{bid.nickname}</h3>
+                                            <p className="card-title col-sm-2 mt-4">
                                                 <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
                                             </p>
-                                            <h6 className="card-title col-sm-1">{bid.bidPrice} 원</h6>
+                                            <h6 className="card-title col-sm-1 mt-4">{bid.bidPrice} 원</h6>
                                             <div className='col-sm-5'></div>
-                                            <button type="button" className="btn btn-primary col-sm-1 mt-1">즉시구매</button>
-                                            <button type="button" className="btn btn-info col-sm-1 mt-1" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
-                                        </div>
-
-                                        <div className='card-body row'>
-                                            <div className="alert alert-light col-sm-12" role="alert">
-                                                <img src="http://placeholder.com/70" className="img-fluid mx-4" alt="..." />
-                                                {bid.bidContext ? bid.bidContext : "상세 설명이 없습니다."}
+                                            <div className="col-sm-1">
+                                                <button type="button" className="btn btn-primary col-12" onClick={openModal}>즉시구매</button>
                                             </div>
+
+                                            <div className="col-sm-1">
+                                                <button type="button" className="btn btn-info col-12" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='card-body row'>
+                                        <div className="alert alert-light col-sm-12" role="alert">
+                                            <img src="http://placeholder.com/70" className="img-fluid mx-4" alt="..." />
+                                            {bid.bidContext ? bid.bidContext : "상세 설명이 없습니다."}
                                         </div>
                                     </div>
                                 </div>
@@ -179,20 +189,25 @@ function Trading() {
                     <div className="row">
                         <div className="col-md-6 offset-md-6">
                             <div className="input-group mt-2">
-                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" /*onChange={handleFileChnage}*/ accept='image/jpeg, image/jp, image/png'/>
+                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" onChange={handleBidChange} />
                                 <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" name="bidPrice" value={bidData.bidPrice} onChange={handleBidChange} />
-                                <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={null}>    
-                                    이미지 업로드
-                                </button>
-                                <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>    
+                                <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
                                     입찰 하기
                                 </button>
                             </div>
                         </div>
                     </div>
+                    <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
+                    <Buying
+                        show={showModal}
+                        onClose={closeModal}
+                        onSave={() => {
+                            // Handle save logic here
+                            closeModal();
+                        }}
+                    />
                 </div>
-                <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
-            </article>
+            </article >
         </>
     );
 }
