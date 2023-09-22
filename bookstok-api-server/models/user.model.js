@@ -9,21 +9,23 @@ const userModel = {
     try{
       const sql = `select * from user`;
       const [ result ] = await pool.query(sql);
-      return result;
+      return result.affectedRows;
     }catch(err){
       throw new Error('DB Error', { cause: err });
     }
   },
   // 회원 가입
-  async create(user){
+  async create(addUserInfo){
     try{
       // crypto 모듈로 비번을 sha1 단방향 암호화를 한 다음 입력
-      user.pwd=crypto.createHash('sha1').update(user.pwd).digest('base64');
+      addUserInfo.pwd=crypto.createHash('sha1').update(addUserInfo.pwd).digest('base64');
       const sql = `insert into user set ?`;
-      const [ result ]  = await pool.query(sql, [user]);
-      return result.insertId;
+      const [ result ] = await pool.query(sql, [addUserInfo]);
+      return result.affectedRows === 1;
     }catch(err){
-      throw new Error('DB Error', { cause: err });
+      const newError = new Error('DB Error');
+      newError.cause = err;
+      throw newError;
     }
   },
   // 로그인

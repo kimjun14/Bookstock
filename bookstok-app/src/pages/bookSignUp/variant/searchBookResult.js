@@ -24,7 +24,7 @@ const SearchBookResult = ({ query, popupToResult }) => {
         if (query) {
             const timer = setTimeout(() => {
                 fetchData(query);
-            }, 250);  // 0.25초의 딜레이
+            }, 500);  // 0.25초의 딜레이
             // 컴포넌트 언마운트 시 타이머를 클리어합니다.
             return () => clearTimeout(timer);
         }

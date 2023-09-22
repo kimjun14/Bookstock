@@ -19,10 +19,11 @@ router.get('/', async (req, res, next) => {
 // 사용자 등록 [post] ip:12345/api/users/
 router.post('/', async (req, res, next) => {
   try{
-    const id = await user.create(req.body);
-    res.json({ id });
+    console.log(req.body);
+    await user.create(req.body);
+    res.status(200).send({ message: '회원가입 성공' });
   }catch(err){
-    next(err);
+    res.status(400).send({ message: '회원가입 실패' });
   }
 });
 

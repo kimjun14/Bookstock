@@ -1,10 +1,19 @@
 /* global Kakao */
 
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import './index.css'
+import axios from 'axios';
+// axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
+const axiosConnect = axios.create({
+    baseURL: 'http://localhost:12345/api',
+    withCredentials: true
+  });
 
 function SignUp() {
+    const [signUpData,setSignUpData] = useState({});
+    const navigation=useNavigate();
+
     const KakaoRestApiKey = '861d57b9824340a31ae9c887397ac901'; // Kakao REST API Key
     const KakaoRedirectUri = 'http://localhost:3000/oauth/callback/kakao'; // Kakao Redirect URI
 
@@ -23,13 +32,33 @@ function SignUp() {
         window.location.href = naverURL;
     }
 
+    const handleSignUpDataChange = (e) => {
+        setSignUpData({
+            ...signUpData,
+            [e.target.name]: e.target.value
+            
+        });
+        console.log(signUpData);
+    }
+
+    const handleSignUpSubmit = async () => {
+        try {
+            await axiosConnect.post('/users/', signUpData)
+            window.alert("회원 등록이 완료되었습니다.");
+            navigation('/signin');
+        } catch (err) {
+            console.error(err);
+            window.alert("오류가 발생하였습니다.");
+            navigation('/signup');
+        }
+    }
 
     return (
         <div className="container-fluid px-2 px-md-4 py-5 mx-auto">
             <div className="col-lg-7" style={{ margin: 'auto' }}>
                 <div className="card2 card border-0 px-4 px-sm-5 py-5">
                     <small className="text-right mb-3">
-                        <Link to="./../signIn/index.js">
+                        <Link to="./../signIn/">
                             <u style={{color:'gray', textDecoration:'none'}}>북스탁 계정이 이미 있나요?</u>
                         </Link>
                     </small>
@@ -38,37 +67,43 @@ function SignUp() {
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">닉네임</h6>
                         </label>
-                        <input type="text" name="nick" placeholder="RaLiBooks" style={{ width: '50%' }} />
+                        <input type="text" name="nick" placeholder="RaLiBooks" style={{ width: '50%' }} 
+                        value={signUpData.nick} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">이메일 주소(아이디)</h6>
                         </label>
-                        <input type="text" name="email" placeholder="BookStock@email.com" />
+                        <input type="text" name="userId" placeholder="BookStock@email.com"
+                        value={signUpData.userId} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">비밀번호</h6>
                         </label>
-                        <input type="password" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" />
+                        <input type="password" name="pwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                        value={signUpData.pwd} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">주소</h6>
                         </label>
-                        <input type="text" name="adress" placeholder="주소를 입력하세요" />
+                        <input type="text" name="userAddr" placeholder="주소를 입력하세요" 
+                        value={signUpData.userAddr} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">전화번호</h6>
                         </label>
-                        <input type="text" name="phone" placeholder="-(하이픈)을 제외하고 입력하세요" />
+                        <input type="text" name="userPhone" placeholder="-(하이픈)을 제외하고 입력하세요" 
+                        value={signUpData.userPhone} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">계좌번호</h6>
                         </label>
-                        <input type="text" name="acount" placeholder="-(하이픈)을 제외하고 입력하세요" />
+                        <input type="text" name="userAccount" placeholder="-(하이픈)을 제외하고 입력하세요" 
+                        value={signUpData.userAccount} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3 mb-3">
                         <small className="text-muted">
@@ -77,7 +112,7 @@ function SignUp() {
                     </div>
                     <div className="row mb-4">
                         <div className="col-md-6">
-                            <button className="btn btn-blue text-center mb-1 py-2" >계정 만들기</button>
+                            <button className="btn btn-blue text-center mb-1 py-2" onClick={handleSignUpSubmit} >계정 만들기</button>
                         </div>
                     </div>
                     <div className="row px-3 mb-4 d-flex align-items-center">

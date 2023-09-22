@@ -75,9 +75,9 @@ function BookSearchResult() {
               <td><Link to={`/trading?id=${book.auctionId}`}>{book.bookTitle}</Link></td>
               <td>시작가: {book.auctionPrice}원
               <br />현재가: 추후 구현 예정</td>
-              <td><Link to={`/${book.uId}`}>{book.uId} 추후 닉네임으로 구현 예정</Link></td>
+              <td><Link to={`/`}>{book.nickname} </Link></td>
               <td>{AuctionCreateAt(book.auctionStart)} /<br />{AuctionCreateAt(book.auctionEnd)}</td>
-              <td>추후 구현 예정</td>
+              <td>{book.viewCount}</td>
               <td>
 
                 {/* 관심등록 버튼 */}
