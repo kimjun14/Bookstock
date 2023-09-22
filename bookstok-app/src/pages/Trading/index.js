@@ -23,6 +23,7 @@ function Trading() {
     const [auctionBidData, setAuctionBidData] = useState([]);
     // const [userName,setUserName]= useState([])
     const [showModal, setShowModal] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
     const URLquery = useLocation();
     const queryParams = new URLSearchParams(URLquery.search);
     // location.search      =>  URL? query... 이후부분받음
@@ -99,6 +100,31 @@ function Trading() {
 
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
+
+    const handleImageChange = (e) => {
+        setSelectedImage(e.target.files[0]);
+      };
+    
+      const handleUpload = async () => {
+        if (selectedImage) {
+          const formData = new FormData();
+          formData.append('image', selectedImage);
+    
+          try {
+            const response = await axiosConnect.post('/upload', formData);
+    
+            if (response.status === 200) {
+              console.log('Image uploaded successfully');
+            } else {
+              console.error('Image upload failed');
+            }
+          } catch (error) {
+            console.error('Error uploading image:', error);
+          }
+        } else {
+          console.error('No image selected');
+        }
+      };
 
     return (
         <>
@@ -189,22 +215,22 @@ function Trading() {
                     <div className="row">
                         <div className="col-md-6 offset-md-6">
                             <div className="input-group mt-2">
-                                <input type="file" className="form-control" id="inputGroupFile04" name="bidImgSrc" onChange={handleBidChange} />
                                 <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" name="bidPrice" value={bidData.bidPrice} onChange={handleBidChange} />
                                 <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
                                     입찰 하기
                                 </button>
                             </div>
                         </div>
+                        <div>
+                            <h2>Image Upload</h2>
+                            <input type="file" onChange={handleImageChange} />
+                            <button onClick={handleUpload}>Upload</button>
+                        </div>
                     </div>
                     <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
-                    <Buying
-                        show={showModal}
-                        onClose={closeModal}
-                        onSave={() => {
-                            // Handle save logic here
-                            closeModal();
-                        }}
+                    <Buying show={showModal} onClose={closeModal} onSave={() => {
+                        closeModal();
+                    }}
                     />
                 </div>
             </article >

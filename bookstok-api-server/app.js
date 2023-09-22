@@ -6,7 +6,6 @@ var logger = require('morgan');
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var fileuploadRouter = require('./routes/fileupload');
 
 var app = express();
 
@@ -32,7 +31,8 @@ app.use(session({
 }));  // req.session 속성을 만들어서 세션 객체를 저장
 
 app.use('/api', indexRouter);
-app.use('/fileupload', fileuploadRouter);
+app.use(express.static('public'));
+
 
 // 404 에러 처리
 app.use((req, res, next) => {
