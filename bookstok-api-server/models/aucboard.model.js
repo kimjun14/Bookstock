@@ -4,7 +4,7 @@ const userModel = {
   // 경매 조회(기본값은 책 제목임)
   async auctionSearch(bookName) {
     try {
-      const sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' order by auctionId DESC`;
+      const sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' order by auctionId DESC limit 10`;
       const [result] = await pool.query(sql);
       return result;
     } catch (err) {

@@ -16,7 +16,8 @@ router.post('/', async (req, res, next) => {
         result_style:"json",
         page_no: 1,
         page_size:10,
-        title: query
+        title: query,
+        start_publish_date:20120101
       }
     })
     console.log(response.data);

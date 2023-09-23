@@ -71,7 +71,7 @@ function BookSearchResult() {
           {books.map((book) => (
             <tr key={book.index}>
               <th scope="row">{book.index}</th>
-              <td><img src={book.bookImgSrc} alt="" style={{ width: '100%', maxWidth: '120px', height: 'auto' }} /></td>
+              <td><img src={book.bookImgSrc ? book.bookImgSrc : "http://via.placeholder.com/120x160"} alt="" style={{ width: '100%', maxWidth: '120px', height: 'auto' }} /></td>
               <td><Link to={`/trading?id=${book.auctionId}`}>{book.bookTitle}</Link></td>
               <td>시작가: {book.auctionPrice}원
               <br />현재가: 추후 구현 예정</td>
@@ -83,11 +83,12 @@ function BookSearchResult() {
                 {/* 관심등록 버튼 */}
                 <button className='interestBtn'>
                   <img
-                    src=""
-                    alt="이미지 구현 예정"
+                    src="http://localhost:12345/images/star.png"
+                    alt=""
+                    width="20px"
                   />
                 </button>
-                숫자 구현
+                0
               </td>
             </tr>
           ))}

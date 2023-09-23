@@ -71,6 +71,7 @@ function Trading() {
   const handleBidSubmit = async () => {
     try {
       await axiosConnect.post(`/auctions/${queryParams.get('id')}`, bidData)
+      window.alert("입찰 등록에 성공하였습니다.")
     } catch (err) {
       console.error(err);
     } finally {
