@@ -203,7 +203,7 @@ function Trading() {
 
                   <div className='card-body row'>
                     <div className="alert alert-light col-sm-12" role="alert">
-                      <img src={bid.bidImgSrc} className="img-fluid mx-4" alt="..." />
+                      <img src={bid.bidImgSrc } className="img-fluid mx-4" alt="..." />
                       {bid.bidContext ? bid.bidContext : "상세 설명이 없습니다."}
                     </div>
                   </div>

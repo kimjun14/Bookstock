@@ -1,68 +1,53 @@
 // MainRanking.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './NewBooks.css'
+import axios from 'axios';
 
-const exampleData = [
-    {
-        title: '어린왕자',
-        author: '생텍쥐페리',
-        startPrice: 11000,
-        presentPrice: 9000,
-        coverImage: 'https://picsum.photos/80/115',
-    },
-    {
-        title: '어린왕자',
-        author: '생텍쥐페리',
-        startPrice: 11000,
-        presentPrice: 9000,
-        coverImage: 'https://picsum.photos/80/115',
-    },
-    {
-        title: '어린왕자',
-        author: '생텍쥐페리',
-        startPrice: 11000,
-        presentPrice: 9000,
-        coverImage: 'https://picsum.photos/80/115',
-    },
-    {
-        title: '어린왕자',
-        author: '생텍쥐페리',
-        startPrice: 11000,
-        presentPrice: 9000,
-        coverImage: 'https://picsum.photos/80/115',
-    },
-    {
-        title: '어린왕자',
-        author: '생텍쥐페리',
-        startPrice: 11000,
-        presentPrice: 9000,
-        coverImage: 'https://picsum.photos/80/115',
-    },
-    {
-        title: '어린왕자',
-        author: '생텍쥐페리',
-        startPrice: 11000,
-        presentPrice: 9000,
-        coverImage: 'https://picsum.photos/80/115',
-    }
-];
+const axiosConnect = axios.create({
+    baseURL: 'http://localhost:12345/api',
+    withCredentials: true
+});
+
+        // title: '어린왕자',
+        // author: '생텍쥐페리',
+        // startPrice: 11000,
+        // presentPrice: 9000,
+        // coverImage: 'https://picsum.photos/80/115',
+        // 쓰지 않으니 레거시 코드의 일부만 남깁니다.
 
 function NewBooks() {
+    const [bookData , setBookData] = useState([]);
+
+    const newBookFetcher = async () => {
+        try{
+            const response=await axiosConnect.get('test/mainpagetest')
+            setBookData(response.data);
+        }catch(err){
+            console.log(err);
+        }finally{
+            console.log(bookData);
+        }
+    }
+
+    useEffect(()=>{
+        newBookFetcher();
+    },[]);
+
     return (
         <div>
             <h2>새로 올라온 도서</h2>
             <div className="row row-cols-3-2">
-                {exampleData.map((book, index) => (
-                    <div className="col" key={index} style={{ position: "relative" }}>
-                        <Link to={`/book/${book.id}`} className="card-link">
+                {bookData.map((bookData) => (
+                    <div className="col" key={bookData.index} style={{ position: "relative" }}>
+                        <Link to={`/trading?id=${bookData.auctionId}`} className="card-link">
                             <div className="card custom-card-new">
-                                <img src={book.coverImage} className="card-img" alt={book.title} />
+                                <img src={bookData.bookImgSrc} className="card-img" alt={bookData.bookTitle} />
                                 <div className="card-body">
-                                    <h5 className="card-title">{book.title}</h5>
-                                    <p className="card-text">{book.author}</p>
-                                    <p className="card-text">시작 가격: {book.startPrice}원</p>
-                                    <p className="card-text">현재 가격: {book.presentPrice}원</p>
+                                    <h5 className="card-title">{bookData.bookTitle}</h5>
+                                    <p className="card-text">{bookData.bookAuthor}</p>
+                                    <p className="card-text">시작 가격: {bookData.auctionPrice}원</p>
+                                    <p className="card-text">현재 가격: 9000원</p>
                                 </div>
                             </div>
                         </Link>

@@ -16,7 +16,7 @@ function BookSearchResult() {
 
   const fetchSearchList = async () => {
     try{
-        const response=await axiosConnect.get(`/auctions/mypagetest/test`)
+        const response=await axiosConnect.get(`/test/mypagetest`)
         setBooks(response.data);
     }catch(err){
         console.error(err);

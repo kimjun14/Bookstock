@@ -21,25 +21,14 @@ router.get('/:id', async (req, res, next) => {
     const list = await user.auctionIdSearch(id);
     // 최근 조회한 페이지 정보를 쿠키로 저장
     let recentPages = req.cookies.recentPages || [];
-    recentPages.push(id);
+    if (!recentPages.includes(id)){
+      recentPages.push(id);
+    }
     if (recentPages.length > 5) {
       recentPages = recentPages.slice(-5);  // 최근 5개만 유지
     }
     res.cookie('recentPages', recentPages, { maxAge: 86400000 });
     res.json(list);
-  }catch(err){
-    next(err);
-  }
-});
-
-// 마이페이지 기능 추가를 위해 임시로 넣어뒀음. 분리할 예정임
-router.get('/mypagetest/test', async (req, res, next) => {
-  console.log(req.cookies.recentPages)
-  try{
-    const list = await user.mypageRecentSearch(req.cookies.recentPages);
-    // 최근 조회한 페이지 정보를 쿠키로 저장
-    res.json(list);
-    res.status(200).send("");
   }catch(err){
     next(err);
   }
