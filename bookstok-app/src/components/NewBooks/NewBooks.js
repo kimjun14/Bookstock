@@ -42,8 +42,7 @@ function NewBooks() {
                     <div className="col" key={bookData.index} style={{ position: "relative" }}>
                         <Link to={`/trading?id=${bookData.auctionId}`} className="card-link">
                             <div className="card custom-card-new" style={{ display: 'flex', flexDirection: 'column' }}>
-                                <img src={bookData.bookImgSrc} className="card-img" alt={bookData.bookTitle} style={{ height: '485px' }} />
-                                {/* Adjust the height value (e.g., '200px') to your desired fixed height */}
+                                <img src={bookData.bookImgSrc} className="card-img" alt={bookData.bookTitle} style={{ height: '450px' }} />
                                 <div className="card-body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                                     <h5 className="card-title">{bookData.bookTitle}</h5>
                                     <p className="card-text">{bookData.bookAuthor}</p>

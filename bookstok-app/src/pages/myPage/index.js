@@ -77,12 +77,10 @@ const MyPage = () => {
                                 <button className="mt-1 btn btn-secondary btn-sm">프로필 관리</button>
                             </div>
 
-                            <div className="col-md-2" style={{ marginLeft: "auto", marginRight: "4rem", display: "flex", alignItems: "center" }}>
-                                <div style={{ borderRight: "1px solid #bcbdbe", paddingRight: "1rem" }}>
-                                    <span className="mx-5">
-                                        <div>일반회원</div>
-                                        <div>다음 등급까지 0페이지 남았습니다.</div>
-                                    </span>
+                            <div className="col-md-5" style={{ marginLeft: "auto", marginRight: "4rem", display: "flex", alignItems: "center"}}>
+                                <div style={{ borderRight: "1px solid #bcbdbe", paddingRight: "1rem"}}>
+                                    <div style={{marginLeft: "75px"}}>일반회원</div>
+                                    <div>다음 등급까지 0페이지 남았습니다.</div>
                                 </div>
                                 {/* 일반회원이랑 예치금 박스안으로 들어가게 반응형으로 수정했어요. 그런데 일반회원 텍스트가 왜저러는지 모르겠네요ㅜㅜ */}
 
