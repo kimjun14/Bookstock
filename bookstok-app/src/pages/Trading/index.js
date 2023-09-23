@@ -190,15 +190,11 @@ function Trading() {
                       <p className="card-title col-sm-2 mt-4">
                         <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
                       </p>
-                      <h6 className="card-title col-sm-1 mt-4">{bid.bidPrice} 원</h6>
-                      <div className='col-sm-5'></div>
-                      <div className="col-sm-1">
-                        <button type="button" className="btn btn-primary col-12" onClick={openModal}>즉시구매</button>
-                      </div>
+                      <h6 className="card-title col-sm-2 mt-4">{bid.bidPrice} 원</h6>
+                      <div className="col-sm-2"></div>
+                      <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={openModal}>즉시구매</button>
+                      <button type="button" className="btn btn-info col-sm-2 mt-3" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
 
-                      <div className="col-sm-1">
-                        <button type="button" className="btn btn-info col-12" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
-                      </div>
                     </div>
                   </div>
 
