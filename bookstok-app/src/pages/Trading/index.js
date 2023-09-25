@@ -122,6 +122,7 @@ function Trading() {
           })
           console.log(bidData)
           console.log('Image uploaded successfully');
+          alert("이미지 업로드가 완료 되었습니다.")
         } else {
           console.error('Image upload failed');
         }

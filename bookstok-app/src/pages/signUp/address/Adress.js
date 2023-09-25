@@ -3,7 +3,7 @@ import DaumPostcode from "react-daum-postcode";
 
 const Address = (props) => {
 
-    const complete = (data) =>{
+    const complete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
 
@@ -22,20 +22,18 @@ const Address = (props) => {
 
         props.setcompany({
             ...props.company,
-            address:fullAddress,
+            address: fullAddress,
         })
     }
 
 
     return (
-        <div >
+        <div className="col-md-6">
             <DaumPostcode
                 className="postmodal"
                 autoClose
                 onComplete={complete} />
         </div>
-
-        
     );
 };
 
