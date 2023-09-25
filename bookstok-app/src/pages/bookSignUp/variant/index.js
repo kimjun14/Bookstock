@@ -202,7 +202,7 @@ const BookSignUp = () => {
                     <BookResearch aucToInfo={infoCallback} className="book-research" />
 
                     <div className="d-grid gap-2 col-11 mx-auto mt-5">
-                        <button type="submit" className="btn btn-sign-up btn-lg mt-5">
+                        <button type="submit" className="btn btn-sign-up btn-lg mt-3 mb-5">
                             역경매 등록
                         </button>
                     </div>

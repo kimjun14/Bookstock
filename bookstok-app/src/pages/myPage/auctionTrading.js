@@ -78,7 +78,7 @@ const AuctionTrading = () => {
                                     </option>
                                 ))}
                             </select>
-                            <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="계좌번호" value={accountNumber} onChange={handleAccountNumberChange} />
+                            <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="계좌번호 하이픈(-) 없이 입력하세요." value={accountNumber} onChange={handleAccountNumberChange} />
                             <button className="btn btn-success" type="submit" onClick={handleSubmit}>거래완료</button>
                         </div>
                     </div>
