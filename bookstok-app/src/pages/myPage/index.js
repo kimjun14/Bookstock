@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
+import AuctionProgress from './auctionProgress';
+import AuctionTrading from './auctionTrading';
 
 const RequireLogin = ({ children }) => {
     // useAuth를 사용하여 로그인 상태 확인
@@ -24,6 +26,19 @@ const RequireLogin = ({ children }) => {
 }
 
 const MyPage = () => {
+    const [showAuction, setShowAuction] = useState(false);
+    const [showTrading, setShowTrading] = useState(false);
+
+    const toggleAuction = () => {
+        setShowAuction(!showAuction);
+        setShowTrading(false);
+    };
+
+    const toggleTrading = () => {
+        setShowTrading(!showTrading);
+        setShowAuction(false);
+    };
+
     return (
         <div className="container">
             <div className="row">
@@ -55,8 +70,6 @@ const MyPage = () => {
 
                     <Link className="ms-4 text-decoration-none text-black" to="/">내 정보 관리</Link><br />
                     <Link className="ms-4 text-decoration-none text-black" to="/">1:1 문의</Link><br />
-                    <Link className="ms-4 text-decoration-none text-black" to="/">기기 관리</Link><br />
-                    <Link className="ms-4 text-decoration-none text-black" to="/">리뷰 관리</Link><br />
                 </div>
 
                 <div className="col-md-9" style={{ marginTop: "10px" }}>
@@ -98,46 +111,30 @@ const MyPage = () => {
 
                     <div className="border rounded">
                         <div className="d-flex flex-row mb-3 justify-content-around">
-                            <div className="p-2 ms-4">
-                                <Link to="#" className="text-decoration-none">
-                                    <p className="fs-5 mt-4 text-black">입찰중</p>
+                            <div className="p-2 ms-4" onClick={toggleAuction}>
+                                <p className="fs-5 mt-4 text-black">경매진행중</p>
+                                <p className="text-center text-black">0</p> 
+                            </div>
+
+                            <div className="p-2 ms-4" onClick={toggleTrading}>
+                                    <p className="fs-5 mt-4 text-black">거래중</p>
                                     <p className="text-center text-black">0</p>
-                                </Link>
                             </div>
 
                             <div className="p-2 ms-4">
                                 <Link to="#" className="text-decoration-none">
-                                    <p className="fs-5 mt-4 text-black">판매완료</p>
-                                    <p className="text-center text-black">0</p>
-                                </Link>
-                            </div>
-
-                            <div className="p-2 ms-4">
-                                <Link to="#" className="text-decoration-none">
-                                    <p className="fs-5 mt-4 text-black">역경매등록</p>
-                                    <p className="text-center text-black">0</p>
-                                </Link>
-                            </div>
-
-                            <div className="p-2 ms-4">
-                                <Link to="#" className="text-decoration-none">
-                                    <p className="fs-5 mt-4 text-black">구매중</p>
-                                    <p className="text-center text-black">0</p>
-                                </Link>
-                            </div>
-
-                            <div className="p-2 ms-4">
-                                <Link to="#" className="text-decoration-none">
-                                    <p className="fs-5 mt-4 text-black">구매완료</p>
+                                    <p className="fs-5 mt-4 text-black">경매완료</p>
                                     <p className="text-center text-black">0</p>
                                 </Link>
                             </div>
                         </div>
                     </div>
 
-                    <div className="mt-5 ">
+                    <div className="mt-5">
                         <div>
-                            <p className="text-center">거래 내역이 없습니다.</p>
+                            {/* 상세 내역 보기 버튼과 상세 내역을 보여주는 부분 */}
+                            {showAuction && <AuctionProgress />}
+                            {showTrading && <AuctionTrading />}
                         </div>
                     </div>
                 </div>

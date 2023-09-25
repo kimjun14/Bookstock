@@ -109,7 +109,6 @@ function SignUp() {
                             <h6 className="mb-0 text-sm">주소</h6>
                         </label>
                         <button className="btn btn-primary" onClick={handleComplete}>우편번호 찾기</button>
-                        
                         <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
                         {popup && <Address company={enroll_company} setcompany={setEnroll_company}></Address>}
                     </div>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 
-const Address = (props) => {
+const TradingAddress = (props) => {
 
-    const complete = (data) => {
+    const complete = (data) =>{
         let fullAddress = data.address;
         let extraAddress = '';
 
@@ -22,19 +22,21 @@ const Address = (props) => {
 
         props.setcompany({
             ...props.company,
-            address: fullAddress,
+            address:fullAddress,
         })
     }
 
 
     return (
-        <div className="col-md-6">
+        <div>
             <DaumPostcode
                 className="postmodal"
                 autoClose
                 onComplete={complete} />
         </div>
+
+        
     );
 };
 
-export default Address;
+export default TradingAddress;
