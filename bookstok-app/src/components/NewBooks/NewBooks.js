@@ -37,14 +37,14 @@ function NewBooks() {
     }, []);
 
     return (
-        <div className='container-fluid'>
+        <div>
             <h2>새로 올라온 도서</h2>
-            <div className="row">
+            <div className="row row-cols-3-2">
                 {bookData.map((bookData) => (
-                    <div className="col-lg-4 col-md-6 col-sm-12" key={bookData.index} style={{ position: "relative" }}>
+                    <div className="col" key={bookData.index} style={{ position: "relative" }}>
                         <Link to={`/trading?id=${bookData.auctionId}`} className="card-link">
                             <div className="card custom-card-new" style={{ display: 'flex', flexDirection: 'column' }}>
-                                <img src={bookData.bookImgSrc} className="card-img" alt={bookData.bookTitle} />
+                                <img src={bookData.bookImgSrc} className="card-img" alt={bookData.bookTitle} style={{ height: '450px' }} />
                                 <div className="card-body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                                     <h5 className="card-title">{bookData.bookTitle}</h5>
                                     <p className="card-text">{bookData.bookAuthor}</p>
@@ -61,6 +61,7 @@ function NewBooks() {
                 ))}
             </div>
         </div>
+
     );
 }
 
