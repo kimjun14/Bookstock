@@ -1,3 +1,5 @@
+// App.js 파일
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
@@ -15,11 +17,12 @@ import LostPwd from './pages/lostPwd';
 import ModalComponent from './pages/Trading/buying';
 import BuyingSuccess from './pages/Trading/buyingSuccess';
 import RecentSearch from './pages/myPage/recentSearch'
+// import ChatBotButton from './components/ChatBot/ChatBot'; 
 
 function App() {
   return (
     <Router>
-      <AuthProvider> {/* AuthProvider로 AuthContext를 제공 */}
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
@@ -37,6 +40,7 @@ function App() {
           </Route>
         </Routes>
       </AuthProvider>
+      {/* <ChatBotButton /> */}
     </Router>
   );
 }
