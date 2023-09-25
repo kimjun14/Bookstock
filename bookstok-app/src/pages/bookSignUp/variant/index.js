@@ -106,90 +106,80 @@ const BookSignUp = () => {
         });
         setSelectedDays(null); // 선택된 날짜 초기화
     };
-
     return (
         <>
             <div className="book-sign-up-container">
                 <form onSubmit={handleSubmit} className="book-sign-up-form">
                     <div className="row justify-content-around">
                         <div className="col-md-6">
-                            <h2 className="mb-3 textH2">도서 역경매 등록</h2>
-                            <div className="form-groupName">
-                                <label htmlFor="name" style={{
-                                    marginLeft: '-1rem', marginTop: '2rem'
-                                }}>게시글 제목</label>
+                            <h2 style={{marginLeft:'-0rem'}}>도서 역경매 등록</h2>
+                            <div className="auctionTitle">
+                                <label htmlFor="auctionTitle">게시글 제목</label>
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className="form-control formTitle"
                                     id="auctionTitle"
                                     name="auctionTitle"
                                     onChange={(e) => handleChange(e, "auctionTitle")}
                                     placeholder="게시글 제목을 입력하세요"
                                 />
                             </div>
-                            <div className="form-groupDes">
-                                <label htmlFor="description" style={{
-                                    marginLeft: '-1rem', marginTop: '1rem'
-                                }}>상세정보</label>
+                            <div>
+                                <label htmlFor="auctionContext">상세정보</label>
                                 <textarea
-                                    className="form-control"
+                                    className="form-control formContext"
                                     id="auctionContext"
-                                    style={{ marginLeft: '-1rem' }}
                                     name="auctionContext"
                                     onChange={(e) => handleChange(e, "auctionContext")}
                                     placeholder="상세정보를 입력하세요"
                                 ></textarea>
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="price" style={{
-                                    marginLeft: '-1rem', marginTop: '1rem'
-                                }}>경매시작가</label>
+                            <div>
+                                <label htmlFor="auctionPrice">경매시작가</label>
                                 <input
                                     type="number"
-                                    className="form-control"
+                                    className="form-control formPrice"
                                     id="auctionPrice"
                                     name="auctionPrice"
                                     onChange={(e) => handleChange(e, "auctionPrice")}
                                     placeholder="원하는 경매시작 가격을 입력하세요"
                                 />
                             </div>
-                            <div className="form-group exDateBtn-group">
-                                <label htmlFor="category" style={{
-                                    marginTop: '1rem'
-                                }}>마감기한</label>
-                                <div>{renderAuctionEnd()}</div> {/* 선택된 마감일 표시 */}
-                                <div className="btn-group exDateBtn">
+                            <div className="exDateBtn-group">
+                                <label>마감기한</label>
+                                <div>{renderAuctionEnd()}</div>
+                                <div className="d-flex flex-wrap align-items-center">
                                     <button
                                         type="button"
-                                        className="btn btn-secondary"
+                                        className="btn btn-secondary mb-2 me-2"
                                         onClick={() => handleSetAuctionEnd(1)}
                                     >
                                         1일
                                     </button>
                                     <button
                                         type="button"
-                                        className="btn btn-secondary"
+                                        className="btn btn-secondary mb-2 me-2"
                                         onClick={() => handleSetAuctionEnd(3)}
                                     >
                                         3일
                                     </button>
                                     <button
                                         type="button"
-                                        className="btn btn-secondary"
+                                        className="btn btn-secondary mb-2 me-2"
                                         onClick={() => handleSetAuctionEnd(7)}
                                     >
                                         7일
                                     </button>
                                     <button
                                         type="button"
-                                        className="btn btn-secondary"
+                                        className="btn btn-secondary mb-2 me-2"
                                         onClick={() => handleSetAuctionEnd(30)}
                                     >
                                         30일
                                     </button>
                                     <button
                                         type="button"
-                                        className="btn btn-secondary"
+                                        className="btn btn-secondary mb-2 me-2"
                                         onClick={() => handleSetAuctionEnd(60)}
                                     >
                                         60일
@@ -198,12 +188,12 @@ const BookSignUp = () => {
                             </div>
                         </div>
                     </div>
-                    <hr className="mt-5" />
+                    <hr />
                     <BookResearch aucToInfo={infoCallback} className="book-research" />
 
-                    <div className="d-grid gap-2 col-11 mx-auto mt-5">
-                        <button type="submit" className="btn btn-sign-up btn-lg mt-3 mb-5">
-                            역경매 등록
+                    <div className="d-grid col-11 mx-auto ">
+                        <button type="submit" className="btn btn-sign-up btn-lg mt-3 mb-5 signupBtn">
+                            등록하기
                         </button>
                     </div>
                 </form>

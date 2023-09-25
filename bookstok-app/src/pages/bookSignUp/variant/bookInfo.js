@@ -60,7 +60,7 @@ const BookResearch = ({ aucToInfo }) => {
                         </div>
                         <div className="col-md-5 mb-3">
                                 <div className="row justify-content-between align-items-center mb-3">
-                                    <h1 className="col-md-5">도서 정보</h1>
+                                    <h2 className="col-md-5" style={{width: '20rem', margin: 'auto'}}>도서정보 등록</h2>
                                     {bookInfo.title_url && (
                                     <button type="button" 
                                             className="btn btn-success col-md-3 mb-2" 
@@ -73,28 +73,28 @@ const BookResearch = ({ aucToInfo }) => {
                                            infoToPopup={popupCallback} />
                                 </div>
                             
-                            <label htmlFor="email">도서제목:</label>
+                            <label htmlFor="email" style={{marginTop:'1rem'}}>도서제목</label>
                             <input type="text" 
                                    className="form-control ms-1" 
                                    id="bookTitle" 
                                    name="bookTitle" 
                                    value={bookInfo.title} />
 
-                            <label htmlFor="userAccount">출판사:</label>
+                            <label htmlFor="userAccount" style={{marginTop:'1rem'}}>출판사</label>
                             <input type="text" 
                                    className="form-control ms-1" 
                                    id="bookPub" 
                                    name="bookPub" 
                                    value={bookInfo.pub} />
 
-                            <label htmlFor="name">출판일:</label>
+                            <label htmlFor="name" style={{marginTop:'1rem'}}>출판일</label>
                             <input type="text" 
                                    className="form-control ms-1" 
                                    id="bookPubDate" 
                                    name="bookPubDate" 
                                    value={bookInfo.pubDate} />
 
-                            <label htmlFor="address">작가:</label>
+                            <label htmlFor="address" style={{marginTop:'1rem'}}>작가</label>
                             <input type="text" 
                                    className="form-control ms-1" 
                                    id="bookAuthor" 

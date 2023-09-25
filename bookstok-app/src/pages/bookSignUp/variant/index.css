@@ -1,12 +1,49 @@
-.book-sign-up-container{
+.book-sign-up-container {
   border-radius: 20px;
   box-shadow: 20px 20px 80px rgb(206, 206, 206);
   width: 45rem;
   margin: auto;
   margin-top: 3rem;
+  font-weight: 500;
 }
 
-.book-sign-up-form{
-  
+.col-md-6 {
+  border: 1px solid red;
+  width: 40rem;
 }
 
+.formTitle {
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
+.formContext {
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
+.formPrice {
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
+.exDateBtn-group{
+  margin-bottom: 2rem;
+}
+
+.signupBtn{
+  background-color: #fff;
+  border-color: #1187cf;
+  color: #1187cf;
+  border-radius: 6px;
+  width: 36.7rem;
+  margin: auto;
+
+}
+
+.signupBtn:hover{
+  background-color: #1187cf;
+  border-color: #1187cf;
+  color: #fff;
+  border-radius: 6px;
+}
