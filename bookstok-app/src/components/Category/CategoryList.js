@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 function CategoryList({ onCategoryClick }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
-
-    // 리디북스 도서 카테고리 목록
     const categories = [
         {
             name: '소설',
