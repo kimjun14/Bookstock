@@ -249,7 +249,6 @@ function SignUp() {
         address: '',
     });
 
-    const [popup, setPopup] = useState(false);
 
     const handleInput = (e) => {
         setEnroll_company({
@@ -258,9 +257,22 @@ function SignUp() {
         })
     }
 
-    const handleComplete = (data) => {
-        setPopup(!popup);
-    }
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+    
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const [detailAddress, setDetailAddress] = useState('');
+
+    const handleDetailAddressChange = (e) => {
+        setDetailAddress(e.target.value);
+    };
+
 
     // 선택된 카테고리가 2개인지 확인하는 상태
     const isCategoryFull = selectedCategories.length === 2;
@@ -321,10 +333,14 @@ function SignUp() {
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">주소</h6>
                         </label>
-                        <button className="btn btn-primary" onClick={handleComplete}>우편번호 찾기</button>
-
-                        <input className="user_enroll_text" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
-                        {popup && <Address company={enroll_company} setcompany={setEnroll_company}></Address>}
+                        <div className="row">
+                            <input className="col-sm-9 user_enroll_text" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
+                            <div className="col-sm-3">
+                                <button className="btn btn-primary" onClick={handleOpenModal}>우편번호 찾기</button>
+                            </div>
+                        </div>
+                        <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" value={detailAddress} onChange={handleDetailAddressChange} />
+                        {isModalOpen && <Address company={enroll_company} setcompany={setEnroll_company}  closeModal={handleCloseModal}></Address>}
                     </div>
 
                     <div className="row px-3">

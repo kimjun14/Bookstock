@@ -5,7 +5,6 @@ const AuctionTrading = () => {
     const [selectedBank, setSelectedBank] = useState('');
     const [accountNumber, setAccountNumber] = useState('');
     const [detailAddress, setDetailAddress] = useState('');
-    const [popup, setPopup] = useState(false);
     const [enroll_company, setEnroll_company] = useState({
         address: '',
     });

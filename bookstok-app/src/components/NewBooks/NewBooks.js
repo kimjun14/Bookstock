@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './NewBooks.css'
 import axios from 'axios';
+import { ProgressBar } from 'react-bootstrap';
+import calculateProgress from './progressbar';
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
@@ -48,6 +50,10 @@ function NewBooks() {
                                     <p className="card-text">{bookData.bookAuthor}</p>
                                     <p className="card-text">시작 가격: {bookData.auctionPrice}원</p>
                                     <p className="card-text">현재 가격: 9000원</p>
+                                    <ProgressBar
+                                        now={calculateProgress(bookData.currentPrice, bookData.auctionPrice)}
+                                        label={`${calculateProgress(bookData.currentPrice, bookData.auctionPrice)}%`}
+                                    />
                                 </div>
                             </div>
                         </Link>

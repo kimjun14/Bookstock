@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
+import { Modal, Button } from "react-bootstrap"; 
 
 const Address = (props) => {
 
@@ -23,17 +24,32 @@ const Address = (props) => {
         props.setcompany({
             ...props.company,
             address: fullAddress,
-        })
+        });
+
+        // 주소 선택 완료 후 모달 닫기
+        props.closeModal();
     }
 
 
     return (
-        <div className="col-md-6">
+        <Modal show={true} onHide={props.closeModal}> {/* 모달 가시성 제어 */}
+        <Modal.Header closeButton>
+            <Modal.Title>우편번호 찾기</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            {/* DaumPostcode 컴포넌트를 모달 내부에 배치합니다. */}
             <DaumPostcode
                 className="postmodal"
                 autoClose
-                onComplete={complete} />
-        </div>
+                onComplete={complete}
+            />
+        </Modal.Body>
+        <Modal.Footer>
+            <Button variant="secondary" onClick={props.closeModal}>
+                닫기
+            </Button>
+        </Modal.Footer>
+    </Modal>
     );
 };
 
