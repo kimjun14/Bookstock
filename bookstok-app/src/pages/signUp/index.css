@@ -27,6 +27,26 @@ button:focus {
   outline-width: 0;
 }
 
+.category-toggle {
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  padding-top: 1rem;
+  padding-left: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.form-check {
+  border: 0px red solid;
+  width: 8.3rem;
+  font-size: small;
+}
+
+.form-check-label {
+  margin-left: 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 .btn-blue {
   background-color: #fff;
   border-color: #1187cf;
@@ -41,15 +61,15 @@ button:focus {
   cursor: pointer;
 }
 .line {
-    height: 1px;
-    width: 45%;
-    background-color: #E0E0E0;
-    margin-top: 10px;
-    margin-bottom: 1rem;
+  height: 1px;
+  width: 45%;
+  background-color: #e0e0e0;
+  margin-top: 10px;
+  margin-bottom: 1rem;
 }
 
 .or {
-    width: 10%
+  width: 10%;
 }
 
 .social-connect1 .btn {
@@ -69,7 +89,6 @@ button:focus {
   border-color: #03c75a;
   color: #03c75a;
   width: 100%;
-
 }
 
 .social-connect2 .btn:hover {
