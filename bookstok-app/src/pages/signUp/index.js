@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './index.css'
 import axios from 'axios';
+import Address from "./address/Adress";
+
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
@@ -52,7 +54,23 @@ function SignUp() {
             navigation('/signup');
         }
     }
+    //주소 처리
+        const [enroll_company, setEnroll_company] = useState({
+            address:'',
+        });
 
+        const [popup, setPopup] = useState(false);
+
+        const handleInput = (e) => {
+            setEnroll_company({
+                ...enroll_company,
+                [e.target.name]:e.target.value,
+            })
+        }
+
+        const handleComplete = (data) => {
+            setPopup(!popup);
+        }
     return (
         <div className="container-fluid px-2 px-md-4 py-5 mx-auto">
             <div className="col-lg-7" style={{ margin: 'auto' }}>
@@ -84,19 +102,25 @@ function SignUp() {
                         <input type="password" name="pwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                         value={signUpData.pwd} onChange={handleSignUpDataChange} />
                     </div>
-                    <div className="row px-3">
-                        <label className="mb-0">
+
+                    
+                    <div className="row px-3" >
+                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">주소</h6>
                         </label>
-                        <input type="text" name="userAddr" placeholder="주소를 입력하세요" 
-                        value={signUpData.userAddr} onChange={handleSignUpDataChange} />
+                        <button className="btn btn-primary" onClick={handleComplete}>우편번호 찾기</button>
+                        
+                        <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                        {popup && <Address company={enroll_company} setcompany={setEnroll_company}></Address>}
                     </div>
+
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">전화번호</h6>
                         </label>
                         <input type="text" name="userPhone" placeholder="-(하이픈)을 제외하고 입력하세요" 
                         value={signUpData.userPhone} onChange={handleSignUpDataChange} />
+                        
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">

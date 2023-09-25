@@ -1,25 +1,36 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import './index.css'
 import { Link, } from "react-router-dom";
 import logo from '../../img/logo2Cut.jpg';
-import axios from "axios";
-
+import emailjs from '@emailjs/browser';
 
 const LostPwd = function () {
-  const [email, setEmail] = useState()
-  const sendEmail = () => {
-    if(email){
-    alert('메일 전송이 완료돼었습니다.')
-    }else{
-      alert('메일 주소를 입력해 주세요')
-    }
-  }
+  const form = useRef();
+
+  // 초기 상태를 빈 문자열로 설정
+  const [email, setEmail] = useState('');
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+  
+    emailjs.sendForm("service_htttesl", "template_sve3j1k", form.current, "0EHUtDyOyjCADR8b4").then(
+      result => {
+        alert("메일 전송이 완료되었습니다.");
+        form.current.reset();
+      },
+      (error) => {
+        console.log(error.text);
+        alert("메일 전송이 실패했습니다.");
+      }
+    );
+  };
+  
   return (
     <div className="wrapper bg-white">
       <div className="logo">
         <img src={logo} alt="BookStock" />
       </div>
-      <form className="pt-3" >
+      <form className="pt-3" ref={form} onSubmit={sendEmail}>
         <div className="form-group py-2">
           <div className="input-field">
             <span className="far fa-user p-2"></span>
@@ -28,15 +39,14 @@ const LostPwd = function () {
               name="username"
               placeholder="이메일을 입력하세요"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-
+              value={email} // 상태 변수로 설정된 email을 사용
+              onChange={(e) => setEmail(e.target.value)} // 상태 변수 업데이트
             />
           </div>
         </div>
 
 
-        <button className="btn btn-block btn-primary text-center my-3" onClick={sendEmail}>
+        <button className="btn btn-block btn-primary text-center my-3" type="submit">
           인증메일 발송
         </button>
 
