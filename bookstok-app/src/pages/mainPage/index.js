@@ -2,7 +2,6 @@ import React from 'react';
 import banner from '../../img/banner.jpg';
 import banner2 from '../../img/banner2.jpg';
 import banner3 from '../../img/banner3.jpg';
-import { Link } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
 import './style.css'
 import MainRanking from '../../components/MainRanking/MainRanking';
