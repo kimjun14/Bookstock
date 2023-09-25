@@ -59,7 +59,7 @@ const BookSignUp = () => {
         setProduct((prevProduct) => ({
             ...prevProduct,
             // auctionEnd: `${selectedDays}일 (${formattedDate} 마감)`, 혹시 모르니 이전 코드 주석처리함
-            auctionEnd:selectedDays
+            auctionEnd: selectedDays
         }));
     }, [selectedDays]);
 

@@ -1,65 +1,12 @@
-/* CSS for BookSignUp Component */
-.book-sign-up-container {
-  margin-top: 2rem;
+.book-sign-up-container{
+  border-radius: 20px;
+  box-shadow: 20px 20px 80px rgb(206, 206, 206);
+  width: 45rem;
+  margin: auto;
+  margin-top: 3rem;
 }
 
-.book-sign-up-form {
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  margin-left: 2rem;
-  margin-right: 2rem;
+.book-sign-up-form{
+  
 }
 
-.col-md-6 .textH2 {
-  margin-left: -1rem;
-}
-
-label {
-  font-weight: bold;
-  display: block; /* 라벨을 블록 요소로 설정하여 위아래로 정렬 */
-}
-
-.form-control {
-  width: 100%; /* 부모 요소에 맞게 너비 설정 */
-  margin-top: 0.25rem; /* 인풋 박스 간격 조절 */
-}
-
-.exDateBtn-group {
-  flex-wrap: wrap; /* 다음 줄로 이동하도록 설정 */
-  align-items: center; /* 버튼들을 세로 중앙 정렬 */
-  margin-left: -1rem;
-}
-.exDateBtn {
-  width: 37.7rem;
-  margin-left: -0.5rem;
-  margin-top: 0.5rem;
-  margin-right: 1rem;
-}
-
-/* Style the submit button */
-.btn-sign-up {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: #fff;
-  font-weight: bold;
-}
-
-.btn-sign-up:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-
-/* Style the hr */
-hr {
-  border-color: #ccc;
-  margin-top: 2rem;
-}
-
-/* Style the BookResearch component (you can adjust this as needed) */
-.book-research {
-  background-color: #f8f9fa;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
