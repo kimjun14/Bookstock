@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
 import AuctionProgress from './auctionProgress';
@@ -80,7 +80,7 @@ const MyPage = () => {
                                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                             </svg>
 
-                            <div className="ms-4 mt-2" style={{ border: "0px solid blue" }}>
+                            <div className="ms-4 mt-2">
                                 <span>
                                     <b className="fs-5">userId</b>
                                 </span><br />
@@ -90,9 +90,9 @@ const MyPage = () => {
                                 <button className="mt-1 btn btn-secondary btn-sm">프로필 관리</button>
                             </div>
 
-                            <div className="col-md-5" style={{ marginLeft: "auto", marginRight: "4rem", display: "flex", alignItems: "center"}}>
-                                <div style={{ borderRight: "1px solid #bcbdbe", paddingRight: "1rem"}}>
-                                    <div style={{marginLeft: "75px"}}>일반회원</div>
+                            <div className="col-md-5" style={{ marginLeft: "auto", marginRight: "4rem", display: "flex", alignItems: "center" }}>
+                                <div style={{ borderRight: "1px solid #bcbdbe", paddingRight: "1rem" }}>
+                                    <div style={{ marginLeft: "75px" }}>일반회원</div>
                                     <div>다음 등급까지 0페이지 남았습니다.</div>
                                 </div>
                                 {/* 일반회원이랑 예치금 박스안으로 들어가게 반응형으로 수정했어요. 그런데 일반회원 텍스트가 왜저러는지 모르겠네요ㅜㅜ */}
@@ -113,12 +113,12 @@ const MyPage = () => {
                         <div className="d-flex flex-row mb-3 justify-content-around">
                             <div className="p-2 ms-4" onClick={toggleAuction}>
                                 <p className="fs-5 mt-4 text-black">경매진행중</p>
-                                <p className="text-center text-black">0</p> 
+                                <p className="text-center text-black">0</p>
                             </div>
 
                             <div className="p-2 ms-4" onClick={toggleTrading}>
-                                    <p className="fs-5 mt-4 text-black">거래중</p>
-                                    <p className="text-center text-black">0</p>
+                                <p className="fs-5 mt-4 text-black">거래중</p>
+                                <p className="text-center text-black">0</p>
                             </div>
 
                             <div className="p-2 ms-4">
