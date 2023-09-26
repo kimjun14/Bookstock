@@ -18,9 +18,9 @@ const BookResearch = ({ aucToInfo }) => {
         setBookInfo({
             title: book.TITLE,
             pub: book.PUBLISHER,
-            pubDate: book.PUBLISH_PREDATE,
+            pubDate: book.PUBDATE,
             author: book.AUTHOR,
-            title_url:book.TITLE_URL
+            image:book.IMAGE
         })
         console.log(book);
         closeModal();
@@ -40,7 +40,7 @@ const BookResearch = ({ aucToInfo }) => {
             ...prevBookInfo,
             title: aucToInfo.TITLE,
             pub: aucToInfo.PUBLISHER,
-            pubDate: aucToInfo.PUBLISH_PREDATE,
+            pubDate: aucToInfo.PUBDATE,
             author: aucToInfo.AUTHOR
         }));
     }, [aucToInfo]);
@@ -52,7 +52,7 @@ const BookResearch = ({ aucToInfo }) => {
                     <div className="row justify-content-around mt-5">
                         <div className="col-md-3">
                             <img 
-                                src={bookInfo.title_url || placeholderImage}  
+                                src={bookInfo.image || placeholderImage}  
                                 alt="bookimg" 
                                 name="bookImgSrc" 
                                 className="col-md-12 mb-4"

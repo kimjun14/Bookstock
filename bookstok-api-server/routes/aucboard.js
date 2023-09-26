@@ -34,6 +34,18 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// 경매 마무리 [patch] ip:12345/api/auctions/경매번호
+router.patch('/:id', async (req, res, next) => {
+  try{
+    // const aId = Number(req.params.id);
+    // const bId = (req.body);
+    const list = await user.auctionIdDone(Number(req.params.id),req.body.bid);
+    res.status(200).send("통신 완료");
+  }catch(err){
+    next(err);
+  }
+});
+
 // 입찰 목록 조회 [get] ip:12345/api/auctions/경매번호/bids
 router.get('/:id/bids', async (req, res, next) => {
   try{

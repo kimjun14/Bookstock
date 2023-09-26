@@ -99,8 +99,15 @@ function Trading() {
     setChatPopUp(false);
   };
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const openModal = (bid) => {
+    setSelectBid(bid);
+    setShowModal(true);
+  }
+
+  const closeModal = () => {
+    setSelectBid(null);
+    setShowModal(false);
+  }
 
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);
@@ -193,7 +200,7 @@ function Trading() {
                       </p>
                       <h6 className="card-title col-sm-2 mt-4">{bid.bidPrice} 원</h6>
                       <div className="col-sm-2"></div>
-                      <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={openModal}>즉시구매</button>
+                      <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={() => openModal(bid)}>즉시구매</button>
                       <button type="button" className="btn btn-info col-sm-2 mt-3" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
 
                     </div>
@@ -234,7 +241,7 @@ function Trading() {
             </div>
           </div>
           <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
-          <Buying show={showModal} onClose={closeModal} onSave={() => {
+          <Buying show={showModal} bid={selectBid} onClose={closeModal} onSave={() => {
             closeModal();
           }}
           />

@@ -27,10 +27,11 @@ const BookSignUp = () => {
     const infoCallback = (book) => {
         setProduct((prevProduct) => ({
             ...prevProduct,
+            bookImgSrc: book.IMAGE,
             bookTitle: book.TITLE,
             bookAuthor: book.AUTHOR,
             bookPub: book.PUBLISHER,
-            bookImgSrc: book.TITLE_URL
+            bookPubDate: book.PUBDATE
         }));
     }
 
