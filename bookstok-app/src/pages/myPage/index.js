@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
 import AuctionProgress from './auctionProgress';
-import AuctionTrading from './auctionTrading';
+import AuctionTrading from './auctionTrading/auctionTrading';
+import './index.css'
 
 const RequireLogin = ({ children }) => {
     // useAuth를 사용하여 로그인 상태 확인
@@ -40,7 +41,7 @@ const MyPage = () => {
     };
 
     return (
-        <div className="container">
+        <div className="mypageContainer">
             <div className="row">
                 <div className="col-md-2" style={{ marginLeft: "4rem" }}>
                     <p>마이북스탁</p>

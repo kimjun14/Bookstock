@@ -1,0 +1,26 @@
+.btn-buyer {
+  border-color: #1187cf;
+  color: #1187cf;
+  font-weight: 600;
+  width: 28.5rem;
+  margin-right: 0.2rem;
+}
+
+.btn-buyer:hover {
+  border-color: #1187cf;
+  color: #fff;
+  background-color: #1187cf;
+}
+
+.btn-seller {
+  border-color: lightslategray;
+  color: lightslategray;
+  font-weight: 600;
+  width: 28.5rem;
+}
+
+.btn-seller:hover {
+  border-color: lightslategray;
+  color: #fff;
+  background-color: lightslategray;
+}
