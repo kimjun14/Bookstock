@@ -3,8 +3,8 @@ import React from "react";
 const Footer = function () {
     return (
       <>
-          <footer className="text-center text-lg-start" style={{backgroundColor: 'white'}}>
-            <div className="container d-flex justify-content-center py-5">
+          <div className="lh-lg" style={{backgroundColor: 'white', marginTop: "7rem"}}>
+            <div className="container d-flex justify-content-center" style={{backgroundColor: 'white'}}>
               <a className="nav-link active text-secondary-emphasis mx-3" aria-current="page" href="/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1187CF" className="bi bi-facebook" viewBox="0 0 16 16">
                   <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
@@ -28,13 +28,12 @@ const Footer = function () {
             </div>
         
             {/* <!-- Copyright --> */}
-            <div className="text-center text-white p-2" style={{backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
+            <div className="text-center text-white p-2" style={{backgroundColor: 'rgba(0, 0, 0, 0.2)', marginTop: "6.4rem"}}>
               © 2023 Copyright:
               <a className="text-white text-decoration-none" href="/">RARIBOOKS</a>
             </div>
             {/* <!-- Copyright --> */}
-          </footer>
-          
+          </div>
         </>
     )
 }

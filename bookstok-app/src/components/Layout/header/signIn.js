@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SignIn = function () {
   return (
-    <li className="nav-item">
+    <div className="nav-item">
       <Link to="/signin" className="nav-link text-secondary-emphasis" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-door-open" viewBox="0 0 16 16">
               <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
@@ -11,7 +11,7 @@ const SignIn = function () {
           </svg>
           <span style={{ fontSize: '12px', marginTop: '6px' }}>LOGIN</span>
       </Link>
-    </li>
+    </div>
   );
 };
 
