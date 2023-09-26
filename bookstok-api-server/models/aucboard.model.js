@@ -4,7 +4,7 @@ const userModel = {
   // 경매 조회(기본값은 책 제목임)
   async auctionSearch(bookName) {
     try {
-      const sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' order by auctionId DESC limit 10`;
+      const sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' and done = false order by auctionId DESC limit 10`;
       const [result] = await pool.query(sql);
       return result;
     } catch (err) {
@@ -30,6 +30,20 @@ const userModel = {
       const sql = `select * from bid where aId = ? order by bidPrice ASC`;
       const [result] = await pool.query(sql,auctionId);
       return result;
+    } catch (err) {
+      console.error(err);
+      throw new Error('DB Error');
+    }
+  },
+  // 경매 낙찰이 돼서 완료시킴
+  async auctionIdDone(auctionId,bidId) {
+    try {
+      await pool.query(
+        `update auction set done = true where auctionId = ?`
+        ,auctionId);
+      await pool.query(
+        `update bid set done = true where bidId = ?`
+        ,bidId);
     } catch (err) {
       console.error(err);
       throw new Error('DB Error');

@@ -15,6 +15,7 @@ const SearchBookResult = ({ query, popupToResult }) => {
         try {
             const response = await axios.post('http://localhost:12345/api/search', { query });
             setData(response.data);
+            console.log(data);
         } catch (error) {
             console.error("쿼리 전송 실패", error);
             setError(error); // 에러 상태 설정
@@ -24,7 +25,7 @@ const SearchBookResult = ({ query, popupToResult }) => {
         if (query) {
             const timer = setTimeout(() => {
                 fetchData(query);
-            }, 500);  // 0.25초의 딜레이
+            }, 500);  // 0.5초의 딜레이
             // 컴포넌트 언마운트 시 타이머를 클리어합니다.
             return () => clearTimeout(timer);
         }
@@ -40,18 +41,18 @@ const SearchBookResult = ({ query, popupToResult }) => {
     return (
         <>
             {/* 검색 내용 표시 row */}
-            {data.docs.map((book, index) => (
+            {data.items.map((book, index) => (
                 <div
                     key={index}
                     className={`row p-2 d-flex align-items-center ${index === bookBackGround ? "selected-book" : ""
                         }`}
                     onClick={() => {
                         popupToResult({
-                            TITLE: book.TITLE,
-                            AUTHOR: book.AUTHOR,
-                            PUBLISHER: book.PUBLISHER,
-                            TITLE_URL: book.TITLE_URL,
-                            PUBLISH_PREDATE: book.PUBLISH_PREDATE
+                            TITLE: book.title,
+                            AUTHOR: book.author,
+                            PUBLISHER: book.publisher,
+                            IMAGE: book.image,
+                            PUBDATE: book.pubdate
                         });
                         addShadowToBook(index); // 선택된 도서에 음영 추가
                     }}
@@ -59,26 +60,26 @@ const SearchBookResult = ({ query, popupToResult }) => {
                     <div className="col-md-3 col-sm-6">
                         <img
                             className="img-fluid"
-                            alt={book.TITLE}
-                            src={book.TITLE_URL}
+                            alt={book.title}
+                            src={book.image}
                         />
                     </div>
                     <div className="col-md-9 col-sm-6">
                         <div className="d-flex align-items-start">
                             <span className="col-2">제목</span>
-                            <span className="col-10">: {book.TITLE}</span>
+                            <span className="col-10">: {book.title}</span>
                         </div>
                         <div className="d-flex align-items-start">
                             <span className="col-2">작가</span>
-                            <span className="col-10">: {book.AUTHOR}</span>
+                            <span className="col-10">: {book.author}</span>
                         </div>
                         <div className="d-flex align-items-start">
                             <span className="col-2">출판사</span>
-                            <span className="col-10">: {book.PUBLISHER}</span>
+                            <span className="col-10">: {book.publisher}</span>
                         </div>
                         <div className="d-flex align-items-start">
                             <span className="col-2">출판일</span>
-                            <span className="col-10">: {book.PUBLISH_PREDATE}</span>
+                            <span className="col-10">: {book.pubdate}</span>
                         </div>
                     </div>
                 </div >
