@@ -6,11 +6,11 @@ import Footer from './footer';
 
 const Layout = function(){
     return(
-        <div className='container'>
+        <>
             <Header />
             <Outlet />
             <Footer />
-        </div>
+        </>
     )
 }
 
