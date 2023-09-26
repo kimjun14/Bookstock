@@ -1,7 +1,9 @@
 // BuyerComponent.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TradingAddress from "../TradingAddress";
 import './BuyerComponent.css'
+import axios from "axios";
+
 
 function BuyerComponent() {
     const [selectedBank, setSelectedBank] = useState('');
@@ -62,6 +64,139 @@ function BuyerComponent() {
         }
     };
 
+    // const [selectedCarrier, setSelectedCarrier] = useState(""); // 선택된 택배사
+    // const [trackingNumber, setTrackingNumber] = useState(""); // 운송장 번호
+    // const [trackingResult, setTrackingResult] = useState(null); // 조회 결과
+
+    // const carriers = [
+    //     {
+    //         "International": "false",
+    //         "Code": "04",
+    //         "Name": "CJ대한통운"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "05",
+    //         "Name": "한진택배"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "08",
+    //         "Name": "롯데택배"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "01",
+    //         "Name": "우체국택배"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "06",
+    //         "Name": "로젠택배"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "11",
+    //         "Name": "일양로지스"
+    //     },
+    //     {
+    //         "International": "true",
+    //         "Code": "12",
+    //         "Name": "EMS"
+    //     },
+    //     {
+    //         "International": "true",
+    //         "Code": "13",
+    //         "Name": "DHL"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "20",
+    //         "Name": "한덱스"
+    //     },
+    //     {
+    //         "International": "true",
+    //         "Code": "21",
+    //         "Name": "FedEx"
+    //     },
+    //     {
+    //         "International": "true",
+    //         "Code": "14",
+    //         "Name": "UPS"
+    //     },
+    //     {
+    //         "International": "true",
+    //         "Code": "26",
+    //         "Name": "USPS"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "22",
+    //         "Name": "대신택배"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "23",
+    //         "Name": "경동택배"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "32",
+    //         "Name": "합동택배"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "46",
+    //         "Name": "CU 편의점택배"
+    //     },
+    //     {
+    //         "International": "false",
+    //         "Code": "24",
+    //         "Name": "GS Postbox 택배"
+    //     },
+    // ];
+
+    // const handleCarrierChange = (e) => {
+    //     setSelectedCarrier(e.target.value);
+    // };
+
+    // const handleTrackingNumberChange = (e) => {
+    //     setTrackingNumber(e.target.value);
+    // };
+
+    // const handleTrackParcel = async (e) => {
+    //     e.preventDefault();
+
+    //     if (!selectedCarrier || !trackingNumber) {
+    //         alert("택배사와 운송장 번호를 모두 입력해주세요.");
+    //         return;
+    //     }
+
+    //     try {
+    //         // 프록시 서버 엔드포인트로 API 요청을 보냅니다.
+    //         const response = await axios.get("http://localhost:3000/api/trackParcel", {
+    //             params: {
+    //                 selectedCarrier,
+    //                 trackingNumber,
+    //             }
+    //         });
+
+    //         console.log(response.data.code[0]); // code 출력
+    //         console.log(response.data.msg[0]); // msg 출력
+    //         console.log(response.data.status[0]); // status 출력
+
+    //         setTrackingResult(response.data);
+
+
+
+    //         // API 응답 데이터를 상태 변수에 저장
+    //         setTrackingResult(response.data);
+    //     } catch (error) {
+    //         console.error("택배 추적 오류:", error);
+    //     }
+    // };
+
+
     return (
         <>
             <div>
@@ -79,6 +214,38 @@ function BuyerComponent() {
                         </option>
                     ))}
                 </select>
+
+                {/* <div>
+                    <h2>택배배송 조회</h2>
+                    <form onSubmit={handleTrackParcel}>
+                        <div>
+                            <label>택배사 선택:</label>
+                            <select onChange={handleCarrierChange} value={selectedCarrier}>
+                                <option value="">택배사를 선택하세요</option>
+                                {carriers.map((carrier) => (
+                                    <option key={carrier.Code} value={carrier.Code}>
+                                        {carrier.Name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label>운송장 번호 입력:</label>
+                            <input
+                                type="text"
+                                value={trackingNumber}
+                                onChange={handleTrackingNumberChange}
+                            />
+                        </div>
+                        <button type="submit">조회하기</button>
+                    </form>
+                    {trackingResult && (
+                        <div>
+                            <h3>택배 추적 결과:</h3>
+                            <pre>{JSON.stringify(trackingResult, null, 2)}</pre>
+                        </div>
+                    )}
+                </div> */}
                 <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
                 <button className="btn btn-blue mt-3" onClick={handleConfirmPurchase}>구매확정</button>
             </div>
