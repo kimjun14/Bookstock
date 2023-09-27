@@ -41,10 +41,6 @@ function BuyerComponent() {
         })
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    }
-
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleOpenModal = () => {
@@ -61,6 +57,22 @@ function BuyerComponent() {
             // 여기에서 DB 업데이트 로직을 추가하세요.
             // axios 또는 fetch를 사용하여 서버로 업데이트 요청을 보낼 수 있습니다.
             // 업데이트가 성공하면 메시지를 표시하거나 다음 단계로 이동할 수 있습니다.
+        }
+    };
+
+    const handleConfirmAddress = () => {
+        const confirmAddress = window.confirm("주소를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
+        if (confirmAddress) {
+            // 주소 변경을 서버에 요청하고 DB를 업데이트하는 코드를 추가하세요.
+            // axios 또는 fetch를 사용하여 서버로 요청을 보낼 수 있습니다.
+        }
+    };
+
+    const handleConfirmAccountNumber = () => {
+        const confirmAccountNumber = window.confirm("계좌번호를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
+        if (confirmAccountNumber) {
+            // 계좌번호 변경을 서버에 요청하고 DB를 업데이트하는 코드를 추가하세요.
+            // axios 또는 fetch를 사용하여 서버로 요청을 보낼 수 있습니다.
         }
     };
 
@@ -205,15 +217,21 @@ function BuyerComponent() {
                 <input className="user_enroll_text" type="text" name="address" placeholder="주소를 입력하세요" value={enroll_company.address} onChange={handleInput} />
                 <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소를 입력하세요" value={detailAddress} onChange={handleDetailAddressChange} />
                 {isModalOpen && <TradingAddress company={enroll_company} setcompany={setEnroll_company} closeModal={handleCloseModal}></TradingAddress>}
+                <button className="btn btn-blue-address" onClick={handleConfirmAddress}>주소 저장</button>
+
 
                 <h4>계좌번호</h4>
-                <select className="form-select-sm mt-3" value={selectedBank} onChange={handleBankChange}>
+                <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
                     {banks.map((bank, index) => (
                         <option key={index} value={bank}>
                             {bank}
                         </option>
                     ))}
                 </select>
+
+                <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
+                <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
+
 
                 {/* <div>
                     <h2>택배배송 조회</h2>
@@ -246,8 +264,8 @@ function BuyerComponent() {
                         </div>
                     )}
                 </div> */}
-                <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
-                <button className="btn btn-blue mt-3" onClick={handleConfirmPurchase}>구매확정</button>
+
+                <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
             </div>
         </>
     );

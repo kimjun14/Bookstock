@@ -1,3 +1,40 @@
-.addressTitle{
-    margin-top: 2rem;
+.addressTitle {
+  margin-top: 2rem;
+}
+
+#detailAddress,
+#accountNumber {
+  width: 65%;
+  margin-right: 0.5rem;
+}
+.btn-blue-address,
+.btn-blue-account,
+.parcelNumBtn {
+  border-color: lightslategray;
+  color: lightslategray;
+  width: 33.9%;
+  border-radius: 0.6rem;
+  height: 2.85rem;
+}
+
+.btn-blue-address:hover,
+.btn-blue-account:hover,
+.parcelNumBtn:hover {
+  border-color: lightslategray;
+  color: #fff;
+  background-color: lightslategray;
+}
+
+.btn-blue-confirm {
+  border-color: #1187cf;
+  color: #1187cf;
+  width: 100%;
+  border-radius: 0.6rem;
+  height: 2.85rem;
+  margin-top: 2rem;
+}
+.btn-blue-confirm:hover {
+  border-color: #1187cf;
+  color: #fff;
+  background-color: #1187cf;
 }
