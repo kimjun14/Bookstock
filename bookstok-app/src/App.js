@@ -9,7 +9,7 @@ import SearchResult from './pages/searchResult/newIndex';
 import Trading from './pages/Trading';
 import MainPage from './pages/mainPage';
 import SignUp from './pages/signUp';
-import MyPage from './pages/myPage';
+import MyPage from './pages/myPage';  
 import BookSignUp from './pages/bookSignUp/variant';
 import { AuthProvider } from './AuthContext';
 import RequireLogin from './RequireLogin';
@@ -17,7 +17,7 @@ import LostPwd from './pages/lostPwd';
 import ModalComponent from './pages/Trading/buying';
 import BuyingSuccess from './pages/Trading/buyingSuccess';
 import RecentSearch from './pages/myPage/recentSearch'
-import Payment from './pages/payment/payment';
+import Payment from './pages/myPage/payment/payment';
 // import ChatBotButton from './components/ChatBot/ChatBot'; 
 
 function App() {

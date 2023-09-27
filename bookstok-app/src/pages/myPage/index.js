@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
+
+import Payment from './payment/payment';
 import AuctionProgress from './auctionProgress';
 import AuctionTrading from './auctionTrading/auctionTrading';
 import './index.css'
@@ -44,7 +46,7 @@ const MyPage = () => {
         <div className="mypageContainer">
             <div className="row">
                 <div className="col-md-2" style={{ marginLeft: "4rem" }}>
-                    <p>마이북스탁</p>
+                    <p className="mt-5">마이북스탁</p>
                     <Link to="/mypage" className="text-decoration-none">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className="bi bi-house-door-fill" viewBox="0 0 16 16">
                             <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
@@ -73,7 +75,7 @@ const MyPage = () => {
                     <Link className="ms-4 text-decoration-none text-black" to="/">1:1 문의</Link><br />
                 </div>
 
-                <div className="col-md-9" style={{ marginTop: "10px" }}>
+                <div className="col-md-7" style={{ marginTop: "45px" }}>
                     <RequireLogin>
                         <div className="col-md-12 p-4 rounded d-flex flex-row" style={{ border: "1px solid #bcbdbe" }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="#bcbdbe" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -92,18 +94,18 @@ const MyPage = () => {
                             </div>
 
                             <div className="col-md-5" style={{ marginLeft: "auto", marginRight: "4rem", display: "flex", alignItems: "center" }}>
-                                <div style={{ borderRight: "1px solid #bcbdbe", paddingRight: "1rem" }}>
+                                <div style={{ paddingRight: "1rem" }}>
                                     <div style={{ marginLeft: "75px" }}>일반회원</div>
                                     <div>다음 등급까지 0페이지 남았습니다.</div>
                                 </div>
                                 {/* 일반회원이랑 예치금 박스안으로 들어가게 반응형으로 수정했어요. 그런데 일반회원 텍스트가 왜저러는지 모르겠네요ㅜㅜ */}
 
-                                <div style={{ marginLeft: "3rem" }}>
+                                {/* <div style={{ marginLeft: "3rem" }}>
                                     <span >
                                         <div>예치금</div>
                                         <div>10,000</div>
                                     </span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </RequireLogin>
@@ -138,6 +140,10 @@ const MyPage = () => {
                             {showTrading && <AuctionTrading />}
                         </div>
                     </div>
+                </div>
+
+                <div className="col-md-2">
+                    <Payment />
                 </div>
             </div>
         </div>

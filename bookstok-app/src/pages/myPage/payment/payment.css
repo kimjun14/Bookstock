@@ -1,0 +1,27 @@
+.underline1{
+    width: 10.5rem;
+    /* margin-left: 4.2rem; */
+}
+
+.text-bg-primary{
+    background: linear-gradient(to bottom, #1d73a9, #2e8ccb);
+}
+
+.icon{
+    width: 1rem;
+    height: 2vh;
+}
+
+.card-title{
+    font-size: 16px;
+}
+
+.card-container{
+    margin-top: 2.7rem;
+}
+
+.button-div{
+    width: 120%;
+    border: 0px solid red;
+    margin-left: -0.8rem;
+}
