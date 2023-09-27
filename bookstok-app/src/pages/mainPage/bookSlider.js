@@ -51,10 +51,10 @@ function NewBooks() {
                                     <p>{book.bookAuthor}</p>
                                     <p className="card-text">시작 가격: {book.auctionPrice}원</p>
                                     <p className="card-text">현재 가격: 9000원</p>
-                                    <ProgressBar
+                                    {/* <ProgressBar
                                         now={calculateProgress(bookData.currentPrice, bookData.auctionPrice)}
                                         label={`${calculateProgress(bookData.currentPrice, bookData.auctionPrice)}%`}
-                                    />                 
+                                    />                  */}
                                     </div>
                             </div>
                         ))}
