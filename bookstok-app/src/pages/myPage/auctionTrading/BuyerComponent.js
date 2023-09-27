@@ -2,15 +2,22 @@
 import React, { useState, useEffect } from "react";
 import TradingAddress from "../TradingAddress";
 import './BuyerComponent.css'
-import axios from "axios";
+import axios from 'axios';
+
+// axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
+const axiosConnect = axios.create({
+  baseURL: 'http://localhost:12345/api',
+  withCredentials: true
+});
 
 
 function BuyerComponent() {
     const [selectedBank, setSelectedBank] = useState('');
     const [accountNumber, setAccountNumber] = useState('');
-    const [detailAddress, setDetailAddress] = useState('');
-    const [enroll_company, setEnroll_company] = useState({
-        address: '',
+    const [addressData, setAddressData] = useState({
+        addr: '',
+        addr2:'',
+        addrPostal:''
     });
 
     const banks = [
@@ -30,13 +37,9 @@ function BuyerComponent() {
         setAccountNumber(e.target.value);
     };
 
-    const handleDetailAddressChange = (e) => {
-        setDetailAddress(e.target.value);
-    };
-
-    const handleInput = (e) => {
-        setEnroll_company({
-            ...enroll_company,
+    const handleAddressInput = (e) => {
+        setAddressData({
+            ...addressData,
             [e.target.name]: e.target.value,
         })
     }
@@ -60,13 +63,36 @@ function BuyerComponent() {
         }
     };
 
-    const handleConfirmAddress = () => {
+    const addrCheck = async () => {
+        try{
+            const result = await axiosConnect.get(`/trading/addr`);
+            setAddressData(result.data);
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    const handleConfirmAddress = async () => {
         const confirmAddress = window.confirm("주소를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
         if (confirmAddress) {
-            // 주소 변경을 서버에 요청하고 DB를 업데이트하는 코드를 추가하세요.
-            // axios 또는 fetch를 사용하여 서버로 요청을 보낼 수 있습니다.
+            try{
+                console.log(addressData);
+                await axiosConnect.patch(`/trading/addr`,addressData);
+                alert("주소 입력 성공");
+            }catch(err){
+                console.error(err);
+            }
         }
+        addrCheck()
     };
+
+    useEffect(()=>{
+        addrCheck()
+    },[])  // 마운트 되면 실행
+    
+    useEffect(()=>{
+        console.log(addressData)
+    },[addressData])        // 상태 변화 체크용
 
     const handleConfirmAccountNumber = () => {
         const confirmAccountNumber = window.confirm("계좌번호를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
@@ -214,9 +240,9 @@ function BuyerComponent() {
             <div>
                 <h4 className="addressTitle">주소</h4>
                 <input type="button" onClick={handleOpenModal} value="우편번호 찾기" />
-                <input className="user_enroll_text" type="text" name="address" placeholder="주소를 입력하세요" value={enroll_company.address} onChange={handleInput} />
-                <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소를 입력하세요" value={detailAddress} onChange={handleDetailAddressChange} />
-                {isModalOpen && <TradingAddress company={enroll_company} setcompany={setEnroll_company} closeModal={handleCloseModal}></TradingAddress>}
+                <input className="user_enroll_text" type="text" name="addr" placeholder="주소를 입력하세요" value={addressData.addr} onChange={handleAddressInput} />
+                <input type="text" id="detailAddress" name="addr2" placeholder="상세주소를 입력하세요" value={addressData.addr2} onChange={handleAddressInput} />
+                {isModalOpen && <TradingAddress company={addressData} setcompany={setAddressData} closeModal={handleCloseModal}></TradingAddress>}
                 <button className="btn btn-blue-address" onClick={handleConfirmAddress}>주소 저장</button>
 
 
