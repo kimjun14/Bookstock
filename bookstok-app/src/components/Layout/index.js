@@ -4,12 +4,16 @@ import Header from './header';
 import Footer from './footer';
 
 
-const Layout = function(){
-    return(
+const Layout = function () {
+    return (
         <>
-            <Header />
-            <Outlet />
-            <Footer />
+            <div className='container-fluid'>
+                <div className='container'>
+                    <Header />
+                    <Outlet />
+                </div>
+                <Footer />
+            </div>
         </>
     )
 }

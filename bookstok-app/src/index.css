@@ -6,13 +6,10 @@ body {
   font-family: 'Noto Sans KR', sans-serif; /* 한국어 폰트 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  margin: 0;
 }
 
 code {
   font-family: 'source-code-pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
-html {
-  margin: 0;
-  padding: 0;
 }
