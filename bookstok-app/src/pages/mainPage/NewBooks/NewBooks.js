@@ -1,22 +1,15 @@
 // MainRanking.js
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './NewBooks.css'
 import axios from 'axios';
 import { ProgressBar } from 'react-bootstrap';
 import calculateProgress from './progressbar';
+import './NewBooks.css'
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
     withCredentials: true
 });
-
-// title: '어린왕자',
-// author: '생텍쥐페리',
-// startPrice: 11000,
-// presentPrice: 9000,
-// coverImage: 'https://picsum.photos/80/115',
-// 쓰지 않으니 레거시 코드의 일부만 남깁니다.
 
 function NewBooks() {
     const [bookData, setBookData] = useState([]);
@@ -39,13 +32,13 @@ function NewBooks() {
     return (
         <div>
             <h2>새로 올라온 도서</h2>
-            <div className="row row-cols-3-2">
+            <div className="row row-cols-3-2 newBooks-card">
                 {bookData.map((bookData) => (
-                    <div className="col" key={bookData.index} style={{ position: "relative" }}>
+                    <div className="col" key={bookData.index}>
                         <Link to={`/trading?id=${bookData.auctionId}`} className="card-link">
-                            <div className="card custom-card-new" style={{ display: 'flex', flexDirection: 'column' }}>
-                                <img src={bookData.bookImgSrc} className="card-img" alt={bookData.bookTitle} style={{ height: '450px' }} />
-                                <div className="card-body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                            <div className="card custom-card-new">
+                                <img src={bookData.bookImgSrc} className="card-img" alt={bookData.bookTitle} />
+                                <div className="card-body">
                                     <h5 className="card-title">{bookData.bookTitle}</h5>
                                     <p className="card-text">{bookData.bookAuthor}</p>
                                     <p className="card-text">시작 가격: {bookData.auctionPrice}원</p>
@@ -61,7 +54,6 @@ function NewBooks() {
                 ))}
             </div>
         </div>
-
     );
 }
 
