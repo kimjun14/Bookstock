@@ -17,7 +17,7 @@ function BuyerComponent() {
     const [addressData, setAddressData] = useState({
         addr: '',
         addr2:'',
-        addrPostal:''
+        addrpostal:''
     });
 
     const banks = [
