@@ -1,5 +1,6 @@
 import './payment.css'
 import icon from'../../../img/bookstock.jpg'
+import { Link } from 'react-router-dom';
 
 const Payment = () => {
     return (
@@ -43,7 +44,9 @@ const Payment = () => {
                             </span>
                             <p className="card-text mb-2">0원 〉</p>
                             <div className='button-div d-flex justify-content-center'>
-                                <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
+                                <Link to="/deposit">
+                                    <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
+                                </Link>
                                 <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
                             </div>
                         </div>

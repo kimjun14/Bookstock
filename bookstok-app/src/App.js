@@ -17,7 +17,7 @@ import LostPwd from './pages/lostPwd';
 import ModalComponent from './pages/Trading/buying';
 import BuyingSuccess from './pages/Trading/buyingSuccess';
 import RecentSearch from './pages/myPage/recentSearch'
-import Payment from './pages/myPage/payment/payment';
+import Deposit from './pages/myPage/payment/deposit';
 // import ChatBotButton from './components/ChatBot/ChatBot'; 
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
             <Route path="/buying" element={<ModalComponent />} />
             <Route path='/buyingSuccess' element={<BuyingSuccess />} />
             <Route path='/recentSearch' element={<RecentSearch />} />
-            <Route path='/payment' element={<Payment />} />
+            <Route path='/deposit' element={<Deposit />} />
           </Route>
         </Routes>
       </AuthProvider>
