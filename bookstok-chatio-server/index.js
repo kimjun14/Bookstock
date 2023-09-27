@@ -16,7 +16,7 @@ const io = new Server(server, {
 });
 
 const pool = mysql.createPool({
-  host: '3.36.80.213',
+  host: '13.124.253.233',
   port: '3306',
   user: 'bookstock',
   password: 'Bookstock12$$',
