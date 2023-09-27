@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './SellerComponent.css';
 import axios from 'axios';
 
@@ -112,14 +112,35 @@ function SellerComponent() {
         setTrackingNumber(e.target.value);
     };
 
-    const handleConfirmSave = () => {
-        const confirmSave = window.confirm("운송장 번호를 저장하시겠습니까? 저장 후 수정이 불가능합니다.");
+    const trackingCheck = async () => {
+        try{
+            const result = await axiosConnect.get(`/trading/sell/track`);
+            setSelectedCarrier(result.data.trackingCompany);
+            setTrackingNumber(result.data.trackingNumber)
+        }catch(err){
+            console.error(err);
+        }
+    }
 
+    useEffect(()=>{
+        trackingCheck();
+        accountCheck();
+    },[])  // 마운트 되면 실행
+
+    const handleConfirmSave = async () => {
+        const confirmSave = window.confirm("운송장 번호를 저장하시겠습니까? 저장 후 수정이 불가능합니다.");
         if (confirmSave) {
+            try{
+                await axiosConnect.patch(`/trading/sell/track`,{"trackingNumber":trackingNumber,"trackingCompany":selectedCarrier});
+                alert("송장 입력 성공");
+            }catch(err){
+                console.error(err);
+            }
             // 여기에서 송장 번호를 저장하거나 서버로 업데이트 요청을 보낼 수 있습니다.
             // 저장이 성공하면 isSaved 상태를 true로 설정합니다.
-            setIsSaved(true);
+            // setIsSaved(true);
         }
+        trackingCheck();
     };
 
     const banks = [
@@ -141,18 +162,37 @@ function SellerComponent() {
 
     const handleBankChange = (e) => {
         setSelectedBank(e.target.value);
+        console.log(selectedBank);
     };
 
     const handleAccountNumberChange = (e) => {
         setAccountNumber(e.target.value);
+        console.log(accountNumber);
     };
 
-    const handleConfirmAccountNumber = () => {
+    const accountCheck = async () => {
+        try{
+            const result = await axiosConnect.get(`/trading/account`);
+            setSelectedBank(result.data.sellerBank);
+            setAccountNumber(result.data.sellerAccount)
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    const handleConfirmAccountNumber = async () => {
         const confirmAccountNumber = window.confirm("계좌번호를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
         if (confirmAccountNumber) {
             // 계좌번호 변경을 서버에 요청하고 DB를 업데이트하는 코드를 추가하세요.
             // axios 또는 fetch를 사용하여 서버로 요청을 보낼 수 있습니다.
+            try{
+                await axiosConnect.patch(`/trading/account`,{"sellerAccount":accountNumber,"sellerBank":selectedBank});
+                alert("계좌 입력 성공");
+            }catch(err){
+                console.error(err);
+            }
         }
+        accountCheck();
     };
 
     return (

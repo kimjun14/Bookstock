@@ -65,7 +65,7 @@ function BuyerComponent() {
 
     const addrCheck = async () => {
         try{
-            const result = await axiosConnect.get(`/trading/addr`);
+            const result = await axiosConnect.get(`/trading/buy/addr`);
             setAddressData(result.data);
         }catch(err){
             console.error(err);
@@ -76,8 +76,7 @@ function BuyerComponent() {
         const confirmAddress = window.confirm("주소를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
         if (confirmAddress) {
             try{
-                console.log(addressData);
-                await axiosConnect.patch(`/trading/addr`,addressData);
+                await axiosConnect.patch(`/trading/buy/addr`,addressData);
                 alert("주소 입력 성공");
             }catch(err){
                 console.error(err);
@@ -87,19 +86,33 @@ function BuyerComponent() {
     };
 
     useEffect(()=>{
-        addrCheck()
+        addrCheck();
+        accountCheck();
     },[])  // 마운트 되면 실행
-    
-    useEffect(()=>{
-        console.log(addressData)
-    },[addressData])        // 상태 변화 체크용
 
-    const handleConfirmAccountNumber = () => {
+    const accountCheck = async () => {
+        try{
+            const result = await axiosConnect.get(`/trading/account`);
+            setSelectedBank(result.data.buyerBank);
+            setAccountNumber(result.data.buyerAccount)
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    const handleConfirmAccountNumber = async () => {
         const confirmAccountNumber = window.confirm("계좌번호를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
         if (confirmAccountNumber) {
             // 계좌번호 변경을 서버에 요청하고 DB를 업데이트하는 코드를 추가하세요.
             // axios 또는 fetch를 사용하여 서버로 요청을 보낼 수 있습니다.
+            try{
+                await axiosConnect.patch(`/trading/account`,{"buyerAccount":accountNumber,"buyerBank":selectedBank});
+                alert("계좌 입력 성공");
+            }catch(err){
+                console.error(err);
+            }
         }
+        accountCheck();
     };
 
     // const [selectedCarrier, setSelectedCarrier] = useState(""); // 선택된 택배사
