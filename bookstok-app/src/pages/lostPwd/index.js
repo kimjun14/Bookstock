@@ -13,9 +13,10 @@ const LostPwd = function () {
   const sendEmail = (e) => {
     e.preventDefault();
   
-    emailjs.sendForm("service_htttesl", "template_sve3j1k", form.current, "0EHUtDyOyjCADR8b4").then(
-      result => {
+    emailjs.sendForm('service_m8s3p04', 'template_0n4pomu', form.current, 'WnKyAvQ7Xbhx7cSc5')
+      .then((result) => {
         alert("메일 전송이 완료되었습니다.");
+        console.log(result.text);
         form.current.reset();
       },
       (error) => {
@@ -36,7 +37,7 @@ const LostPwd = function () {
             <span className="far fa-user p-2"></span>
             <input
               type="text"
-              name="username"
+              name="user_email"
               placeholder="이메일을 입력하세요"
               required
               value={email} // 상태 변수로 설정된 email을 사용
