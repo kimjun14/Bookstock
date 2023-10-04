@@ -8,6 +8,7 @@
   width: 15rem;
   font-size: large;
   padding-left: 0;
+  border-radius: 6px;
 }
 
 .category-list li {
@@ -16,16 +17,30 @@
 
 .category-list .mainCate {
   border: 1px solid rgba(17, 135, 207, 0.2);
+  border-bottom: 0px;
   display: flex;
   justify-content: space-between;
   height: 2.5rem;
   padding-top: 0.4rem;
   padding-left: 0.5rem;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .category-list .mainCate:hover {
   background-color: #1187cf;
   color: white;
+}
+.category-list .mainCate:first-child {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.category-list .mainCate:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom: 1px solid rgba(17, 135, 207, 0.2);
 }
 
 .category-list .mainCate svg {
@@ -41,6 +56,10 @@
   padding-left: 0.5rem;
   background-color: transparent;
   color: #424242;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+    
 }
 .category-list .subCate:hover {
   color: #1187cf;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import BookResearch from './bookInfo';
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -19,9 +19,9 @@ const BookSignUp = () => {
         bookTitle: '',
         bookAuthor: '',
         bookPub: '',
-        auctionEnd: '', // 초기값은 빈 문자열로 설정
+        auctionEnd: '',
     });
-    const [selectedDays, setSelectedDays] = useState(1); // 초깃값을 1로 설정
+    const [selectedDays, setSelectedDays] = useState(1);
     const navigation = useNavigate();
 
     const infoCallback = (book) => {
@@ -48,7 +48,6 @@ const BookSignUp = () => {
     };
 
     useEffect(() => {
-        // 초기값 설정 코드
         const currentDate = new Date();
         currentDate.setDate(currentDate.getDate() + selectedDays);
         const formattedDate = currentDate.toLocaleDateString("en-US", {
@@ -59,13 +58,12 @@ const BookSignUp = () => {
 
         setProduct((prevProduct) => ({
             ...prevProduct,
-            // auctionEnd: `${selectedDays}일 (${formattedDate} 마감)`, 혹시 모르니 이전 코드 주석처리함
             auctionEnd: selectedDays
         }));
     }, [selectedDays]);
 
     const handleSetAuctionEnd = (days) => {
-        setSelectedDays(days); // 선택된 날짜 업데이트
+        setSelectedDays(days);
     };
 
     const renderAuctionEnd = () => {
@@ -103,17 +101,22 @@ const BookSignUp = () => {
             auctionContext: '',
             auctionPrice: '',
             uId: '',
-            auctionEnd: '', // 초기화
+            auctionEnd: '',
         });
-        setSelectedDays(null); // 선택된 날짜 초기화
+        setSelectedDays(null);
     };
+
     return (
         <>
             <div className="book-sign-up-container">
-                <form onSubmit={handleSubmit} className="book-sign-up-form">
-                    <div className="row justify-content-around">
-                        <div className="col-md-6">
-                            <h2 style={{marginLeft:'-0rem'}}>도서 역경매 등록</h2>
+                <h2>도서 역경매 등록</h2>
+
+                <div className="row">
+                    <div className="col-md-6">
+                        <BookResearch aucToInfo={infoCallback} className="book-research" />
+                    </div>
+                    <div className="col-md-6">
+                        <form onSubmit={handleSubmit} className="book-sign-up-form">
                             <div className="auctionTitle">
                                 <label htmlFor="auctionTitle">게시글 제목</label>
                                 <input
@@ -187,17 +190,15 @@ const BookSignUp = () => {
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <hr />
-                    <BookResearch aucToInfo={infoCallback} className="book-research" />
+                        </form>
 
-                    <div className="d-grid col-11 mx-auto ">
-                        <button type="submit" className="btn btn-sign-up btn-lg mt-3 mb-5 signupBtn">
-                            등록하기
-                        </button>
                     </div>
-                </form>
+                </div>
+                <div className="d-grid col-11 mx-auto ">
+                    <button type="submit" className="btn btn-sign-up btn-lg mt-4 mb-5 signupBtn">
+                        등록하기
+                    </button>
+                </div>
             </div>
         </>
     );

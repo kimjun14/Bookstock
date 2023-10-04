@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PopUp from "./popUp";
-import placeholderImage from '../../../img/placeholder-image.jpg'; 
-
+import placeholderImage from '../../../img/placeholder-image.jpg';
+import './bookInfo.css';
 
 const BookResearch = ({ aucToInfo }) => {
     const [showModal, setShowModal] = useState(false);
@@ -11,18 +11,17 @@ const BookResearch = ({ aucToInfo }) => {
         pubDate: "",
         author: "",
         title_url: ""
-    })
+    });
 
     const popupCallback = (book) => {
-        aucToInfo(book);  // 상위 컴포넌트로 선택한 책 정보 전달
+        aucToInfo(book);
         setBookInfo({
             title: book.TITLE,
             pub: book.PUBLISHER,
             pubDate: book.PUBDATE,
             author: book.AUTHOR,
-            image:book.IMAGE
-        })
-        console.log(book);
+            image: book.IMAGE
+        });
         closeModal();
     };
 
@@ -35,7 +34,6 @@ const BookResearch = ({ aucToInfo }) => {
     };
 
     useEffect(() => {
-        // aucToinfo 에서 전달된 정보를 bookInfo 상태에 업데이트
         setBookInfo((prevBookInfo) => ({
             ...prevBookInfo,
             title: aucToInfo.TITLE,
@@ -46,60 +44,73 @@ const BookResearch = ({ aucToInfo }) => {
     }, [aucToInfo]);
 
     return (
-        <div className="container-fluid mt-5">
+        <div className="book-research-container container-fluid">
             <div className="row align-items-center">
                 <form className="validation-form" noValidate>
-                    <div className="row justify-content-around mt-5">
+                    <div className="row justify-content-around">
                         <div className="col-md-3">
-                            <img 
-                                src={bookInfo.image || placeholderImage}  
-                                alt="bookimg" 
-                                name="bookImgSrc" 
-                                className="col-md-12 mb-4"
-                                onClick={openModal}/>
+                            <img
+                                src={bookInfo.image || placeholderImage}
+                                alt="bookimg"
+                                name="bookImgSrc"
+                                className="book-research-img col-md-12 mb-4"
+                                onClick={openModal}
+                            />
                         </div>
                         <div className="col-md-5 mb-3">
-                                <div className="row justify-content-between align-items-center mb-3">
-                                    <h2 className="col-md-5" style={{width: '20rem', margin: 'auto'}}>도서정보 등록</h2>
-                                    {bookInfo.title_url && (
-                                    <button type="button" 
-                                            className="btn btn-success col-md-3 mb-2" 
-                                            onClick={openModal}>도서검색
+                            <div className="row justify-content-between align-items-center mb-3">
+                                {bookInfo.title_url && (
+                                    <button
+                                        type="button"
+                                        className="book-research-search-btn btn btn-success col-md-3 mb-2"
+                                        onClick={openModal}
+                                    >
+                                        도서검색
                                     </button>
-                                    )}
+                                )}
 
-                                    <PopUp isOpen={showModal} 
-                                           onClose={closeModal} 
-                                           infoToPopup={popupCallback} />
-                                </div>
-                            
-                            <label htmlFor="email" style={{marginTop:'1rem'}}>도서제목</label>
-                            <input type="text" 
-                                   className="form-control ms-1" 
-                                   id="bookTitle" 
-                                   name="bookTitle" 
-                                   value={bookInfo.title} />
+                                <PopUp isOpen={showModal} onClose={closeModal} infoToPopup={popupCallback} />
+                            </div>
 
-                            <label htmlFor="userAccount" style={{marginTop:'1rem'}}>출판사</label>
-                            <input type="text" 
-                                   className="form-control ms-1" 
-                                   id="bookPub" 
-                                   name="bookPub" 
-                                   value={bookInfo.pub} />
+                            <label htmlFor="email" style={{ marginTop: '1rem' }}>도서제목</label>
+                            <input
+                                type="text"
+                                className="form-control ms-1"
+                                id="bookTitle"
+                                name="bookTitle"
+                                value={bookInfo.title}
+                                placeholder="도서제목을 입력하세요"
+                            />
 
-                            <label htmlFor="name" style={{marginTop:'1rem'}}>출판일</label>
-                            <input type="text" 
-                                   className="form-control ms-1" 
-                                   id="bookPubDate" 
-                                   name="bookPubDate" 
-                                   value={bookInfo.pubDate} />
+                            <label htmlFor="userAccount" style={{ marginTop: '1rem' }}>출판사</label>
+                            <input
+                                type="text"
+                                className="form-control ms-1"
+                                id="bookPub"
+                                name="bookPub"
+                                value={bookInfo.pub}
+                                placeholder="출판사를 입력하세요"
+                            />
 
-                            <label htmlFor="address" style={{marginTop:'1rem'}}>작가</label>
-                            <input type="text" 
-                                   className="form-control ms-1" 
-                                   id="bookAuthor" 
-                                   name="bookAuthor" 
-                                   value={bookInfo.author} />
+                            <label htmlFor="name" style={{ marginTop: '1rem' }}>출판일</label>
+                            <input
+                                type="text"
+                                className="form-control ms-1"
+                                id="bookPubDate"
+                                name="bookPubDate"
+                                value={bookInfo.pubDate}
+                                placeholder="출판일을 입력하세요"
+                            />
+
+                            <label htmlFor="address" style={{ marginTop: '1rem' }}>작가</label>
+                            <input
+                                type="text"
+                                className="form-control ms-1"
+                                id="bookAuthor"
+                                name="bookAuthor"
+                                value={bookInfo.author}
+                                placeholder="작가를 입력하세요"
+                            />
                         </div>
                     </div>
                 </form>
@@ -107,5 +118,4 @@ const BookResearch = ({ aucToInfo }) => {
         </div>
     );
 }
-
 export default BookResearch;

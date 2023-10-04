@@ -1,0 +1,19 @@
+.book-research-container {
+  border-right: 1px solid gainsboro;
+  margin-top: -6rem;
+}
+
+.book-research-img {
+  max-width: 100%;
+  cursor: pointer;
+  margin: 3rem;
+}
+
+.book-research-title {
+  width: 20rem;
+}
+
+.book-research-search-btn {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
