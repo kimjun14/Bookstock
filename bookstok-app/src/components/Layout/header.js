@@ -74,7 +74,7 @@ const Header = function () {
                 <div className="row justify-content-end" style={{ border: "0px solid red", marginRight: '1rem' }}>
                     <div className="col-sm-9"></div>
                     <Link to="/booksignup" type="button" className="col-sm btn header-bookSignUp">
-                        경매 등록하기
+                        역경매 등록하기
                     </Link>
                     <Button className="col-sm btn header-category" onClick={handleShowModal}>
                         전체 카테고리
