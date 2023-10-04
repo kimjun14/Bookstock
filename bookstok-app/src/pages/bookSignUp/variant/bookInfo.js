@@ -4,7 +4,7 @@ import placeholderImage from '../../../img/placeholder-image.jpg';
 import './bookInfo.css';
 import axios from "axios";
 
-const BookResearch = ({ aucToInfo }) => {
+const BookResearch = ({ aucToInfo, onImageUpload }) => {
     const [showModal, setShowModal] = useState(false);
     const [bookInfo, setBookInfo] = useState({
         title: "",
@@ -19,7 +19,7 @@ const BookResearch = ({ aucToInfo }) => {
     const axiosConnect = axios.create({
         baseURL: 'http://localhost:12345/api',
         withCredentials: true
-      });
+    });
 
     const popupCallback = (book) => {
         aucToInfo(book);
@@ -62,37 +62,45 @@ const BookResearch = ({ aucToInfo }) => {
 
     const handleImageChange = (e) => {
         setSelectedImage(e.target.files[0]);
-      };
+    };
 
-    const handleUpload = async () => {
+    useEffect(() => {
+        console.log("Updated bookInfo in useEffect:", bookInfo);
+    }, [bookInfo]);
+    
+    const handleUpload = async (e) => {
+        e.preventDefault();
         if (selectedImage) {
             const formData = new FormData();
             formData.append('image', selectedImage);
-
+    
             try {
                 const response = await axiosConnect.post('/upload/auction', formData);
-
+    
                 if (response.status === 200) {
-                    console.log(response.data.bookImgSrc);
-                    setBookInfo ({
-                        ...bookInfo,
-                        bookImgSrc: `http://localhost:12345/images/auctionimg/${response.data.bookImgSrc}`
-                    })
-                    console.log(bookInfo)
-                    console.log('Image uploaded successfully');
-                    alert("이미지 업로드가 완료 되었습니다.")
+                    const uploadedImageSrc = `http://localhost:12345/images/auctionimg/${response.data.bookImgSrc}`;
+                    // console.log(response.data.bookImgSrc);
+                    setBookInfo((prevBookInfo) => ({
+                        ...prevBookInfo,
+                        bookImgSrc: uploadedImageSrc,
+                    }));
+    
+                    console.log('이미지 업로드 성공');
+                    alert('이미지 업로드가 완료되었습니다.');
+
+                    // 이미지 정보를 부모 컴포넌트로 전달
+                    onImageUpload(uploadedImageSrc);
                 } else {
-                    console.error('Image upload failed');
+                    console.error('이미지 업로드 실패');
                 }
             } catch (error) {
-                console.error('Error uploading image:', error);
-            } finally {
-                console.log(bookInfo)
+                console.error('이미지 업로드 에러:', error);
             }
         } else {
-            console.error('No image selected');
+            console.error('선택된 이미지가 없습니다');
         }
     };
+
 
     return (
         <div className="book-research-container container-fluid">
@@ -169,8 +177,8 @@ const BookResearch = ({ aucToInfo }) => {
                         </div>
                     </div>
                     <div className="input-group">
-                        <input type="file" className="form-control" id="inputGroupFile02" onChange={handleImageChange}/>
-                        <label className="input-group-text" htmlFor="inputGroupFile02" onClick={handleUpload}>Upload</label>
+                        <input type="file" className="form-control" id="inputGroupFile02" onChange={handleImageChange} />
+                        <button className="input-group-text" htmlFor="inputGroupFile02" onClick={handleUpload}>Upload</button>
                     </div>
                 </form>
             </div>

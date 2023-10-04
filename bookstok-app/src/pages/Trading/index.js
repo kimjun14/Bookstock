@@ -108,11 +108,13 @@ function Trading() {
     setSelectBid(null);
     setShowModal(false);
   }
-
+  
+  // 이미지 선택 상태 변경
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);
   };
-
+  
+  // 이미지 업로드 핸들러
   const handleUpload = async () => {
     if (selectedImage) {
       const formData = new FormData();
