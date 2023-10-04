@@ -160,10 +160,15 @@ const BookSignUp = () => {
                             </div>
                             <label>도서 카테고리</label>
                             <div>
-                                <Button className="cateSignUpBtn btn" onClick={() => setShowModal(true)}>
-                                    {selectedCategory ? selectedCategory : "카테고리 선택"}
-                                </Button>
-                                <CategoryModal show={showModal} onHide={() => setShowModal(false)} onCategorySelect={handleCategorySelect} />
+                                <button type="button" className="btn btn-secondary mb-2 me-2" onClick={() => setShowModal(true)}>
+                                    {selectedCategory ? selectedCategory : "카테고리 선택하기"}
+                                </button>
+                                <CategoryModal
+                                    show={showModal}
+                                    onHide={() => setShowModal(false)}
+                                    onCategorySelect={handleCategorySelect}
+                                    selectedCategory={selectedCategory}
+                                />
                             </div>
                             <div className="exDateBtn-group">
                                 <label>마감기한</label>
@@ -210,9 +215,9 @@ const BookSignUp = () => {
                     </div>
                 </div>
                 <div className="d-grid col-11 mx-auto ">
-                    <button type="submit" 
-                    className="btn btn-sign-up btn-lg mt-4 mb-5 signupBtn"
-                    onClick={() => handleSubmit()}>
+                    <button type="submit"
+                        className="btn btn-sign-up btn-lg mt-4 mb-5 signupBtn"
+                        onClick={() => handleSubmit()}>
                         등록하기
                     </button>
                 </div>

@@ -14,6 +14,7 @@ h2{
 
 .col-md-6 {
   margin: auto;
+  border-left: 1px solid gainsboro;
 }
 
 .book-sign-up-form{
@@ -41,8 +42,21 @@ h2{
   width: 80%;
 }
 
+.cateSignUpBtn{
+  margin-bottom: 1rem;
+  background-color: #fff !important; 
+  font-size: large !important;
+  font-weight: 500 !important;
+  border-color: lightslategray !important;
+  color: lightslategray !important;
+  border-radius: 6px !important;
+  margin-right: 1.25rem;
+  transition: background-color 0.3s, color 0.3s !important;
+}
+
 .exDateBtn-group{
   margin-bottom: 2rem;
+
 }
 
 .signupBtn{

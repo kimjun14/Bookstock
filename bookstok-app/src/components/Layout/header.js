@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo2Cut from "../../img/logo2Cut.jpg";
 import { useNavigate } from "react-router";
 import './header.css'
@@ -17,6 +17,7 @@ const Header = function () {
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const location = useLocation();
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -34,6 +35,8 @@ const Header = function () {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
+    const isBookSignUpPage = location.pathname === "/booksignup";
 
     return (
         <>
@@ -71,16 +74,18 @@ const Header = function () {
                     </Nav>
                 </Navbar>
 
-                <div className="row justify-content-end" style={{ border: "0px solid red", marginRight: '1rem' }}>
-                    <div className="col-sm-9"></div>
-                    <Link to="/booksignup" type="button" className="col-sm btn header-bookSignUp">
-                        역경매 등록하기
-                    </Link>
-                    <Button className="col-sm btn header-category" onClick={handleShowModal}>
-                        전체 카테고리
-                    </Button>
-                    <CategoryModal show={showModal} onHide={handleCloseModal} />
-                </div>
+                {!isBookSignUpPage && (
+                    <div className="row justify-content-end" style={{ border: "0px solid red", marginRight: '1rem' }}>
+                        <div className="col-sm-9"></div>
+                        <Link to="/booksignup" type="button" className="col-sm btn header-bookSignUp">
+                            역경매 등록하기
+                        </Link>
+                        <Button className="col-sm btn header-category" onClick={handleShowModal}>
+                            전체 카테고리
+                        </Button>
+                        <CategoryModal show={showModal} onHide={handleCloseModal} />
+                    </div>
+                )}
             </div>
         </>
     )
