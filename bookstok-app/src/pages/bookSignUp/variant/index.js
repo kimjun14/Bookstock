@@ -3,6 +3,8 @@ import BookResearch from './bookInfo';
 import axios from "axios";
 import { useNavigate } from "react-router";
 import './index.css'
+import CategoryModal from "../../../components/Category/CategoryModal";
+import Button from 'react-bootstrap/Button';
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
@@ -22,6 +24,8 @@ const BookSignUp = () => {
         auctionEnd: '',
     });
     const [selectedDays, setSelectedDays] = useState(1);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState("");
     const navigation = useNavigate();
 
     const infoCallback = (book) => {
@@ -106,6 +110,11 @@ const BookSignUp = () => {
         setSelectedDays(null);
     };
 
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category); // 선택한 카테고리 업데이트
+        setShowModal(false); // 모달을 닫습니다.
+    };
+
     return (
         <>
             <div className="book-sign-up-container">
@@ -149,6 +158,13 @@ const BookSignUp = () => {
                                     placeholder="원하는 경매시작 가격을 입력하세요"
                                 />
                             </div>
+                            <label>도서 카테고리</label>
+                            <div>
+                                <Button className="cateSignUpBtn btn" onClick={() => setShowModal(true)}>
+                                    {selectedCategory ? selectedCategory : "카테고리 선택"}
+                                </Button>
+                                <CategoryModal show={showModal} onHide={() => setShowModal(false)} onCategorySelect={handleCategorySelect} />
+                            </div>
                             <div className="exDateBtn-group">
                                 <label>마감기한</label>
                                 <div>{renderAuctionEnd()}</div>
@@ -191,7 +207,6 @@ const BookSignUp = () => {
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <div className="d-grid col-11 mx-auto ">
