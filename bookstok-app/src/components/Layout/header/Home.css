@@ -1,0 +1,21 @@
+.header-home {
+  background-color: transparent;
+  border-style: none;
+  border-radius: 50% 50% 50% 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.header-home:hover {
+  background-color: #F7F8F9;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.text-secondary-emphasis-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
