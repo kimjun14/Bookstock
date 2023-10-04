@@ -15,6 +15,7 @@ const axiosConnect = axios.create({
 const categories = [
     {
         name: '소설',
+        no:1,
         subcategories: [
             '소설 전체',
             '한국소설',
@@ -38,6 +39,7 @@ const categories = [
     },
     {
         name: '경영/경제',
+        no:2,
         subcategories: [
             '경영/경제 전체',
             '경영일반',
@@ -49,6 +51,7 @@ const categories = [
     },
     {
         name: '인문/사회/역사',
+        no:3,
         subcategories: [
             '인문/사회/역사 전체',
             '인문',
@@ -59,6 +62,7 @@ const categories = [
     },
     {
         name: "자기계발",
+        no:4,
         subcategories: [
             '자기계발 전체',
             '성공/삶의자세',
@@ -71,6 +75,7 @@ const categories = [
     },
     {
         name: "에세이/시",
+        no:5,
         subcategories: [
             '에세이/시 전체',
             '에세이',
@@ -79,6 +84,7 @@ const categories = [
     },
     {
         name: "여행",
+        no:6,
         subcategories: [
             '여행 전체',
             '국내여행',
@@ -87,6 +93,7 @@ const categories = [
     },
     {
         name: "종교",
+        no:7,
         subcategories: [
             '종교 전체',
             '종교일반',
@@ -98,6 +105,7 @@ const categories = [
     },
     {
         name: '외국어',
+        no:8,
         subcategories: ['외국어 전체',
             '비즈니스영어',
             '일반영어',
@@ -106,6 +114,7 @@ const categories = [
     },
     {
         name: '과학',
+        no:9,
         subcategories: [
             '과학 전체',
             '과학일반',
@@ -115,6 +124,7 @@ const categories = [
     },
     {
         name: '진로/교육/교재',
+        no:10,
         subcategories: ['진로/교육/교재 전체',
             '공부법',
             '특목고/자사고',
@@ -127,6 +137,7 @@ const categories = [
     },
     {
         name: '컴퓨터/IT',
+        no:11,
         subcategories: [
             '컴퓨터/IT 전체',
             'IT 비즈니스',
@@ -138,6 +149,7 @@ const categories = [
     },
     {
         name: '건강/다이어트',
+        no:12,
         subcategories: [
             '건강/다이어트 전체',
             '다이어트/운동/스포츠',
@@ -147,6 +159,7 @@ const categories = [
     },
     {
         name: '가정/생활',
+        no:13,
         subcategories: [
             '가정/생활 전체',
             '결혼/임신/출산',
@@ -156,6 +169,7 @@ const categories = [
     },
     {
         name: "어린이/청소년",
+        no:14,
         subcategories: [
             '어린이/청소년 전체',
             '유아',
@@ -165,10 +179,12 @@ const categories = [
     },
     {
         name: '해외도서',
+        no:15,
         subcategories: ['해외도서 전체']
     },
     {
         name: '잡지',
+        no:16,
         subcategories: ['잡지 전체',
             '경영/재테크',
             '문학/교양',
@@ -218,7 +234,7 @@ function SignUp() {
     const handleSignUpSubmit = async () => {
         try {
             // 필수 입력 필드 검사
-            if (!signUpData.nick || !signUpData.userId || !signUpData.pwd || !signUpData.userPhone || !signUpData.userAccount) {
+            if (!signUpData.nick || !signUpData.userId || !signUpData.pwd || !signUpData.userPhone || !signUpData.userAccount ||signUpData.Address) {
                 window.alert("모든 필수 정보를 입력하세요.");
                 return;
             }
@@ -231,6 +247,9 @@ function SignUp() {
 
             // 회원 가입 데이터에 선택된 카테고리 추가
             signUpData.categories = selectedCategories;
+            signUpData.userAddr = enroll_company.address;
+            signUpData.userAddrSub = detailAddress;
+            console.log(signUpData);
 
             // 서버로 데이터 전송
             await axiosConnect.post('/users/', signUpData);
@@ -295,6 +314,11 @@ function SignUp() {
             }
         }
     };
+
+    useEffect(()=>{
+        console.log(enroll_company);
+        console.log(selectedCategories);
+    },[selectedCategories]) // 상태변화 체크용
 
     return (
         <div className="container-fluid px-2 px-md-4 py-5 mx-auto">
@@ -369,10 +393,10 @@ function SignUp() {
                                         className="form-check-input"
                                         type="checkbox"
                                         name="categories"
-                                        value={category.name}
-                                        checked={selectedCategories.includes(category.name)}
-                                        onChange={() => handleCategoryToggle(category.name)}
-                                        disabled={isCategoryFull && !selectedCategories.includes(category.name)}
+                                        value={category.no}
+                                        checked={selectedCategories.includes(category.no)}
+                                        onChange={() => handleCategoryToggle(category.no)}
+                                        disabled={isCategoryFull && !selectedCategories.includes(category.no)}
                                     />
                                     <label className="form-check-label">{category.name}</label>
                                 </div>
