@@ -1,10 +1,10 @@
-// MainRanking.js
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
-import { ProgressBar } from 'react-bootstrap';
-import calculateProgress from './progressbar';
 import './NewBooks.css'
+import ProgressBar from './progressbar';
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
@@ -16,44 +16,61 @@ function NewBooks() {
 
     const newBookFetcher = async () => {
         try {
-            const response = await axiosConnect.get('test/mainpagetest')
+            const response = await axiosConnect.get('test/mainpagetest');
             setBookData(response.data);
         } catch (err) {
             console.log(err);
-        } finally {
-            console.log(bookData);
         }
-    }
+    };
 
     useEffect(() => {
         newBookFetcher();
     }, []);
 
+    // 슬라이더 설정
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: bookData.length > 3 ? 3 : bookData.length,
+        slidesToScroll: 1
+    };
+
+    const calculateProgress = (currentPrice, auctionPrice) => {
+        if (auctionPrice === 0) {
+            return 0; // Handle division by zero
+        }
+        return ((currentPrice / auctionPrice) * 100).toFixed(2);
+    };
+
     return (
-        <div>
+        <>
             <h2>새로 올라온 도서</h2>
-            <div className="row row-cols-3-2 newBooks-card">
-                {bookData.map((bookData) => (
-                    <div className="col" key={bookData.index}>
-                        <Link to={`/trading?id=${bookData.auctionId}`} className="card-link">
-                            <div className="card custom-card-new">
-                                <img src={bookData.bookImgSrc} className="card-img" alt={bookData.bookTitle} />
-                                <div className="card-body">
-                                    <h5 className="card-title">{bookData.bookTitle}</h5>
-                                    <p className="card-text">{bookData.bookAuthor}</p>
-                                    <p className="card-text">시작 가격: {bookData.auctionPrice}원</p>
+            <div className="book-slider-container">
+                {bookData.length > 0 ? (
+                    <Slider {...settings}>
+                        {bookData.map((book) => (
+                            <div key={book.index} className="book-slide">
+                                <div className="d-flex flex-column align-items-center">
+                                    <img src={book.bookImgSrc} alt={book.bookTitle} />
+                                    <h3>{book.bookTitle}</h3>
+                                    <p>{book.bookAuthor}</p>
+                                    <p className="card-text">시작 가격: {book.auctionPrice}원</p>
                                     <p className="card-text">현재 가격: 9000원</p>
                                     <ProgressBar
-                                        now={calculateProgress(bookData.currentPrice, bookData.auctionPrice)}
-                                        label={`${calculateProgress(bookData.currentPrice, bookData.auctionPrice)}%`}
-                                    />
-                                </div>
+                                        now={calculateProgress(book.currentPrice, book.auctionPrice)}
+                                        label={`${calculateProgress(book.currentPrice, book.auctionPrice)}%`}
+                                    />                 
+                                    </div>
                             </div>
-                        </Link>
-                    </div>
-                ))}
+                        ))}
+                    </Slider>
+                ) : (
+                    // 데이터가 로딩 중일 때 표시할 내용
+                    <p>Loading...</p>
+                )}
             </div>
-        </div>
+        </>
     );
 }
 

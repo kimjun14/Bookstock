@@ -5,8 +5,7 @@ import banner3 from '../../img/banner3.jpg';
 import { Carousel } from 'react-bootstrap';
 import './style.css'
 import MainRanking from './MainRanking/MainRanking';
-import NewBooks from './NewBooks/NewBooks'; // NewBooks 컴포넌트를 import
-import BookSlider from './bookSlider';
+import NewBooks from './NewBooks/NewBooks'; 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
@@ -62,11 +61,7 @@ function MainPage() {
                 </Carousel>
             </div>
 
-            {/* 새로 나온 도서 */}
-            {/* <NewBooks bookData={bookData} /> bookData를 props로 전달 */}
-            
-            {/* BookSlider 컴포넌트 */}
-            <BookSlider books={bookData} /> {/* bookData를 props로 전달 */}
+            <NewBooks bookData={bookData} />
             
             {/* 인기 도서 */}
             <MainRanking />

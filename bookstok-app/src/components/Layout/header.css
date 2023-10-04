@@ -3,16 +3,47 @@
   background: transparent;
   border: 1px solid gainsboro;
 }
+
 .btn-outline-secondary:hover {
   background-color: #1187cf;
 }
 
 .navbar-brand img {
   margin-top: 1rem;
-  margin-left: 1rem;
+  margin-left: 2rem;
   width: 15rem;
 }
 
-.bibi-book{
-  background-color: transparent;
+.header-bookSignUp {
+  background-color: #fff;
+  font-size: large;
+  font-weight: 500;
+  border-color: #1187cf;
+  color: #1187cf;
+  border-radius: 6px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.header-bookSignUp:hover {
+  background-color: #1187cf;
+  border-color: #1187cf; 
+  color: #fff;
+}
+
+.header-category {
+  background-color: #fff !important; 
+  font-size: large !important;
+  font-weight: 500 !important;
+  border-color: lightslategray !important;
+  color: lightslategray !important;
+  border-radius: 6px !important;
+  margin-left: 0.5rem !important;
+  margin-right: 1.25rem;
+  transition: background-color 0.3s, color 0.3s !important;
+}
+
+.header-category:hover {
+  background-color: lightslategray !important;
+  color: #fff !important;
+  margin-left: 0.5rem !important;
 }

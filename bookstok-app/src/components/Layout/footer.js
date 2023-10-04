@@ -28,7 +28,7 @@ const Footer = function () {
             </div>
         
             {/* <!-- Copyright --> */}
-            <div className="text-center text-white p-2" style={{backgroundColor: 'rgba(0, 0, 0, 0.2)', marginTop: "6.4rem"}}>
+            <div className="text-center text-white p-2" style={{backgroundColor: 'rgba(0, 0, 0, 0.2)', marginTop: "5rem"}}>
               © 2023 Copyright:
               <a className="text-white text-decoration-none" href="/">RARIBOOKS</a>
             </div>
