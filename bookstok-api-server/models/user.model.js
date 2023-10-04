@@ -16,6 +16,10 @@ const userModel = {
   },
   // 회원 가입
   async create(addUserInfo){
+    addUserInfo.category1=addUserInfo.categories[0];
+    addUserInfo.category2=addUserInfo.categories[1];
+    delete addUserInfo.categories;
+    console.log(addUserInfo);
     try{
       // crypto 모듈로 비번을 sha1 단방향 암호화를 한 다음 입력
       addUserInfo.pwd=crypto.createHash('sha1').update(addUserInfo.pwd).digest('base64');
@@ -23,6 +27,7 @@ const userModel = {
       const [ result ] = await pool.query(sql, [addUserInfo]);
       return result.affectedRows === 1;
     }catch(err){
+      console.log(err);
       const newError = new Error('DB Error');
       newError.cause = err;
       throw newError;

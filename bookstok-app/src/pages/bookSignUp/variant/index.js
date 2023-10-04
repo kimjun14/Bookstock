@@ -82,7 +82,7 @@ const BookSignUp = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         var newAuctionId;
 
         try {
@@ -210,7 +210,9 @@ const BookSignUp = () => {
                     </div>
                 </div>
                 <div className="d-grid col-11 mx-auto ">
-                    <button type="submit" className="btn btn-sign-up btn-lg mt-4 mb-5 signupBtn">
+                    <button type="submit" 
+                    className="btn btn-sign-up btn-lg mt-4 mb-5 signupBtn"
+                    onClick={() => handleSubmit()}>
                         등록하기
                     </button>
                 </div>
