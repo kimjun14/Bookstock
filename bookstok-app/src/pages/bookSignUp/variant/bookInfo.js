@@ -25,6 +25,15 @@ const BookResearch = ({ aucToInfo }) => {
         closeModal();
     };
 
+    const handleChange = (e, name, book) => {
+        const { value } = e.target;
+        setBookInfo((prevProduct) => ({
+            ...prevProduct,
+            [name]: value,
+        }));
+        aucToInfo(book);
+    };
+
     const openModal = () => {
         setShowModal(true);
     };
@@ -80,6 +89,7 @@ const BookResearch = ({ aucToInfo }) => {
                                 name="bookTitle"
                                 value={bookInfo.title}
                                 placeholder="도서제목을 입력하세요"
+                                onChange={(e) => handleChange(e, "TITLE",bookInfo)}
                             />
 
                             <label htmlFor="userAccount" style={{ marginTop: '1rem' }}>출판사</label>
@@ -90,6 +100,7 @@ const BookResearch = ({ aucToInfo }) => {
                                 name="bookPub"
                                 value={bookInfo.pub}
                                 placeholder="출판사를 입력하세요"
+                                onChange={(e) => handleChange(e, "PUBLISHER",bookInfo)}
                             />
 
                             <label htmlFor="name" style={{ marginTop: '1rem' }}>출판일</label>
@@ -100,6 +111,7 @@ const BookResearch = ({ aucToInfo }) => {
                                 name="bookPubDate"
                                 value={bookInfo.pubDate}
                                 placeholder="출판일을 입력하세요"
+                                onChange={(e) => handleChange(e, "PUBDATE",bookInfo)}
                             />
 
                             <label htmlFor="address" style={{ marginTop: '1rem' }}>작가</label>
@@ -110,6 +122,7 @@ const BookResearch = ({ aucToInfo }) => {
                                 name="bookAuthor"
                                 value={bookInfo.author}
                                 placeholder="작가를 입력하세요"
+                                onChange={(e) => handleChange(e, "AUTHOR",bookInfo)}
                             />
                         </div>
                     </div>
