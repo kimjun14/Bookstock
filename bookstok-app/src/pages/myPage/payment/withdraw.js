@@ -19,6 +19,13 @@ const Withdraw = () => {
                 alert("올바른 출금 금액을 입력하세요.");
                 return;
             }
+
+            // 출금 금액이 사용 가능한 잔액을 초과하는지 확인
+            if (parseInt(points) > balance) {
+                alert("출금 금액이 사용 가능한 잔액을 초과합니다.");
+                return;
+            }
+
             // 서버의 API 엔드포인트와 포트를 실제로 사용 중인 것으로 바꿔주세요
             const response = await axiosConnect.post('/point/withdraw', {
                 accountNumber,
