@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo2Cut from "../../img/logo2Cut.jpg";
 import { useNavigate } from "react-router";
 import './header.css'
@@ -17,6 +17,7 @@ const Header = function () {
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const location = useLocation();
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -35,6 +36,8 @@ const Header = function () {
         setShowModal(false);
     };
 
+    const isBookSignUpPage = location.pathname === "/booksignup";
+
     return (
         <>
             <div className="container-fluid mb-5">
@@ -43,14 +46,14 @@ const Header = function () {
                         <img src={logo2Cut} alt="logo" />
                     </Navbar.Brand>
                     <Nav className="col-sm-5 justify-content-end align-items-center mt-4">
-                        <Form onSubmit={handleSearchSubmit} className="">
+                        <Form onSubmit={handleSearchSubmit} className="header-search">
                             <div className="input-group">
-                                <span className="input-group-text" style={{ backgroundColor: 'transparent' }}>
+                                <span className="input-group-text" style={{ backgroundColor: 'transparent', border:'none' }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="dimgray" className="bi bi-search" viewBox="0 0 16 16">
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                     </svg>
                                 </span>
-                                <input className="form-control" type="search" placeholder="" style={{ borderLeft: 'none' }} value={searchTerm} onChange={handleSearchChange} />
+                                <input className="form-control" type="search" placeholder="" style={{ border: 'none', boxShadow:'none' }} value={searchTerm} onChange={handleSearchChange} />
                             </div>
                         </Form>
                         <Nav>
@@ -71,16 +74,18 @@ const Header = function () {
                     </Nav>
                 </Navbar>
 
-                <div className="row justify-content-end" style={{ border: "0px solid red", marginRight: '1rem' }}>
-                    <div className="col-sm-9"></div>
-                    <Link to="/booksignup" type="button" className="col-sm btn header-bookSignUp">
-                        역경매 등록하기
-                    </Link>
-                    <Button className="col-sm btn header-category" onClick={handleShowModal}>
-                        전체 카테고리
-                    </Button>
-                    <CategoryModal show={showModal} onHide={handleCloseModal} />
-                </div>
+                {!isBookSignUpPage && (
+                    <div className="row justify-content-end" style={{ border: "0px solid red", marginRight: '1rem' }}>
+                        <div className="col-sm-9"></div>
+                        <Link to="/booksignup" type="button" className="col-sm btn header-bookSignUp">
+                            역경매 등록하기
+                        </Link>
+                        <Button className="col-sm btn header-category" onClick={handleShowModal}>
+                            전체 카테고리
+                        </Button>
+                        <CategoryModal show={showModal} onHide={handleCloseModal} />
+                    </div>
+                )}
             </div>
         </>
     )
