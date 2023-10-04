@@ -1,59 +1,64 @@
 import './payment.css'
-import icon from'../../../img/bookstock.jpg'
+import icon from '../../../img/bookstock.jpg'
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Payment = () => {
+    const [balance, setBalance] = useState(0);
+
+    const axiosConnect = axios.create({
+        baseURL: 'http://localhost:12345/api',
+        withCredentials: true
+      });
+    
+
+    useEffect(() => {
+        const fetchBalance = async () => {
+            try {
+                // 서버의 잔액 조회 API 엔드포인트로 요청 보내기
+                const response = await axiosConnect.get('/point/balance');
+
+                // 서버 응답에서 잔액 가져오기
+                if (response.data.success) {
+                    setBalance(response.data.balance);
+                } else {
+                    console.error('서버 응답 오류:', response.data.message);
+                }
+            } catch (error) {
+                console.error('잔액 조회 중 오류:', error);
+            }
+        };
+
+        // 페이지가 로드될 때 한 번 잔액 조회 수행
+        fetchBalance();
+    }, []);
     return (
         <>
             <div className="card-container text-center card" >
-                 <div className="card-body">
-                    {/* <div className="profile d-flex mb-2 mt-2"> */}
-                        {/* <div>
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                width="48"
-                                height="48"
-                                fill="currentColor"
-                                class="bi bi-person-circle"
-                                viewBox="0 0 16 16"
-                            >
-                                <path
-                                    d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
-                                />
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-                                />
-                            </svg>
-                        </div> */}
-                        {/* <div> */}
-                            {/* <h6 className="card-title ms-3">
-                                UserId
-                            </h6>
-
-                            <h6 className="card-subtitle mb-2 text-body-secondary">
-                                Email
-                            </h6> */}
-                        {/* </div>  */}
-                    {/* </div> */}
-
+                <div className="card-body">
                     <div className="pay-container text-center card text-bg-primary mb-3">
                         <div className="card-body">
                             <span className="card-title">
-                                <img src={icon} alt="icon" className='icon'/>
+                                <img src={icon} alt="icon" className='icon' />
                                 <span>북스탁 Pay</span>
                             </span>
-                            <p className="card-text mb-2">0원 〉</p>
+                            <Link to="/deposit">
+                                <p className="balance card-text mb-2">{balance}원 〉</p>
+                            </Link>
                             <div className='button-div d-flex justify-content-center'>
                                 <Link to="/deposit">
                                     <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
                                 </Link>
-                                <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
+                                <Link to="/withdraw">
+                                    <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
+                                </Link>
                             </div>
                         </div>
                     </div>
 
-                    <hr className="underline1"/>
-                    
+                    <hr className="underline1" />
+
                     <div className="d-flex justify-content-around">
                         <span className="fw-bold" onClick={null}>머니 내역</span>
                         <span className="fw-bold" onClick={null}>고객 센터</span>

@@ -9,12 +9,6 @@ const Deposit = () => {
     const [accountNumber, setAccountNumber] = useState('');
     const [modal, setModal] = useState(false);
 
-    const axiosConnect = axios.create({
-        baseURL: 'http://localhost:12345/api',
-        withCredentials: true
-      });
-
-
     const banks = [
         '은행을 선택하세요',
         '국민은행',
@@ -22,7 +16,7 @@ const Deposit = () => {
     ];
 
     const BankAccount = [
-        '',
+        '', 
         '462602-04-219275',
         '112-526-288076'
     ]
@@ -66,23 +60,23 @@ const Deposit = () => {
         // 이하 코드는 금액과 은행이 선택된 상태에서만 실행
         openModal();
     
-    try {
-        // Node.js 서버로 충전 요청 보내기
-        const response = await axiosConnect.post('/point', {
-            cash: parseInt(cash, 10),  // 문자열을 정수로 변환
-        });
+    // try {
+    //     // Node.js 서버로 충전 요청 보내기
+    //     const response = await axiosConnect.post('/point', {
+    //         cash: parseInt(cash, 10),  // 문자열을 정수로 변환
+    //     });
     
-        // 서버 응답에 따라 알림 또는 다른 작업 수행
-        if (response.data.success) {
-          alert('충전이 성공적으로 완료되었습니다.');
-          closeModal();
-        } else {
-          alert('충전 중에 오류가 발생했습니다.');
-        }
-      } catch (error) {
-        console.error('Error during chargeMoney request:', error);
-        alert('서버와 통신 중 오류가 발생했습니다.');
-      };
+    //     // 서버 응답에 따라 알림 또는 다른 작업 수행
+    //     if (response.data.success) {
+    //       alert('충전이 성공적으로 완료되었습니다.');
+    //       closeModal();
+    //     } else {
+    //       alert('충전 중에 오류가 발생했습니다.');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error during chargeMoney request:', error);
+    //     alert('서버와 통신 중 오류가 발생했습니다.');
+    //   };
     }
     return (
         <>
