@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const multer = require('multer');
 
-const storage = multer.diskStorage({
+const storageBid = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'public/images/bidimg');
   },
@@ -13,13 +13,30 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const storageAuction = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/images/auctionimg');
+  },
+  filename: (req, file, cb) => {
+    const timestamp = Date.now();
+    const ext = file.originalname.split('.').pop();
+    cb(null, `image-${timestamp}.${ext}`); 
+  },
+});
 
-router.post('/', upload.single('image'), (req, res, next) => {
-  const path=req.file.filename
-  res.json({ bidImgSrc: path});
+const uploadBid = multer({ storage: storageBid });
+const uploadAuction = multer({ storage: storageAuction });
+
+// bidImg 업로드 라우터
+router.post('/', uploadBid.single('image'), (req, res, next) => {
+  const path = req.file.filename;
+  res.json({ bidImgSrc: path });
+});
+
+// auctionImg 업로드 라우터
+router.post('/auction', uploadAuction.single('image'), (req, res, next) => {
+  const path = req.file.filename;
+  res.json({ bookImgSrc: path });
 });
 
 module.exports = router;
-
-

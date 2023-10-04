@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PopUp from "./popUp";
 import placeholderImage from '../../../img/placeholder-image.jpg';
 import './bookInfo.css';
+import axios from "axios";
 
 const BookResearch = ({ aucToInfo }) => {
     const [showModal, setShowModal] = useState(false);
@@ -10,8 +11,15 @@ const BookResearch = ({ aucToInfo }) => {
         pub: "",
         pubDate: "",
         author: "",
-        title_url: ""
+        title_url: "",
+        bookImgSrc: ""
     });
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const axiosConnect = axios.create({
+        baseURL: 'http://localhost:12345/api',
+        withCredentials: true
+      });
 
     const popupCallback = (book) => {
         aucToInfo(book);
@@ -52,14 +60,48 @@ const BookResearch = ({ aucToInfo }) => {
         }));
     }, [aucToInfo]);
 
+    const handleImageChange = (e) => {
+        setSelectedImage(e.target.files[0]);
+      };
+
+    const handleUpload = async () => {
+        if (selectedImage) {
+            const formData = new FormData();
+            formData.append('image', selectedImage);
+
+            try {
+                const response = await axiosConnect.post('/upload/auction', formData);
+
+                if (response.status === 200) {
+                    console.log(response.data.bookImgSrc);
+                    setBookInfo ({
+                        ...bookInfo,
+                        bookImgSrc: `http://localhost:12345/images/auctionimg/${response.data.bookImgSrc}`
+                    })
+                    console.log(bookInfo)
+                    console.log('Image uploaded successfully');
+                    alert("이미지 업로드가 완료 되었습니다.")
+                } else {
+                    console.error('Image upload failed');
+                }
+            } catch (error) {
+                console.error('Error uploading image:', error);
+            } finally {
+                console.log(bookInfo)
+            }
+        } else {
+            console.error('No image selected');
+        }
+    };
+
     return (
         <div className="book-research-container container-fluid">
-            <div className="row align-items-center">
+            <div className="row">
                 <form className="validation-form" noValidate>
                     <div className="row justify-content-around">
                         <div className="col-md-3">
                             <img
-                                src={bookInfo.image || placeholderImage}
+                                src={bookInfo.image || bookInfo.bookImgSrc || placeholderImage}
                                 alt="bookimg"
                                 name="bookImgSrc"
                                 className="book-research-img col-md-12 mb-4"
@@ -89,7 +131,7 @@ const BookResearch = ({ aucToInfo }) => {
                                 name="bookTitle"
                                 value={bookInfo.title}
                                 placeholder="도서제목을 입력하세요"
-                                onChange={(e) => handleChange(e, "TITLE",bookInfo)}
+                                onChange={(e) => handleChange(e, "TITLE", bookInfo)}
                             />
 
                             <label htmlFor="userAccount" style={{ marginTop: '1rem' }}>출판사</label>
@@ -100,7 +142,7 @@ const BookResearch = ({ aucToInfo }) => {
                                 name="bookPub"
                                 value={bookInfo.pub}
                                 placeholder="출판사를 입력하세요"
-                                onChange={(e) => handleChange(e, "PUBLISHER",bookInfo)}
+                                onChange={(e) => handleChange(e, "PUBLISHER", bookInfo)}
                             />
 
                             <label htmlFor="name" style={{ marginTop: '1rem' }}>출판일</label>
@@ -111,7 +153,7 @@ const BookResearch = ({ aucToInfo }) => {
                                 name="bookPubDate"
                                 value={bookInfo.pubDate}
                                 placeholder="출판일을 입력하세요"
-                                onChange={(e) => handleChange(e, "PUBDATE",bookInfo)}
+                                onChange={(e) => handleChange(e, "PUBDATE", bookInfo)}
                             />
 
                             <label htmlFor="address" style={{ marginTop: '1rem' }}>작가</label>
@@ -122,9 +164,13 @@ const BookResearch = ({ aucToInfo }) => {
                                 name="bookAuthor"
                                 value={bookInfo.author}
                                 placeholder="작가를 입력하세요"
-                                onChange={(e) => handleChange(e, "AUTHOR",bookInfo)}
+                                onChange={(e) => handleChange(e, "AUTHOR", bookInfo)}
                             />
                         </div>
+                    </div>
+                    <div className="input-group">
+                        <input type="file" className="form-control" id="inputGroupFile02" onChange={handleImageChange}/>
+                        <label className="input-group-text" htmlFor="inputGroupFile02" onClick={handleUpload}>Upload</label>
                     </div>
                 </form>
             </div>
