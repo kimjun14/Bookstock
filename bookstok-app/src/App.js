@@ -18,7 +18,6 @@ import BuyingSuccess from './pages/Trading/buyingSuccess';
 import RecentSearch from './pages/myPage/recentSearch'
 import Deposit from './pages/myPage/payment/deposit';
 import Withdraw from './pages/myPage/payment/withdraw';
-import Responsive from './components/Layout/useResponsive';
 // import ChatBotButton from './components/ChatBot/ChatBot'; 
 
 function App() {
@@ -41,7 +40,6 @@ function App() {
             <Route path='/recentSearch' element={<RecentSearch />} />
             <Route path='/deposit' element={<Deposit />} />
             <Route path='/withdraw' element={<Withdraw />} />
-            <Route path='/responsive' element={<Responsive/>} />
           </Route>
         </Routes>
       </AuthProvider>
