@@ -6,6 +6,12 @@ import Payment from './payment/payment';
 import AuctionProgress from './auctionProgress';
 import AuctionTrading from './auctionTrading/auctionTrading';
 import './index.css'
+import axios from 'axios';
+
+const axiosConnect = axios.create({
+    baseURL: 'http://localhost:12345/api',
+    withCredentials: true
+});
 
 const RequireLogin = ({ children }) => {
     // useAuth를 사용하여 로그인 상태 확인
@@ -31,6 +37,22 @@ const RequireLogin = ({ children }) => {
 const MyPage = () => {
     const [showAuction, setShowAuction] = useState(false);
     const [showTrading, setShowTrading] = useState(false);
+
+    // 로그인한 사용자가 화면이 랜더링 될 때 (useEffect) fetch를 시도함
+    // axios 통신을 통해 로그인ID의 정보를 받아와 myInfo State로 저장됨
+    // 전달 되는정보. nick(닉네임), userId(아이디), userPhone(전번),[userAddr,userAddrSub](주소1,2)
+    const [myinfo, setMyInfo] = useState([]);
+    const fetchInfoList = async () => {
+        try{
+            const response=await axiosConnect.get(`/mypage/myinfo`)
+            setMyInfo(response.data);
+        }catch(err){
+            console.error(err);
+        }
+    }
+    useEffect(()=>{
+        fetchInfoList();
+    },[]);
 
     const toggleAuction = () => {
         setShowAuction(!showAuction);
@@ -85,10 +107,10 @@ const MyPage = () => {
 
                             <div className="ms-4 mt-2">
                                 <span>
-                                    <b className="fs-5">userId</b>
+                                    <b className="fs-5">{myinfo.nick} </b>
                                 </span><br />
                                 <span className="text-black-50">
-                                    email
+                                    {myinfo.userId}
                                 </span><br />
                                 <button className="mt-1 btn btn-secondary btn-sm">프로필 관리</button>
                             </div>
