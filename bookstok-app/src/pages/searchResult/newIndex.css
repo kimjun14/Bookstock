@@ -1,32 +1,62 @@
 /* 정렬 버튼 스타일 */
-.btn-group{
-    float: right;
-    margin-bottom: 1rem;
+.btn-group {
+  float: right;
+  margin-bottom: 1rem;
 }
 
-.btn-primary {
+.btn-recent,
+.btn-title,
+.btn-pop {
   color: black;
   background: transparent;
-  border: 1px solid gainsboro;
+  border: 1px solid lightslategray;
+  color: lightslategray;
+  font-weight: 500;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.btn-primary:hover {
-  background-color: #1187cf;
+.btn-recent:hover,
+.btn-title:hover,
+.btn-pop:hover {
+  background-color: lightslategray;
+  color: white;
 }
 
 /* 표 스타일 */
 .searchTable {
-  width: 100%; 
+  margin: 0 auto; 
+  width: 80%; 
+  border-collapse: collapse; 
   text-align: center;
 }
 
-a{
-    text-decoration: none;
-    color: black;
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 10px; 
+}
+
+thead {
+  background-color: #f3f3f3;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 /* 관심 등록 버튼 스타일 */
 .interestBtn {
-    background-color: transparent;
-    border-style: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.searchBookImg {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
 }

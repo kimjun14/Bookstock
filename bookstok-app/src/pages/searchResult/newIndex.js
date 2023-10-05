@@ -47,9 +47,9 @@ function BookSearchResult() {
       <h1 style={{ textAlign: 'center' }}>도서 검색 결과</h1>
       {/* 정렬 버튼 */}
       <div className="btn-group" role="group" aria-label="Basic example">
-        <button type="button" className="btn btn-primary">최신순</button>
-        <button type="button" className="btn btn-primary">제목순</button>
-        <button type="button" className="btn btn-primary">인기순</button>
+        <button type="button" className="btn btn-recent">최신순</button>
+        <button type="button" className="btn btn-title">제목순</button>
+        <button type="button" className="btn btn-pop">인기순</button>
       </div>
       {/* 검색 결과 표 */}
       <table className="searchTable">
@@ -57,7 +57,7 @@ function BookSearchResult() {
           backgroundColor: '#f3f3f3'
         }}>
           <tr>
-            <th scope="col"></th>
+            <th scope="col">번호</th>
             <th scope="col">표지</th>
             <th scope="col">도서명</th>
             <th scope="col">가격</th>
@@ -67,11 +67,11 @@ function BookSearchResult() {
             <th scope="col">관심등록</th>
           </tr>
         </thead>
-        <tbody className="table-group-divider">
+        <tbody className="table-group-divider"  style={{marginBottom:'2rem'}}>
           {books.map((book) => (
             <tr key={book.index}>
               <th scope="row">{book.index}</th>
-              <td><img src={book.bookImgSrc ? book.bookImgSrc : "http://via.placeholder.com/120x160"} alt="" style={{ width: '100%', maxWidth: '120px', height: 'auto' }} /></td>
+              <td><img src={book.bookImgSrc ? book.bookImgSrc : "http://via.placeholder.com/120x160"} alt="" className='searchBookImg'/></td>
               <td><Link to={`/trading?id=${book.auctionId}`}>{book.bookTitle}</Link></td>
               <td>시작가: {book.auctionPrice}원
               <br />현재가: 추후 구현 예정</td>
