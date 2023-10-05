@@ -3,14 +3,20 @@ import './index.css'
 import { Link } from "react-router-dom";
 import logo from '../../img/logo2Cut.jpg';
 import emailjs from '@emailjs/browser';
+import axios from "axios";
+
+const axiosConnect = axios.create({
+  baseURL: 'http://localhost:12345/api',
+  withCredentials: true
+});
 
 const LostPwd = function () {
   const form = useRef();
 
   // 초기 상태를 빈 문자열로 설정
   const [userId, setUserId] = useState('');
-  const [email, setEmail] = useState('');
   const [newPwd, setNewPwd] = useState(''); 
+
 
   const generateRandomPassword = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*";
@@ -39,13 +45,28 @@ const LostPwd = function () {
     }
   }, [newPwd]);
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
-
+  
     const generatedPwd = generateRandomPassword();
-
+  
     setNewPwd(generatedPwd);
+  
+    try {
+      const response = await axiosConnect.put('/lostpwd/', { 
+        userId: userId,
+        pwd : generatedPwd
+      });
+      console.log(response, response.data);
+      if (response.status === 200) {
+        console.log('확인');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+  
+  
 
   return (
     <div className="wrapper bg-white">
@@ -70,8 +91,8 @@ const LostPwd = function () {
               name="user_email"
               placeholder="이메일을 입력하세요"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
             />
           </div>
         </div>
