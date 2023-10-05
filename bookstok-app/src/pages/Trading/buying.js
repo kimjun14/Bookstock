@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const axiosConnect = axios.create({
   baseURL: 'http://localhost:12345/api',

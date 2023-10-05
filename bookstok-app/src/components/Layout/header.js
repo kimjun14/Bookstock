@@ -11,9 +11,10 @@ import { useAuth } from '../../AuthContext'
 import SignOut from "./header/SignOut";
 import { Button, Navbar, Nav, Form } from 'react-bootstrap';
 import CategoryModal from '.././Category/CategoryModal';
+import { useMediaQuery } from "react-responsive";
 
 const Header = function () {
-    const { isLoggedIn, login, logout } = useAuth();
+    const { isLoggedIn } = useAuth();
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);

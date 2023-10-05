@@ -3,8 +3,6 @@ import BookResearch from './bookInfo';
 import axios from "axios";
 import { useNavigate } from "react-router";
 import './index.css'
-import CategoryModal from "../../../components/Category/CategoryModal";
-import Button from 'react-bootstrap/Button';
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
@@ -24,8 +22,6 @@ const BookSignUp = () => {
         auctionEnd: '',
     });
     const [selectedDays, setSelectedDays] = useState(1);
-    const [showModal, setShowModal] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState("");
     const navigation = useNavigate();
 
     const infoCallback = (book) => {

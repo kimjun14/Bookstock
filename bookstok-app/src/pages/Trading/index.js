@@ -108,12 +108,12 @@ function Trading() {
     setSelectBid(null);
     setShowModal(false);
   }
-  
+
   // 이미지 선택 상태 변경
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);
   };
-  
+
   // 이미지 업로드 핸들러
   const handleUpload = async () => {
     if (selectedImage) {
@@ -137,7 +137,7 @@ function Trading() {
         }
       } catch (error) {
         console.error('Error uploading image:', error);
-      } finally{
+      } finally {
         console.log(bidData)
       }
     } else {
@@ -210,7 +210,7 @@ function Trading() {
 
                   <div className='card-body row'>
                     <div className="alert alert-light col-sm-12" role="alert">
-                      <img src={bid.bidImgSrc } className="img-fluid mx-4" alt="..." />
+                      <img src={bid.bidImgSrc} className="img-fluid mx-4" alt="..." />
                       {bid.bidContext ? bid.bidContext : "상세 설명이 없습니다."}
                     </div>
                   </div>
@@ -227,21 +227,35 @@ function Trading() {
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-md-6 offset-md-6">
-              <div className="input-group mt-2">
-                <input type="text" className="form-control" placeholder="입찰금액을 입력하세요" name="bidPrice" value={bidData.bidPrice} onChange={handleBidChange} />
-                <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
-                  입찰 하기
-                </button>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="input-group mt-2">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="입찰금액을 입력하세요"
+                    name="bidPrice"
+                    value={bidData.bidPrice}
+                    onChange={handleBidChange}
+                  />
+                  <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
+                    입찰 하기
+                  </button>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="input-group mt-2">
+                  <input className="form-control" type="file" onChange={handleImageChange} />
+                  <button className="btn btn-primary" onClick={handleUpload}>
+                    Upload
+                  </button>
+                </div>
               </div>
             </div>
-            <div>
-              <h2>Image Upload</h2>
-              <input type="file" onChange={handleImageChange} />
-              <button onClick={handleUpload}>Upload</button>
-            </div>
           </div>
+
           <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
           <Buying show={showModal} bid={selectBid} onClose={closeModal} onSave={() => {
             closeModal();

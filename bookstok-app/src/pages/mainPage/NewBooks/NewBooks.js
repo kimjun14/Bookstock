@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import './NewBooks.css'
 import ProgressBar from './progressbar';
+import { Link } from 'react-router-dom';
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
@@ -50,28 +51,30 @@ function NewBooks() {
                 {bookData.length > 0 ? (
                     <Slider {...settings}>
                         {bookData.map((book) => (
-                            <div key={book.index} className="book-slide">
-                                <div className="d-flex flex-column align-items-center">
-                                    <img src={book.bookImgSrc} alt={book.bookTitle} />
-                                    <h3>{book.bookTitle}</h3>
-                                    <p>{book.bookAuthor}</p>
-                                    <p className="card-text">시작 가격: {book.auctionPrice}원</p>
-                                    <p className="card-text">현재 가격: 9000원</p>
-                                    <ProgressBar
-                                        now={calculateProgress(book.currentPrice, book.auctionPrice)}
-                                        label={`${calculateProgress(book.currentPrice, book.auctionPrice)}%`}
-                                    />                 
+                            <Link to={`/trading?id=${book.auctionId}`} className="tradingLink card-link">
+                                <div key={book.index} className="book-slide">
+                                    <div className="d-flex flex-column align-items-center">
+                                        <img src={book.bookImgSrc} alt={book.bookTitle} />
+                                        <h3>{book.bookTitle}</h3>
+                                        <p>{book.bookAuthor}</p>
+                                        <p className="card-text">시작 가격: {book.auctionPrice}원</p>
+                                        <p className="card-text">현재 가격: 9000원</p>
+                                        <ProgressBar
+                                            now={calculateProgress(book.currentPrice, book.auctionPrice)}
+                                            label={`${calculateProgress(book.currentPrice, book.auctionPrice)}%`}
+                                        />
                                     </div>
-                            </div>
+                                </div>
+                            </Link>
                         ))}
-                    </Slider>
-                ) : (
-                    // 데이터가 로딩 중일 때 표시할 내용
-                    <p>Loading...</p>
+                            </Slider>
+                        ) : (
+                        // 데이터가 로딩 중일 때 표시할 내용
+                        <p>Loading...</p>
                 )}
-            </div>
+                    </div>
         </>
-    );
+            );
 }
 
-export default NewBooks;
+            export default NewBooks;
