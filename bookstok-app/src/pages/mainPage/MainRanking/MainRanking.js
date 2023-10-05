@@ -42,7 +42,7 @@ function MainRanking() {
   
  return (
      <div>
-         <h2>실시간 인기 도서</h2>
+         <h2 className='rankingBookTitle'>실시간 인기 도서</h2>
          <Slider {...settings}>
            {bookData.slice(0, itemsPerPage).map((book,index)=>(
              <div key={book.id} className="book-slide">

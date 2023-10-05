@@ -1,19 +1,61 @@
-.newBooks-card{
-  width: 80%;
+.newBookTitle {
+  text-align: left;
+  font-weight: bolder;
+  margin-left: 2.5rem;
+}
+
+.book-slider-container {
+  max-width: 80%;
   margin: auto;
 }
 
-.custom-card-new{
+.newBooks-card {
+  width: 50%;
   margin: auto;
+  text-align: center;
+  color: black;
+  border-radius: 10px;
+}
+
+.newBooks-card:hover {
+  background-color: #f7f8f9;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.newBooks-card img {
+  margin-bottom: 1.5rem;
+}
+
+.newBooks-card .bookTitle-text {
+  font-size: larger;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.newBooks-card .bookAuthor-text {
+  color: dimgray;
+  font-weight: 600;
+  font-size: medium;
+}
+
+.newBooks-card .auctionPrice-text {
+  color: #0067a3;
+  font-weight: 600;
+  font-size: medium;
+  margin-bottom: 0.1rem;
+}
+
+.newBooks-card .presentPrice-text {
+  color: #9b111e;
+  font-weight: 600;
+  font-size: medium;
 }
 
 /* NewBooks.css */
 .book-slide img {
   max-width: 100%; /* 이미지의 최대 너비를 부모 요소에 맞게 조절 */
   max-height: 30rem; /* 이미지의 최대 높이를 원하는 크기로 조절 */
-}
-
-.tradingLink{
-  text-decoration: none;
-  color: black;
 }

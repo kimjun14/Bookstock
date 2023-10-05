@@ -1,9 +1,8 @@
-.container h2 {
-  margin-top: 5rem;
-  margin-left: 2rem;
+.rankingBookTitle {
   text-align: left;
-  color: black;
-  font-weight: 700;
+  font-weight: bolder;
+  margin-left: 2.5rem;
+  margin-top: 5rem;
 }
 /* 
 .custom-card {

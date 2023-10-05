@@ -34,7 +34,7 @@ function NewBooks() {
         infinite: true,
         speed: 500,
         slidesToShow: bookData.length > 3 ? 3 : bookData.length,
-        slidesToScroll: 1
+        slidesToScroll: 2
     };
 
     const calculateProgress = (currentPrice, auctionPrice) => {
@@ -46,19 +46,19 @@ function NewBooks() {
 
     return (
         <>
-            <h2>새로 올라온 도서</h2>
+            <h2 className='newBookTitle'>새로 올라온 도서</h2>
             <div className="book-slider-container">
                 {bookData.length > 0 ? (
                     <Slider {...settings}>
                         {bookData.map((book) => (
                             <Link to={`/trading?id=${book.auctionId}`} className="tradingLink card-link">
                                 <div key={book.index} className="book-slide">
-                                    <div className="d-flex flex-column align-items-center">
+                                    <div className="d-flex flex-column align-items-center newBooks-card">
                                         <img src={book.bookImgSrc} alt={book.bookTitle} />
-                                        <h3>{book.bookTitle}</h3>
-                                        <p>{book.bookAuthor}</p>
-                                        <p className="card-text">시작 가격: {book.auctionPrice}원</p>
-                                        <p className="card-text">현재 가격: 9000원</p>
+                                        <h4 className='bookTitle-text'>{book.bookTitle}</h4>
+                                        <p className='bookAuthor-text'>{book.bookAuthor}</p>
+                                        <p className="auctionPrice-text">시작 {book.auctionPrice}원</p>
+                                        <p className="presentPrice-text">현재 9000원</p>
                                         <ProgressBar
                                             now={calculateProgress(book.currentPrice, book.auctionPrice)}
                                             label={`${calculateProgress(book.currentPrice, book.auctionPrice)}%`}
