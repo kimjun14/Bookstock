@@ -67,16 +67,16 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
     useEffect(() => {
         console.log("Updated bookInfo in useEffect:", bookInfo);
     }, [bookInfo]);
-    
+
     const handleUpload = async (e) => {
         e.preventDefault();
         if (selectedImage) {
             const formData = new FormData();
             formData.append('image', selectedImage);
-    
+
             try {
                 const response = await axiosConnect.post('/upload/auction', formData);
-    
+
                 if (response.status === 200) {
                     const uploadedImageSrc = `http://localhost:12345/images/auctionimg/${response.data.bookImgSrc}`;
                     // console.log(response.data.bookImgSrc);
@@ -84,7 +84,7 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
                         ...prevBookInfo,
                         bookImgSrc: uploadedImageSrc,
                     }));
-    
+
                     console.log('이미지 업로드 성공');
                     alert('이미지 업로드가 완료되었습니다.');
 
@@ -107,7 +107,7 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
             <div className="row">
                 <form className="validation-form" noValidate>
                     <div className="row justify-content-around">
-                        <div className="col-md-3">
+                        <div className="col-md-4 mt-5">
                             <img
                                 src={bookInfo.image || bookInfo.bookImgSrc || placeholderImage}
                                 alt="bookimg"
@@ -131,18 +131,18 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
                                 <PopUp isOpen={showModal} onClose={closeModal} infoToPopup={popupCallback} />
                             </div>
 
-                            <label htmlFor="email" style={{ marginTop: '1rem' }}>도서제목</label>
+                            <label htmlFor="title" style={{ marginTop: '1rem' }}>도서제목</label>
                             <input
                                 type="text"
                                 className="form-control ms-1"
                                 id="bookTitle"
                                 name="bookTitle"
                                 value={bookInfo.title}
-                                placeholder="도서제목을 입력하세요"
+                                placeholder="도서 제목을 입력하세요"
                                 onChange={(e) => handleChange(e, "TITLE", bookInfo)}
                             />
 
-                            <label htmlFor="userAccount" style={{ marginTop: '1rem' }}>출판사</label>
+                            <label htmlFor="public" style={{ marginTop: '1rem' }}>출판사</label>
                             <input
                                 type="text"
                                 className="form-control ms-1"
@@ -153,18 +153,18 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
                                 onChange={(e) => handleChange(e, "PUBLISHER", bookInfo)}
                             />
 
-                            <label htmlFor="name" style={{ marginTop: '1rem' }}>출판일</label>
+                            <label htmlFor="pubDate" style={{ marginTop: '1rem' }}>출판일</label>
                             <input
                                 type="text"
                                 className="form-control ms-1"
                                 id="bookPubDate"
                                 name="bookPubDate"
                                 value={bookInfo.pubDate}
-                                placeholder="출판일을 입력하세요"
+                                placeholder="출판일을 입력하세요."
                                 onChange={(e) => handleChange(e, "PUBDATE", bookInfo)}
                             />
 
-                            <label htmlFor="address" style={{ marginTop: '1rem' }}>작가</label>
+                            <label htmlFor="author" style={{ marginTop: '1rem' }}>작가</label>
                             <input
                                 type="text"
                                 className="form-control ms-1"
@@ -174,12 +174,21 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
                                 placeholder="작가를 입력하세요"
                                 onChange={(e) => handleChange(e, "AUTHOR", bookInfo)}
                             />
+
+                                <div className="col-md-12 mt-3">
+                                    <label htmlFor="imageUpload">이미지 업로드</label>
+                                    <div className="input-group ms-3">
+                                        <input type="file"
+                                            className="form-control"
+                                            onChange={handleImageChange} />
+                                        <button className="input-group-text" htmlFor="inputGroupFile02" onClick={handleUpload}>업로드</button>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                    <div className="input-group">
-                        <input type="file" className="form-control" id="inputGroupFile02" onChange={handleImageChange} />
-                        <button className="input-group-text" htmlFor="inputGroupFile02" onClick={handleUpload}>Upload</button>
-                    </div>
+
+
+
                 </form>
             </div>
         </div>
