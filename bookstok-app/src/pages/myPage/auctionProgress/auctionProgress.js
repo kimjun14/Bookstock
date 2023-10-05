@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BuyerComponent from "./aucComponent";
 import SellerComponent from "./bidComponent";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -39,7 +40,7 @@ const AuctionProgress = () => {
             </Button>
           </Col>
         </Row>
-        {/* {isBuyerActive && <BuyerComponent />} */}
+        {isBuyerActive && <BuyerComponent />}
         {isSellerActive && <SellerComponent />}
       </Container>
     )

@@ -13,6 +13,18 @@ const userModel = {
         }catch(err){
             throw new Error('DB Error', { cause: err });
         }
+    },    
+    async myAuction(userNo){
+        try{
+            const [result]=await pool.query(
+                `SELECT *
+                from auction
+                where uId=?;;`
+            ,userNo)
+            return result;
+        }catch(err){
+            throw new Error('DB Error', { cause: err });
+        }
     },
     async myAuctionBid(userNo){
         try{

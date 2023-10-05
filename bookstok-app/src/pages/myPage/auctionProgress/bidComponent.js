@@ -17,16 +17,19 @@ function groupByAId(data) {
 }
 
 
-const AuctionProgress = () => {
+const AuctionProgressInfoComponent = () => {
     const [myBidInfo,setMyBidInfo] = useState([]);
     const fetchData = async () => {
         try{
-            const response=await axiosConnect.get(`/mypage/auction`)
-            setMyBidInfo(groupByAId(response.data));
-            console.log(myBidInfo)
+            const response = await axiosConnect.get(`/mypage/auctionbid`)
+            if(response.data){
+                setMyBidInfo(groupByAId(response.data));
+            }
+            
         }catch(err){
             console.error(err);
         }
+        console.log(myBidInfo)
     }
     
     useEffect(()=>{
@@ -107,4 +110,4 @@ const AuctionProgress = () => {
     );
 }
 
-export default AuctionProgress;
+export default AuctionProgressInfoComponent;

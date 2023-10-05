@@ -7,6 +7,10 @@
 var app = require('../app');
 var debug = require('debug')('bookstok-api-server:server');
 var http = require('http');
+var path = require('path');
+const { Server } = require('socket.io');
+const pool = require('../models/pool');
+const fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +24,58 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*", // 모든 도메인에서의 접근을 허용합니다. 실제 운영 환경에서는 특정 도메인을 지정해주세요.
+    methods: ["GET", "POST"] // 허용하려는 메서드를 지정합니다.
+  }
+});
+
+const logDirectory = path.join(__dirname, 'logs');
+if (!fs.existsSync(logDirectory)) {
+  fs.mkdirSync(logDirectory);
+}
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  // 기존의 채팅 내역 로드
+  socket.on('check chatId', async (msg) => {
+    const { bId, aId } = msg;
+    try {
+      const [rows] = await pool.execute(`SELECT * FROM chats where aId=${aId} and bId=${bId} ORDER BY timestamp DESC LIMIT 20`);
+      // 처음으로 접속한 유저에게만 이전 채팅 내역 전송
+      socket.emit('load previous messages', rows.reverse());
+    } catch (error) {
+        console.error('DB 에러:', error);
+    } 
+  });
+
+  socket.on('chat message', async (msg) => {
+    const { text, sender, bId, aId } = msg;
+    try {
+      // DB에 메시지 저장
+      const [rows, fields] = await pool.execute(
+        `INSERT INTO chats 
+        (text, sender, bId, aId) 
+        VALUES (?, ?, ?, ? )`,
+        [text, sender, bId, aId]
+      );
+
+      // 모든 클라이언트에게 메시지 전송
+      io.emit('new message', msg);
+    } catch (error) {
+      console.error('DB 에러:', error);
+    }
+
+    // 로그 파일에 기록
+    fs.appendFileSync(path.join(logDirectory, 'access.log'), `${JSON.stringify(msg)}\n`);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
 
 /**
  * Listen on provided port, on all network interfaces.

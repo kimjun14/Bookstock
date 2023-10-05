@@ -30,7 +30,7 @@ function Chat({ isOpen, bid, onClose }) {
     };
 
     useEffect(() => {
-        socketRef.current = io.connect('http://localhost:54321');
+        socketRef.current = io.connect('http://localhost:12345');
         if(bid!=null){  // bid값이 null인 초기엔 채팅 이력을 받아오지 않음
             socketRef.current.emit('check chatId', { aId:queryParams.get('id'), bId: bid.bidId });
             socketRef.current.on('load previous messages', (previousMessages) => {
