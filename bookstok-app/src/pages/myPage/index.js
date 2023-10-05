@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
 
 import Payment from './payment/payment';
-import AuctionProgress from './auctionProgress';
+import AuctionProgress from './auctionProgress/auctionProgress';
 import AuctionTrading from './auctionTrading/auctionTrading';
 import './index.css'
 import axios from 'axios';
@@ -159,7 +159,7 @@ const MyPage = () => {
                         <div>
                             {/* 상세 내역 보기 버튼과 상세 내역을 보여주는 부분 */}
                             {showAuction && <AuctionProgress />}
-                            {showTrading && <AuctionTrading />}
+                            {showTrading && <AuctionTrading infoData={myinfo} />}
                         </div>
                     </div>
                 </div>

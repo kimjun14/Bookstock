@@ -14,4 +14,14 @@ router.get('/myinfo', async (req, res, next) => {
   }
 });
 
+router.get('/auction', async (req, res, next) => {
+  try {
+    const result=await user.myAuctionBid(req.session.userNo);
+    res.status(200).json(result);
+  }
+  catch(err){
+    next(err);
+  }
+});
+
 module.exports = router;
