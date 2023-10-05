@@ -3,11 +3,11 @@ var router = express.Router();
 
 const user = require('../models/mypage.model');
 
-// 검색어 쿼리 받은걸 외부 API 서버로 던짐
-router.get('/', async (req, res, next) => {
+// 마이페이지 접속시 실행되는 정보 전달 라우터
+router.get('/myinfo', async (req, res, next) => {
   try {
     const result=await user.myInfo(req.session.userNo);
-    res.status(200).json(list);
+    res.status(200).json(result);
   }
   catch(err){
     next(err);
