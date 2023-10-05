@@ -55,21 +55,13 @@ const LostPwd = function () {
       <form className="pt-3" ref={form} onSubmit={sendEmail}>
         <div className="form-group py-2">
 
-          
-          <div className="input-field">
-            <span className="far fa-user p-2"></span>
             <input
               type="hidden"
               name="generatedPwd"
-              id="random"
-              placeholder="임시비밀번호"
               required
               value={newPwd}
               readOnly 
             />
-          </div>
-
-          <br/>
 
           <div className="input-field">
             <span className="far fa-user p-2"></span>
