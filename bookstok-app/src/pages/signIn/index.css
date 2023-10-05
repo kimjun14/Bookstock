@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap');
 
 .wrapper {
-  max-width: 500px;
+  max-width: 29rem;
   border-radius: 10px;
   margin: 50px auto;
   padding: 30px 40px;
@@ -111,21 +111,6 @@ a:hover {
 .btn.btn-block:hover {
   background-color: #18a8f1;
   border-style: none;
-}
-
-.socialLogin {
-  display: flex;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.social-connect1 {
-  width: 96%;
-  margin: auto;
-}
-.social-connect2 {
-  width: 96%;
-  margin: auto;
 }
 
 .signup {

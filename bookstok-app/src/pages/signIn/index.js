@@ -46,7 +46,7 @@ const SignIn = function () {
     }
     //아이지 저장에 체크돼 있을 경우
     if (true /* 로그인 성공 했을 때 */) {
-      if(saveId) {
+      if (saveId) {
         localStorage.setItem(LS_KEY_ID, loginId);
       }
     };
@@ -64,7 +64,7 @@ const SignIn = function () {
           localStorage.setItem('token', responseData.token); // 받은 토큰 저장
           login(); // 로그인 상태 업데이트
           navigate('/'); // 메인 페이지로 이동
-          console.log('로그인 성공 메인 페이지로 이동',response);
+          console.log('로그인 성공 메인 페이지로 이동', response);
         } else {
           alert('아이디 또는 비밀번호가 일치하지 않습니다.');
         }
@@ -85,7 +85,7 @@ const SignIn = function () {
 
   const [saveId, setSaveId] = useState(false);
 
-  
+
   const handleSaveId = function () {
     localStorage.setItem(LS_KEY_SAVE_ID_FLAG, !saveId);
     setSaveId(!saveId);
@@ -95,15 +95,15 @@ const SignIn = function () {
     let idFlag = JSON.parse(localStorage.getItem(LS_KEY_SAVE_ID_FLAG));
     if (idFlag !== null) {
       setSaveId(idFlag);
-    } 
-    if (idFlag ===false) {
+    }
+    if (idFlag === false) {
       localStorage.setItem(LS_KEY_ID, "");
-    } 
+    }
     let data = localStorage.getItem(LS_KEY_ID);
     if (data !== null) {
       setLoginId(data);
     }
-  },[])
+  }, [])
 
 
   return (
@@ -145,7 +145,7 @@ const SignIn = function () {
           <div className="remember">
             <label className="option text-muted">
               아이디 기억하기
-              <input type="checkbox" name="checkbox" checked={saveId} onChange={handleSaveId}/>
+              <input type="checkbox" name="checkbox" checked={saveId} onChange={handleSaveId} />
               <span className="checkmark"></span>
             </label>
           </div>
@@ -155,23 +155,23 @@ const SignIn = function () {
             </Link>
           </div>
         </div>
-        <button className="btn btn-block btn-primary text-center my-3">
+        <button className="btn btn-block btn-primary text-center my-3" style={{ width: '100%', fontWeight: '600', fontSize: 'large', height: '3rem', margin: 'auto' }}>
           로그인
         </button>
         <div className="socialLogin">
           <div className="col-sm-6">
-            <p className="social-connect1">
-              <span className="fa fa-kakao-plus"></span>
-              <button className="btn text-center mb-1 py-2" onClick={handleLoginWithKakao2}>카카오 계정으로 로그인하기</button>
-            </p>
+            <div className="d-flex align-items-center">
+              <img src="/assets/img/kakaoImg.png" style={{ width: '11.6rem', height: '3rem', margin: 'auto', cursor: 'pointer', marginRight: '0.5rem' }} alt="카카오 로그인" onClick={handleLoginWithKakao2} />
+            </div>
           </div>
           <div className="col-sm-6">
-            <p className="social-connect2">
-              <span className="fa fa-naver-plus"></span>
-              <button className="btn text-center mb-1 py-2" onClick={handleLoginWithNaver2}>네이버 계정으로 로그인하기</button>
-            </p>
+            <div className="d-flex align-items-center">
+              <img src="/assets/img/NaverImg.png" style={{ width: '11.6rem', height: '3rem', margin: 'auto', cursor: 'pointer' }} alt="네이버 로그인" onClick={handleLoginWithNaver2} />
+            </div>
           </div>
         </div>
+
+
         <div className="text-center pt-3 text-muted">
           북스탁 회원이 아닌가요? <span className="signup"><Link to="./../signUp">회원가입</Link></span>
         </div>

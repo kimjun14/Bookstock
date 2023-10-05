@@ -47,7 +47,7 @@ button:focus {
   font-weight: 500;
 }
 
-.btn-blue {
+.btn-blue-signup {
   background-color: #fff;
   border-color: #1187cf;
   color: #1187cf;
@@ -55,7 +55,7 @@ button:focus {
   width: 100%;
 }
 
-.btn-blue:hover {
+.btn-blue-signup:hover {
   background-color: #1187cf;
   color: #fff;
   cursor: pointer;

@@ -12,13 +12,13 @@ function KakaoLogin() {
 
     return (
         <div className="col-sm-6">
-            <p className="social-connect1">
-                <button className="btn text-center mb-1 py-2" onClick={handleLogin}>
-                    카카오 계정으로 로그인하기
-                </button>
-            </p>
+          <p className="social-connect1">
+            <button className="btn text-center mb-1 py-2" onClick={handleLogin}>
+              <img src={imageUrl} alt="카카오 로그인" /> {/* 이미지를 표시하는 부분 */}
+            </button>
+          </p>
         </div>
-    );
-}
+      );
+    };    
 
 export default KakaoLogin;

@@ -15,7 +15,7 @@ const axiosConnect = axios.create({
 const categories = [
     {
         name: '소설',
-        no:1,
+        no: 1,
         subcategories: [
             '소설 전체',
             '한국소설',
@@ -39,7 +39,7 @@ const categories = [
     },
     {
         name: '경영/경제',
-        no:2,
+        no: 2,
         subcategories: [
             '경영/경제 전체',
             '경영일반',
@@ -51,7 +51,7 @@ const categories = [
     },
     {
         name: '인문/사회/역사',
-        no:3,
+        no: 3,
         subcategories: [
             '인문/사회/역사 전체',
             '인문',
@@ -62,7 +62,7 @@ const categories = [
     },
     {
         name: "자기계발",
-        no:4,
+        no: 4,
         subcategories: [
             '자기계발 전체',
             '성공/삶의자세',
@@ -75,7 +75,7 @@ const categories = [
     },
     {
         name: "에세이/시",
-        no:5,
+        no: 5,
         subcategories: [
             '에세이/시 전체',
             '에세이',
@@ -84,7 +84,7 @@ const categories = [
     },
     {
         name: "여행",
-        no:6,
+        no: 6,
         subcategories: [
             '여행 전체',
             '국내여행',
@@ -93,7 +93,7 @@ const categories = [
     },
     {
         name: "종교",
-        no:7,
+        no: 7,
         subcategories: [
             '종교 전체',
             '종교일반',
@@ -105,7 +105,7 @@ const categories = [
     },
     {
         name: '외국어',
-        no:8,
+        no: 8,
         subcategories: ['외국어 전체',
             '비즈니스영어',
             '일반영어',
@@ -114,7 +114,7 @@ const categories = [
     },
     {
         name: '과학',
-        no:9,
+        no: 9,
         subcategories: [
             '과학 전체',
             '과학일반',
@@ -124,7 +124,7 @@ const categories = [
     },
     {
         name: '진로/교육/교재',
-        no:10,
+        no: 10,
         subcategories: ['진로/교육/교재 전체',
             '공부법',
             '특목고/자사고',
@@ -137,7 +137,7 @@ const categories = [
     },
     {
         name: '컴퓨터/IT',
-        no:11,
+        no: 11,
         subcategories: [
             '컴퓨터/IT 전체',
             'IT 비즈니스',
@@ -149,7 +149,7 @@ const categories = [
     },
     {
         name: '건강/다이어트',
-        no:12,
+        no: 12,
         subcategories: [
             '건강/다이어트 전체',
             '다이어트/운동/스포츠',
@@ -159,7 +159,7 @@ const categories = [
     },
     {
         name: '가정/생활',
-        no:13,
+        no: 13,
         subcategories: [
             '가정/생활 전체',
             '결혼/임신/출산',
@@ -169,7 +169,7 @@ const categories = [
     },
     {
         name: "어린이/청소년",
-        no:14,
+        no: 14,
         subcategories: [
             '어린이/청소년 전체',
             '유아',
@@ -179,12 +179,12 @@ const categories = [
     },
     {
         name: '해외도서',
-        no:15,
+        no: 15,
         subcategories: ['해외도서 전체']
     },
     {
         name: '잡지',
-        no:16,
+        no: 16,
         subcategories: ['잡지 전체',
             '경영/재테크',
             '문학/교양',
@@ -234,7 +234,7 @@ function SignUp() {
     const handleSignUpSubmit = async () => {
         try {
             // 필수 입력 필드 검사
-            if (!signUpData.nick || !signUpData.userId || !signUpData.pwd || !signUpData.userPhone || !signUpData.userAccount ||signUpData.Address) {
+            if (!signUpData.nick || !signUpData.userId || !signUpData.pwd || !signUpData.userPhone || !signUpData.userAccount || signUpData.Address) {
                 window.alert("모든 필수 정보를 입력하세요.");
                 return;
             }
@@ -281,7 +281,7 @@ function SignUp() {
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
-    
+
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
@@ -315,10 +315,10 @@ function SignUp() {
         }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(enroll_company);
         console.log(selectedCategories);
-    },[selectedCategories]) // 상태변화 체크용
+    }, [selectedCategories]) // 상태변화 체크용
 
     return (
         <div className="container-fluid px-2 px-md-4 py-5 mx-auto">
@@ -364,7 +364,7 @@ function SignUp() {
                             </div>
                         </div>
                         <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" value={detailAddress} onChange={handleDetailAddressChange} />
-                        {isModalOpen && <Address company={enroll_company} setcompany={setEnroll_company}  closeModal={handleCloseModal}></Address>}
+                        {isModalOpen && <Address company={enroll_company} setcompany={setEnroll_company} closeModal={handleCloseModal}></Address>}
                     </div>
 
                     <div className="row px-3">
@@ -409,8 +409,8 @@ function SignUp() {
                         </small>
                     </div>
                     <div className="row mb-4">
-                        <div className="col-md-6">
-                            <button className="btn btn-blue text-center mb-1 py-2" onClick={handleSignUpSubmit} >계정 만들기</button>
+                        <div className="col-md-6" style={{ border:'0', width:'55%', marginTop:'1rem' }}>
+                            <button className="btn btn-blue-signup text-center mb-1 py-2" onClick={handleSignUpSubmit} >계정 만들기</button>
                         </div>
                     </div>
                     <div className="row px-3 mb-4 d-flex align-items-center">
@@ -419,26 +419,19 @@ function SignUp() {
                         <div className="line"></div>
                     </div>
 
-                    <div className="row text-center">
+                    <div className="socialLogin" style={{width:'60%', margin:'auto'}}>
                         <div className="col-sm-6">
-                            <p className="social-connect1">
-                                <span className="fa fa-google-plus"></span>
-                                <button className="btn text-center mb-1 py-2" onClick={handleLoginWithKakao}>카카오 계정으로 로그인하기</button>
-                            </p>
+                            <div className="d-flex align-items-center">
+                                <img src="/assets/img/kakaoImg.png" style={{ width: '85%', height: '2.7rem', margin: 'auto', cursor: 'pointer', alignItems:'center', marginRight:'0.5rem' }} alt="카카오 로그인" onClick={handleLoginWithKakao} />
+                            </div>
                         </div>
                         <div className="col-sm-6">
-                            <p className="social-connect2">
-                                <span className="fa fa-google-plus"></span>
-                                <button className="btn text-center mb-1 py-2" onClick={handleLoginWithNaver}>네이버 계정으로 로그인하기</button>
-                            </p>
+                            <div className="d-flex align-items-center">
+                                <img src="/assets/img/NaverImg.png" style={{ width: '85%', height: '2.7rem', margin: 'auto', cursor: 'pointer', alignItems:'center',marginLeft:'0.5rem'  }} alt="네이버 로그인" onClick={handleLoginWithNaver} />
+                            </div>
                         </div>
-                        {/* <div className="col-sm-6">
-                            <p className="social-connect">
-                                <span className="fa fa-google-plus"></span>
-                                <small className="pl-3 pr-1">구글계정으로 로그인하기</small>
-                            </p>
-                        </div> */}
                     </div>
+
                 </div>
             </div>
         </div>
