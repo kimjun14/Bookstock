@@ -1,41 +1,44 @@
 .rankingBookTitle {
   text-align: left;
   font-weight: bolder;
-  margin-left: 2.5rem;
-  margin-top: 5rem;
+  margin-left: 4.5rem;
+  margin-top: 3rem;
 }
-/* 
-.custom-card {
-    height: 16.5rem;
-    width: 80%;
-    border: 0px;
-    margin: auto;
+
+.ranking-card-group {
+  width: 23rem; 
+  height: 11rem;
+  margin: 1rem;
+  border: none;
+}
+
+.ranking-card-group:hover {
+  background-color: #f7f8f9;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .rank-badge {
-  position: absolute;
-  top: -0.3rem;
-  left: 0.3rem;  
-  color: #fff;
-  font-size: 3.7rem;
-  padding: 4px 8px;
+  margin-left: 1rem;
+  color: rgba(17, 135, 207, 0.8); /* 투명도 0.5로 설정 (0에서 1 사이의 값) */
+  font-size: 3rem;
   border-radius: 4px;
-  z-index: 1; /* 다른 내용 위에 표시되도록 설정 */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* 그림자 스타일 적용 */
-/* 
+  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.btn-blue {
-  background-color: #fff;
-  border-color: #1187cf;
-  color: #1187cf;
-  border-radius: 6px;
+.ranking-book-title {
+  font-weight: bold;
+  font-size: medium;
   margin-top: 1rem;
+  margin-right: 1rem;
 }
 
-.btn-blue:hover {
-  background-color: #1187cf;
-  color: #fff;
-  cursor: pointer;
+.ranking-book-author {
+  color: dimgray;
+  font-weight: 600;
+  font-size: small;
+  margin-top: 1rem;
+  margin-right: 1rem;
 }
- */ 

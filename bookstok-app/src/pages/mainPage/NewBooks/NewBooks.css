@@ -1,16 +1,21 @@
 .newBookTitle {
   text-align: left;
   font-weight: bolder;
-  margin-left: 2.5rem;
+  margin-left: 4.5rem;
 }
 
 .book-slider-container {
-  max-width: 80%;
-  margin: auto;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -1.5rem;
+  box-shadow: 0px 2px 10px gainsboro;
+  border-radius: 10px;
+  padding: 3rem;
 }
 
 .newBooks-card {
-  width: 50%;
+  width: 55%;
   margin: auto;
   text-align: center;
   color: black;
