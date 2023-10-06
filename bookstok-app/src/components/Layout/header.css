@@ -76,5 +76,6 @@
     cursor: pointer;
     border: 0px;
     border-radius: 6px;
+    width: 99%;
   }
 }
