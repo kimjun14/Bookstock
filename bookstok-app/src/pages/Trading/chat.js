@@ -30,7 +30,9 @@ function Chat({ isOpen, bid, onClose }) {
     };
 
     useEffect(() => {
-        socketRef.current = io.connect('http://localhost:12345');
+        socketRef.current = io.connect('http://localhost:12345',{
+            withCredentials: true
+        });
         if(bid!=null){  // bid값이 null인 초기엔 채팅 이력을 받아오지 않음
             socketRef.current.emit('check chatId', { aId:queryParams.get('id'), bId: bid.bidId });
             socketRef.current.on('load previous messages', (previousMessages) => {
@@ -67,7 +69,7 @@ function Chat({ isOpen, bid, onClose }) {
                                         >
                                             {message.sender === 'user' ? (
                                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style={{ width: '45px', height: '100%' }} />
-                                            ) : null}
+                                            ) : null}{message.sender}
                                             <div className={`p-3 ${message.sender === 'user' ? 'ms-3' : 'me-3'} ${message.sender === 'user' ? 'bg-info' : 'bg-light'}`} style={{ borderRadius: '15px' }}>
                                                 <p className="small mb-0">{message.text}</p>
                                             </div>

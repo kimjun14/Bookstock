@@ -7,6 +7,17 @@ const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var app = express();
+const sessionMiddleware = session({
+    cookie: { 
+        maxAge: 1000*60*60*24*7,
+        httpOnly: false,
+        SameSite:'None'
+    },
+    secret: 'sometext', // 세션 데이터 암호화를 위한 비밀 키 (보안 목적)
+    rolling: true,  // 매 응답마다 쿠키 시간 초기화
+    resave: false,  // false : 세션값이 수정되지 않으면 서버에 다시 저장하지 않음 // true : 매 응답마다 세션 저장
+    saveUninitialized: true
+  });
 
 app.use(cors({
     origin:'http://localhost:3000', // 클라이언트 도메인 주소
@@ -17,17 +28,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-    cookie: { 
-        maxAge: 1000*60*60*24*7,
-        httpOnly: false,
-        SameSite:'None'
-    },
-    secret: 'sometext', // 세션 데이터 암호화를 위한 비밀 키 (보안 목적)
-    rolling: true,  // 매 응답마다 쿠키 시간 초기화
-    resave: false,  // false : 세션값이 수정되지 않으면 서버에 다시 저장하지 않음 // true : 매 응답마다 세션 저장
-    saveUninitialized: true,   // 초기화되지 않은 세션도 저장할지 여부
-}));  // req.session 속성을 만들어서 세션 객체를 저장
+app.use(sessionMiddleware);  // req.session 속성을 만들어서 세션 객체를 저장
+
 
 app.use('/images', express.static('public/images'));
 app.use('/api', indexRouter);
@@ -47,4 +49,4 @@ app.use((err, req, res, next) => {
     res.json({error: {message: '요청을 처리할 수 없습니다. 잠시 후 다시 요청해 주세요.'}});
 });
 
-module.exports = app;
+module.exports = { app, sessionMiddleware };
