@@ -49,7 +49,7 @@ const SignIn = function () {
       if (response.status === 200) {
         const responseData = response.data;
         if (responseData.message === 'SUCCESS') {
-          localStorage.setItem('token', responseData.token);
+          sessionStorage.setItem('token', responseData.token);
           login();
           navigate('/');
         } else {
