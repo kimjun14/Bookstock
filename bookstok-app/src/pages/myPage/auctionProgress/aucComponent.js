@@ -33,7 +33,7 @@ const AuctionProgressInfoComponent = () => {
                 <div>
                     {myAuctionInfo.map((auction, index) => (
                         
-                        <div key={auction.auctionId} class="container text-center">
+                        <div key={auction.auctionId} className="container text-center">
                             <Link to={`/trading?id=${auction.auctionId}`}>
                             <div className="card mb-4">
                             <div className="card-body d-flex align-items-center">
