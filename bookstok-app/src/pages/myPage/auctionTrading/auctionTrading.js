@@ -35,34 +35,36 @@ function MainComponent() {
 
   return (
     <>
-    <Desktop>
-      <Container className="mt-4">
-        <Row>
-          <Col>
-            <Button
-              variant={isBuyerActive ? "btn-buyer" : "btn-buyer:hover"}
-              onClick={handleBuyerClick}
-              className="btn btn-buyer"
-            >
-              구매자
-            </Button>{" "}
-            <Button
-              variant={isSellerActive ? "btn-seller" : "btn-seller:hover"}
-              onClick={handleSellerClick}
-              className="btn btn-seller"
-            >
-              판매자
-            </Button>
-          </Col>
-        </Row>
-        {isBuyerActive && <BuyerComponent />}
-        {isSellerActive && <SellerComponent />}
-      </Container>
-    </Desktop>
+      <Desktop>
+        <Container className="mt-4">
+          <Row>
+            <Col>
+              <Button
+                variant={isBuyerActive ? "btn-buyer" : "btn-buyer:hover"}
+                onClick={handleBuyerClick}
+                className="btn btn-buyer w-100"
+              >
+                구매자
+              </Button>{" "}
+            </Col>
+            <Col>
+              <Button
+                variant={isSellerActive ? "btn-seller" : "btn-seller:hover"}
+                onClick={handleSellerClick}
+                className="btn btn-seller w-100"
+              >
+                판매자
+              </Button>
+            </Col>
+          </Row>
+          {isBuyerActive && <BuyerComponent />}
+          {isSellerActive && <SellerComponent />}
+        </Container>
+      </Desktop>
 
-    <Mobile>
-    <Container className="mt-4">
-        <Row className="d-flex justify-content-center">
+      <Mobile>
+        <Container className="mt-4">
+          <Row className="d-flex justify-content-center">
             <Button
               variant={isBuyerActive ? "btn-buyer" : "btn-buyer:hover"}
               onClick={handleBuyerClick}
@@ -70,8 +72,8 @@ function MainComponent() {
             >
               구매자
             </Button>{" "}
-        </Row>
-        <Row className="d-flex justify-content-center">
+          </Row>
+          <Row className="d-flex justify-content-center">
             <Button
               variant={isSellerActive ? "btn-seller" : "btn-seller:hover"}
               onClick={handleSellerClick}
@@ -79,11 +81,11 @@ function MainComponent() {
             >
               판매자
             </Button>
-        </Row>
-        {isBuyerActive && <BuyerComponent />}
-        {isSellerActive && <SellerComponent />}
-      </Container>
-    </Mobile>
+          </Row>
+          {isBuyerActive && <BuyerComponent />}
+          {isSellerActive && <SellerComponent />}
+        </Container>
+      </Mobile>
     </>
   );
 }
