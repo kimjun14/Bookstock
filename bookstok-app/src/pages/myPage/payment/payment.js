@@ -3,6 +3,17 @@ import icon from '../../../img/bookstock.jpg'
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useMediaQuery } from 'react-responsive';
+
+const Desktop = ({ children }) => {
+    const isDesktop = useMediaQuery({ minWidth: 992 })
+    return isDesktop ? children : null
+}
+
+const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
+    return isMobile ? children : null
+}
 
 const Payment = () => {
     const [balance, setBalance] = useState(0);
@@ -10,8 +21,8 @@ const Payment = () => {
     const axiosConnect = axios.create({
         baseURL: 'http://localhost:12345/api',
         withCredentials: true
-      });
-    
+    });
+
 
     useEffect(() => {
         const fetchBalance = async () => {
@@ -35,36 +46,65 @@ const Payment = () => {
     }, []);
     return (
         <>
-            <div className="card-container text-center card" >
-                <div className="card-body">
-                    <div className="pay-container text-center card text-bg-primary mb-3">
-                        <div className="card-body">
-                            <span className="card-title">
-                                <img src={icon} alt="icon" className='icon' />
-                                <span>북스탁 Pay</span>
-                            </span>
-                            <Link to="/deposit">
-                                <p className="balance card-text mb-2">{balance}원 〉</p>
-                            </Link>
-                            <div className='button-div d-flex justify-content-center'>
+            <Desktop>
+                <div className="card-container text-center card" >
+                    <div className="card-body">
+                        <div className="pay-container text-center card text-bg-primary mb-3">
+                            <div className="card-body">
+                                <span className="card-title">
+                                    <img src={icon} alt="icon" className='icon' />
+                                    <span>북스탁 Pay</span>
+                                </span>
                                 <Link to="/deposit">
-                                    <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
+                                    <p className="balance card-text mb-2">{balance}원 〉</p>
                                 </Link>
-                                <Link to="/withdraw">
-                                    <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
-                                </Link>
+                                <div className='button-div d-flex justify-content-center'>
+                                    <Link to="/deposit">
+                                        <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
+                                    </Link>
+                                    <Link to="/withdraw">
+                                        <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr className="underline1" />
+
+                        <div className="d-flex justify-content-around">
+                            <span className="fw-bold" onClick={null}>머니 내역</span>
+                            <span className="fw-bold" onClick={null}>고객 센터</span>
+                        </div>
+                    </div>
+                </div>
+            </Desktop>
+            <Mobile>
+                <div className='d-flex align-items-center justify-content-center'>
+                    <div className="card-container card" >
+                        <div className="card-body">
+                            <div className="pay-container text-center card text-bg-primary mb-3">
+                                <div className="card-body">
+                                    <span className="card-title">
+                                        <img src={icon} alt="icon" className='icon' />
+                                        <span>북스탁 Pay</span>
+                                    </span>
+                                    <Link to="/deposit">
+                                        <p className="balance card-text mb-2">{balance}원 〉</p>
+                                    </Link>
+                                    <div className='button-div d-flex align-items-center justify-content-center'>
+                                        <Link to="/deposit" className='me-2'> 
+                                            <button type="button" className="btn btn-outline-light btn-sm">충전하기</button>
+                                        </Link>
+                                        <Link to="/withdraw">
+                                            <button type="button" className="btn btn-outline-light btn-sm">출금하기</button>
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <hr className="underline1" />
-
-                    <div className="d-flex justify-content-around">
-                        <span className="fw-bold" onClick={null}>머니 내역</span>
-                        <span className="fw-bold" onClick={null}>고객 센터</span>
-                    </div>
                 </div>
-            </div>
+            </Mobile>
         </>
     );
 }

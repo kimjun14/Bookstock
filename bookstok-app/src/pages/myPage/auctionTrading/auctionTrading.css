@@ -24,3 +24,16 @@
   color: #fff;
   background-color: lightslategray;
 }
+
+
+@media screen and (max-width: 576px) {
+  .btn-buyer {
+    width: 80%;
+  }
+
+  .btn-seller {
+    width: 80%;
+    margin-right: 3px;
+  }
+  
+}

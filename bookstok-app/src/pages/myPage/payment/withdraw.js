@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './withdraw.css';
+import { useMediaQuery } from 'react-responsive';
+
+const Desktop = ({ children }) => {
+    const isDesktop = useMediaQuery({ minWidth: 992 })
+    return isDesktop ? children : null
+}
+
+const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
+    return isMobile ? children : null
+}
+
 
 const Withdraw = () => {
     const [accountNumber, setAccountNumber] = useState('');
@@ -56,20 +68,40 @@ const Withdraw = () => {
     }, []);
 
     return (
-        <div className='withdrawContainer text-center'>
-            <label>
-                계좌 번호:
-                <input type="text" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
-            </label>
-            <br />
-            <label>
-                출금할 포인트:
-                <input type="text" value={points} onChange={(e) => setPoints(e.target.value)} />
-            </label>
-            <br />
-            <p>잔액: {balance} 포인트</p> {/* 잔액을 표시하는 부분 추가 */}
-            <button onClick={handleDeductPoints}>출금하기</button>
-        </div>
+        <>
+            <Desktop>
+                <div className='withdrawContainer text-center'>
+                    <label>
+                        계좌 번호:
+                        <input type="text" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
+                    </label>
+                    <br />
+                    <label>
+                        출금할 포인트:
+                        <input type="text" value={points} onChange={(e) => setPoints(e.target.value)} />
+                    </label>
+                    <br />
+                    <p>잔액: {balance} 포인트</p> {/* 잔액을 표시하는 부분 추가 */}
+                    <button type="button" className="btn btn-primary"  onClick={handleDeductPoints}>출금하기</button>
+                </div>
+            </Desktop>
+            <Mobile>
+                <div className='withdrawContainer text-center'>
+                    <label>
+                        계좌 번호:
+                        <input className="accountInput"type="text" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
+                    </label>
+                    <br />
+                    <label className='mt-3'>
+                        출금할 포인트:
+                        <input className="pointInput" type="text" value={points} onChange={(e) => setPoints(e.target.value)} />
+                    </label>
+                    <br />
+                    <p>잔액: {balance} 포인트</p> {/* 잔액을 표시하는 부분 추가 */}
+                    <button type="button" className="btn btn-primary"  onClick={handleDeductPoints}>출금하기</button>
+                </div>
+            </Mobile>
+        </>
     );
 };
 

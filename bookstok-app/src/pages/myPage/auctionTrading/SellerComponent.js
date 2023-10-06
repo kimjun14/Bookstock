@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react";
 import './SellerComponent.css';
 import axios from 'axios';
 
+import { useMediaQuery } from 'react-responsive';
+
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
-  baseURL: 'http://localhost:12345/api',
-  withCredentials: true
+    baseURL: 'http://localhost:12345/api',
+    withCredentials: true
 });
+
+const Desktop = ({ children }) => {
+    const isDesktop = useMediaQuery({ minWidth: 992 })
+    return isDesktop ? children : null
+}
+
+const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
+    return isMobile ? children : null
+}
 
 
 function SellerComponent() {
@@ -113,27 +125,27 @@ function SellerComponent() {
     };
 
     const trackingCheck = async () => {
-        try{
+        try {
             const result = await axiosConnect.get(`/trading/sell/track`);
             setSelectedCarrier(result.data.trackingCompany);
             setTrackingNumber(result.data.trackingNumber)
-        }catch(err){
+        } catch (err) {
             console.error(err);
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         trackingCheck();
         accountCheck();
-    },[])  // 마운트 되면 실행
+    }, [])  // 마운트 되면 실행
 
     const handleConfirmSave = async () => {
         const confirmSave = window.confirm("운송장 번호를 저장하시겠습니까? 저장 후 수정이 불가능합니다.");
         if (confirmSave) {
-            try{
-                await axiosConnect.patch(`/trading/sell/track`,{"trackingNumber":trackingNumber,"trackingCompany":selectedCarrier});
+            try {
+                await axiosConnect.patch(`/trading/sell/track`, { "trackingNumber": trackingNumber, "trackingCompany": selectedCarrier });
                 alert("송장 입력 성공");
-            }catch(err){
+            } catch (err) {
                 console.error(err);
             }
             // 여기에서 송장 번호를 저장하거나 서버로 업데이트 요청을 보낼 수 있습니다.
@@ -158,7 +170,7 @@ function SellerComponent() {
         'KEB하나은행',
         'SC제일은행',
     ];
-    
+
 
     const handleBankChange = (e) => {
         setSelectedBank(e.target.value);
@@ -171,11 +183,11 @@ function SellerComponent() {
     };
 
     const accountCheck = async () => {
-        try{
+        try {
             const result = await axiosConnect.get(`/trading/account`);
             setSelectedBank(result.data.sellerBank);
             setAccountNumber(result.data.sellerAccount)
-        }catch(err){
+        } catch (err) {
             console.error(err);
         }
     }
@@ -185,10 +197,10 @@ function SellerComponent() {
         if (confirmAccountNumber) {
             // 계좌번호 변경을 서버에 요청하고 DB를 업데이트하는 코드를 추가하세요.
             // axios 또는 fetch를 사용하여 서버로 요청을 보낼 수 있습니다.
-            try{
-                await axiosConnect.patch(`/trading/account`,{"sellerAccount":accountNumber,"sellerBank":selectedBank});
+            try {
+                await axiosConnect.patch(`/trading/account`, { "sellerAccount": accountNumber, "sellerBank": selectedBank });
                 alert("계좌 입력 성공");
-            }catch(err){
+            } catch (err) {
                 console.error(err);
             }
         }
@@ -196,44 +208,89 @@ function SellerComponent() {
     };
 
     return (
-        <div className="container">
-            <h4 className="parcelNum">운송장 번호</h4>
-            <div className="mb-3">
-                <select className="form-select form-select-sm" onChange={handleCarrierChange} value={selectedCarrier}>
-                    <option value="">택배사를 선택하세요</option>
-                    {carriers.map((carrier) => (
-                        <option key={carrier.Code} value={carrier.Code}>
-                            {carrier.Name}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <div className="mb-3">
-                <input
-                    type="text"
-                    placeholder="하이픈(-)을 제외하고 입력하세요"
-                    className="parcelInput"
-                    value={trackingNumber}
-                    onChange={handleTrackingNumberChange}
-                    disabled={isSaved} // 저장 후 수정 불가능하도록 비활성화
-                />
-                <button className="btn parcelNumBtn" onClick={handleConfirmSave} disabled={isSaved}>
-                    운송장 번호 저장
-                </button>
-            </div>
-            <div>
-                <h4>계좌번호</h4>
-                <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
-                    {banks.map((bank, index) => (
-                        <option key={index} value={bank}>
-                            {bank}
-                        </option>
-                    ))}
-                </select>
-                <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
-                <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
-            </div>
-        </div>
+        <>
+            <Desktop>
+                <div className="container">
+                    <h4 className="parcelNum">운송장 번호</h4>
+                    <div className="mb-3">
+                        <select className="form-select form-select-sm" onChange={handleCarrierChange} value={selectedCarrier}>
+                            <option value="">택배사를 선택하세요</option>
+                            {carriers.map((carrier) => (
+                                <option key={carrier.Code} value={carrier.Code}>
+                                    {carrier.Name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="mb-3">
+                        <input
+                            type="text"
+                            placeholder="하이픈(-)을 제외하고 입력하세요"
+                            className="parcelInput"
+                            value={trackingNumber}
+                            onChange={handleTrackingNumberChange}
+                            disabled={isSaved} // 저장 후 수정 불가능하도록 비활성화
+                        />
+                        <button className="btn parcelNumBtn" onClick={handleConfirmSave} disabled={isSaved}>
+                            운송장 번호 저장
+                        </button>
+                    </div>
+                    <div>
+                        <h4>계좌번호</h4>
+                        <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
+                            {banks.map((bank, index) => (
+                                <option key={index} value={bank}>
+                                    {bank}
+                                </option>
+                            ))}
+                        </select>
+                        <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
+                        <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
+                    </div>
+                </div>
+            </Desktop>
+
+            <Mobile>
+                <div className="container">
+                    <h4 className="parcelNum text-center">운송장 번호</h4>
+                    <div className="mb-3">
+                        <select className="form-select form-select-sm" onChange={handleCarrierChange} value={selectedCarrier}>
+                            <option value="">택배사를 선택하세요</option>
+                            {carriers.map((carrier) => (
+                                <option key={carrier.Code} value={carrier.Code}>
+                                    {carrier.Name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="mb-3 text-center">
+                        <input
+                            type="text"
+                            placeholder="하이픈(-)을 제외하고 입력하세요"
+                            className="parcelInput w-100"
+                            value={trackingNumber}
+                            onChange={handleTrackingNumberChange}
+                            disabled={isSaved} // 저장 후 수정 불가능하도록 비활성화
+                        />
+                        <button className="btn parcelNumBtn" onClick={handleConfirmSave} disabled={isSaved}>
+                            운송장 번호 저장
+                        </button>
+                    </div>
+                    <div className="text-center">
+                        <h4>계좌번호</h4>
+                        <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
+                            {banks.map((bank, index) => (
+                                <option key={index} value={bank}>
+                                    {bank}
+                                </option>
+                            ))}
+                        </select>
+                        <input className="w-100 mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
+                        <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
+                    </div>
+                </div>
+            </Mobile>
+        </>
     );
 }
 

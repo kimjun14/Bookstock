@@ -38,3 +38,12 @@
   color: #fff;
   background-color: #1187cf;
 }
+
+@media screen and (max-width: 576px) {
+  .btn-blue-address,
+  .btn-blue-account { 
+    height: 2.5rem;
+    width: 80%;
+  }
+  
+}

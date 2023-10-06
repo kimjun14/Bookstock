@@ -3,12 +3,23 @@ import React, { useState, useEffect } from "react";
 import TradingAddress from "../TradingAddress";
 import './BuyerComponent.css'
 import axios from 'axios';
+import { useMediaQuery } from 'react-responsive';
 
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
-  baseURL: 'http://localhost:12345/api',
-  withCredentials: true
+    baseURL: 'http://localhost:12345/api',
+    withCredentials: true
 });
+
+const Desktop = ({ children }) => {
+    const isDesktop = useMediaQuery({ minWidth: 992 })
+    return isDesktop ? children : null
+}
+
+const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
+    return isMobile ? children : null
+}
 
 
 function BuyerComponent() {
@@ -16,8 +27,8 @@ function BuyerComponent() {
     const [accountNumber, setAccountNumber] = useState('');
     const [addressData, setAddressData] = useState({
         addr: '',
-        addr2:'',
-        addrpostal:''
+        addr2: '',
+        addrpostal: ''
     });
 
     const banks = [
@@ -64,10 +75,10 @@ function BuyerComponent() {
     };
 
     const addrCheck = async () => {
-        try{
+        try {
             const result = await axiosConnect.get(`/trading/buy/addr`);
             setAddressData(result.data);
-        }catch(err){
+        } catch (err) {
             console.error(err);
         }
     }
@@ -75,27 +86,27 @@ function BuyerComponent() {
     const handleConfirmAddress = async () => {
         const confirmAddress = window.confirm("주소를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
         if (confirmAddress) {
-            try{
-                await axiosConnect.patch(`/trading/buy/addr`,addressData);
+            try {
+                await axiosConnect.patch(`/trading/buy/addr`, addressData);
                 alert("주소 입력 성공");
-            }catch(err){
+            } catch (err) {
                 console.error(err);
             }
         }
         addrCheck()
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         addrCheck();
         accountCheck();
-    },[])  // 마운트 되면 실행
+    }, [])  // 마운트 되면 실행
 
     const accountCheck = async () => {
-        try{
+        try {
             const result = await axiosConnect.get(`/trading/account`);
             setSelectedBank(result.data.buyerBank);
             setAccountNumber(result.data.buyerAccount)
-        }catch(err){
+        } catch (err) {
             console.error(err);
         }
     }
@@ -105,10 +116,10 @@ function BuyerComponent() {
         if (confirmAccountNumber) {
             // 계좌번호 변경을 서버에 요청하고 DB를 업데이트하는 코드를 추가하세요.
             // axios 또는 fetch를 사용하여 서버로 요청을 보낼 수 있습니다.
-            try{
-                await axiosConnect.patch(`/trading/account`,{"buyerAccount":accountNumber,"buyerBank":selectedBank});
+            try {
+                await axiosConnect.patch(`/trading/account`, { "buyerAccount": accountNumber, "buyerBank": selectedBank });
                 alert("계좌 입력 성공");
-            }catch(err){
+            } catch (err) {
                 console.error(err);
             }
         }
@@ -250,29 +261,30 @@ function BuyerComponent() {
 
     return (
         <>
-            <div>
-                <h4 className="addressTitle">주소</h4>
-                <input type="button" onClick={handleOpenModal} value="우편번호 찾기" />
-                <input className="user_enroll_text" type="text" name="addr" placeholder="주소를 입력하세요" value={addressData.addr} onChange={handleAddressInput} />
-                <input type="text" id="detailAddress" name="addr2" placeholder="상세주소를 입력하세요" value={addressData.addr2} onChange={handleAddressInput} />
-                {isModalOpen && <TradingAddress company={addressData} setcompany={setAddressData} closeModal={handleCloseModal}></TradingAddress>}
-                <button className="btn btn-blue-address" onClick={handleConfirmAddress}>주소 저장</button>
+            <Desktop>
+                <div>
+                    <h4 className="addressTitle">주소</h4>
+                    <input type="button" onClick={handleOpenModal} value="우편번호 찾기" />
+                    <input className="user_enroll_text" type="text" name="addr" placeholder="주소를 입력하세요" value={addressData.addr} onChange={handleAddressInput} />
+                    <input type="text" id="detailAddress" name="addr2" placeholder="상세주소를 입력하세요" value={addressData.addr2} onChange={handleAddressInput} />
+                    {isModalOpen && <TradingAddress company={addressData} setcompany={setAddressData} closeModal={handleCloseModal}></TradingAddress>}
+                    <button className="btn btn-blue-address" onClick={handleConfirmAddress}>주소 저장</button>
 
 
-                <h4>계좌번호</h4>
-                <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
-                    {banks.map((bank, index) => (
-                        <option key={index} value={bank}>
-                            {bank}
-                        </option>
-                    ))}
-                </select>
+                    <h4>계좌번호</h4>
+                    <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
+                        {banks.map((bank, index) => (
+                            <option key={index} value={bank}>
+                                {bank}
+                            </option>
+                        ))}
+                    </select>
 
-                <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
-                <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
+                    <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
+                    <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
 
 
-                {/* <div>
+                    {/* <div>
                     <h2>택배배송 조회</h2>
                     <form onSubmit={handleTrackParcel}>
                         <div>
@@ -304,8 +316,32 @@ function BuyerComponent() {
                     )}
                 </div> */}
 
-                <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
-            </div>
+                    <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
+                </div>
+            </Desktop>
+            <Mobile>
+                <div className="text-center">
+                    <h4 className="addressTitle">주소</h4>
+                    <input type="button" onClick={handleOpenModal} value="우편번호 찾기" />
+                    <input className="user_enroll_text" type="text" name="addr" placeholder="주소를 입력하세요" value={addressData.addr} onChange={handleAddressInput} />
+                    <input className="w-100" type="text" id="detailAddress" name="addr2" placeholder="상세주소를 입력하세요" value={addressData.addr2} onChange={handleAddressInput} />
+                    {isModalOpen && <TradingAddress company={addressData} setcompany={setAddressData} closeModal={handleCloseModal}></TradingAddress>}
+                    <button className="btn btn-blue-address mb-5" onClick={handleConfirmAddress}>주소 저장</button>
+
+
+                    <h4>계좌번호</h4>
+                    <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
+                        {banks.map((bank, index) => (
+                            <option key={index} value={bank}>
+                                {bank}
+                            </option>
+                        ))}
+                    </select>
+
+                    <input className="w-100 mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
+                    <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
+                </div>
+            </Mobile>
         </>
     );
 }
