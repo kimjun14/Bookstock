@@ -55,3 +55,18 @@
   color: #fff !important;
   margin-left: 0.5rem !important;
 }
+
+
+@media screen and (max-width: 576px) {
+  .header-category {
+    background-color: #fff !important; 
+    font-size: large !important;
+    font-weight: 500 !important;
+    border-color: lightslategray !important;
+    color: lightslategray !important;
+    border-radius: 6px !important;
+    margin-left: 0rem !important;
+    margin-right: 0rem;
+    transition: background-color 0.3s, color 0.3s !important;
+  }
+}
