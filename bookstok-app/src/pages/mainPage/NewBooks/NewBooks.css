@@ -1,7 +1,7 @@
 .newBookTitle {
   text-align: left;
   font-weight: bolder;
-  margin-left: 4.5rem;
+  margin-left: 3rem;
 }
 
 .book-slider-container {
@@ -59,8 +59,31 @@
   font-size: medium;
 }
 
-/* NewBooks.css */
 .book-slide img {
-  max-width: 100%; /* 이미지의 최대 너비를 부모 요소에 맞게 조절 */
-  max-height: 30rem; /* 이미지의 최대 높이를 원하는 크기로 조절 */
+  max-width: 100%;
+  max-height: 30rem;
+}
+
+/* 모바일 */
+@media screen and (max-width: 575px) {
+  .newBookTitle {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .book-slider-container {
+    padding: 2rem;
+  }
+}
+
+/* 태블릿 */
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  .newBookTitle {
+    margin-left: 2rem;
+    font-size: 2rem;
+  }
+
+  .book-slider-container {
+    padding: 2rem;
+  }
 }

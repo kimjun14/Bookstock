@@ -5,7 +5,7 @@ import banner3 from '../../img/banner3.jpg';
 import { Carousel } from 'react-bootstrap';
 import './style.css'
 import MainRanking from './MainRanking/MainRanking';
-import NewBooks from './NewBooks/NewBooks'; 
+import NewBooks from './NewBooks/NewBooks';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
@@ -60,10 +60,7 @@ function MainPage() {
                     </Carousel.Item>
                 </Carousel>
             </div>
-
             <NewBooks bookData={bookData} />
-            
-            {/* 인기 도서 */}
             <MainRanking />
         </div>
     );

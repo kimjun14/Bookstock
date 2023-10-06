@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import './MainRanking.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import './MainRanking.css';
+import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const axiosConnect = axios.create({
   baseURL: 'http://localhost:12345/api',
@@ -16,57 +17,74 @@ function MainRanking() {
 
   const rankBookFetcher = async () => {
     try {
-      const response = await axiosConnect.get('test/mainpagetest2')
+      const response = await axiosConnect.get('test/mainpagetest2');
       setBookData(response.data);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     rankBookFetcher();
-    console.log(bookData);;
   }, []);
 
-  // 한 페이지에 표시할 아이템 개수 (6개)
-  const itemsPerPage = bookData.length;
+  const isDesktop = useMediaQuery({ minWidth: 992 });
+  const isTablet = useMediaQuery({ minWidth: 576, maxWidth: 991 });
+  const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 575 });
 
-  // 슬라이더 설정 (2열, 각 열당 아이템3개)
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    rows: 2,
-    slidesPerRow: 3
+  const getSliderSettings = () => {
+    if (isDesktop) {
+      return {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 2
+      };
+    } else if (isTablet) {
+      return {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 1
+      };
+    } else if (isMobile) {
+      return {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
+    }
   };
+
   return (
     <div>
       <h2 className='rankingBookTitle'>실시간 인기 도서</h2>
       <div className="book-slider-container">
-        <Slider {...settings}>
-          {bookData.slice(0, itemsPerPage).map((book, index) => (
-            <div key={book.id} className="book-slide">
-              <Link to={`/trading?id=${book.auctionId}`} className="card-link">
-                <div className="card ranking-card-group">
-                  <div className="row no-gutters">
-                    <div className="col-md-2">
-                      <div className="rank-badge">{index + 1}</div>
-                    </div>
-                    <div className="col-md-4">
-                      <img src={book.bookImgSrc} alt={book.bookTitle} />
-                    </div>
-                    <div className="col-md">
-                      <h5 className="ranking-book-title" >{book.bookTitle}</h5>
-                      <p className="ranking-book-author">{book.bookAuthor}</p>
-                    </div>
+        {bookData.length > 0 ? (
+          <Slider {...getSliderSettings()}>
+            {bookData.map((book, index) => (
+              <Link to={`/trading?id=${book.auctionId}`} className="tradingLink card-link" key={index}>
+                <div className="book-slide">
+                  <div className="d-flex flex-column align-items-center rankingBooks-card">
+                    <span className="rank-badge">{index + 1}</span>
+                    <img src={book.bookImgSrc} alt={book.bookTitle} />
+                    <h4 className='bookTitle-text'>{book.bookTitle}</h4>
+                    <p className='bookAuthor-text'>{book.bookAuthor}</p>
                   </div>
                 </div>
-              </Link>
-            </div>
-          ))}
-        </Slider>
+              </Link>)
+            )}
+          </Slider>
+        ) : (
+          <p> loading...</p>
+        )}
       </div>
-    </ div >
-  );}
-  
+    </div>
+  );
+}
+
 export default MainRanking;

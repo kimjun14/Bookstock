@@ -1,18 +1,31 @@
 .rankingBookTitle {
   text-align: left;
   font-weight: bolder;
-  margin-left: 4.5rem;
+  margin-left: 3rem;
   margin-top: 3rem;
 }
 
-.ranking-card-group {
-  width: 23rem; 
-  height: 11rem;
-  margin: 1rem;
-  border: none;
+.book-slider-container {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -1.5rem;
+  box-shadow: 0px 2px 10px gainsboro;
+  border-radius: 10px;
+  padding: 3rem;
 }
 
-.ranking-card-group:hover {
+.rankingBooks-card {
+  width: 55%;
+  margin: auto;
+  text-align: center;
+  color: black;
+  border-radius: 10px;
+  position: relative;
+  overflow: visible;
+}
+
+.rankingBooks-card:hover {
   background-color: #f7f8f9;
   cursor: pointer;
   transition:
@@ -20,25 +33,52 @@
     color 0.3s;
 }
 
-.rank-badge {
-  margin-left: 1rem;
-  color: rgba(17, 135, 207, 0.8); /* 투명도 0.5로 설정 (0에서 1 사이의 값) */
-  font-size: 3rem;
-  border-radius: 4px;
-  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+.rankingBooks-card img {
+  margin-bottom: 1.5rem;
 }
 
-.ranking-book-title {
-  font-weight: bold;
-  font-size: medium;
-  margin-top: 1rem;
-  margin-right: 1rem;
+.rankingBooks-card .bookTitle-text {
+  font-size: larger;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-.ranking-book-author {
+.rankingBooks-card .bookAuthor-text {
   color: dimgray;
   font-weight: 600;
-  font-size: small;
-  margin-top: 1rem;
-  margin-right: 1rem;
+  font-size: medium;
+}
+
+.rankingBooks-card .rank-badge {
+  position: absolute;
+  left: -1rem;
+  top: -1.5rem;
+  color: #f7f8f9;
+  font-size: 5rem;
+  border-radius: 4px;
+  text-shadow: -1px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* 모바일 */
+@media screen and (max-width: 575px) {
+  .rankingBookTitle {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .book-slider-container {
+    padding: 2rem;
+  }
+}
+
+/* 태블릿 */
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  .rankingBookTitle {
+    margin-left: 2rem;
+    font-size: 2rem;
+  }
+
+  .book-slider-container {
+    padding: 2rem;
+  }
 }
