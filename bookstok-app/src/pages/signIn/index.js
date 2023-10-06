@@ -30,26 +30,15 @@ const SignIn = function () {
   const [loginId, setLoginId] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth(); // useAuth를 통해 login 함수 가져오기
+  const { login, isLoggedIn } = useAuth(); // useAuth를 통해 login 함수와 isLoggedIn 상태 가져오기
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleLogin = async function (e) {
-    e.preventDefault();
-
-    if (!loginId) {
-      alert("아이디를 입력해주세요.");
-      return;
-    }
-
-    if (!loginPassword) {
-      alert("비밀번호를 입력해주세요.");
-      return;
-    }
-    //아이지 저장에 체크돼 있을 경우
-    if (true /* 로그인 성공 했을 때 */) {
-      if (saveId) {
-        localStorage.setItem(LS_KEY_ID, loginId);
-      }
-    };
 
     try {
       const response = await axiosConnect.post('/users/signin', {
@@ -60,24 +49,22 @@ const SignIn = function () {
       if (response.status === 200) {
         const responseData = response.data;
         if (responseData.message === 'SUCCESS') {
-          // 서버로부터 'SUCCESS' 메시지를 받으면 로그인 성공 처리를 수행합니다.
-          localStorage.setItem('token', responseData.token); // 받은 토큰 저장
-          login(); // 로그인 상태 업데이트
-          navigate('/'); // 메인 페이지로 이동
-          console.log('로그인 성공 메인 페이지로 이동', response);
+          localStorage.setItem('token', responseData.token);
+          login();
+          navigate('/');
         } else {
           alert('아이디 또는 비밀번호가 일치하지 않습니다.');
         }
       } else {
-        // 서버 오류 처리
         alert('서버 오류로 로그인에 실패하였습니다.');
       }
     } catch (error) {
       console.error('로그인 오류:', error);
       alert('로그인 중 오류가 발생하였습니다.');
-      navigate('/'); // 오류 발생 시 메인 페이지로 이동
+      navigate('/');
     }
   };
+
 
   //아이디 저장
   const LS_KEY_ID = 'LS_KEY_ID';
