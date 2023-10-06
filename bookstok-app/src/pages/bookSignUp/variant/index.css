@@ -6,73 +6,86 @@
   font-weight: 500;
 }
 
-h2{
-  text-align:center;
+h2 {
+  text-align: center;
   padding-top: 2.5rem;
   padding-bottom: 3.5rem;
 }
 
-.col-md-6 {
-  margin: auto;
-  border-left: 1px solid gainsboro;
-}
-
-.book-sign-up-form{
+.book-sign-up-form {
   margin-left: 1rem;
 }
 
-.formTitle {
-  margin: auto;
-  margin-left: 0;
-  margin-bottom: 1rem;
-  width: 80%;
-}
-
-.formContext {
-  margin: auto;
-  margin-left: 0;
-  margin-bottom: 1rem;
-  width: 80%;
-}
-
+.formTitle,
+.formContext,
 .formPrice {
   margin: auto;
   margin-left: 0;
   margin-bottom: 1rem;
   width: 80%;
+  font-size: medium;
 }
 
-.cateSignUpBtn{
+.cateSignUpBtn {
   margin-bottom: 1rem;
-  background-color: #fff; 
+  background-color: #fff;
   font-size: large;
   font-weight: 500;
   border-color: lightslategray;
   color: lightslategray;
   border-radius: 6px;
   margin-right: 1.25rem;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
-.exDateBtn-group{
+.exDateBtn-group {
   margin-bottom: 2rem;
-
 }
 
-.signupBtn{
+.signupBtn {
   background-color: #fff;
   border-color: #1187cf;
   color: #1187cf;
   border-radius: 6px;
-  width: 36.7rem;
+  width: 100%;
   margin: auto;
-
 }
 
-.signupBtn:hover{
+.signupBtn:hover {
   background-color: #1187cf;
   border-color: #1187cf;
   color: #fff;
   border-radius: 6px;
 }
 
+/* 태블릿 */
+@media (min-width: 576px) and (max-width: 991px) {
+  .book-sign-up-container.tablet {
+    margin: 2rem;
+    font-size: normal;
+    margin-top: 2.5 rem;
+  }
+  .formTitle.mobile,
+  .formContext.mobile,
+  .formPrice.mobile {
+    width: 100%;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 575px) {
+  .book-sign-up-container.mobile {
+    margin: 1rem;
+  }
+  .book-sign-up-container.mobile h2 {
+    visibility: visible; /* 요소 표시 설정 */
+  }
+
+  .formTitle.mobile,
+  .formContext.mobile,
+  .formPrice.mobile {
+    width: 100%;
+  }
+}

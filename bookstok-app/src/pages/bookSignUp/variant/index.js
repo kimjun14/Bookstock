@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import './index.css'
 import CategoryModal from "../../../components/Category/CategoryModal";
+import { useMediaQuery } from 'react-responsive';
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
@@ -11,6 +12,9 @@ const axiosConnect = axios.create({
 });
 
 const BookSignUp = () => {
+    const isTablet = useMediaQuery({ minWidth: 576, maxWidth: 991 });
+    const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 575 });
+
     const [product, setProduct] = useState({
         auctionTitle: '',
         auctionContext: '',
@@ -136,112 +140,115 @@ const BookSignUp = () => {
 
     return (
         <>
-            <div className="book-sign-up-container">
+            <div className={`book-sign-up-container ${isMobile ? 'mobile' : ''} ${isTablet ? 'tablet' : ''}`}>
                 <h2>도서 역경매 등록</h2>
 
-                <div className="row">
-                    <div className="col-md-6">
-                        <BookResearch aucToInfo={infoCallback} onImageUpload={handleImageUpload} className="book-research" />
-                    </div>
-                    <div className="col-md-6">
-                        <form onSubmit={handleSubmit} className="book-sign-up-form">
-                            <div className="auctionTitle">
-                                <label htmlFor="auctionTitle">게시글 제목</label>
-                                <input
-                                    type="text"
-                                    className="form-control formTitle"
-                                    id="auctionTitle"
-                                    name="auctionTitle"
-                                    onChange={(e) => handleChange(e, "auctionTitle")}
-                                    placeholder="게시글 제목을 입력하세요"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="auctionContext">상세정보</label>
-                                <textarea
-                                    className="form-control formContext"
-                                    id="auctionContext"
-                                    name="auctionContext"
-                                    onChange={(e) => handleChange(e, "auctionContext")}
-                                    placeholder="상세정보를 입력하세요"
-                                ></textarea>
-                            </div>
-                            <div>
-                                <label htmlFor="auctionPrice">경매시작가</label>
-                                <input
-                                    type="number"
-                                    className="form-control formPrice"
-                                    id="auctionPrice"
-                                    name="auctionPrice"
-                                    onChange={(e) => handleChange(e, "auctionPrice")}
-                                    placeholder="원하는 경매시작 가격을 입력하세요"
-                                />
-                            </div>
-                            <label>도서 카테고리</label>
-                            <div>
-                                <button type="button" className="btn btn-secondary mb-2 me-2" onClick={() => setShowModal(true)}>
-                                    {selectedCategory ? selectedCategory : "카테고리 선택하기"}
-                                </button>
-                                <CategoryModal
-                                    show={showModal}
-                                    onHide={() => setShowModal(false)}
-                                    onCategorySelect={handleCategorySelect}
-                                    selectedCategory={selectedCategory}
-                                />
-                            </div>
-                            <div className="exDateBtn-group">
-                                <label>마감기한</label>
-                                <div>{renderAuctionEnd()}</div>
-                                <div className="d-flex flex-wrap align-items-center">
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary mb-2 me-2"
-                                        onClick={() => handleSetAuctionEnd(1)}
-                                    >
-                                        1일
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary mb-2 me-2"
-                                        onClick={() => handleSetAuctionEnd(3)}
-                                    >
-                                        3일
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary mb-2 me-2"
-                                        onClick={() => handleSetAuctionEnd(7)}
-                                    >
-                                        7일
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary mb-2 me-2"
-                                        onClick={() => handleSetAuctionEnd(30)}
-                                    >
-                                        30일
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary mb-2 me-2"
-                                        onClick={() => handleSetAuctionEnd(60)}
-                                    >
-                                        60일
-                                    </button>
+                <div>
+                    <div className="row">
+                        <div className="col-md-6" style={{ border: 'none', marginTop: '3rem' }}>
+                            <BookResearch aucToInfo={infoCallback} onImageUpload={handleImageUpload} className="book-research" />
+                        </div>
+                        <div className="col-md-6" style={{ border: 'none' }}>
+                            <form onSubmit={handleSubmit} className="book-sign-up-form">
+                                <div className="auctionTitle">
+                                    <label htmlFor="auctionTitle">게시글 제목</label>
+                                    <input
+                                        type="text"
+                                        className="form-control formTitle"
+                                        id="auctionTitle"
+                                        name="auctionTitle"
+                                        onChange={(e) => handleChange(e, "auctionTitle")}
+                                        placeholder="게시글 제목을 입력하세요"
+                                    />
                                 </div>
-                            </div>
-                        </form>
+                                <div>
+                                    <label htmlFor="auctionContext">상세정보</label>
+                                    <textarea
+                                        className="form-control formContext"
+                                        id="auctionContext"
+                                        name="auctionContext"
+                                        onChange={(e) => handleChange(e, "auctionContext")}
+                                        placeholder="상세정보를 입력하세요"
+                                    ></textarea>
+                                </div>
+                                <div>
+                                    <label htmlFor="auctionPrice">경매시작가</label>
+                                    <input
+                                        type="number"
+                                        className="form-control formPrice"
+                                        id="auctionPrice"
+                                        name="auctionPrice"
+                                        onChange={(e) => handleChange(e, "auctionPrice")}
+                                        placeholder="원하는 경매시작 가격을 입력하세요"
+                                    />
+                                </div>
+                                <label>도서 카테고리</label>
+                                <div>
+                                    <button type="button" className="btn btn-secondary mb-2 me-2" onClick={() => setShowModal(true)}>
+                                        {selectedCategory ? selectedCategory : "카테고리 선택하기"}
+                                    </button>
+                                    <CategoryModal
+                                        show={showModal}
+                                        onHide={() => setShowModal(false)}
+                                        onCategorySelect={handleCategorySelect}
+                                        selectedCategory={selectedCategory}
+                                    />
+                                </div>
+                                <div className="exDateBtn-group">
+                                    <label>마감기한</label>
+                                    <div>{renderAuctionEnd()}</div>
+                                    <div className="d-flex flex-wrap align-items-center">
+                                        <button
+                                            type="button"
+                                            className="btn btn-secondary mb-2 me-2"
+                                            onClick={() => handleSetAuctionEnd(1)}
+                                        >
+                                            1일
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn btn-secondary mb-2 me-2"
+                                            onClick={() => handleSetAuctionEnd(3)}
+                                        >
+                                            3일
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn btn-secondary mb-2 me-2"
+                                            onClick={() => handleSetAuctionEnd(7)}
+                                        >
+                                            7일
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn btn-secondary mb-2 me-2"
+                                            onClick={() => handleSetAuctionEnd(30)}
+                                        >
+                                            30일
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn btn-secondary mb-2 me-2"
+                                            onClick={() => handleSetAuctionEnd(60)}
+                                        >
+                                            60일
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
 
+                        </div>
                     </div>
-                </div>
-                <div className="d-grid col-11 mx-auto ">
-                    <button type="submit"
-                        className="btn btn-sign-up btn-lg mt-4 mb-5 signupBtn"
-                        onClick={() => handleSubmit()}>
-                        등록하기
-                    </button>
+                    <div className="d-grid col-11 mx-auto ">
+                        <button type="submit"
+                            className="btn btn-sign-up btn-lg mt-4 mb-5 signupBtn"
+                            onClick={() => handleSubmit()}>
+                            등록하기
+                        </button>
+                    </div>
                 </div>
             </div>
+
         </>
     );
 }

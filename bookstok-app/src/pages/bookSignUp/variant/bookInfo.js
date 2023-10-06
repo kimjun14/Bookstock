@@ -3,8 +3,12 @@ import PopUp from "./popUp";
 import placeholderImage from '../../../img/placeholder-image.jpg';
 import './bookInfo.css';
 import axios from "axios";
+import { useMediaQuery } from 'react-responsive';
 
 const BookResearch = ({ aucToInfo, onImageUpload }) => {
+    const isTablet = useMediaQuery({ minWidth: 576, maxWidth: 991 });
+    const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 575 });
+
     const [showModal, setShowModal] = useState(false);
     const [bookInfo, setBookInfo] = useState({
         title: "",
@@ -103,93 +107,96 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
 
 
     return (
-        <div className="book-research-container container-fluid">
-            <div className="row">
-                <form className="validation-form" noValidate>
-                    <div className="row justify-content-around">
-                        <div className="col-md-4 mt-5">
-                            <img
-                                src={bookInfo.image || bookInfo.bookImgSrc || placeholderImage}
-                                alt="bookimg"
-                                name="bookImgSrc"
-                                className="book-research-img col-md-12 mb-4"
-                                onClick={openModal}
-                            />
-                        </div>
-                        <div className="col-md-5 mb-3">
-                            <div className="row justify-content-between align-items-center mb-3">
-                                {bookInfo.title_url && (
-                                    <button
-                                        type="button"
-                                        className="book-research-search-btn btn btn-success col-md-3 mb-2"
-                                        onClick={openModal}
-                                    >
-                                        도서검색
-                                    </button>
-                                )}
+        <div className={`book-research-container ${isMobile ? 'mobile' : ''} ${isTablet ? 'tablet' : ''}`}>
 
-                                <PopUp isOpen={showModal} onClose={closeModal} infoToPopup={popupCallback} />
+            <div className="book-research-container container-fluid">
+                <div className="row">
+                    <form className="validation-form" noValidate>
+                        <div className="row justify-content-around">
+                            <div className="col-md-4">
+                                <img
+                                    src={bookInfo.image || bookInfo.bookImgSrc || placeholderImage}
+                                    alt="bookimg"
+                                    name="bookImgSrc"
+                                    className="book-research-img col-md-12"
+                                    onClick={openModal}
+                                />
                             </div>
+                            <div className="col-md-5" style={{ marginRight: '1rem' }}>
+                                <div className="row justify-content-between align-items-center">
+                                    {bookInfo.title_url && (
+                                        <button
+                                            type="button"
+                                            className="book-research-search-btn btn btn-success col-md-3"
+                                            onClick={openModal}
+                                        >
+                                            도서검색
+                                        </button>
+                                    )}
 
-                            <label htmlFor="title" style={{ marginTop: '1rem' }}>도서제목</label>
-                            <input
-                                type="text"
-                                className="form-control ms-1"
-                                id="bookTitle"
-                                name="bookTitle"
-                                value={bookInfo.title}
-                                placeholder="도서 제목을 입력하세요"
-                                onChange={(e) => handleChange(e, "TITLE", bookInfo)}
-                            />
+                                    <PopUp isOpen={showModal} onClose={closeModal} infoToPopup={popupCallback} />
+                                </div>
 
-                            <label htmlFor="public" style={{ marginTop: '1rem' }}>출판사</label>
-                            <input
-                                type="text"
-                                className="form-control ms-1"
-                                id="bookPub"
-                                name="bookPub"
-                                value={bookInfo.pub}
-                                placeholder="출판사를 입력하세요"
-                                onChange={(e) => handleChange(e, "PUBLISHER", bookInfo)}
-                            />
+                                <label htmlFor="title" className='labelTitle'>도서제목</label>
+                                <input
+                                    type="text"
+                                    className="form-control ms-1 "
+                                    id="bookTitle"
+                                    name="bookTitle"
+                                    value={bookInfo.title}
+                                    placeholder="도서 제목을 입력하세요"
+                                    onChange={(e) => handleChange(e, "TITLE", bookInfo)}
+                                />
 
-                            <label htmlFor="pubDate" style={{ marginTop: '1rem' }}>출판일</label>
-                            <input
-                                type="text"
-                                className="form-control ms-1"
-                                id="bookPubDate"
-                                name="bookPubDate"
-                                value={bookInfo.pubDate}
-                                placeholder="출판일을 입력하세요."
-                                onChange={(e) => handleChange(e, "PUBDATE", bookInfo)}
-                            />
+                                <label htmlFor="public" className='labelPublic'>출판사</label>
+                                <input
+                                    type="text"
+                                    className="form-control ms-1 form-public"
+                                    id="bookPub"
+                                    name="bookPub"
+                                    value={bookInfo.pub}
+                                    placeholder="출판사를 입력하세요"
+                                    onChange={(e) => handleChange(e, "PUBLISHER", bookInfo)}
+                                />
 
-                            <label htmlFor="author" style={{ marginTop: '1rem' }}>작가</label>
-                            <input
-                                type="text"
-                                className="form-control ms-1"
-                                id="bookAuthor"
-                                name="bookAuthor"
-                                value={bookInfo.author}
-                                placeholder="작가를 입력하세요"
-                                onChange={(e) => handleChange(e, "AUTHOR", bookInfo)}
-                            />
+                                <label htmlFor="pubDate" className='labelPubDate' >출판일</label>
+                                <input
+                                    type="text"
+                                    className="form-control ms-1 form-pubDate"
+                                    id="bookPubDate"
+                                    name="bookPubDate"
+                                    value={bookInfo.pubDate}
+                                    placeholder="출판일을 입력하세요."
+                                    onChange={(e) => handleChange(e, "PUBDATE", bookInfo)}
+                                />
 
-                                <div className="col-md-12 mt-3">
-                                    <label htmlFor="imageUpload">이미지 업로드</label>
-                                    <div className="input-group ms-3">
+                                <label htmlFor="author" className='labelAuthor'>작가</label>
+                                <input
+                                    type="text"
+                                    className="form-control ms-1 form-author"
+                                    id="bookAuthor"
+                                    name="bookAuthor"
+                                    value={bookInfo.author}
+                                    placeholder="작가를 입력하세요"
+                                    onChange={(e) => handleChange(e, "AUTHOR", bookInfo)}
+                                />
+
+                                <div className="col-md-12">
+                                    <label htmlFor="imageUpload" className='labelImgUp'>이미지 업로드</label>
+                                    <div className="input-group ms-3 form-imgUp" style={{ width: '95%', marginBottom: '1rem' }}>
                                         <input type="file"
                                             className="form-control"
                                             onChange={handleImageChange} />
                                         <button className="input-group-text" htmlFor="inputGroupFile02" onClick={handleUpload}>업로드</button>
                                     </div>
                                 </div>
+                            </div>
                         </div>
-                    </div>
 
 
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     );

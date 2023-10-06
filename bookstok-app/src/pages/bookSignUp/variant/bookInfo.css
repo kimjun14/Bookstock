@@ -1,18 +1,76 @@
 .book-research-container {
-  margin-top: -6rem;
+  margin-top: -4rem;
 }
 
 .book-research-img {
   max-width: 100%;
   cursor: pointer;
   margin: 3rem;
+  margin-top: 2rem;
+  box-shadow: 0px 2px 10px gainsboro;
+  border-radius: 6px;
 }
 
-.book-research-title {
-  width: 20rem;
+.labelImgUp,
+.labelAuthor,
+.labelPubDate,
+.labelPublic,
+.labelTitle {
+  font-size: medium;
+  margin-top: 1rem;
+  margin-left: 0.1rem;
+}
+
+.form-title,
+.form-public,
+.form-pubDate,
+.form-author {
+  margin-left: 1rem;
 }
 
 .book-research-search-btn {
   font-size: 1rem;
   padding: 0.5rem 1rem;
+}
+
+/* 태블릿 */
+@media (min-width: 576px) and (max-width: 991px) {
+  .book-sign-up-container.tablet {
+    margin-top: -4.5rem;
+    font-size: small;
+  }
+  .book-research-img {
+    width: 70%;
+    margin-top: 1rem;
+    box-shadow: 0px 2px 10px gainsboro;
+    border-radius: 6px;
+  }
+
+  h2 {
+    visibility: visible; /* 요소 표시 설정 */
+  }
+}
+
+/* 모바일 */
+@media (max-width: 575px) {
+  .book-research-container.mobile {
+    margin-top: -3rem;
+    font-size: x-small;
+  }
+
+  .book-research-img {
+    width: 70%;
+    margin-top: 1rem;
+    box-shadow: 0px 2px 10px gainsboro;
+    border-radius: 6px;
+  }
+
+  .labelImgUp,
+  .labelAuthor,
+  .labelPubDate,
+  .labelPublic,
+  .labelTitle {
+    font-size: medium;
+    margin-top: 1rem;
+  }
 }
