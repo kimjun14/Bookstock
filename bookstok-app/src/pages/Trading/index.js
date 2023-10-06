@@ -249,7 +249,7 @@ function Trading() {
                 <div className="input-group mt-2">
                   <input className="form-control" type="file" onChange={handleImageChange} />
                   <button className="btn btn-primary" onClick={handleUpload}>
-                    Upload
+                    업로드
                   </button>
                 </div>
               </div>
