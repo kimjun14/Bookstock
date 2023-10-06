@@ -19,7 +19,7 @@ const userModel = {
             const [result]=await pool.query(
                 `SELECT *
                 from auction
-                where uId=?;;`
+                where uId=? and done=0;`
             ,userNo)
             return result;
         }catch(err){
@@ -29,7 +29,7 @@ const userModel = {
     async myAuctionBid(userNo){
         try{
             const [result]=await pool.query(
-                `SELECT B.*, A.auctionTitle, A.bookTitle, A.auctionEnd
+                `SELECT B.*, A.*
                 from bid as B
                 join auction as A
                 on B.aId = A.auctionId
