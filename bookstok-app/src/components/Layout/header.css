@@ -79,3 +79,26 @@
     width: 99%;
   }
 }
+
+@media screen and (min-width: 577px) {
+  .header-category {
+    background-color: #fff !important; 
+    font-size: large !important;
+    font-weight: 500 !important;
+    border-color: lightslategray !important;
+    color: lightslategray !important;
+    border-radius: 6px !important;
+    margin-left: 0rem !important;
+    margin-right: 0rem;
+    transition: background-color 0.3s, color 0.3s !important;
+  }
+
+  .header-search{
+    margin-right: 0rem;
+    box-shadow: 0px 2px 8px gainsboro;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 6px;
+    width: 99%;
+  }
+}
