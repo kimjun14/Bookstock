@@ -98,7 +98,7 @@ const Header = function () {
                     {!isBookSignUpPage && (
                         <div className="row justify-content-end" style={{ border: "0px solid red", marginRight: '1rem' }}>
                             <div className="col-sm-9"></div>
-                            <Link to="/booksignup" type="button" className="col-sm btn header-bookSignUp">
+                            <Link to="/booksignup" type="button" className="col-sm btn header-bookSignUp me-2">
                                 역경매 등록하기
                             </Link>
                             <Button className="col-sm btn header-category" onClick={handleShowModal}>
