@@ -12,6 +12,7 @@ const axiosConnect = axios.create({
     withCredentials: true
 });
 
+
 const categories = [
     {
         name: '소설',
@@ -344,6 +345,7 @@ function SignUp() {
     }, [selectedCategories]) // 상태변화 체크용
 
     return (
+        <>
         <div className="container-fluid px-2 px-md-4 py-5 mx-auto">
             <div className="col-lg-7" style={{ margin: 'auto' }}>
                 <div className="card2 card border-0 px-4 px-sm-5 py-5">
@@ -399,12 +401,12 @@ function SignUp() {
                             <h6 className="mb-0 text-sm">주소</h6>
                         </label>
                         <div className="row">
-                            <input className="col-sm-9 user_enroll_text" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
-                            <div className="col-sm-3">
-                                <button className="btn btn-primary" onClick={handleOpenModal}>우편번호 찾기</button>
-                            </div>
+                            <input className="col-sm-12 user_enroll_text" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
                         </div>
                         <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" value={detailAddress} onChange={handleDetailAddressChange} />
+                        <div className="col-sm-4">
+                            <button className="addressBtn btn btn-primary mt-1" onClick={handleOpenModal}>우편번호 찾기</button>
+                        </div>
                         {isModalOpen && <Address company={enroll_company} setcompany={setEnroll_company} closeModal={handleCloseModal}></Address>}
                     </div>
 
@@ -468,6 +470,7 @@ function SignUp() {
                 </div>
             </div>
         </div>
+    </>
     );
 }
 
