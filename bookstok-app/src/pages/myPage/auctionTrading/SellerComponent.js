@@ -11,13 +11,18 @@ const axiosConnect = axios.create({
 });
 
 const Desktop = ({ children }) => {
-    const isDesktop = useMediaQuery({ minWidth: 992 })
+    const isDesktop = useMediaQuery({ minWidth: 1024 })
     return isDesktop ? children : null
 }
 
 const Mobile = ({ children }) => {
     const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
     return isMobile ? children : null
+}
+
+const Tablet = ({ children }) => {
+    const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
+    return isTablet ? children : null
 }
 
 
@@ -249,7 +254,47 @@ function SellerComponent() {
                     </div>
                 </div>
             </Desktop>
+            <Tablet>
+                <div className="container">
+                    <h4 className="parcelNum text-center">운송장 번호</h4>
+                    <div className="mb-3">
+                        <select className="form-select form-select-sm" onChange={handleCarrierChange} value={selectedCarrier}>
+                            <option value="">택배사를 선택하세요</option>
+                            {carriers.map((carrier) => (
+                                <option key={carrier.Code} value={carrier.Code}>
+                                    {carrier.Name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="mb-3 text-center">
+                        <input
+                            type="text"
+                            placeholder="하이픈(-)을 제외하고 입력하세요"
+                            className="parcelInput w-100"
+                            value={trackingNumber}
+                            onChange={handleTrackingNumberChange}
+                            disabled={isSaved} // 저장 후 수정 불가능하도록 비활성화
+                        />
+                        <button className="btn parcelNumBtn" onClick={handleConfirmSave} disabled={isSaved}>
+                            운송장 번호 저장
+                        </button>
+                    </div>
+                    <div className="text-center">
+                        <h4>계좌번호</h4>
+                        <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
+                            {banks.map((bank, index) => (
+                                <option key={index} value={bank}>
+                                    {bank}
+                                </option>
+                            ))}
+                        </select>
+                        <input className="w-100 mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
+                        <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
+                    </div>
+                </div>
 
+            </Tablet>
             <Mobile>
                 <div className="container">
                     <h4 className="parcelNum text-center">운송장 번호</h4>

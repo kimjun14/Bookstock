@@ -6,13 +6,18 @@ import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
 
 const Desktop = ({ children }) => {
-    const isDesktop = useMediaQuery({ minWidth: 992 })
+    const isDesktop = useMediaQuery({ minWidth: 1024 })
     return isDesktop ? children : null
 }
 
 const Mobile = ({ children }) => {
     const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
     return isMobile ? children : null
+}
+
+const Tablet = ({ children }) => {
+    const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
+    return isTablet ? children : null
 }
 
 const Payment = () => {
@@ -68,16 +73,38 @@ const Payment = () => {
                                 </div>
                             </div>
                         </div>
-
-                        <hr className="underline1" />
-
-                        <div className="d-flex justify-content-around">
-                            <span className="fw-bold" onClick={null}>머니 내역</span>
-                            <span className="fw-bold" onClick={null}>고객 센터</span>
-                        </div>
                     </div>
                 </div>
             </Desktop>
+
+            <Tablet>
+                <div className='d-flex align-items-center justify-content-center'>
+                    <div className="card-container card" >
+                        <div className="card-body">
+                            <div className="pay-container text-center card text-bg-primary mb-3">
+                                <div className="card-body">
+                                    <span className="card-title">
+                                        <img src={icon} alt="icon" className='icon' />
+                                        <span>북스탁 Pay</span>
+                                    </span>
+                                    <Link to="/deposit">
+                                        <p className="balance card-text mb-2">{balance}원 〉</p>
+                                    </Link>
+                                    <div className='button-div d-flex align-items-center justify-content-center'>
+                                        <Link to="/deposit" className='me-2'>
+                                            <button type="button" className="btn btn-outline-light btn-sm">충전하기</button>
+                                        </Link>
+                                        <Link to="/withdraw">
+                                            <button type="button" className="btn btn-outline-light btn-sm">출금하기</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Tablet>
+
             <Mobile>
                 <div className='d-flex align-items-center justify-content-center'>
                     <div className="card-container card" >
@@ -92,7 +119,7 @@ const Payment = () => {
                                         <p className="balance card-text mb-2">{balance}원 〉</p>
                                     </Link>
                                     <div className='button-div d-flex align-items-center justify-content-center'>
-                                        <Link to="/deposit" className='me-2'> 
+                                        <Link to="/deposit" className='me-2'>
                                             <button type="button" className="btn btn-outline-light btn-sm">충전하기</button>
                                         </Link>
                                         <Link to="/withdraw">

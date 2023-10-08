@@ -12,13 +12,18 @@ const axiosConnect = axios.create({
 });
 
 const Desktop = ({ children }) => {
-    const isDesktop = useMediaQuery({ minWidth: 992 })
+    const isDesktop = useMediaQuery({ minWidth: 1024 })
     return isDesktop ? children : null
 }
 
 const Mobile = ({ children }) => {
     const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
     return isMobile ? children : null
+}
+
+const Tablet = ({ children }) => {
+    const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
+    return isTablet ? children : null
 }
 
 
@@ -271,7 +276,7 @@ function BuyerComponent() {
                     <button className="btn btn-blue-address" onClick={handleConfirmAddress}>주소 저장</button>
 
 
-                    <h4>계좌번호</h4>
+                    <h4 className="mt-5">계좌번호</h4>
                     <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
                         {banks.map((bank, index) => (
                             <option key={index} value={bank}>
@@ -319,6 +324,32 @@ function BuyerComponent() {
                     <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
                 </div>
             </Desktop>
+
+            <Tablet>
+                <div className="text-center">
+                    <h4 className="addressTitle">주소</h4>
+                    <input type="button" onClick={handleOpenModal} value="우편번호 찾기" />
+                    <input className="user_enroll_text" type="text" name="addr" placeholder="주소를 입력하세요" value={addressData.addr} onChange={handleAddressInput} />
+                    <input className="w-100" type="text" id="detailAddress" name="addr2" placeholder="상세주소를 입력하세요" value={addressData.addr2} onChange={handleAddressInput} />
+                    {isModalOpen && <TradingAddress company={addressData} setcompany={setAddressData} closeModal={handleCloseModal}></TradingAddress>}
+                    <button className="btn btn-blue-address mb-5" onClick={handleConfirmAddress}>주소 저장</button>
+
+
+                    <h4>계좌번호</h4>
+                    <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
+                        {banks.map((bank, index) => (
+                            <option key={index} value={bank}>
+                                {bank}
+                            </option>
+                        ))}
+                    </select>
+
+                    <input className="w-100 mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
+                    <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
+                </div>
+
+            </Tablet>
+
             <Mobile>
                 <div className="text-center">
                     <h4 className="addressTitle">주소</h4>

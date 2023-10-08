@@ -33,11 +33,23 @@
 
 
 @media screen and (max-width: 576px) {
- .card-container {
-    width: 90%;
- }
- .button-div {
-    border: 0px solid red;
-    margin-left: -1.2rem;
+    .card-container {
+        width: 90%;
+    }
+
+    .button-div {
+        border: 0px solid red;
+        margin-left: -10%;
+    }
 }
+
+@media screen and (min-width: 577px) and (max-width: 1023px) {
+    .card-container {
+        width: 90%;
+    }
+
+    .button-div {
+        border: 0px solid red;
+        margin-left: -10%;
+    }
 }

@@ -10,13 +10,18 @@ import './auctionTrading.css'
 import { useMediaQuery } from 'react-responsive';
 
 const Desktop = ({ children }) => {
-  const isDesktop = useMediaQuery({ minWidth: 992 })
+  const isDesktop = useMediaQuery({ minWidth: 1024 })
   return isDesktop ? children : null
 }
 
 const Mobile = ({ children }) => {
   const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
   return isMobile ? children : null
+}
+
+const Tablet = ({ children }) => {
+  const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
+  return isTablet ? children : null
 }
 
 function MainComponent() {
@@ -36,7 +41,7 @@ function MainComponent() {
   return (
     <>
       <Desktop>
-        <Container className="mt-4">
+        <Container>
           <Row>
             <Col>
               <Button
@@ -61,6 +66,31 @@ function MainComponent() {
           {isSellerActive && <SellerComponent />}
         </Container>
       </Desktop>
+
+      <Tablet>
+        <Container className="mt-4">
+          <Row className="d-flex justify-content-center">
+            <Button
+              variant={isBuyerActive ? "btn-buyer" : "btn-buyer:hover"}
+              onClick={handleBuyerClick}
+              className="btn btn-buyer mb-1"
+            >
+              구매자
+            </Button>{" "}
+          </Row>
+          <Row className="d-flex justify-content-center">
+            <Button
+              variant={isSellerActive ? "btn-seller" : "btn-seller:hover"}
+              onClick={handleSellerClick}
+              className="btn btn-seller"
+            >
+              판매자
+            </Button>
+          </Row>
+          {isBuyerActive && <BuyerComponent />}
+          {isSellerActive && <SellerComponent />}
+        </Container>
+      </Tablet>
 
       <Mobile>
         <Container className="mt-4">

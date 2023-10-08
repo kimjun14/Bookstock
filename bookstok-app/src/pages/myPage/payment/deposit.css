@@ -34,4 +34,58 @@
     margin: auto;
    }
 }
-  
+
+@media screen and (min-width: 577px) and (max-width: 1023px) {
+  .deposit-container {
+    border-radius: 20px;
+    box-shadow: 20px 20px 80px rgb(206, 206, 206);
+    margin: 0.2rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .chargeInput,
+  .toolbar {
+    width: 90%;
+    margin: auto;
+   }
+
+   .form-select-sm {
+    width: 50%;
+   }
+   .accountInput {
+    width: 90%;
+    margin: auto;
+   }
+
+   .chargeButton {
+    width: 90%;
+    margin: auto;
+   }
+}
+@media screen and (min-width: 1024px) {
+  .deposit-container {
+    border-radius: 20px;
+    box-shadow: 20px 20px 80px rgb(206, 206, 206);
+    margin: 0.2rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .chargeInput,
+  .toolbar {
+    width: 90%;
+    margin: auto;
+   }
+
+   .form-select-sm {
+    width: 50%;
+   }
+   .accountInput {
+    width: 90%;
+    margin: auto;
+   }
+
+   .chargeButton {
+    width: 90%;
+    margin: auto;
+   }
+}

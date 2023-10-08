@@ -5,13 +5,18 @@ import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
 
 const Desktop = ({ children }) => {
-    const isDesktop = useMediaQuery({ minWidth: 992 })
+    const isDesktop = useMediaQuery({ minWidth: 1024 })
     return isDesktop ? children : null
 }
 
 const Mobile = ({ children }) => {
     const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
     return isMobile ? children : null
+}
+
+const Tablet = ({ children }) => {
+    const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
+    return isTablet ? children : null
 }
 const Deposit = () => {
     const [cash, setCash] = useState('');
@@ -136,6 +141,51 @@ const Deposit = () => {
                     <DepositModal openModal={modal} closeModal={closeModal} cash={cash} bank={selectedBank} account={accountNumber} />
                 </div>
             </Desktop>
+
+            <Tablet>
+            <div className="deposit-container text-center">
+                    <div className="row justify-content-center mb-3">
+                        <div className="col-sm-6 fs-3">북스탁페이 머니로</div>
+                    </div>
+
+                    <div className="justify-content-center mb-2">
+                        <input type="tel" className="chargeInput" placeholder='충전할 금액을 입력해 주세요.' value={cash === '0' ? '' : cash} onChange={(e) => setCash(e.target.value)} />
+                    </div>
+
+                    <div className="row toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div className="btn-group" role="group" aria-label="First group">
+                            <button type="button" className="btn btn-outline-secondary" onClick={() => setCashHandler("10000")}>+1만</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={() => setCashHandler("50000")}>+5만</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={() => setCashHandler("100000")}>+10만</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={() => setCashHandler("200000")}>+20만</button>
+                        </div>
+                    </div>
+
+                    <div className="row justify-content-center mt-5">
+                        <div className="col-sm-6 fw-bold">무통장 입금</div>
+                    </div>
+
+                    <select className="form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
+                        {banks.map((bank, index) => (
+                            <option key={index} value={bank}>
+                                {bank}
+                            </option>
+                        ))}
+                    </select>
+                            <div className='text-center'>
+                    <div className="accountInput">
+                        <input type="text" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={setAccountNumber} />
+                    </div>
+                    </div>
+
+                    <div className='row justify-content-center'>
+                        <button className='chargeButton col-sm-6 btn btn-primary' onClick={chargeMoney} >
+                            충전하기
+                        </button>
+                    </div>
+                    <DepositModal openModal={modal} closeModal={closeModal} cash={cash} bank={selectedBank} account={accountNumber} />
+                </div>
+            </Tablet>
 
             <Mobile>
                 <div className="deposit-container text-center">

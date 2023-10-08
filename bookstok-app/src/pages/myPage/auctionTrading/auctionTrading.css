@@ -37,3 +37,15 @@
   }
   
 }
+
+@media screen and (min-width: 577px) and (max-width: 1023px) {
+  .btn-buyer {
+    width: 80%;
+  }
+
+  .btn-seller {
+    width: 80%;
+    margin-right: 3px;
+  }
+  
+}

@@ -13,6 +13,11 @@ const Mobile = ({ children }) => {
     return isMobile ? children : null
 }
 
+const Tablet = ({ children }) => {
+    const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
+    return isTablet ? children : null
+}
+
 
 const Withdraw = () => {
     const [accountNumber, setAccountNumber] = useState('');
@@ -82,14 +87,14 @@ const Withdraw = () => {
                     </label>
                     <br />
                     <p>잔액: {balance} 포인트</p> {/* 잔액을 표시하는 부분 추가 */}
-                    <button type="button" className="btn btn-primary"  onClick={handleDeductPoints}>출금하기</button>
+                    <button type="button" className="btn btn-primary" onClick={handleDeductPoints}>출금하기</button>
                 </div>
             </Desktop>
-            <Mobile>
+            <Tablet>
                 <div className='withdrawContainer text-center'>
                     <label>
                         계좌 번호:
-                        <input className="accountInput"type="text" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
+                        <input className="accountInput" type="text" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
                     </label>
                     <br />
                     <label className='mt-3'>
@@ -98,7 +103,23 @@ const Withdraw = () => {
                     </label>
                     <br />
                     <p>잔액: {balance} 포인트</p> {/* 잔액을 표시하는 부분 추가 */}
-                    <button type="button" className="btn btn-primary"  onClick={handleDeductPoints}>출금하기</button>
+                    <button type="button" className="btn btn-primary" onClick={handleDeductPoints}>출금하기</button>
+                </div>
+            </Tablet>
+            <Mobile>
+                <div className='withdrawContainer text-center'>
+                    <label>
+                        계좌 번호:
+                        <input className="accountInput" type="text" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
+                    </label>
+                    <br />
+                    <label className='mt-3'>
+                        출금할 포인트:
+                        <input className="pointInput" type="text" value={points} onChange={(e) => setPoints(e.target.value)} />
+                    </label>
+                    <br />
+                    <p>잔액: {balance} 포인트</p> {/* 잔액을 표시하는 부분 추가 */}
+                    <button type="button" className="btn btn-primary" onClick={handleDeductPoints}>출금하기</button>
                 </div>
             </Mobile>
         </>

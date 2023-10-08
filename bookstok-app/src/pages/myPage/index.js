@@ -9,6 +9,7 @@ import './index.css'
 import axios from 'axios';
 
 import { useMediaQuery } from 'react-responsive';
+import { Tab } from 'react-bootstrap';
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
@@ -37,13 +38,18 @@ const RequireLogin = ({ children }) => {
 }
 
 const Desktop = ({ children }) => {
-    const isDesktop = useMediaQuery({ minWidth: 992 })
+    const isDesktop = useMediaQuery({ minWidth: 1024 })
     return isDesktop ? children : null
 }
 
 const Mobile = ({ children }) => {
     const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
     return isMobile ? children : null
+}
+
+const Tablet = ({ children }) => {
+    const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
+    return isTablet ? children : null
 }
 const MyPage = () => {
     const [showAuction, setShowAuction] = useState(false);
@@ -184,6 +190,87 @@ const MyPage = () => {
                 </div>
             </Desktop>
 
+            <Tablet>
+                <div className="mypageContainer">
+                    <div className="col" style={{ marginTop: "45px" }}>
+                        <RequireLogin>
+                            <div className="row">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="#bcbdbe" className="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg>
+                            </div>
+
+                            <div className='row text-center mt-2'>
+                                <b className="fs-3">{myinfo.nick} </b>
+                            </div>
+                            <div className='row justify-content-center text-black-50'>
+                                {myinfo.userId} 님 환영합니다.
+                            </div>
+
+                            <div className='row justify-content-center mb-3'>
+                                <button className="profile mt-2 btn btn-secondary btn-sm">프로필 관리</button>
+                            </div>
+
+                            <div className='row text-center'>
+                                <div>일반회원</div>
+                                <div>다음 등급까지 0페이지 남았습니다.</div>
+                                {/* progress bar 시간되면 넣기 */}
+                            </div>
+                        </RequireLogin>
+
+                        <div className="row">
+                            <Payment />
+                        </div>
+
+                        <div className="text-center">
+                            <div className="fs-4 mt-5 mb-4 fw-bold">경매 진행 내역</div>
+
+                            <div className="border rounded ms-1 me-1">
+                                <div className="mb-3">
+                                    <div className="row text-center" onClick={toggleAuction}>
+                                        <p className="fs-6 mt-4 text-black">경매진행중</p>
+                                        <p className="text-center text-black">0</p>
+                                    </div>
+
+                                    <div className="row text-center" onClick={toggleTrading}>
+                                        <p className="fs-6 mt-4 text-black">거래중</p>
+                                        <p className="text-center text-black">0</p>
+                                    </div>
+
+                                    <div className="row text-center">
+                                        <Link to="#" className="text-decoration-none">
+                                            <p className="fs-6 mt-4 text-black">경매완료</p>
+                                            <p className="text-center text-black">0</p>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-0">
+                            <div>
+                                {/* 상세 내역 보기 버튼과 상세 내역을 보여주는 부분 */}
+                                {showAuction && <AuctionProgress />}
+                                {showTrading && <AuctionTrading infoData={myinfo} />}
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className='ms-5'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className="bi bi-book-fill" viewBox="0 0 16 16">
+                            <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+                        </svg>
+                        <span> 책</span>
+                        <br />
+
+                        <Link to="/" className="ms-4 text-decoration-none text-black">선호상품</Link><br />
+                        <Link to="/recentSearch" className="ms-4 text-decoration-none text-black">최근 조회한 상품</Link><br />
+                    </div>
+                    <hr />
+                </div>
+            </Tablet>
+
             <Mobile>
                 <div className="mypageContainer">
                     <div className="col-md-7" style={{ marginTop: "45px" }}>
@@ -212,9 +299,11 @@ const MyPage = () => {
                                 {/* progress bar 시간되면 넣기 */}
                             </div>
                         </RequireLogin>
+
                         <div className="row">
                             <Payment />
                         </div>
+
                         <div className="text-center">
                             <div className="fs-4 mt-5 mb-4 fw-bold">경매 진행 내역</div>
 
@@ -240,7 +329,7 @@ const MyPage = () => {
                             </div>
                         </div>
 
-                        <div className="mt-5">
+                        <div className="mt-0">
                             <div>
                                 {/* 상세 내역 보기 버튼과 상세 내역을 보여주는 부분 */}
                                 {showAuction && <AuctionProgress />}
@@ -248,9 +337,6 @@ const MyPage = () => {
                             </div>
                         </div>
                     </div>
-
-
-
                     <hr />
                     <div className='ms-5'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className="bi bi-book-fill" viewBox="0 0 16 16">
@@ -263,7 +349,6 @@ const MyPage = () => {
                         <Link to="/recentSearch" className="ms-4 text-decoration-none text-black">최근 조회한 상품</Link><br />
                     </div>
                     <hr />
-
                 </div>
             </Mobile>
         </>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 import Chat from './chat';
 import Buying from './buying';
+import { Button, Col, FormControl, InputGroup, Row } from 'react-bootstrap';
 
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
@@ -226,35 +227,37 @@ function Trading() {
               <label htmlFor="floatingTextarea2" className='ms-1'>상품 정보를 입력하세요</label>
             </div>
           </div>
-
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="input-group mt-2">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="입찰금액을 입력하세요"
-                    name="bidPrice"
-                    value={bidData.bidPrice}
-                    onChange={handleBidChange}
-                  />
-                  <button className="btn btn-success mt-0" type="button" id="inputGroupFileAddon04" onClick={handleBidSubmit}>
-                    입찰 하기
-                  </button>
-                </div>
+          <Row>
+            <Col>
+              <div className="input-group mt-2">
+                <FormControl
+                  type="file"
+                  onChange={handleImageChange}
+                  id="inputGroupFile04"
+                  aria-describedby="inputGroupFileAddon04"
+                  aria-label="Upload"
+                />
+                <Button onClick={handleUpload}>
+                  업로드
+                </Button>
               </div>
+            </Col>
 
-              <div className="col-md-6">
-                <div className="input-group mt-2">
-                  <input className="form-control" type="file" onChange={handleImageChange} />
-                  <button className="btn btn-primary" onClick={handleUpload}>
-                    업로드
-                  </button>
-                </div>
+            <Col>
+              <div className="input-group mt-2">
+                <FormControl
+                  type="text"
+                  placeholder="입찰금액을 입력하세요"
+                  name="bidPrice"
+                  value={bidData.bidPrice}
+                  onChange={handleBidChange}
+                />
+                <Button onClick={handleBidSubmit}>
+                  입찰 하기
+                </Button>
               </div>
-            </div>
-          </div>
+            </Col>
+          </Row>
 
           <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
           <Buying show={showModal} bid={selectBid} onClose={closeModal} onSave={() => {
