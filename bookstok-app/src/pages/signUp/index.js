@@ -201,7 +201,9 @@ const categories = [
 
 function SignUp() {
     const [signUpData, setSignUpData] = useState({});
+    const [isPasswordMatch, setPasswordMatch] = useState(true);
     const [selectedCategories, setSelectedCategories] = useState([]); // 선택한 카테고리 배열 추가
+    const [confirmPassword, setConfirmPassword] = useState('');
     const navigation = useNavigate();
 
     const KakaoRestApiKey = '861d57b9824340a31ae9c887397ac901'; // Kakao REST API Key
@@ -231,12 +233,33 @@ function SignUp() {
         console.log(signUpData);
     }
 
+    const handleConfirmPasswordChange = (e) => {
+        const confirmPasswordValue = e.target.value;
+        setConfirmPassword(confirmPasswordValue);
+
+        // 비밀번호 확인
+        if (signUpData.pwd !== confirmPasswordValue) {
+            setPasswordMatch(false);
+        } else {
+            setPasswordMatch(true);
+        }
+    };
+
     const handleSignUpSubmit = async () => {
         try {
             // 필수 입력 필드 검사
-            if (!signUpData.nick || !signUpData.userId || !signUpData.pwd || !signUpData.userPhone || !signUpData.userAccount || signUpData.Address) {
+            if (!signUpData.nick || !signUpData.userId || !signUpData.pwd || !signUpData.userPhone || signUpData.Address || !confirmPassword) {
                 window.alert("모든 필수 정보를 입력하세요.");
                 return;
+            }
+
+            // 비밀번호 확인
+            if (signUpData.pwd !== confirmPassword) {
+                setPasswordMatch(false);
+                console.log("Password doesn't match");
+                return;
+            } else {
+                setPasswordMatch(true); // 비밀번호가 일치하면 초기화
             }
 
             // 카테고리 선택 검사
@@ -351,6 +374,24 @@ function SignUp() {
                         <input type="password" name="pwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                             value={signUpData.pwd} onChange={handleSignUpDataChange} />
                     </div>
+                    <div className="row px-3" style={{ marginBottom: confirmPassword ? '25px' : '2px' }}>
+                        <label className="mb-0">
+                            <h6 className="mb-0 text-sm">비밀번호 확인</h6>
+                        </label>
+                        <input
+                            type="password"
+                            name="pwd"
+                            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChange}
+                            style={{ margin: confirmPassword && '0' }}
+                        />
+                        {confirmPassword && (
+                            <p style={{ color: isPasswordMatch ? 'green' : 'red', margin: '0' }}>
+                                {isPasswordMatch ? '✅ 비밀번호가 일치합니다' : '❌ 비밀번호가 일치하지 않습니다'}
+                            </p>
+                        )}
+                    </div>
 
 
                     <div className="row px-3" >
@@ -373,14 +414,6 @@ function SignUp() {
                         </label>
                         <input type="text" name="userPhone" placeholder="-(하이픈)을 제외하고 입력하세요"
                             value={signUpData.userPhone} onChange={handleSignUpDataChange} />
-
-                    </div>
-                    <div className="row px-3">
-                        <label className="mb-0">
-                            <h6 className="mb-0 text-sm">계좌번호</h6>
-                        </label>
-                        <input type="text" name="userAccount" placeholder="-(하이픈)을 제외하고 입력하세요"
-                            value={signUpData.userAccount} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
@@ -409,7 +442,7 @@ function SignUp() {
                         </small>
                     </div>
                     <div className="row mb-4">
-                        <div className="col-md-6" style={{ border:'0', width:'55%', marginTop:'1rem' }}>
+                        <div className="col" style={{ border: '0', width: '55%', marginTop: '1rem' }}>
                             <button className="btn btn-blue-signup text-center mb-1 py-2" onClick={handleSignUpSubmit} >계정 만들기</button>
                         </div>
                     </div>
@@ -419,15 +452,15 @@ function SignUp() {
                         <div className="line"></div>
                     </div>
 
-                    <div className="socialLogin" style={{width:'60%', margin:'auto'}}>
+                    <div className="socialLogin" style={{ width: '60%', margin: 'auto' }}>
                         <div className="col-sm-6">
                             <div className="d-flex align-items-center">
-                                <img src="/assets/img/kakaoImg.png" style={{ width: '85%', height: '2.7rem', margin: 'auto', cursor: 'pointer', alignItems:'center', marginRight:'0.5rem' }} alt="카카오 로그인" onClick={handleLoginWithKakao} />
+                                <img src="/assets/img/kakaoImg.png" style={{ width: '85%', height: '2.7rem', margin: 'auto', cursor: 'pointer', alignItems: 'center', marginRight: '0.5rem' }} alt="카카오 로그인" onClick={handleLoginWithKakao} />
                             </div>
                         </div>
                         <div className="col-sm-6">
                             <div className="d-flex align-items-center">
-                                <img src="/assets/img/NaverImg.png" style={{ width: '85%', height: '2.7rem', margin: 'auto', cursor: 'pointer', alignItems:'center',marginLeft:'0.5rem'  }} alt="네이버 로그인" onClick={handleLoginWithNaver} />
+                                <img src="/assets/img/NaverImg.png" style={{ width: '85%', height: '2.7rem', margin: 'auto', cursor: 'pointer', alignItems: 'center', marginLeft: '0.5rem' }} alt="네이버 로그인" onClick={handleLoginWithNaver} />
                             </div>
                         </div>
                     </div>
