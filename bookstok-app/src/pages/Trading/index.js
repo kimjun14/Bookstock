@@ -5,13 +5,29 @@ import axios from 'axios';
 import moment from 'moment';
 import Chat from './chat';
 import Buying from './buying';
-import { Button, Col, FormControl, InputGroup, Row } from 'react-bootstrap';
+import { Button, Col, FormControl, Row, InputGroup } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
   baseURL: 'http://localhost:12345/api',
   withCredentials: true
 });
+
+const Desktop = ({ children }) => {
+  const isDesktop = useMediaQuery({ minWidth: 1024 })
+  return isDesktop ? children : null
+}
+
+const Mobile = ({ children }) => {
+  const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
+  return isMobile ? children : null
+}
+
+const Tablet = ({ children }) => {
+  const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
+  return isTablet ? children : null
+}
 
 function Trading() {
   const navigation = useNavigate();
@@ -148,124 +164,371 @@ function Trading() {
 
   return (
     <>
-      <article>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-6">
-              <div className="item">
-                <div className="itemImg">
-                  <img
-                    src={auctionData.bookImgSrc && auctionData.bookImgSrc}
-                    alt="bookImg"
-                    className="img-fluid" // 이미지 플루이드 반응형
+      <Desktop>
+        <article>
+          <div className="container-fluid">
+            <div className="row itemInfo-container">
+              <div className="col d-flex justify-content-center">
+                <img
+                  src={auctionData.bookImgSrc && auctionData.bookImgSrc}
+                  alt="bookImg"
+                  className="img-fluid" // 이미지 플루이드 반응형
+                  style={{ width: "60%" }}
+                />
+              </div>
+              <div className="col">
+                <div className="itemInfo" style={{ width: "80%" }}>
+                  <span className="badge text-bg-dark fs-2 mt-3">삽니다</span>
+                  <span className="itemTitle fs-2"> {auctionData.auctionTitle && auctionData.auctionTitle}</span>
+                  <hr />
+
+                  <ul className="list-group list-group-flush mt-5">
+                    <li className="list-group-item">책제목: {auctionData.bookTitle && auctionData.bookTitle}</li>
+                    <li className="list-group-item">작가: {auctionData.bookAuthor && auctionData.bookAuthor}</li>
+                    <li className="list-group-item">출판사: {auctionData.bookPub && auctionData.bookPub}</li>
+                    <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</li>
+                    <li className="list-group-item">출판일 : {auctionData.bookPubDate && auctionData.bookPubDate}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="detail-card-container card text-center mt-5">
+              <div className="card-header">
+                상세설명
+              </div>
+              <div className="card-body">
+                <p className="card-text">{auctionData.auctionContext && auctionData.auctionContext}</p>
+              </div>
+            </div>
+
+            <div id="bid" className="mt-5 mb-3">
+              <h2>역경매 입찰</h2>
+            </div>
+            <div>
+              {auctionBidData.map((bid) => (
+                <div className="bid-container card mb-3" style={{ minWidth: "25%" }} key={bid.id}>
+                  <div className="row g-0">
+                    <div className="col-md-12">
+                      <div className="card-body row align-items-center">
+                        <h3 className="card-title col-sm-1 ms-5 mt-4">{bid.nickname}</h3>
+                        <p className="card-title col-sm-2 ms-2 mt-4">
+                          <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
+                        </p>
+                        <h6 className="card-title col-sm-2 mt-4">{bid.bidPrice} 원</h6>
+                        <div className="col-sm-2"></div>
+                        <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={() => openModal(bid)}>즉시구매</button>
+                        <button type="button" className="btn btn-info col-sm-2 mt-3 ms-2" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
+
+                      </div>
+                    </div>
+
+                    <div className='card-body row'>
+                      <div className="alert alert-light col-sm-12" role="alert">
+                        <img src={bid.bidImgSrc} className="img-fluid mx-4" alt="..." style={{ width: "18%" }} />
+                        {bid.bidContext ? bid.bidContext : "상세 설명이 없습니다."}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+            </div>
+
+            <div className="itemExplain row">
+              <div className="form-floating">
+                <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} name="bidContext" value={bidData.bidContext} onChange={handleBidChange} ></textarea>
+                <label htmlFor="floatingTextarea2" className='ms-2'>상품 정보를 입력하세요</label>
+              </div>
+            </div>
+            <Row className='bidCreateContainer'>
+              <Col className='d-flex'>
+                <InputGroup className='mt-2'>
+                  <FormControl
+                    type="file"
+                    onChange={handleImageChange}
+                    id="inputGroupFile04"
+                    aria-describedby="inputGroupFileAddon04"
+                    aria-label="Upload"
                   />
+                  <Button className='uploadBtn' onClick={handleUpload}>
+                    업로드
+                  </Button>
+                </InputGroup>
+
+
+              </Col>
+
+              <Col>
+                <InputGroup className='mt-2'>
+                  <FormControl
+                    type="text"
+                    placeholder="입찰금액을 입력하세요"
+                    name="bidPrice"
+                    value={bidData.bidPrice}
+                    onChange={handleBidChange}
+
+                  />
+                  <Button className='bidBtn' onClick={handleBidSubmit}>
+                    입찰 하기
+                  </Button>
+                </InputGroup>
+              </Col>
+            </Row>
+
+            <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
+            <Buying show={showModal} bid={selectBid} onClose={closeModal} onSave={() => {
+              closeModal();
+            }}
+            />
+          </div >
+        </article >
+      </Desktop>
+
+      <Tablet>
+        <article>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <img
+                  src={auctionData.bookImgSrc && auctionData.bookImgSrc}
+                  alt="bookImg"
+                  className="img-fluid" // 이미지 플루이드 반응형
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <div className="col">
+                <div className="itemInfo" style={{ width: "100%" }}>
+                  <span className="badge text-bg-dark fs-2 mt-3">삽니다</span>
+                  <span className="itemTitle fs-2"> {auctionData.auctionTitle && auctionData.auctionTitle}</span>
+                  <hr />
+
+                  <ul className="list-group list-group-flush mt-5">
+                    <li className="list-group-item">책제목: {auctionData.bookTitle && auctionData.bookTitle}</li>
+                    <li className="list-group-item">작가: {auctionData.bookAuthor && auctionData.bookAuthor}</li>
+                    <li className="list-group-item">출판사: {auctionData.bookPub && auctionData.bookPub}</li>
+                    <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</li>
+                    <li className="list-group-item">출판일 : {auctionData.bookPubDate && auctionData.bookPubDate}</li>
+                  </ul>
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="itemInfo">
-                <h2>
-                  <span className="badge text-bg-dark">~~~삽니다~~~</span>
-                  <span className="itemTitle"> {auctionData.auctionTitle && auctionData.auctionTitle}</span>
-                </h2>
 
-                <p>{auctionData.bookTitle && auctionData.bookTitle}</p>
-                <p>작가: {auctionData.bookAuthor && auctionData.bookAuthor}</p>
-                <p>출판사: {auctionData.bookPub && auctionData.bookPub}</p>
-                <p>경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</p>
-                <p>판매상태: ~~~판매중~~~ </p>
-                <p>출판일 : {auctionData.bookPubDate && auctionData.bookPubDate}</p>
+            <div className="card text-center mt-5">
+              <div className="card-header">
+                상세설명
+              </div>
+              <div className="card-body">
+                <p className="card-text">{auctionData.auctionContext && auctionData.auctionContext}</p>
               </div>
             </div>
-          </div>
 
-          <div className="card text-center">
-            <div className="card-header">
-              상세설명
+            <div id="bid" className="mt-5 mb-3">
+              <h2>역경매 입찰</h2>
             </div>
-            <div className="card-body">
-              <p className="card-text">{auctionData.auctionContext && auctionData.auctionContext}</p>
-            </div>
-          </div>
+            <div>
+              {auctionBidData.map((bid) => (
+                <div className="card mb-3" style={{ minWidth: "25%" }} key={bid.id}>
+                  <div className="row g-0">
+                    <div className="col-md-12">
+                      <div className="card-body row align-items-center">
+                        <h3 className="card-title col ms-4 mt-4">{bid.nickname}</h3>
+                        <p className="card-title col mt-4">
+                          <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
+                        </p>
+                        <h6 className="card-title col mt-4">{bid.bidPrice} 원</h6>
+                        <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={() => openModal(bid)}>즉시구매</button>
+                        <button type="button" className="btn btn-info col-sm-2 mt-3 ms-2 me-4" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
 
-          <div id="bid" className="mt-5 mb-3">
-            <h2>역경매 입찰</h2>
-          </div>
-          <div>
-            {auctionBidData.map((bid) => (
-              <div className="card mb-3" style={{ minWidth: "25%" }} key={bid.id}>
-                <div className="row g-0">
-                  <div className="col-md-12">
-                    <div className="card-body row align-items-center">
-                      <h3 className="card-title col-sm-1 ms-4 mt-4">{bid.nickname}</h3>
-                      <p className="card-title col-sm-2 mt-4">
-                        <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
-                      </p>
-                      <h6 className="card-title col-sm-2 mt-4">{bid.bidPrice} 원</h6>
-                      <div className="col-sm-2"></div>
-                      <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={() => openModal(bid)}>즉시구매</button>
-                      <button type="button" className="btn btn-info col-sm-2 mt-3" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
-
+                      </div>
                     </div>
-                  </div>
 
-                  <div className='card-body row'>
-                    <div className="alert alert-light col-sm-12" role="alert">
-                      <img src={bid.bidImgSrc} className="img-fluid mx-4" alt="..." />
-                      {bid.bidContext ? bid.bidContext : "상세 설명이 없습니다."}
+                    <div className='card-body row'>
+                      <div className="alert alert-light col-sm-12" role="alert">
+                        <img src={bid.bidImgSrc} className="img-fluid mx-4" alt="..." style={{ width: "30%" }} />
+                        {bid.bidContext ? bid.bidContext : "상세 설명이 없습니다."}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
-          </div>
-
-          <div className="row">
-            <div className="form-floating">
-              <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} name="bidContext" value={bidData.bidContext} onChange={handleBidChange} ></textarea>
-              <label htmlFor="floatingTextarea2" className='ms-1'>상품 정보를 입력하세요</label>
             </div>
-          </div>
-          <Row>
-            <Col>
-              <div className="input-group mt-2">
-                <FormControl
-                  type="file"
-                  onChange={handleImageChange}
-                  id="inputGroupFile04"
-                  aria-describedby="inputGroupFileAddon04"
-                  aria-label="Upload"
-                />
-                <Button onClick={handleUpload}>
-                  업로드
-                </Button>
-              </div>
-            </Col>
 
-            <Col>
-              <div className="input-group mt-2">
-                <FormControl
-                  type="text"
-                  placeholder="입찰금액을 입력하세요"
-                  name="bidPrice"
-                  value={bidData.bidPrice}
-                  onChange={handleBidChange}
-                />
-                <Button onClick={handleBidSubmit}>
-                  입찰 하기
-                </Button>
+            <div className="row">
+              <div className="form-floating">
+                <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} name="bidContext" value={bidData.bidContext} onChange={handleBidChange} ></textarea>
+                <label htmlFor="floatingTextarea2" className='ms-2'>상품 정보를 입력하세요</label>
               </div>
-            </Col>
-          </Row>
+            </div>
+            <Row>
+              <Col className='d-flex'>
+                <InputGroup className='mt-2'>
+                  <FormControl
+                    type="file"
+                    onChange={handleImageChange}
+                    id="inputGroupFile04"
+                    aria-describedby="inputGroupFileAddon04"
+                    aria-label="Upload"
+                  />
+                  <Button className='uploadBtn' onClick={handleUpload}>
+                    업로드
+                  </Button>
+                </InputGroup>
 
-          <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
-          <Buying show={showModal} bid={selectBid} onClose={closeModal} onSave={() => {
-            closeModal();
-          }}
-          />
-        </div>
-      </article >
+
+              </Col>
+
+              <Col>
+                <InputGroup className='mt-2'>
+                  <FormControl
+                    type="text"
+                    placeholder="입찰금액을 입력하세요"
+                    name="bidPrice"
+                    value={bidData.bidPrice}
+                    onChange={handleBidChange}
+
+                  />
+                  <Button className='bidBtn' onClick={handleBidSubmit}>
+                    입찰 하기
+                  </Button>
+                </InputGroup>
+              </Col>
+            </Row>
+
+            <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
+            <Buying show={showModal} bid={selectBid} onClose={closeModal} onSave={() => {
+              closeModal();
+            }}
+            />
+          </div >
+        </article >
+      </Tablet>
+      
+      <Mobile>
+      <article>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <img
+                  src={auctionData.bookImgSrc && auctionData.bookImgSrc}
+                  alt="bookImg"
+                  className="img-fluid" // 이미지 플루이드 반응형
+                  style={{ width: "50%" }}
+                />
+              </div>
+            </div>
+            <div className="row justify-content-center">
+                <div className="itemInfo" style={{ width: "80%" }}>
+                  <span className="badge text-bg-dark fs-2 mt-5">삽니다</span>
+                  <span className="itemTitle fs-2"> {auctionData.auctionTitle && auctionData.auctionTitle}</span>
+                  <hr />
+
+                  <ul className="list-group list-group-flush text-center mt-5">
+                    <li className="list-group-item">책제목: {auctionData.bookTitle && auctionData.bookTitle}</li>
+                    <li className="list-group-item">작가: {auctionData.bookAuthor && auctionData.bookAuthor}</li>
+                    <li className="list-group-item">출판사: {auctionData.bookPub && auctionData.bookPub}</li>
+                    <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</li>
+                    <li className="list-group-item">출판일 : {auctionData.bookPubDate && auctionData.bookPubDate}</li>
+                  </ul>
+                </div>
+            </div>
+
+            <div className="card text-center mt-5">
+              <div className="card-header">
+                상세설명
+              </div>
+              <div className="card-body">
+                <p className="card-text">{auctionData.auctionContext && auctionData.auctionContext}</p>
+              </div>
+            </div>
+
+            <div id="bid" className="mt-5 mb-1">
+              <h2>역경매 입찰</h2>
+            </div>
+            <div>
+              {auctionBidData.map((bid) => (
+                <div className="card mb-3" style={{ minWidth: "25%" }} key={bid.id}>
+                  <div className="row g-0">
+                    <div className="col-md-12">
+                      <div className="card-body row align-items-center text-center">
+                        <h3 className="card-title col-sm-1 mt-4">{bid.nickname}</h3>
+                        <p className="card-title col-sm-2 mt-1">
+                          <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
+                        </p>
+                        <h6 className="card-title col-sm-2 mt-2">{bid.bidPrice} 원</h6>
+                        <div className="col-sm-2"></div>
+                      </div>
+                    </div>
+
+                    <div className='card-body'>
+                      <div className="row justify-content-center alert alert-light" role="alert">
+                        <img src={bid.bidImgSrc} className="img-fluid" alt="..." style={{ width: "50%" }} />
+                      </div>
+                      <div className='text-center'>
+                        {bid.bidContext ? bid.bidContext : "상세 설명이 없습니다."}
+                      </div>
+                    </div>
+
+                    <div className='row justify-content-center'>
+                      <button type="button" className=" btn btn-primary mt-1 ms-4" onClick={() => openModal(bid)} style={{width: "80%"}}>즉시구매</button>
+                      <button type="button" className="btn btn-info mt-2 ms-4 mb-3" onClick={() => openChatPopUp(bid)} style={{width: "80%"}}>1:1 채팅</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+            </div>
+
+            <div className="row">
+              <div className="form-floating">
+                <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} name="bidContext" value={bidData.bidContext} onChange={handleBidChange} ></textarea>
+                <label htmlFor="floatingTextarea2" className='ms-2'>상품 정보를 입력하세요</label>
+              </div>
+            </div>
+            <Row>
+              <Col className='d-flex'>
+                <InputGroup className='mt-2'>
+                  <FormControl
+                    type="file"
+                    onChange={handleImageChange}
+                    id="inputGroupFile04"
+                    aria-describedby="inputGroupFileAddon04"
+                    aria-label="Upload"
+                  />
+                  <Button className='uploadBtn' onClick={handleUpload}>
+                    업로드
+                  </Button>
+                </InputGroup>
+                  
+                
+              </Col>
+
+              <Col>
+                <InputGroup className='mt-2'>
+                  <FormControl
+                    type="text"
+                    placeholder="입찰금액을 입력하세요"
+                    name="bidPrice"
+                    value={bidData.bidPrice}
+                    onChange={handleBidChange}
+
+                  />
+                  <Button className='bidBtn' onClick={handleBidSubmit}>
+                    입찰 하기
+                  </Button>
+                </InputGroup>
+              </Col>
+            </Row>
+
+            <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
+            <Buying show={showModal} bid={selectBid} onClose={closeModal} onSave={() => {
+              closeModal();
+            }}
+            />
+          </div >
+        </article >
+      </Mobile>
     </>
   );
 }

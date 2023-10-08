@@ -1,0 +1,33 @@
+.bidBtn {
+    height: 2.4rem;
+    margin-top: 0.1rem;
+}
+
+.uploadBtn {
+    height: 2.4rem;
+    margin-top: 0.1rem;
+}
+
+.detail-card-container{
+    width: 80%;
+    margin: auto;
+}
+
+.itemInfo-container{
+    margin: auto;
+}
+
+.bid-container{
+    width: 80%;
+    margin: auto;
+}
+
+.bidCreateContainer{
+    width: 82%;
+    margin: auto;
+}
+
+.itemExplain{
+    width: 82%;
+    margin: auto;
+}

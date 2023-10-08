@@ -9,7 +9,6 @@ import './index.css'
 import axios from 'axios';
 
 import { useMediaQuery } from 'react-responsive';
-import { Tab } from 'react-bootstrap';
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
