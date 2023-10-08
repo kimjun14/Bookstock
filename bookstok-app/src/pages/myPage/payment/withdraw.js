@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './withdraw.css';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router';
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 })
@@ -23,6 +24,7 @@ const Withdraw = () => {
     const [accountNumber, setAccountNumber] = useState('');
     const [points, setPoints] = useState('');
     const [balance, setBalance] = useState(0); // 잔액 상태 추가
+    const navigate = useNavigate();
 
     const axiosConnect = axios.create({
         baseURL: 'http://localhost:12345/api',
@@ -53,6 +55,9 @@ const Withdraw = () => {
             alert("출금이 완료되었습니다.")
             // 출금이 성공하면 잔액을 업데이트
             fetchBalance();
+
+            // 출금이 성공하면 마이페이지로 돌려보냄
+            navigate('/mypage');
         } catch (error) {
             console.error('포인트 출금 중 에러:', error.response ? error.response.data.message : '네트워크 에러');
         }

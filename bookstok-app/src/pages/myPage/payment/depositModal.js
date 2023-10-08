@@ -2,13 +2,18 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const DepositModal = ({ openModal, closeModal, cash, selectedBank, account }) => {
+
+  const navigate = useNavigate();
 
   const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
     withCredentials: true
   });
+  
 
   const handleConfirm = async () => {
     try {
@@ -22,6 +27,9 @@ const DepositModal = ({ openModal, closeModal, cash, selectedBank, account }) =>
       if (response.data.success) {
         alert('충전이 성공적으로 완료되었습니다.');
         closeModal();
+
+        // 포인트 충전 성공 시 마이페이지로 이동
+        navigate('/mypage');
       } else {
         alert('충전 중에 오류가 발생했습니다.');
       }
