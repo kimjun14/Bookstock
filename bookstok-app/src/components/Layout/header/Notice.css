@@ -1,0 +1,22 @@
+/* Notice.css */
+
+.custom-button {
+  border: none !important;
+  background: none;
+  cursor: pointer;
+}
+
+.header-notice {
+  border: none !important;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-top: 0.5rem;
+  margin-left: 0.1rem;
+  cursor: pointer;
+}
+
+.text-secondary-emphasis-notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

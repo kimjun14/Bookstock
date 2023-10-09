@@ -6,9 +6,10 @@ import './header.css'
 import Home from "./header/Home";
 import SignIn from "./header/signIn";
 import MyPage from "./header/MyPage";
+import Notice from "./header/Notice";
 import SignUp from "./header/SignUp";
-import { useAuth } from '../../AuthContext'
 import SignOut from "./header/SignOut";
+import { useAuth } from '../../AuthContext'
 import { Button, Navbar, Nav, Form } from 'react-bootstrap';
 import CategoryModal from '.././Category/CategoryModal';
 import { useMediaQuery } from 'react-responsive';
@@ -34,8 +35,6 @@ const Header = function () {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const location = useLocation();
-
-
 
     const handleSearchChange = (e) => {
         console.log(e.target.value);
@@ -84,6 +83,7 @@ const Header = function () {
                                     <>
                                         <SignOut />
                                         <MyPage />
+                                        <Notice message="알림 메시지" type="success" />
                                     </>
                                 ) : (
                                     <>
@@ -138,6 +138,7 @@ const Header = function () {
                             <>
                                 <SignOut />
                                 <MyPage />
+                                <Notice message="알림 메시지" type="success" />
                             </>
                         ) : (
                             <>
@@ -192,6 +193,7 @@ const Header = function () {
                             <>
                                 <SignOut />
                                 <MyPage />
+                                <Notice message="알림 메시지" type="success" />
                             </>
                         ) : (
                             <>

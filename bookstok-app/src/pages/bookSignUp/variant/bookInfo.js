@@ -201,7 +201,7 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
 
                                     {/* // 초기 상태 메시지 표시 */}
                                     {uploadStatus === 'initial' && (
-                                        <p style={{ color: 'red' }}>📕 이미지를 선택하고 업로드 버튼을 눌러주세요.</p>
+                                        <p style={{ color: 'red' }}>📕 직접 입력 시 이미지를 선택하고 업로드 버튼을 눌러주세요.</p>
                                     )}
 
                                     {/* // 이미지 업로드 상태에 따른 메시지 표시 */}
