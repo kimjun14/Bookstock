@@ -7,6 +7,7 @@ import Chat from './chat';
 import Buying from './buying';
 import { Button, Col, FormControl, Row, InputGroup } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
+import { useNotification } from '../../contexts/NotificationContext';
 
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
@@ -32,6 +33,8 @@ const Tablet = ({ children }) => {
 function Trading() {
   const navigation = useNavigate();
   const [uploadStatus, setUploadStatus] = useState('initial');
+  const [notifications, setNotifications] = useState([]);
+  const { addNotification } = useNotification();
   const [bidData, setBidData] = useState({
     bidPrice: "",
     bidImgSrc: "",
@@ -52,6 +55,7 @@ function Trading() {
     try {
       const response = await axiosConnect.get(`/auctions/${queryParams.get('id')}`)
       // console.log(response.data[0]);   // auctionData에 어떤 값이 들어가는지 확인하는 용도
+      console.log("Fetched auction data:", response.data[0]); // 가져온 데이터를 로그로 출력
       setAuctionData(response.data[0]);
     } catch (err) {
       console.error(err);
@@ -61,6 +65,7 @@ function Trading() {
   const fetchBidData = async () => {
     try {
       const response = await axiosConnect.get(`/auctions/${queryParams.get('id')}/bids`)
+      console.log("Fetched bid data:", response.data); // 가져온 데이터를 로그로 출력
       setAuctionBidData(response.data);
       console.log(response.data);
     } catch (err) {
@@ -79,6 +84,11 @@ function Trading() {
     }
   }, []);     // 컴포넌트가 처음 마운트 되면 axios 통신을 하여 id값의 경매 데이터를 받아옴
 
+  useEffect(() => {
+    console.log("Auction data state:", auctionData);
+    console.log("Bid data state:", auctionBidData);
+  }, [auctionData, auctionBidData]);
+
   const handleBidChange = (e) => {
     setBidData({
       ...bidData,
@@ -88,14 +98,35 @@ function Trading() {
 
   const handleBidSubmit = async () => {
     try {
+      console.log("Bid data before submission:", bidData);
       await axiosConnect.post(`/auctions/${queryParams.get('id')}`, bidData)
       window.alert("입찰 등록에 성공하였습니다.")
+      console.log("Bid submission successful!");
+
+      // 새로운 입찰이 등록되었음을 알림 컴포넌트에 전달
+      const newBidNotification = {
+        message: `새로운 판매자 입찰이 등록되었습니다.`,
+        type: 'success',
+        price: bidData.bidPrice,
+      details: bidData.bidContext,
+      sellerId: getSellerIdForBid(),
+      };
+      addNotification(newBidNotification);
+
     } catch (err) {
-      console.error(err);
+      console.error("Error submitting bid:", err);
     } finally {
       fetchBidData();
     }
   }
+
+// 판매자 아이디를 가져오는 함수 수정
+const getSellerIdForBid = () => {
+  // 여기에서 판매자 아이디를 얻는 작업을 수행하세요.
+  // 예를 들어, 판매자 아이디가 닉네임과 동일하다고 가정하면 아래와 같이 작성할 수 있습니다.
+  const sellerBid = auctionBidData.find(bid => bid.id === bidData.nickname);
+  return sellerBid ? sellerBid.nickname : 'Unknown Seller';
+};
 
   const formatBidCreateAt = (dateString) => {
     const formattedDate = moment(dateString).format('YYYY-MM-DD HH:mm:ss');
@@ -385,11 +416,11 @@ function Trading() {
               <Col className='d-flex'>
                 <InputGroup className='mt-2'>
                   <FormControl
-                   type="file"
-                   onChange={handleImageChange}
-                   id="inputGroupFile04"
-                   aria-describedby="inputGroupFileAddon04"
-                   aria-label="Upload"
+                    type="file"
+                    onChange={handleImageChange}
+                    id="inputGroupFile04"
+                    aria-describedby="inputGroupFileAddon04"
+                    aria-label="Upload"
 
                   />
                   <Button className='uploadBtn' onClick={handleUpload}>
@@ -526,7 +557,7 @@ function Trading() {
                   id="inputGroupFile04"
                   aria-describedby="inputGroupFileAddon04"
                   aria-label="Upload"
-                  style={{marginBottom: "0"}}
+                  style={{ marginBottom: "0" }}
                 />
                 <Button className='uploadBtn' onClick={handleUpload}>
                   업로드

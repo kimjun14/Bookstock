@@ -13,6 +13,7 @@ import { useAuth } from '../../AuthContext'
 import { Button, Navbar, Nav, Form } from 'react-bootstrap';
 import CategoryModal from '.././Category/CategoryModal';
 import { useMediaQuery } from 'react-responsive';
+import { useNotification } from "../../contexts/NotificationContext";
 
 const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 1024 })
@@ -35,6 +36,7 @@ const Header = function () {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const location = useLocation();
+    const { notifications } = useNotification();
 
     const handleSearchChange = (e) => {
         console.log(e.target.value);
@@ -83,7 +85,7 @@ const Header = function () {
                                     <>
                                         <SignOut />
                                         <MyPage />
-                                        <Notice message="알림 메시지" type="success" />
+                                        <Notice notifications={notifications} />
                                     </>
                                 ) : (
                                     <>
@@ -138,7 +140,7 @@ const Header = function () {
                             <>
                                 <SignOut />
                                 <MyPage />
-                                <Notice message="알림 메시지" type="success" />
+                                <Notice notifications={notifications} />
                             </>
                         ) : (
                             <>
@@ -193,7 +195,7 @@ const Header = function () {
                             <>
                                 <SignOut />
                                 <MyPage />
-                                <Notice message="알림 메시지" type="success" />
+                                <Notice notifications={notifications} />
                             </>
                         ) : (
                             <>
