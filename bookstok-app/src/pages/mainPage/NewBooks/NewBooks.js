@@ -73,7 +73,7 @@ function NewBooks() {
                 {bookData.length > 0 ? (
                     <Slider {...getSliderSettings()}>
                         {bookData.map((book) => (
-                            <Link to={`/trading?id=${book.auctionId}`} className="tradingLink card-link">
+                            <Link key={book.index} to={`/trading?id=${book.auctionId}`} className="tradingLink card-link">
                                 <div key={book.index} className="book-slide">
                                     <div className="d-flex flex-column align-items-center newBooks-card">
                                         <img src={book.bookImgSrc} alt={book.bookTitle} />

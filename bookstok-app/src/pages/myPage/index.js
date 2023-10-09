@@ -120,7 +120,7 @@ const MyPage = () => {
                                 <div className="col-md-12 p-4 rounded d-flex flex-row" style={{ border: "1px solid #bcbdbe" }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="#bcbdbe" className="bi bi-person-circle" viewBox="0 0 16 16">
                                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                        <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                                     </svg>
 
                                     <div className="ms-4 mt-2">
@@ -160,15 +160,13 @@ const MyPage = () => {
                                     </div>
 
                                     <div className="p-2 ms-4" onClick={toggleTrading}>
-                                        <p className="fs-5 mt-4 text-black">거래중</p>
+                                        <p className="fs-6 mt-4 text-black">거래중</p>
                                         <p className="text-center text-black">0</p>
                                     </div>
 
                                     <div className="p-2 ms-4">
-                                        <Link to="#" className="text-decoration-none">
-                                            <p className="fs-5 mt-4 text-black">경매완료</p>
-                                            <p className="text-center text-black">0</p>
-                                        </Link>
+                                        <p className="fs-6 mt-4 text-black">경매완료</p>
+                                        <p className="text-center text-black">0</p>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +194,7 @@ const MyPage = () => {
                             <div className="row">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="#bcbdbe" className="bi bi-person-circle" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                                 </svg>
                             </div>
 
@@ -238,10 +236,8 @@ const MyPage = () => {
                                     </div>
 
                                     <div className="row text-center">
-                                        <Link to="#" className="text-decoration-none">
-                                            <p className="fs-6 mt-4 text-black">경매완료</p>
-                                            <p className="text-center text-black">0</p>
-                                        </Link>
+                                        <p className="fs-6 mt-4 text-black">경매완료</p>
+                                        <p className="text-center text-black">0</p>
                                     </div>
                                 </div>
                             </div>
@@ -277,7 +273,7 @@ const MyPage = () => {
                             <div className="row">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="#bcbdbe" className="bi bi-person-circle" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                                 </svg>
                             </div>
 
@@ -319,10 +315,9 @@ const MyPage = () => {
                                     </div>
 
                                     <div className="row text-center">
-                                        <Link to="#" className="text-decoration-none">
-                                            <p className="fs-6 mt-4 text-black">경매완료</p>
-                                            <p className="text-center text-black">0</p>
-                                        </Link>
+
+                                        <p className="fs-6 mt-4 text-black">경매완료</p>
+                                        <p className="text-center text-black">0</p>
                                     </div>
                                 </div>
                             </div>

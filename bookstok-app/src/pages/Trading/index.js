@@ -31,6 +31,7 @@ const Tablet = ({ children }) => {
 
 function Trading() {
   const navigation = useNavigate();
+  const [uploadStatus, setUploadStatus] = useState('initial');
   const [bidData, setBidData] = useState({
     bidPrice: "",
     bidImgSrc: "",
@@ -149,16 +150,22 @@ function Trading() {
           console.log(bidData)
           console.log('Image uploaded successfully');
           alert("이미지 업로드가 완료 되었습니다.")
+
+          // 이미지 업로드 성공 메시지 설정
+          setUploadStatus('success');
         } else {
           console.error('Image upload failed');
+          setUploadStatus('error');
         }
       } catch (error) {
         console.error('Error uploading image:', error);
+        setUploadStatus('error');
       } finally {
         console.log(bidData)
       }
     } else {
       console.error('No image selected');
+      setUploadStatus('error');
     }
   };
 
@@ -274,6 +281,19 @@ function Trading() {
                   </Button>
                 </InputGroup>
               </Col>
+              {/* // 초기 상태 메시지 표시 */}
+              {uploadStatus === 'initial' && (
+                <p style={{ color: 'red' }}>📕 도서 이미지를 선택하고 업로드 버튼을 눌러주세요.</p>
+              )}
+
+              {/*  이미지 업로드 상태에 따른 메시지 표시 */}
+              {uploadStatus === 'success' && (
+                <p style={{ color: 'green' }}>✅ 도서 이미지 등록이 완료되었습니다. 금액을 입력하고 입찰하기 버튼을 눌러주세요.</p>
+              )}
+
+              {uploadStatus === 'error' && (
+                <p style={{ color: 'red' }}>✋🏻 도서 이미지를 다시 업로드하세요.</p>
+              )}
             </Row>
 
             <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
@@ -375,8 +395,6 @@ function Trading() {
                     업로드
                   </Button>
                 </InputGroup>
-
-
               </Col>
 
               <Col>
@@ -395,6 +413,19 @@ function Trading() {
                 </InputGroup>
               </Col>
             </Row>
+            {/* // 초기 상태 메시지 표시 */}
+            {uploadStatus === 'initial' && (
+              <p style={{ color: 'red' }}>📕 도서 이미지를 선택하고 업로드 버튼을 눌러주세요.</p>
+            )}
+
+            {/*  이미지 업로드 상태에 따른 메시지 표시 */}
+            {uploadStatus === 'success' && (
+              <p style={{ color: 'green' }}>✅ 도서 이미지 등록이 완료되었습니다. 금액을 입력하고 입찰하기 버튼을 눌러주세요.</p>
+            )}
+
+            {uploadStatus === 'error' && (
+              <p style={{ color: 'red' }}>✋🏻 도서 이미지를 다시 업로드하세요.</p>
+            )}
 
             <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
             <Buying show={showModal} bid={selectBid} onClose={closeModal} onSave={() => {
@@ -404,9 +435,9 @@ function Trading() {
           </div >
         </article >
       </Tablet>
-      
+
       <Mobile>
-      <article>
+        <article>
           <div className="container-fluid">
             <div className="row">
               <div className="col d-flex justify-content-center">
@@ -419,19 +450,19 @@ function Trading() {
               </div>
             </div>
             <div className="row justify-content-center">
-                <div className="itemInfo" style={{ width: "80%" }}>
-                  <span className="badge text-bg-dark fs-2 mt-5">삽니다</span>
-                  <span className="itemTitle fs-2"> {auctionData.auctionTitle && auctionData.auctionTitle}</span>
-                  <hr />
+              <div className="itemInfo" style={{ width: "80%" }}>
+                <span className="badge text-bg-dark fs-2 mt-5">삽니다</span>
+                <span className="itemTitle fs-2"> {auctionData.auctionTitle && auctionData.auctionTitle}</span>
+                <hr />
 
-                  <ul className="list-group list-group-flush text-center mt-5">
-                    <li className="list-group-item">책제목: {auctionData.bookTitle && auctionData.bookTitle}</li>
-                    <li className="list-group-item">작가: {auctionData.bookAuthor && auctionData.bookAuthor}</li>
-                    <li className="list-group-item">출판사: {auctionData.bookPub && auctionData.bookPub}</li>
-                    <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</li>
-                    <li className="list-group-item">출판일 : {auctionData.bookPubDate && auctionData.bookPubDate}</li>
-                  </ul>
-                </div>
+                <ul className="list-group list-group-flush text-center mt-5">
+                  <li className="list-group-item">책제목: {auctionData.bookTitle && auctionData.bookTitle}</li>
+                  <li className="list-group-item">작가: {auctionData.bookAuthor && auctionData.bookAuthor}</li>
+                  <li className="list-group-item">출판사: {auctionData.bookPub && auctionData.bookPub}</li>
+                  <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</li>
+                  <li className="list-group-item">출판일 : {auctionData.bookPubDate && auctionData.bookPubDate}</li>
+                </ul>
+              </div>
             </div>
 
             <div className="card text-center mt-5">
@@ -471,8 +502,8 @@ function Trading() {
                     </div>
 
                     <div className='row justify-content-center'>
-                      <button type="button" className=" btn btn-primary mt-1 ms-4" onClick={() => openModal(bid)} style={{width: "80%"}}>즉시구매</button>
-                      <button type="button" className="btn btn-info mt-2 ms-4 mb-3" onClick={() => openChatPopUp(bid)} style={{width: "80%"}}>1:1 채팅</button>
+                      <button type="button" className=" btn btn-primary mt-1 ms-4" onClick={() => openModal(bid)} style={{ width: "80%" }}>즉시구매</button>
+                      <button type="button" className="btn btn-info mt-2 ms-4 mb-3" onClick={() => openChatPopUp(bid)} style={{ width: "80%" }}>1:1 채팅</button>
                     </div>
                   </div>
                 </div>
@@ -487,40 +518,47 @@ function Trading() {
               </div>
             </div>
             <Row>
-              <Col className='d-flex'>
-                <InputGroup className='mt-2'>
-                  <FormControl
-                    type="file"
-                    onChange={handleImageChange}
-                    id="inputGroupFile04"
-                    aria-describedby="inputGroupFileAddon04"
-                    aria-label="Upload"
-                  />
-                  <Button className='uploadBtn' onClick={handleUpload}>
-                    업로드
-                  </Button>
-                </InputGroup>
-                  
-                
-              </Col>
+              <InputGroup className='mt-4'>
+                <FormControl
+                  type="file"
+                  onChange={handleImageChange}
+                  id="inputGroupFile04"
+                  aria-describedby="inputGroupFileAddon04"
+                  aria-label="Upload"
+                />
+                <Button className='uploadBtn' onClick={handleUpload}>
+                  업로드
+                </Button>
+              </InputGroup>
+              {/* // 초기 상태 메시지 표시 */}
+              {uploadStatus === 'initial' && (
+                <p style={{ color: 'red', marginTop: '0' }}>📕 도서 이미지를 선택하고 업로드 버튼을 눌러주세요.</p>
+              )}
 
-              <Col>
-                <InputGroup className='mt-2'>
-                  <FormControl
-                    type="text"
-                    placeholder="입찰금액을 입력하세요"
-                    name="bidPrice"
-                    value={bidData.bidPrice}
-                    onChange={handleBidChange}
+              {/*  이미지 업로드 상태에 따른 메시지 표시 */}
+              {uploadStatus === 'success' && (
+                <p style={{ color: 'green', marginTop: '0' }}>✅ 도서 이미지 등록이 완료되었습니다. 금액을 입력하고 입찰하기 버튼을 눌러주세요.</p>
+              )}
 
-                  />
-                  <Button className='bidBtn' onClick={handleBidSubmit}>
-                    입찰 하기
-                  </Button>
-                </InputGroup>
-              </Col>
+              {uploadStatus === 'error' && (
+                <p style={{ color: 'red', marginTop: '0' }}>✋🏻 도서 이미지를 다시 업로드하세요.</p>
+              )}
             </Row>
 
+            <Row>
+              <InputGroup>
+                <FormControl
+                  type="text"
+                  placeholder="입찰금액을 입력하세요"
+                  name="bidPrice"
+                  value={bidData.bidPrice}
+                  onChange={handleBidChange}
+                />
+                <Button className='bidBtn' onClick={handleBidSubmit}>
+                  입찰 하기
+                </Button>
+              </InputGroup>
+            </Row>
             <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
             <Buying show={showModal} bid={selectBid} onClose={closeModal} onSave={() => {
               closeModal();

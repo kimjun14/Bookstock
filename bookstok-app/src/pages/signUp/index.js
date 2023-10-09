@@ -359,21 +359,21 @@ function SignUp() {
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">닉네임</h6>
                         </label>
-                        <input type="text" name="nick" placeholder="RaLiBooks" style={{ width: '50%' }}
+                        <input className="SignUpinput" type="text" name="nick" placeholder="RaLiBooks" style={{ width: '50%' }}
                             value={signUpData.nick} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">이메일 주소(아이디)</h6>
                         </label>
-                        <input type="text" name="userId" placeholder="BookStock@email.com"
+                        <input type="text" className="SignUpinput" name="userId" placeholder="BookStock@email.com"
                             value={signUpData.userId} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">비밀번호</h6>
                         </label>
-                        <input type="password" name="pwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                        <input className="SignUpinput" type="password" name="pwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                             value={signUpData.pwd} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3" style={{ marginBottom: confirmPassword ? '25px' : '2px' }}>
@@ -381,6 +381,7 @@ function SignUp() {
                             <h6 className="mb-0 text-sm">비밀번호 확인</h6>
                         </label>
                         <input
+                            className="SignUpinput"
                             type="password"
                             name="pwd"
                             placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
@@ -401,9 +402,9 @@ function SignUp() {
                             <h6 className="mb-0 text-sm">주소</h6>
                         </label>
                         <div className="row">
-                            <input className="col-sm-12 user_enroll_text" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
+                            <input className="col-sm-12 user_enroll_text SignUpinput" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address} />
                         </div>
-                        <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" value={detailAddress} onChange={handleDetailAddressChange} />
+                        <input className="SignUpinput" type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" value={detailAddress} onChange={handleDetailAddressChange} />
                         <div className="col-sm-4">
                             <button className="addressBtn btn btn-primary mt-1" onClick={handleOpenModal}>우편번호 찾기</button>
                         </div>
@@ -414,7 +415,7 @@ function SignUp() {
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">전화번호</h6>
                         </label>
-                        <input type="text" name="userPhone" placeholder="-(하이픈)을 제외하고 입력하세요"
+                        <input className="SignUpinput" type="text" name="userPhone" placeholder="-(하이픈)을 제외하고 입력하세요"
                             value={signUpData.userPhone} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">

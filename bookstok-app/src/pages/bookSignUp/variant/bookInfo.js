@@ -10,6 +10,7 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
     const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 575 });
 
     const [showModal, setShowModal] = useState(false);
+    const [uploadStatus, setUploadStatus] = useState('initial');
     const [bookInfo, setBookInfo] = useState({
         title: "",
         pub: "",
@@ -35,6 +36,8 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
             image: book.IMAGE
         });
         closeModal();
+        // 도서가 선택되면 초기 상태 메시지를 지우기
+        setUploadStatus('searched');
     };
 
     const handleChange = (e, name, book) => {
@@ -94,14 +97,20 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
 
                     // 이미지 정보를 부모 컴포넌트로 전달
                     onImageUpload(uploadedImageSrc);
+
+                    // 이미지 업로드 성공 메시지 설정
+                    setUploadStatus('success');
                 } else {
                     console.error('이미지 업로드 실패');
+                    setUploadStatus('error');
                 }
             } catch (error) {
                 console.error('이미지 업로드 에러:', error);
+                setUploadStatus('error');
             }
         } else {
             console.error('선택된 이미지가 없습니다');
+            setUploadStatus('error');
         }
     };
 
@@ -189,6 +198,25 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
                                             onChange={handleImageChange} />
                                         <button className="input-group-text" htmlFor="inputGroupFile02" onClick={handleUpload}>업로드</button>
                                     </div>
+
+                                    {/* // 초기 상태 메시지 표시 */}
+                                    {uploadStatus === 'initial' && (
+                                        <p style={{ color: 'red' }}>📕 이미지를 선택하고 업로드 버튼을 눌러주세요.</p>
+                                    )}
+
+                                    {/* // 이미지 업로드 상태에 따른 메시지 표시 */}
+                                    {uploadStatus === 'success' && (
+                                        <p style={{ color: 'green' }}>✅ 도서 이미지 등록이 완료되었습니다.</p>
+                                    )}
+
+                                    {uploadStatus === 'error' && (
+                                        <p style={{ color: 'red' }}>✋🏻 도서 이미지를 다시 업로드하세요.</p>
+                                    )}
+
+                                    {/* 도서 검색 후 초기 상태 메시지 표시 */}
+                                    {uploadStatus === 'searched' && (
+                                        <p style={{ color: 'green' }}>🔍 도서 이미지 등록이 완료되었습니다.</p>
+                                    )}
                                 </div>
                             </div>
                         </div>

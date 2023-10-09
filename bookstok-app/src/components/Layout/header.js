@@ -9,7 +9,7 @@ import MyPage from "./header/MyPage";
 import SignUp from "./header/SignUp";
 import { useAuth } from '../../AuthContext'
 import SignOut from "./header/SignOut";
-import { Button, Navbar, Nav, Form, Tab } from 'react-bootstrap';
+import { Button, Navbar, Nav, Form } from 'react-bootstrap';
 import CategoryModal from '.././Category/CategoryModal';
 import { useMediaQuery } from 'react-responsive';
 
