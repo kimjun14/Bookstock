@@ -61,7 +61,58 @@ a {
   height: auto;
 }
 
+/* 태블릿 */
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  .searchTable {
+    font-size: 80%; 
+  }
 
-@media screen and(max-width: 576px){
-    
+  th,
+  td {
+    padding: 8px; 
+  }
+}/* 모바일 */
+@media screen and (max-width: 575px) {
+  .searchTable {
+    display: flex; 
+    flex-direction: row;
+  }
+
+  .searchTable th,
+  .searchTable td {
+    flex: 1;
+    text-align: center;
+  }
+
+  .searchTable thead {
+    display: flex; 
+    flex-direction: column; 
+  }
+
+  .searchTable tbody {
+    display: flex;
+    flex-direction: column; 
+  }
+
+  .searchTable th,
+  .searchTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .searchTable th {
+    background-color: #f3f3f3;
+  }
+
+  .searchTable .searchBookTitle {
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  .searchTable .searchBookImg {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
 }
