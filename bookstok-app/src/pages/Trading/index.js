@@ -385,11 +385,12 @@ function Trading() {
               <Col className='d-flex'>
                 <InputGroup className='mt-2'>
                   <FormControl
-                    type="file"
-                    onChange={handleImageChange}
-                    id="inputGroupFile04"
-                    aria-describedby="inputGroupFileAddon04"
-                    aria-label="Upload"
+                   type="file"
+                   onChange={handleImageChange}
+                   id="inputGroupFile04"
+                   aria-describedby="inputGroupFileAddon04"
+                   aria-label="Upload"
+
                   />
                   <Button className='uploadBtn' onClick={handleUpload}>
                     업로드
@@ -525,6 +526,7 @@ function Trading() {
                   id="inputGroupFile04"
                   aria-describedby="inputGroupFileAddon04"
                   aria-label="Upload"
+                  style={{marginBottom: "0"}}
                 />
                 <Button className='uploadBtn' onClick={handleUpload}>
                   업로드
