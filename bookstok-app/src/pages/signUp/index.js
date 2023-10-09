@@ -359,21 +359,21 @@ function SignUp() {
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">닉네임</h6>
                         </label>
-                        <input className="SignUpinput" type="text" name="nick" placeholder="RaLiBooks" style={{ width: '50%' }}
+                        <input type="text" name="nick" placeholder="RaLiBooks" style={{ width: '50%' }}
                             value={signUpData.nick} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">이메일 주소(아이디)</h6>
                         </label>
-                        <input type="text" className="SignUpinput" name="userId" placeholder="BookStock@email.com"
+                        <input type="text" name="userId" placeholder="BookStock@email.com"
                             value={signUpData.userId} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3">
                         <label className="mb-0">
                             <h6 className="mb-0 text-sm">비밀번호</h6>
                         </label>
-                        <input className="SignUpinput" type="password" name="pwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                        <input type="password" name="pwd" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                             value={signUpData.pwd} onChange={handleSignUpDataChange} />
                     </div>
                     <div className="row px-3" style={{ marginBottom: confirmPassword ? '25px' : '2px' }}>
