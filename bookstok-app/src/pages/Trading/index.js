@@ -108,8 +108,8 @@ function Trading() {
         message: `새로운 판매자 입찰이 등록되었습니다.`,
         type: 'success',
         price: bidData.bidPrice,
-      details: bidData.bidContext,
-      sellerId: getSellerIdForBid(),
+        details: bidData.bidContext,
+        sellerId: getSellerIdForBid(),
       };
       addNotification(newBidNotification);
 
@@ -120,13 +120,13 @@ function Trading() {
     }
   }
 
-// 판매자 아이디를 가져오는 함수 수정
-const getSellerIdForBid = () => {
-  // 여기에서 판매자 아이디를 얻는 작업을 수행하세요.
-  // 예를 들어, 판매자 아이디가 닉네임과 동일하다고 가정하면 아래와 같이 작성할 수 있습니다.
-  const sellerBid = auctionBidData.find(bid => bid.id === bidData.nickname);
-  return sellerBid ? sellerBid.nickname : 'Unknown Seller';
-};
+  // 판매자 아이디를 가져오는 함수 수정
+  const getSellerIdForBid = () => {
+    // 여기에서 판매자 아이디를 얻는 작업을 수행하세요.
+    // 예를 들어, 판매자 아이디가 닉네임과 동일하다고 가정하면 아래와 같이 작성할 수 있습니다.
+    const sellerBid = auctionBidData.find(bid => bid.id === bidData.nickname);
+    return sellerBid ? sellerBid.nickname : 'Unknown Seller';
+  };
 
   const formatBidCreateAt = (dateString) => {
     const formattedDate = moment(dateString).format('YYYY-MM-DD HH:mm:ss');
@@ -204,28 +204,29 @@ const getSellerIdForBid = () => {
     <>
       <Desktop>
         <article>
-          <div className="container-fluid">
-            <div className="row itemInfo-container">
+          <div className="tradingContainer">
+            <div className="row itemInfo-container" style={{ marginTop: '1.5rem' }}>
               <div className="col d-flex justify-content-center">
                 <img
                   src={auctionData.bookImgSrc && auctionData.bookImgSrc}
                   alt="bookImg"
                   className="img-fluid" // 이미지 플루이드 반응형
-                  style={{ width: "60%" }}
+                  style={{ width: "40%", marginLeft: '10%', marginBottom: '2rem' }}
                 />
               </div>
               <div className="col">
                 <div className="itemInfo" style={{ width: "80%" }}>
-                  <span className="badge text-bg-dark fs-2 mt-3">삽니다</span>
-                  <span className="itemTitle fs-2"> {auctionData.auctionTitle && auctionData.auctionTitle}</span>
+                  {/* <span className="badge text-bg-dark fs-2 mt-3">삽니다</span> */}
+                  <span className="tradingTitle fs-2"> {auctionData.auctionTitle && auctionData.auctionTitle}</span>
                   <hr />
 
                   <ul className="list-group list-group-flush mt-5">
-                    <li className="list-group-item">책제목: {auctionData.bookTitle && auctionData.bookTitle}</li>
-                    <li className="list-group-item">작가: {auctionData.bookAuthor && auctionData.bookAuthor}</li>
-                    <li className="list-group-item">출판사: {auctionData.bookPub && auctionData.bookPub}</li>
-                    <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</li>
-                    <li className="list-group-item">출판일 : {auctionData.bookPubDate && auctionData.bookPubDate}</li>
+                    <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>제목</span>
+                      {auctionData.bookTitle && auctionData.bookTitle}</li>
+                    <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>작가</span> {auctionData.bookAuthor && auctionData.bookAuthor}</li>
+                    <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>출판사</span> {auctionData.bookPub && auctionData.bookPub}</li>
+                    <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>출판일</span> {auctionData.bookPubDate && auctionData.bookPubDate}</li>
+                    <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>시작가</span> {auctionData.auctionPrice && auctionData.auctionPrice}</li>
                   </ul>
                 </div>
               </div>
@@ -233,7 +234,7 @@ const getSellerIdForBid = () => {
 
             <div className="detail-card-container card text-center mt-5">
               <div className="card-header">
-                상세설명
+                <b>상세설명</b>
               </div>
               <div className="card-body">
                 <p className="card-text">{auctionData.auctionContext && auctionData.auctionContext}</p>
@@ -241,7 +242,6 @@ const getSellerIdForBid = () => {
             </div>
 
             <div id="bid" className="mt-5 mb-3">
-              <h2>역경매 입찰</h2>
             </div>
             <div>
               {auctionBidData.map((bid) => (
@@ -276,7 +276,7 @@ const getSellerIdForBid = () => {
             <div className="itemExplain row">
               <div className="form-floating">
                 <textarea className="form-control" id="floatingTextarea2" style={{ height: "100px" }} name="bidContext" value={bidData.bidContext} onChange={handleBidChange} ></textarea>
-                <label htmlFor="floatingTextarea2" className='ms-2'>상품 정보를 입력하세요</label>
+                <label htmlFor="floatingTextarea2" className='ms-2'>구매자에게 하고 싶은 말을 입력하세요</label>
               </div>
             </div>
             <Row className='bidCreateContainer'>
@@ -565,16 +565,24 @@ const getSellerIdForBid = () => {
               </InputGroup>
               {/* // 초기 상태 메시지 표시 */}
               {uploadStatus === 'initial' && (
-                <p style={{ color: 'red', marginTop: '0' }}>📕 도서 이미지를 선택하고 업로드 버튼을 눌러주세요.</p>
+                <p style={{ color: 'red', marginTop: '0' }}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+                </svg> 가지고 있는 도서를 촬영 후 이미지를 업로드해 주세요.</p>
               )}
 
               {/*  이미지 업로드 상태에 따른 메시지 표시 */}
               {uploadStatus === 'success' && (
-                <p style={{ color: 'green', marginTop: '0' }}>✅ 도서 이미지 등록이 완료되었습니다. 금액을 입력하고 입찰하기 버튼을 눌러주세요.</p>
+                <p style={{ color: 'green', marginTop: '0' }}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg> 도서 이미지 등록이 완료되었습니다. 금액을 입력하고 입찰하기 버튼을 눌러주세요.</p>
               )}
 
               {uploadStatus === 'error' && (
-                <p style={{ color: 'red', marginTop: '0' }}>✋🏻 도서 이미지를 다시 업로드하세요.</p>
+                <p style={{ color: 'red', marginTop: '0' }}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                </svg> 도서 이미지를 다시 업로드하세요.</p>
               )}
             </Row>
 
