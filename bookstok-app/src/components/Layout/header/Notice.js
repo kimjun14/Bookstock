@@ -19,29 +19,21 @@ const Notice = ({ notifications = [] }) => {
             return;
         }
 
+       // 모든 알림을 토스트로 표시
+       notifications.forEach((notificationData) => {
         const notificationMessage = `새로운 판매자 입찰이 등록되었습니다.
         가격: ${notificationData.price} 원
         상세내용: ${notificationData.details}
         판매자 아이디: ${notificationData.sellerId}`;
         toast.success(notificationMessage);
-    };
+    });
+};
 
     return (
         <div className='header-notice'>
             <button
                 type="button"
-                onClick={() => {
-                    // 마지막 알림을 가져오거나 기본 값 사용
-                    const lastNotification =
-                        notifications.length > 0
-                            ? notifications[0]
-                            : {
-                                  price: '새로운 가격',
-                                  details: '새로운 상세 내용',
-                                  sellerId: '새로운 판매자 아이디',
-                              };
-                    notify(lastNotification);
-                }}
+                onClick={notify} // 기존의 마지막 알림을 가져오는 로직 제거
                 className="btn btn-primary position-relative custom-button text-secondary-emphasis-notice"
             >
                 <svg

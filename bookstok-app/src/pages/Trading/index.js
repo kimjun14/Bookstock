@@ -68,6 +68,10 @@ function Trading() {
       console.log("Fetched bid data:", response.data); // 가져온 데이터를 로그로 출력
       setAuctionBidData(response.data);
       console.log(response.data);
+
+      // 알림을 초기화
+      setNotifications([]);
+
     } catch (err) {
       console.error(err);
     }
@@ -103,6 +107,9 @@ function Trading() {
       window.alert("입찰 등록에 성공하였습니다.")
       console.log("Bid submission successful!");
 
+      // fetchBidData가 완료된 후에 알림을 추가
+      await fetchBidData();
+
       // 새로운 입찰이 등록되었음을 알림 컴포넌트에 전달
       const newBidNotification = {
         message: `새로운 판매자 입찰이 등록되었습니다.`,
@@ -122,11 +129,11 @@ function Trading() {
 
 // 판매자 아이디를 가져오는 함수 수정
 const getSellerIdForBid = () => {
-  // 여기에서 판매자 아이디를 얻는 작업을 수행하세요.
-  // 예를 들어, 판매자 아이디가 닉네임과 동일하다고 가정하면 아래와 같이 작성할 수 있습니다.
-  const sellerBid = auctionBidData.find(bid => bid.id === bidData.nickname);
-  return sellerBid ? sellerBid.nickname : 'Unknown Seller';
+  // 현재는 첫 번째 입찰을 선택하도록 되어 있음. 원하는 방식으로 수정할 수 있음.
+  const firstBid = auctionBidData[0];
+  return firstBid ? firstBid.nickname : 'Unknown Seller';
 };
+
 
   const formatBidCreateAt = (dateString) => {
     const formattedDate = moment(dateString).format('YYYY-MM-DD HH:mm:ss');
