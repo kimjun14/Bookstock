@@ -49,26 +49,51 @@ const Payment = () => {
         // 페이지가 로드될 때 한 번 잔액 조회 수행
         fetchBalance();
     }, []);
+
+    const [userData, setUserData] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/user-info')
+            .then((response) => {
+                if (response.data.success) {
+                    setUserData(response.data.data);
+                }
+            })
+            .catch((error) => {
+                console.error('사용자 정보를 가져오는 중 오류:', error);
+            });
+    }, []);
+
     return (
         <>
             <Desktop>
-                <div className="card-container-pay text-center card" >
+                <div className="card-container-pay text-center card">
                     <div className="card-body-pay">
                         <div className="pay-container text-center card text-bg-primary">
                             <div className="card-body-pay2">
-                                <span className="card-title-pay">
-                                    <img src={icon} alt="icon" className='icon' />
-                                    <span>북스탁 Pay</span>
-                                </span>
+                                <img src={icon} alt="프로필 사진" className="icon" />
+                                <div className="card-title-pay">
+                                    <ul>
+                                        {userData.map((user, index) => (
+                                            <li key={index}>
+                                                닉네임: {user.nick}, 아이디: {user.userId}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance}원 〉</p>
                                 </Link>
-                                <div className='button-div d-flex justify-content-center'>
+                                <div className="button-div d-flex justify-content-center">
                                     <Link to="/deposit">
-                                        <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
+                                        <button type="button" className="btn btn-outline-light btn-sm mx-1">
+                                            충전하기
+                                        </button>
                                     </Link>
                                     <Link to="/withdraw">
-                                        <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
+                                        <button type="button" className="btn btn-outline-light btn-sm ms-1">
+                                            출금하기
+                                        </button>
                                     </Link>
                                 </div>
                             </div>
@@ -78,23 +103,33 @@ const Payment = () => {
             </Desktop>
 
             <Tablet>
-            <div className="card-container-pay text-center card" >
+                <div className="card-container-pay text-center card">
                     <div className="card-body-pay">
                         <div className="pay-container text-center card text-bg-primary">
                             <div className="card-body-pay2">
-                                <span className="card-title-pay">
-                                    <img src={icon} alt="icon" className='icon' />
-                                    <span>북스탁 Pay</span>
-                                </span>
+                                <img src={icon} alt="프로필 사진" className="icon" />
+                                <div className="card-title-pay">
+                                    <ul>
+                                        {userData.map((user, index) => (
+                                            <li key={index}>
+                                                닉네임: {user.nick}, 아이디: {user.userId}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance}원 〉</p>
                                 </Link>
-                                <div className='button-div d-flex justify-content-center'>
+                                <div className="button-div d-flex justify-content-center">
                                     <Link to="/deposit">
-                                        <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
+                                        <button type="button" className="btn btn-outline-light btn-sm mx-1">
+                                            충전하기
+                                        </button>
                                     </Link>
                                     <Link to="/withdraw">
-                                        <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
+                                        <button type="button" className="btn btn-outline-light btn-sm ms-1">
+                                            출금하기
+                                        </button>
                                     </Link>
                                 </div>
                             </div>
@@ -104,23 +139,33 @@ const Payment = () => {
             </Tablet>
 
             <Mobile>
-            <div className="card-container-pay text-center card" >
+                <div className="card-container-pay text-center card">
                     <div className="card-body-pay">
                         <div className="pay-container text-center card text-bg-primary">
                             <div className="card-body-pay2">
-                                <span className="card-title-pay">
-                                    <img src={icon} alt="icon" className='icon' />
-                                    <span>북스탁 Pay</span>
-                                </span>
+                                <img src={icon} alt="프로필 사진" className="icon" />
+                                <div className="card-title-pay">
+                                    <ul>
+                                        {userData.map((user, index) => (
+                                            <li key={index}>
+                                                닉네임: {user.nick}, 아이디: {user.userId}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance}원 〉</p>
                                 </Link>
-                                <div className='button-div d-flex justify-content-center'>
+                                <div className="button-div d-flex justify-content-center">
                                     <Link to="/deposit">
-                                        <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
+                                        <button type="button" className="btn btn-outline-light btn-sm mx-1">
+                                            충전하기
+                                        </button>
                                     </Link>
                                     <Link to="/withdraw">
-                                        <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
+                                        <button type="button" className="btn btn-outline-light btn-sm ms-1">
+                                            출금하기
+                                        </button>
                                     </Link>
                                 </div>
                             </div>
