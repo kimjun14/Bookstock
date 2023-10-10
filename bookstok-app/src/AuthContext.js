@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
+    setTimeout(()=>{},500)
     if (token) {
       setIsLoggedIn(true);
     }
