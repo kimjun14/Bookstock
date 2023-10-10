@@ -13,6 +13,36 @@ const userModel = {
         }catch(err){
             throw new Error('DB Error', { cause: err });
         }
+    },
+    // 마이페이지 기능 테스트용 (분리예정)
+    async mypageRecentSearch(data) {
+        try {
+            const [result] = await pool.query(
+                `SELECT * FROM auction 
+                WHERE auctionId 
+                in (?) 
+                order by auctionId DESC`, [data]);
+            return result;
+        } catch (err) {
+            console.error(err);
+            throw new Error('DB Error');
+        }
+    },
+    // 마이페이지 기능 테스트용 (분리예정)
+    async mypageFavoriteSearch(data) {
+        try {
+            const [result] = await pool.query(
+                `SELECT auction.*
+                FROM auction
+                JOIN 
+                    suggestAuc ON auction.auctionId = suggestAuc.aId
+                WHERE 
+                    suggestAuc.checked = 1 AND suggestAuc.uId = ? and auction.done=0;`, [data]);
+            return result;
+        } catch (err) {
+            console.error(err);
+            throw new Error('DB Error');
+        }
     },    
     async myAuction(userNo){
         try{

@@ -101,7 +101,7 @@ const MyPage = () => {
                             <span> 책</span>
                             <br />
 
-                            <Link to="/" className="ms-4 text-decoration-none text-black">선호상품</Link><br />
+                            <Link to="/favSearch" className="ms-4 text-decoration-none text-black">선호상품</Link><br />
                             <Link to="/recentSearch" className="ms-4 text-decoration-none text-black">최근 조회한 상품</Link><br />
                             <hr />
 
@@ -259,7 +259,7 @@ const MyPage = () => {
                         <span> 책</span>
                         <br />
 
-                        <Link to="/" className="ms-4 text-decoration-none text-black">선호상품</Link><br />
+                        <Link to="/favSearch" className="ms-4 text-decoration-none text-black">선호상품</Link><br />
                         <Link to="/recentSearch" className="ms-4 text-decoration-none text-black">최근 조회한 상품</Link><br />
                     </div>
                     <hr />
