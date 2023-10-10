@@ -14,6 +14,30 @@ router.get('/myinfo', async (req, res, next) => {
   }
 });
 
+// 최근 접속한 페이지를 보여줌
+router.get('/recentpage', async (req, res, next) => {
+  console.log(req.cookies.recentPages)
+  try {
+      const list = await user.mypageRecentSearch(req.cookies.recentPages);
+      // 최근 조회한 페이지 정보를 쿠키로 저장
+      res.status(200).json(list);
+  } catch (err) {
+      next(err);
+  }
+});
+
+// 최근 접속한 페이지를 보여줌
+router.get('/favpage', async (req, res, next) => {
+  console.log(req.session.userNo)
+  try {
+      const list = await user.mypageFavoriteSearch(req.session.userNo);
+      // 최근 조회한 페이지 정보를 쿠키로 저장
+      res.status(200).json(list);
+  } catch (err) {
+      next(err);
+  }
+});
+
 router.get('/auction', async (req, res, next) => {
   try {
     const result=await user.myAuction(req.session.userNo);

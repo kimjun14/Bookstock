@@ -46,6 +46,8 @@ io.on('connection', (socket) => {
   console.log('a user connected');
   console.log(socket.handshake.session,socket.handshake.session.nick);
 
+  socket.emit('get nickname', socket.handshake.session.nick);
+
   // 기존의 채팅 내역 로드
   socket.on('check chatId', async (msg) => {
     const { bId, aId } = msg;
@@ -55,7 +57,7 @@ io.on('connection', (socket) => {
       socket.emit('load previous messages', rows.reverse());
     } catch (error) {
         console.error('DB 에러:', error);
-    } 
+    }
   });
 
   socket.on('chat message', async (msg) => {

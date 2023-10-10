@@ -13,7 +13,8 @@ import { AuthProvider } from './AuthContext';
 import LostPwd from './pages/lostPwd';
 import ModalComponent from './pages/Trading/buying';
 import BuyingSuccess from './pages/Trading/buyingSuccess';
-import RecentSearch from './pages/myPage/recentSearch'
+import RecentSearch from './pages/myPage/search/recentSearch'
+import FavoriteSearch from './pages/myPage/search/favSearch'
 import Deposit from './pages/myPage/payment/deposit';
 import Withdraw from './pages/myPage/payment/withdraw';
 import { NotificationProvider } from './contexts/NotificationContext';
@@ -46,6 +47,7 @@ function App() {
               <Route path="/buying" element={<ModalComponent />} />
               <Route path="/buyingSuccess" element={<BuyingSuccess />} />
               <Route path="/recentSearch" element={<RecentSearch />} />
+              <Route path="/favSearch" element={<FavoriteSearch />} />
               <Route path="/deposit" element={<Deposit />} />
               <Route path="/withdraw" element={<Withdraw />} />
             </Route>

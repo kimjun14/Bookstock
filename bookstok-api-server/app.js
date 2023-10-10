@@ -7,6 +7,7 @@ const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var app = express();
+let clients=[];
 const sessionMiddleware = session({
     cookie: { 
         maxAge: 1000*60*60*24*7,
@@ -34,7 +35,9 @@ app.use(sessionMiddleware);  // req.session 속성을 만들어서 세션 객체
 app.use('/images', express.static('public/images'));
 app.use('/api', indexRouter);
 app.use(express.static('public'));
-
+app.get('/notifications', (req, res) => {
+    res.json({data:"응답 테스트"})
+  });
 
 // 404 에러 처리
 app.use((req, res, next) => {

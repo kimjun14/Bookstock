@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 const user = require('../models/aucboard.model');
 
 // 경매 검색 조회 [get] ip:12345/api/auctions/search?query(key)=value [req.body에 query]
