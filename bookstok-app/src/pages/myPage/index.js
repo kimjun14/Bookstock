@@ -5,7 +5,7 @@ import { useAuth } from '../../AuthContext';
 import Payment from './payment/payment';
 import AuctionProgress from './auctionProgress/auctionProgress';
 import AuctionTrading from './auctionTrading/auctionTrading';
-import MyInfo from './MyInfo';
+import MyInfo from './myinfo/MyInfo';
 import './index.css'
 import axios from 'axios';
 
@@ -115,14 +115,14 @@ const MyPage = () => {
                                     <h5><Link to='/mypage'>경매 진행 내역</Link></h5>
                                     <ul className="list-unstyled">
                                         <li>
-                                            <Link to="/auction/ongoing" className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                            <div onClick={toggleAuction} className="text-decoration-none" style={{ fontWeight: '400' }}>
                                                 경매 진행중
-                                            </Link>
+                                            </div>
                                         </li>
                                         <li>
-                                            <Link to="/auction/trading" className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                            <div onClick={toggleTrading} className="text-decoration-none" style={{ fontWeight: '400' }}>
                                                 거래중
-                                            </Link>
+                                            </div>
                                         </li>
                                         <li>
                                             <Link to="/auction/completed" className="text-decoration-none" style={{ fontWeight: '400' }}>

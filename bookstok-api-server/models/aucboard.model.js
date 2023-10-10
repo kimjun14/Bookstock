@@ -45,15 +45,18 @@ const userModel = {
         `update bid set done = true where bidId = ?`
         ,bidId);
       const [ result ] = await pool.query(  // 구매자와 판매자 유저번호 확인
-        `select A.uId as buyerId,
-        B.uId as sellerId
+        `select 
+          A.auctionId as aId,
+          A.uId as buyerId,
+          B.uId as sellerId,
+          B.bidPrice as price
         from auction as A
         inner join bid as B
         on A.auctionId = B.aId
-        WHERE A.auctionId = ?;`
-      ,auctionId);
+        WHERE A.auctionId = ? and B.bidId = ?;`
+      ,[auctionId,bidId]);
       await pool.query(   // 알아낸 구매자와 판매자 유저번호를 trading tbl에 등록 = 거래 시작
-        `insert into Trading set ?`,
+        `insert into trading set ?`,
         result[0]);
     } catch (err) {
       console.error(err);

@@ -30,6 +30,7 @@ const SignOut = function () {
     } catch (error) {
       console.error('로그아웃 오류:', error);
       alert('로그아웃 중 오류가 발생하였습니다.');
+      logout()  // 서버가 도중에 재시작해서 프론트단은 로그인한 state인데 서버엔 세션이 없는경우니 그냥 로그아웃시킴
     }
   };
 

@@ -103,18 +103,8 @@ function BuyerComponent() {
 
     useEffect(() => {
         addrCheck();
-        accountCheck();
     }, [])  // 마운트 되면 실행
 
-    const accountCheck = async () => {
-        try {
-            const result = await axiosConnect.get(`/trading/account`);
-            setSelectedBank(result.data.buyerBank);
-            setAccountNumber(result.data.buyerAccount)
-        } catch (err) {
-            console.error(err);
-        }
-    }
 
     const handleConfirmAccountNumber = async () => {
         const confirmAccountNumber = window.confirm("계좌번호를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
@@ -128,7 +118,6 @@ function BuyerComponent() {
                 console.error(err);
             }
         }
-        accountCheck();
     };
 
     // const [selectedCarrier, setSelectedCarrier] = useState(""); // 선택된 택배사
@@ -274,20 +263,6 @@ function BuyerComponent() {
                     <input type="text" id="detailAddress" name="addr2" placeholder="상세주소를 입력하세요" value={addressData.addr2} onChange={handleAddressInput} />
                     {isModalOpen && <TradingAddress company={addressData} setcompany={setAddressData} closeModal={handleCloseModal}></TradingAddress>}
                     <button className="btn btn-blue-address" onClick={handleConfirmAddress}>주소 저장</button>
-
-
-                    <h4 className="mt-5">계좌번호</h4>
-                    <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
-                        {banks.map((bank, index) => (
-                            <option key={index} value={bank}>
-                                {bank}
-                            </option>
-                        ))}
-                    </select>
-
-                    <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
-                    <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
-
 
                     {/* <div>
                     <h2>택배배송 조회</h2>

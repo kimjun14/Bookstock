@@ -141,7 +141,6 @@ function SellerComponent() {
 
     useEffect(() => {
         trackingCheck();
-        accountCheck();
     }, [])  // 마운트 되면 실행
 
     const handleConfirmSave = async () => {
@@ -160,57 +159,57 @@ function SellerComponent() {
         trackingCheck();
     };
 
-    const banks = [
-        '은행을 선택하세요',
-        '국민은행',
-        '신한은행',
-        '우리은행',
-        '하나은행',
-        '기업은행',
-        '농협은행',
-        '우체국',
-        '대구은행',
-        '부산은행',
-        '광주은행',
-        'KEB하나은행',
-        'SC제일은행',
-    ];
+    // const banks = [
+    //     '은행을 선택하세요',
+    //     '국민은행',
+    //     '신한은행',
+    //     '우리은행',
+    //     '하나은행',
+    //     '기업은행',
+    //     '농협은행',
+    //     '우체국',
+    //     '대구은행',
+    //     '부산은행',
+    //     '광주은행',
+    //     'KEB하나은행',
+    //     'SC제일은행',
+    // ];
 
 
-    const handleBankChange = (e) => {
-        setSelectedBank(e.target.value);
-        console.log(selectedBank);
-    };
+    // const handleBankChange = (e) => {
+    //     setSelectedBank(e.target.value);
+    //     console.log(selectedBank);
+    // };
 
-    const handleAccountNumberChange = (e) => {
-        setAccountNumber(e.target.value);
-        console.log(accountNumber);
-    };
+    // const handleAccountNumberChange = (e) => {
+    //     setAccountNumber(e.target.value);
+    //     console.log(accountNumber);
+    // };
 
-    const accountCheck = async () => {
-        try {
-            const result = await axiosConnect.get(`/trading/account`);
-            setSelectedBank(result.data.sellerBank);
-            setAccountNumber(result.data.sellerAccount)
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    // const accountCheck = async () => {
+    //     try {
+    //         const result = await axiosConnect.get(`/trading/account`);
+    //         setSelectedBank(result.data.sellerBank);
+    //         setAccountNumber(result.data.sellerAccount)
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }
 
-    const handleConfirmAccountNumber = async () => {
-        const confirmAccountNumber = window.confirm("계좌번호를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
-        if (confirmAccountNumber) {
-            // 계좌번호 변경을 서버에 요청하고 DB를 업데이트하는 코드를 추가하세요.
-            // axios 또는 fetch를 사용하여 서버로 요청을 보낼 수 있습니다.
-            try {
-                await axiosConnect.patch(`/trading/account`, { "sellerAccount": accountNumber, "sellerBank": selectedBank });
-                alert("계좌 입력 성공");
-            } catch (err) {
-                console.error(err);
-            }
-        }
-        accountCheck();
-    };
+    // const handleConfirmAccountNumber = async () => {
+    //     const confirmAccountNumber = window.confirm("계좌번호를 저장하시겠습니까? 저장 후 취소할 수 없습니다.");
+    //     if (confirmAccountNumber) {
+    //         // 계좌번호 변경을 서버에 요청하고 DB를 업데이트하는 코드를 추가하세요.
+    //         // axios 또는 fetch를 사용하여 서버로 요청을 보낼 수 있습니다.
+    //         try {
+    //             await axiosConnect.patch(`/trading/account`, { "sellerAccount": accountNumber, "sellerBank": selectedBank });
+    //             alert("계좌 입력 성공");
+    //         } catch (err) {
+    //             console.error(err);
+    //         }
+    //     }
+    //     accountCheck();
+    // }; 코드 재사용을 위한 주석처리
 
     return (
         <>
@@ -240,18 +239,6 @@ function SellerComponent() {
                             운송장 번호 저장
                         </button>
                     </div>
-                    <div>
-                        <h4>계좌번호</h4>
-                        <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
-                            {banks.map((bank, index) => (
-                                <option key={index} value={bank}>
-                                    {bank}
-                                </option>
-                            ))}
-                        </select>
-                        <input className="mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
-                        <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
-                    </div>
                 </div>
             </Desktop>
             <Tablet>
@@ -279,18 +266,6 @@ function SellerComponent() {
                         <button className="btn parcelNumBtn" onClick={handleConfirmSave} disabled={isSaved}>
                             운송장 번호 저장
                         </button>
-                    </div>
-                    <div className="text-center">
-                        <h4>계좌번호</h4>
-                        <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
-                            {banks.map((bank, index) => (
-                                <option key={index} value={bank}>
-                                    {bank}
-                                </option>
-                            ))}
-                        </select>
-                        <input className="w-100 mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
-                        <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
                     </div>
                 </div>
 
@@ -320,18 +295,6 @@ function SellerComponent() {
                         <button className="btn parcelNumBtn" onClick={handleConfirmSave} disabled={isSaved}>
                             운송장 번호 저장
                         </button>
-                    </div>
-                    <div className="text-center">
-                        <h4>계좌번호</h4>
-                        <select className="form-select form-select-sm mb-3 mt-3" value={selectedBank} onChange={handleBankChange}>
-                            {banks.map((bank, index) => (
-                                <option key={index} value={bank}>
-                                    {bank}
-                                </option>
-                            ))}
-                        </select>
-                        <input className="w-100 mt-2" type="text" id="accountNumber" name="accountNumber" placeholder="하이픈(-)을 제외하고 입력하세요" value={accountNumber} onChange={handleAccountNumberChange} />
-                        <button className="btn btn-blue-account" onClick={handleConfirmAccountNumber}>계좌번호 저장</button>
                     </div>
                 </div>
             </Mobile>
