@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Notice.css';
-import { useNotification } from '../../../contexts/NotificationContext';
+
 
 const Notice = ({ notifications = [] }) => {
     const [unreadCount, setUnreadCount] = useState(0);
@@ -19,15 +19,19 @@ const Notice = ({ notifications = [] }) => {
             return;
         }
 
-       // 모든 알림을 토스트로 표시
-       notifications.forEach((notificationData) => {
-        const notificationMessage = `새로운 판매자 입찰이 등록되었습니다.
-        가격: ${notificationData.price} 원
-        상세내용: ${notificationData.details}
-        판매자 아이디: ${notificationData.sellerId}`;
-        toast.success(notificationMessage);
-    });
-};
+        // 모든 알림을 토스트로 표시
+        notifications.forEach((notificationData) => {
+            const notificationMessage = 
+            <div>
+                새로운 판매자 입찰이 등록되었습니다.
+                가격: {notificationData.price} 원<br/>
+                상세내용: {notificationData.details}
+            </div>
+            console.log('Notification Message:', notificationMessage); // 추가된 부분
+            // 판매자 아이디: ${notificationData.sellerId};
+            toast.success(notificationMessage);
+        });
+    };
 
     return (
         <div className='header-notice'>

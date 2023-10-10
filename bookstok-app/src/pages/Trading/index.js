@@ -116,7 +116,7 @@ function Trading() {
         type: 'success',
         price: bidData.bidPrice,
         details: bidData.bidContext,
-        sellerId: getSellerIdForBid(),
+        // sellerId: getSellerIdForBid(),
       };
       addNotification(newBidNotification);
 
@@ -127,22 +127,14 @@ function Trading() {
     }
   }
 
-<<<<<<< HEAD
-// 판매자 아이디를 가져오는 함수 수정
-const getSellerIdForBid = () => {
-  // 현재는 첫 번째 입찰을 선택하도록 되어 있음. 원하는 방식으로 수정할 수 있음.
-  const firstBid = auctionBidData[0];
-  return firstBid ? firstBid.nickname : 'Unknown Seller';
-};
-=======
-  // 판매자 아이디를 가져오는 함수 수정
-  const getSellerIdForBid = () => {
-    // 여기에서 판매자 아이디를 얻는 작업을 수행하세요.
-    // 예를 들어, 판매자 아이디가 닉네임과 동일하다고 가정하면 아래와 같이 작성할 수 있습니다.
-    const sellerBid = auctionBidData.find(bid => bid.id === bidData.nickname);
-    return sellerBid ? sellerBid.nickname : 'Unknown Seller';
-  };
->>>>>>> 4cb3f07731f538a2c9329347e885d3a48c95d402
+// // 판매자 아이디를 가져오는 함수 수정
+// const getSellerIdForBid = () => {
+//   // 현재는 첫 번째 입찰을 선택하도록 되어 있음. 원하는 방식으로 수정할 수 있음.
+//   const firstBid = auctionBidData[0];
+//   const sellerId = firstBid ? firstBid.nickname : 'Unknown Seller';
+//   console.log('Seller ID:', sellerId); // 추가된 부분
+//   return sellerId;
+// };
 
 
   const formatBidCreateAt = (dateString) => {
