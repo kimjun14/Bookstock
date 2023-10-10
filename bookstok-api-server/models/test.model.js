@@ -42,6 +42,28 @@ const userModel = {
         } catch (err) {
             throw new Error('DB Error');
         }
+    },
+    // 관리자페이지 기능1 (랭킹업데이트) 테스트용 (분리예정)
+    async mainpageRankingSet() {
+        try {
+            await pool.query(
+                `UPDATE auction a
+                LEFT JOIN (
+                    SELECT aId, COUNT(*) as checked_count
+                    FROM suggestAuc
+                    WHERE checked = 1
+                    GROUP BY aId
+                ) AS subquery ON a.auctionId = subquery.aId
+                SET a.star = IFNULL(subquery.checked_count, 0);`);
+            await pool.query(
+                `UPDATE auction
+                SET
+                suggestion = star*10 + viewCount;`
+            )
+            console.log("OK");
+        } catch (err) {
+            throw new Error('DB Error');
+        }
     }
 }
 

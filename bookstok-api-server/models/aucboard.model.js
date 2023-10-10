@@ -89,6 +89,39 @@ const userModel = {
       console.error(err);
       throw new Error('DB Error');
     }
+  },
+  // 추천 등록
+  async addAuctionStar(auctionId,userId) {
+    try {
+      const queryParams = { "aId": auctionId, "uId": userId };
+      const query = `SELECT * FROM suggestAuc WHERE aId = ? AND uId = ?`;
+      const [checked] = await pool.query(query,[queryParams.aId, queryParams.uId]);
+      if(checked.length===0){
+        await pool.query(`insert into suggestAuc (aId,uId,checked) values (?,?,?)`,[queryParams.aId, queryParams.uId,1])
+      }else{
+        await pool.query(
+          `update suggestAuc 
+          set checked=CASE
+            WHEN checked=1 THEN 0
+            WHEN checked=0 THEN 1
+            ELSE checked
+          END
+          where aId=? and uId=? `,[queryParams.aId, queryParams.uId])
+      }
+    } catch (err) {
+      console.error(err);
+      throw new Error('DB Error');
+    } finally{
+      await pool.query(
+        `UPDATE auction a
+        LEFT JOIN (
+            SELECT aId, COUNT(*) as checked_count
+            FROM suggestAuc
+            WHERE checked =1
+            GROUP BY aId
+        ) AS subquery ON a.auctionId = subquery.aId
+        SET a.star = IFNULL(subquery.checked_count, 0);`);
+    }
   }
 }
 

@@ -30,6 +30,16 @@ function BookSearchResult() {
       console.error(err);
     }
   }
+  
+  const fetchSuggestion = async(data) =>{
+    try {
+      await axiosConnect.post(`/auctions/suggest/star`,{aId:data})
+      console.log("OK")
+      fetchSearchList(searchKey)
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   useEffect(() => {
     if (URLquery.search) {
@@ -84,14 +94,14 @@ function BookSearchResult() {
               <td>
 
                 {/* 관심등록 버튼 */}
-                <button className='interestBtn'>
+                <button onClick={()=>fetchSuggestion(book.auctionId)} className='interestBtn'>
                   <img
                     src="http://localhost:12345/images/star.png"
                     alt=""
                     width="20px"
-                  />
+                  /> {book.star}
                 </button>
-                0
+                
               </td>
             </tr>
           ))}

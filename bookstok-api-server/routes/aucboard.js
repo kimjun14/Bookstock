@@ -82,6 +82,21 @@ router.post('/:id', async (req, res, next) => {
   }
 });
 
+// 추천등록  [post] ip:12345/api/auctions/
+router.post('/suggest/star', async (req, res, next) => {
+  try{
+    if(!req.session.userNo){
+      return next(new Error('User not authenticated'));
+    }
+    const userId=req.session.userNo;
+    const auctionId=req.body.aId
+    await user.addAuctionStar(auctionId,userId);
+    res.status(200).send("connection done");
+  }catch(err){
+    next(err);
+  }
+});
+
 
 
 module.exports = router;
