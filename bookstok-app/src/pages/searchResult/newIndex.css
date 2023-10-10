@@ -2,6 +2,7 @@
 .btn-group {
   float: right;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .btn-recent,
@@ -71,48 +72,53 @@ a {
   td {
     padding: 8px; 
   }
-}/* 모바일 */
+}
+
+/* 모바일 */
 @media screen and (max-width: 575px) {
+  /* 표의 너비를 100%로 설정하여 화면 가로 크기에 맞게 조절 */
   .searchTable {
-    display: flex; 
-    flex-direction: row;
+    width: 100%;
+    margin: 0;
   }
 
-  .searchTable th,
-  .searchTable td {
-    flex: 1;
-    text-align: center;
-  }
-
-  .searchTable thead {
-    display: flex; 
-    flex-direction: column; 
-  }
-
-  .searchTable tbody {
-    display: flex;
-    flex-direction: column; 
-  }
-
-  .searchTable th,
-  .searchTable td {
+  /* 표의 각 셀 스타일 조정 */
+  th,
+  td {
     border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
+    padding: 8px; /* 간격을 줄임 */
+    font-size: 12px; /* 폰트 크기를 더 줄임 */
   }
 
-  .searchTable th {
+  /* 표 헤더 스타일 조정 */
+  thead {
     background-color: #f3f3f3;
   }
 
-  .searchTable .searchBookTitle {
-    font-weight: bold;
-    margin-top: 5px;
+  /* 링크 스타일 조정 */
+  a {
+    text-decoration: none;
+    color: black;
   }
 
-  .searchTable .searchBookImg {
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
+  /* 이미지 스타일 조정 */
+  .searchBookImg {
+    max-width: 150px; /* 이미지 크기를 더 크게 조절 */
+    height: auto; /* 세로 비율을 유지합니다. */
+  }
+
+  /* 정렬 버튼 스타일 조정 */
+  .btn-group {
+    float: none; /* 오른쪽 정렬 해제 */
+    text-align: center; /* 중앙 정렬 */
+    margin-bottom: 1rem;
+  }
+
+  .btn-recent,
+  .btn-title,
+  .btn-pop {
+    font-size: 14px; /* 버튼 텍스트 크기 축소 */
+    margin-right: 5px; /* 간격 축소 */
+    padding: 3px 6px; /* 간격 축소 */
   }
 }
