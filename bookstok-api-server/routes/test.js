@@ -35,4 +35,15 @@ router.get('/mainpagetest2', async (req, res, next) => {
     }
 });
 
+// 관리자 기능 추가를 위해 임시로 넣어뒀음.
+
+router.get('/admin1', async (req, res, next) => {
+    try {
+        const list = await user.mainpageRankingSet();
+        res.status(200).send("OK updated");
+    } catch (err) {
+        next(err);
+    }
+});
+
 module.exports = router;

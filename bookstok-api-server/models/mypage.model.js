@@ -40,6 +40,13 @@ const userModel = {
         }catch(err){
             throw new Error('DB Error', { cause: err });
         }
+    },
+    async mainpageRankingSet(){
+        try{
+
+        }catch(err){
+
+        }
     }
 }
 
