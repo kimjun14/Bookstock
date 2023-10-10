@@ -6,28 +6,102 @@
   padding-bottom: 2.5rem;
 }
 
-@media screen and (max-width: 576px) {
+.mypageSidebar {
+  background-color: #f7f8f9;
+  padding: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 6px;
+}
+
+.mypageSidebar h5 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.mypageSidebar ul {
+  list-style-type: none;
+}
+
+.mypageSidebar ul li {
+  margin-bottom: 0.5rem;
+}
+.paymentButtonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.paymentButtonContainer button {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+.paymentButtonContainer button:hover {
+  background-color: #18a8f1;
+  color: white;
+}
+
+/* 태블릿 */
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  .mypageContainer {
+    flex-direction: column-reverse !important;
+  }
+  .mypageSidebar {
+    width: 150%;
+    margin-left: -3rem;
+    margin-right: -3rem;
+    margin-top: 1rem;
+    border-radius: 6px;
+  }
+
+  .mypageContainer {
+    border-radius: 20px;
+    box-shadow: 20px 20px 80px rgb(206, 206, 206);
+    margin: 2rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .mypageSidebar {
+    width: 90%;
+    margin-left: -3rem;
+    margin-right: -3rem;
+    margin-top: 1rem;
+    border-radius: 6px;
+    text-align: center;
+  }
+
   .mypageContainer {
     border-radius: 20px;
     box-shadow: 20px 20px 80px rgb(206, 206, 206);
     margin: 1rem;
-    padding-top: 0.5rem;
+    padding-top: 2.5rem;
     padding-bottom: 2.5rem;
   }
-  .underline {
-    width: 8rem;
-  }
-
-  .profile {
-    width: 80%;
-  }
-
-  
 }
 
-@media screen and (min-width: 577px) and (max-width: 1024px) {
-  .profile{
-    width: 80%;
+/* 모바일 */
+@media screen and (max-width: 575px) {
+  .mypageSidebar {
+    width: 90%;
+    margin-left: -3rem;
+    margin-right: -3rem;
+    margin-top: 1rem;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .mypageContainer {
+    border-radius: 20px;
+    box-shadow: 20px 20px 80px rgb(206, 206, 206);
+    margin: 1rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
   }
 }
-

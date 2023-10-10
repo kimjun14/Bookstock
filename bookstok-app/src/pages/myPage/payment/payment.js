@@ -52,11 +52,11 @@ const Payment = () => {
     return (
         <>
             <Desktop>
-                <div className="card-container text-center card" >
-                    <div className="card-body">
-                        <div className="pay-container text-center card text-bg-primary mb-3">
-                            <div className="card-body">
-                                <span className="card-title">
+                <div className="card-container-pay text-center card" >
+                    <div className="card-body-pay">
+                        <div className="pay-container text-center card text-bg-primary">
+                            <div className="card-body-pay2">
+                                <span className="card-title-pay">
                                     <img src={icon} alt="icon" className='icon' />
                                     <span>북스탁 Pay</span>
                                 </span>
@@ -78,26 +78,24 @@ const Payment = () => {
             </Desktop>
 
             <Tablet>
-                <div className='d-flex align-items-center justify-content-center'>
-                    <div className="card-container card" >
-                        <div className="card-body">
-                            <div className="pay-container text-center card text-bg-primary mb-3">
-                                <div className="card-body">
-                                    <span className="card-title">
-                                        <img src={icon} alt="icon" className='icon' />
-                                        <span>북스탁 Pay</span>
-                                    </span>
+            <div className="card-container-pay text-center card" >
+                    <div className="card-body-pay">
+                        <div className="pay-container text-center card text-bg-primary">
+                            <div className="card-body-pay2">
+                                <span className="card-title-pay">
+                                    <img src={icon} alt="icon" className='icon' />
+                                    <span>북스탁 Pay</span>
+                                </span>
+                                <Link to="/deposit">
+                                    <p className="balance card-text mb-2">{balance}원 〉</p>
+                                </Link>
+                                <div className='button-div d-flex justify-content-center'>
                                     <Link to="/deposit">
-                                        <p className="balance card-text mb-2">{balance}원 〉</p>
+                                        <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
                                     </Link>
-                                    <div className='button-div d-flex align-items-center justify-content-center'>
-                                        <Link to="/deposit" className='me-2'>
-                                            <button type="button" className="btn btn-outline-light btn-sm">충전하기</button>
-                                        </Link>
-                                        <Link to="/withdraw">
-                                            <button type="button" className="btn btn-outline-light btn-sm">출금하기</button>
-                                        </Link>
-                                    </div>
+                                    <Link to="/withdraw">
+                                        <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -106,26 +104,24 @@ const Payment = () => {
             </Tablet>
 
             <Mobile>
-                <div className='d-flex align-items-center justify-content-center'>
-                    <div className="card-container card" >
-                        <div className="card-body">
-                            <div className="pay-container text-center card text-bg-primary mb-3">
-                                <div className="card-body">
-                                    <span className="card-title">
-                                        <img src={icon} alt="icon" className='icon' />
-                                        <span>북스탁 Pay</span>
-                                    </span>
+            <div className="card-container-pay text-center card" >
+                    <div className="card-body-pay">
+                        <div className="pay-container text-center card text-bg-primary">
+                            <div className="card-body-pay2">
+                                <span className="card-title-pay">
+                                    <img src={icon} alt="icon" className='icon' />
+                                    <span>북스탁 Pay</span>
+                                </span>
+                                <Link to="/deposit">
+                                    <p className="balance card-text mb-2">{balance}원 〉</p>
+                                </Link>
+                                <div className='button-div d-flex justify-content-center'>
                                     <Link to="/deposit">
-                                        <p className="balance card-text mb-2">{balance}원 〉</p>
+                                        <button type="button" className="btn btn-outline-light btn-sm mx-1">충전하기</button>
                                     </Link>
-                                    <div className='button-div d-flex align-items-center justify-content-center'>
-                                        <Link to="/deposit" className='me-2'>
-                                            <button type="button" className="btn btn-outline-light btn-sm">충전하기</button>
-                                        </Link>
-                                        <Link to="/withdraw">
-                                            <button type="button" className="btn btn-outline-light btn-sm">출금하기</button>
-                                        </Link>
-                                    </div>
+                                    <Link to="/withdraw">
+                                        <button type="button" className="btn btn-outline-light btn-sm ms-1">출금하기</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

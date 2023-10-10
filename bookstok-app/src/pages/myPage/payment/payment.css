@@ -4,20 +4,29 @@
 }
 
 .text-bg-primary {
-    background: linear-gradient(to bottom, #1d73a9, #2e8ccb);
+    background: linear-gradient(to bottom, dimgray, #1187cf);
+}
+
+.pay-container{
+    height: 8rem;
+    border: none;
+    padding-top: 1rem;
 }
 
 .icon {
     width: 1rem;
-    height: 2vh;
+    height: auto;
+    margin-right: 0.4rem;
+    margin-bottom: 0.3rem;
 }
 
-.card-title {
-    font-size: 16px;
+.card-title-pay {
+    font-size: 1rem;
+    font-weight: 500;
 }
 
-.card-container {
-    margin-top: 2.7rem;
+.card-container-pay {
+    margin-top: 2rem;
 }
 
 .button-div {
@@ -31,10 +40,12 @@
     color: white;
 }
 
+/* 태블릿 */
+@media screen and (min-width: 577px) and (max-width: 1023px) {
+    .card-container-pay {
+        width: 150%;
+        margin-left: -3rem;
 
-@media screen and (max-width: 576px) {
-    .card-container {
-        width: 90%;
     }
 
     .button-div {
@@ -43,9 +54,20 @@
     }
 }
 
-@media screen and (min-width: 577px) and (max-width: 1023px) {
-    .card-container {
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .card-container-pay {
         width: 90%;
+        margin-left: -3rem;
+
+    }}
+
+
+/* 모바일 */
+@media screen and (max-width: 576px) {
+    .card-container-pay {
+        width: 90%;
+        margin-left: -3rem;
+        margin-top: -1rem;
     }
 
     .button-div {
