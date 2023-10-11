@@ -24,6 +24,43 @@ function BookSearchResult() {
   // 자세한 설명은 Trading 참고, 쿼리 문자열의 query(key),검색어(value) 받아옴 
   const [books, setBooks] = useState([]);
 
+  const [bookData, setBookData] = useState([]);
+  const [bidData, setBidData] = useState([]);
+
+  useEffect(() => {
+      const fetchBookData = async () => {
+          try {
+              const response = await axiosConnect.get('test/mainpagetest');
+              setBookData(response.data);
+          } catch (err) {
+              console.log(err);
+          }
+      }
+
+      fetchBookData();
+  }, []);
+
+  useEffect(() => {
+      const fetchBidData = async () => {
+          try {
+              const promises = bookData.map(async (book) => {
+                  const bidResponse = await axiosConnect.get(`test/mainbidprice/${book.auctionId}`);
+                  console.log("비드데이터", bidResponse);
+                  return { auctionId: book.auctionId, bidData: bidResponse.data };
+              });
+
+              const bidResults = await Promise.all(promises);
+
+              setBidData(bidResults);
+          } catch (err) {
+              console.log(err);
+          }
+      }
+
+      if (bookData.length > 0) {
+          fetchBidData();
+      }
+  }, [bookData]);
   const fetchSearchList = async () => {
     try {
       const response = await axiosConnect.get(`/auctions/search?query=${searchKey}`)
@@ -87,7 +124,15 @@ function BookSearchResult() {
               <td><img src={book.bookImgSrc ? book.bookImgSrc : "http://via.placeholder.com/120x160"} alt="" className='searchBookImg' /></td>
               <td><Link to={`/trading?id=${book.auctionId}`}>{book.bookTitle}</Link></td>
               <td>시작가: {book.auctionPrice}원
-                <br />현재가: 추후 구현 예정</td>
+              <br />현재가:
+                {bidData
+                .filter((bidItem) => bidItem.auctionId === book.auctionId)
+                .map((bidItem) => (
+                  <p className="presentPrice-text" key={bidItem.auctionId}>
+                    {bidItem.bidData[0]?.bidprice ? `${bidItem.bidData[0]?.bidprice}원` : '입찰 금액 없음'}
+                  </p>
+                ))
+              }                </td>
               <td><Link to={`/`}>{book.nickname} </Link></td>
               <td>{AuctionCreateAt(book.auctionStart)} /<br />{AuctionCreateAt(book.auctionEnd)}</td>
               <td>{book.viewCount}</td>
