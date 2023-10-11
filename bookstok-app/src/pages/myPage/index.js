@@ -86,7 +86,7 @@ const MyPage = () => {
     };
 
     const toggleMyInfo = () => {
-        setShowMyInfo(true);
+        setShowMyInfo((prev) => !prev);
         setShowAuction(false);
         setShowTrading(false);
     };

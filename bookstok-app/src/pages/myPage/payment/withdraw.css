@@ -4,8 +4,10 @@
     margin: 3rem;
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
-    
   }
+.account-label{
+  width: 285.27px;
+}
 
 
 @media screen and (max-width: 576px) {
@@ -24,6 +26,12 @@
   .pointInput {
     width: 82%;
   }
+  .btn-blue-account{
+    width: 120px;
+  }
+  .account-label{
+    width: 233.92px;
+  }
 }
 
 
@@ -34,6 +42,13 @@
     margin: 0.2rem;
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
+  }
+
+  .account-label{
+    width: 233.92px;
+  }
+  .btn-blue-account{
+    width: 120px;
   }
 
   .accountInput{

@@ -1,13 +1,16 @@
 const pool = require('./pool');
 
 const userModel = {
-    // 입력된 주소 확인
-    async addrCheck(){
+    // 구매자에게 필요한 정보 전달
+    async addrCheck(userId){
         try {
             const [result] = await pool.query(
-                `SELECT addr,addr2,addrpostal
-                FROM trading where tradingId = 1`
-                );
+                `SELECT t.*, a.bookTitle
+                FROM trading as t 
+                join auction as a
+                on a.auctionId = t.aId
+                where t.buyerId = ?`
+                ,[userId]);
             return result;
         } catch (err) {
             console.error(err);
@@ -16,22 +19,26 @@ const userModel = {
     },
     // 주소 변경
     async addrbuyerChange(dataSet){
+        const { tradingId } = dataSet
         try {
             await pool.query(
-            `update trading set ? where tradingId = 1`
-            ,dataSet );
+            `update trading set ? where tradingId = ?`
+            ,[dataSet,tradingId] );
         } catch (err) {
             console.error(err);
             throw new Error('DB Error');
         }
     },
     // 입력된 송장 확인
-    async trackCheck(){
+    async trackCheck(userId){
         try {
             const [result] = await pool.query(
-                `SELECT trackingNumber,trackingCompany
-                FROM trading where tradingId = 1`
-                );
+                `SELECT t.*, a.bookTitle
+                FROM trading as t 
+                join auction as a
+                on a.auctionId = t.aId
+                where t.sellerId = ?`
+                ,[userId]);
             return result;
         } catch (err) {
             console.error(err);
@@ -40,10 +47,11 @@ const userModel = {
     },
     // 송장 변경
     async trackSellerChange(dataSet){
+        const { tradingId } = dataSet
         try {
             await pool.query(
-            `update trading set ? where tradingId = 1`
-            ,dataSet);
+            `update trading set ? where tradingId = ?`
+            ,[dataSet,tradingId]);
         } catch (err) {
             console.error(err);
             throw new Error('DB Error');

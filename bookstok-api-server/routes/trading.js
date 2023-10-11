@@ -3,11 +3,11 @@ var router = express.Router();
 
 const model = require('../models/trading.model');
 
-// 구매자의 주소 입력
+// 구매자에게 필요한 정보 전달
 router.get('/buy/addr', async (req, res, next) => {
     try{
-        const result = await model.addrCheck()
-        res.status(200).json(result[0]);
+        const result = await model.addrCheck(req.session.userNo);
+        res.status(200).json(result);
     }catch(err){
         console.log(err);
         next(err);
@@ -27,8 +27,9 @@ router.patch('/buy/addr', async (req, res, next) => {
 // 판매자의 송장 입력
 router.get('/sell/track', async (req, res, next) => {
     try{
-        const result = await model.trackCheck()
-        res.status(200).json(result[0]);
+        const result = await model.trackCheck(req.session.userNo)
+        console.log(result)
+        res.status(200).json(result);
     }catch(err){
         console.log(err);
         next(err);

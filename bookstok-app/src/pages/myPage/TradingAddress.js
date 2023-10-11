@@ -23,8 +23,8 @@ const TradingAddress = (props) => {
 
         props.setcompany({
             ...props.company,
-            addr: fullAddress,
-            addrpostal:data.zonecode
+            Addr: fullAddress,
+            AddrPostal:data.zonecode
         });
 
         // 주소 선택 완료 후 모달 닫기

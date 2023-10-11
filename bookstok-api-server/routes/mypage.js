@@ -19,19 +19,17 @@ router.get('/recentpage', async (req, res, next) => {
   console.log(req.cookies.recentPages)
   try {
       const list = await user.mypageRecentSearch(req.cookies.recentPages);
-      // 최근 조회한 페이지 정보를 쿠키로 저장
       res.status(200).json(list);
   } catch (err) {
       next(err);
   }
 });
 
-// 최근 접속한 페이지를 보여줌
+// 관심등록한 페이지를 보여줌
 router.get('/favpage', async (req, res, next) => {
   console.log(req.session.userNo)
   try {
       const list = await user.mypageFavoriteSearch(req.session.userNo);
-      // 최근 조회한 페이지 정보를 쿠키로 저장
       res.status(200).json(list);
   } catch (err) {
       next(err);
@@ -51,6 +49,16 @@ router.get('/auction', async (req, res, next) => {
 router.get('/auctionbid', async (req, res, next) => {
   try {
     const result=await user.myAuctionBid(req.session.userNo);
+    res.status(200).json(result);
+  }
+  catch(err){
+    next(err);
+  }
+});
+
+router.get('/buyer', async (req, res, next) => {
+  try {
+    const result=await user.myBookBuyer(req.session.userNo);
     res.status(200).json(result);
   }
   catch(err){
