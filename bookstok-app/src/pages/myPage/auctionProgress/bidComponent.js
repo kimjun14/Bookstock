@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
 import './bidComponent.css'
+import moment from 'moment';
 
 const axiosConnect = axios.create({
     baseURL: 'http://localhost:12345/api',
@@ -53,6 +54,11 @@ const AuctionProgressInfoComponent = () => {
         fetchData()
     }, []);
 
+    const AuctionCreateAt = (dateString) => {
+        const Date = moment(dateString).format("YYYY-MM-DD HH:mm:ss");
+        return Date;
+      }
+
     return (
         <>
             <Desktop>
@@ -75,9 +81,9 @@ const AuctionProgressInfoComponent = () => {
                                                     <div className="card-body row align-items-center">
                                                         <h3 className="card-title col-sm-1 ms-4 mt-4">{bid.nickname}</h3>
                                                         <p className="card-title col-sm-2 mt-4">
-                                                            <small className="text-body-secondary">{bid.bidCreateAt}</small>
+                                                            <small className="text-body-secondary">{AuctionCreateAt(bid.bidCreateAt)}</small>
                                                         </p>
-                                                        <h6 className="card-title col-sm-2 mt-4">{bid.bidPrice} 원</h6>
+                                                        <h6 className="card-title col-sm-2 mt-4">{Number(bid.bidprice).toLocaleString()} 원</h6>
                                                         <div className="col-sm-2"></div>
                                                         <button type="button" className="btn btn-primary col-sm-2 bidBuyBtn" onClick={null}>즉시 구매</button>
                                                         <button type="button" className="btn btn-info col-sm-2 bidChatBtn" onClick={() => null}>1:1 채팅</button>
@@ -86,7 +92,7 @@ const AuctionProgressInfoComponent = () => {
 
                                                 <div className='card-body row card-textBox'>
                                                     <div className="alert alert-light col-sm-12 card-textBoxIn" role="alert">
-                                                        <img src={bid.bidImgSrc ? "" : "http://placeholder.com/100"} className="img-fluid mx-4" alt="..." />
+                                                        <img src={bid.bidImgSrc} className="img-fluid mx-4" alt="..." style={{ width: "10%" }} />
                                                         {bid.bidContext}
                                                     </div>
                                                 </div>

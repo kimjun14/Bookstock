@@ -103,14 +103,6 @@ const MyPage = () => {
                                 <Payment />
                             </div>
                             <div className="col-md-12 mypageSidebar">
-                                <div className="mb-12">
-                                    <h5><Link to='/mypage'>마이 북스탁</Link></h5>
-                                    <ul className="list-unstyled">
-                                        <li onClick={toggleMyInfo} className="text-decoration-none" style={{ fontWeight: '400', cursor: 'pointer' }}>
-                                            내 정보 관리
-                                        </li>
-                                    </ul>
-                                </div>
                                 <div className="mb-3">
                                     <h5><Link to='/mypage'>경매 진행 내역</Link></h5>
                                     <ul className="list-unstyled">
@@ -154,17 +146,14 @@ const MyPage = () => {
                                 <div className="d-flex flex-row mb-3 justify-content-around">
                                     <div className="p-2 ms-4" onClick={toggleAuction}>
                                         <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>경매진행중</p>
-                                        <p className="text-center text-black">0</p>
                                     </div>
 
                                     <div className="p-2 ms-4" onClick={toggleTrading}>
                                         <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>거래중</p>
-                                        <p className="text-center text-black">0</p>
                                     </div>
 
                                     <div className="p-2 ms-4">
                                         <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>경매완료</p>
-                                        <p className="text-center text-black">0</p>
                                     </div>
                                 </div>
                             </div>
