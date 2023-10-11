@@ -39,18 +39,27 @@ const SignIn = function () {
   }, [isLoggedIn, navigate]);
 
   const handleLogin = async function (e) {
-
     try {
       const response = await axiosConnect.post('/users/signin', {
         userId: loginId,
         pwd: loginPassword
       });
-
+  
       if (response.status === 200) {
         const responseData = response.data;
         if (responseData.message === 'SUCCESS') {
+          console.log("로그인 성공");
           sessionStorage.setItem('token', responseData.token);
           login();
+  
+          // Save login ID if the checkbox is checked
+          if (saveId) {
+            localStorage.setItem(LS_KEY_ID, loginId);
+          } else {
+            // Clear saved login ID if the checkbox is not checked
+            localStorage.setItem(LS_KEY_ID, "");
+          }
+  
           navigate('/');
         } else {
           alert('아이디 또는 비밀번호가 일치하지 않습니다.');
