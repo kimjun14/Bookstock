@@ -14,12 +14,27 @@ const axiosConnect = axios.create({
 
 function AuctionSlider() {
   const [auctionData, setAuctionData] = useState([]);
+  const [sliderSettings, setSliderSettings] = useState({
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4, // 기본값
+    slidesToScroll: 2, // 기본값
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axiosConnect.get('/mypage/auction');
         setAuctionData(response.data);
+        // 데이터 수에 따라 슬라이더 설정 업데이트
+        if (response.data.length <= 3) {
+          setSliderSettings(prevSettings => ({
+            ...prevSettings,
+            slidesToShow: response.data.length, // 데이터 수에 맞게 조정
+            slidesToScroll: 1, // 선택적: 한 번에 스크롤할 슬라이드 수를 조정할 수 있습니다.
+          }));
+        }
       } catch (err) {
         console.error(err);
       }
@@ -43,33 +58,31 @@ function AuctionSlider() {
     return isTablet ? children : null
   }
 
-  let sliderSettings;
-
-  if (Desktop) {
-    sliderSettings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 2
-    };
-  } else if (Tablet) {
-    sliderSettings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 2,
-      slidesToScroll: 1
-    };
-  } else if (Mobile) {
-    sliderSettings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-  }
+  // if (Desktop) {
+  //   sliderSettings = {
+  //     dots: true,
+  //     infinite: true,
+  //     speed: 500,
+  //     slidesToShow: 4,
+  //     slidesToScroll: 2
+  //   };
+  // } else if (Tablet) {
+  //   sliderSettings = {
+  //     dots: true,
+  //     infinite: true,
+  //     speed: 500,
+  //     slidesToShow: 2,
+  //     slidesToScroll: 1
+  //   };
+  // } else if (Mobile) {
+  //   sliderSettings = {
+  //     dots: true,
+  //     infinite: true,
+  //     speed: 500,
+  //     slidesToShow: 1,
+  //     slidesToScroll: 1
+  //   };
+  // }
 
   return (
     <>
