@@ -85,19 +85,12 @@ function BookSearchResult() {
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>도서 검색 결과</h1>
-      {/* 정렬 버튼 */}
-      <div className="btn-group" role="group" aria-label="Basic example">
-        <button type="button" className="btn btn-recent">최신순</button>
-        <button type="button" className="btn btn-title">제목순</button>
-        <button type="button" className="btn btn-pop">인기순</button>
-      </div>
       {/* 검색 결과 표 */}
       <table className={`searchTable ${isMobile ? 'mobile' : isTablet ? 'tablet' : ''}`}>
         <thead style={{
           backgroundColor: '#f3f3f3'
         }}>
           <tr>
-            <th scope="col">번호</th>
             <th scope="col">표지</th>
             <th scope="col">도서명</th>
             <th scope="col">가격</th>
@@ -110,7 +103,7 @@ function BookSearchResult() {
         <tbody className="table-group-divider" style={{ marginBottom: '2rem' }}>
           {books.map((book) => (
             <tr key={book.index}>
-              <th scope="row">{book.index}</th>
+              
               <td><img src={book.bookImgSrc ? book.bookImgSrc : "http://via.placeholder.com/120x160"} alt="" className='searchBookImg' /></td>
               <td><Link to={`/trading?id=${book.auctionId}`}>{book.bookTitle}</Link></td>
               <td>시작가: {book.auctionPrice}원

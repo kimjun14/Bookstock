@@ -47,7 +47,7 @@ function App() {
               <Route path="/buying" element={<ModalComponent />} />
               <Route path="/buyingSuccess" element={<BuyingSuccess />} />
               <Route path="/recentSearch" element={<RecentSearch />} />
-              <Route path="/favSearch" element={<FavoriteSearch />} />
+              <Route path="/favorites" element={<FavoriteSearch />} />
               <Route path="/deposit" element={<Deposit />} />
               <Route path="/withdraw" element={<Withdraw />} />
             </Route>
