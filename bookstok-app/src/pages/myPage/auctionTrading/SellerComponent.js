@@ -138,14 +138,14 @@ function SellerComponent() {
     }
 
     useEffect(() => {
-        trackingCheck();        
+        trackingCheck();
     }, [])  // 마운트 되면 실행
 
     const handleConfirmSave = async (input) => {
-        const sendData={ 
-            "trackingNumber": input.trackingNumber, 
+        const sendData = {
+            "trackingNumber": input.trackingNumber,
             "trackingCompany": input.trackingCompany,
-            "tradingId" : input.tradingId
+            "tradingId": input.tradingId
         }
         console.log(sendData);
         const confirmSave = window.confirm("운송장 번호를 저장하시겠습니까? 저장 후 수정이 불가능합니다.");
@@ -166,43 +166,100 @@ function SellerComponent() {
     return (
         <>
             <Desktop>
-            {trackingData.map((tracking, index) => (
-                <div key={index} className="container card mt-3 p-3">
-                    <h4>책 제목 : {tracking.bookTitle}</h4>
-                    <h4 className="parcelNum">운송장 번호</h4>
-                    <div className="mb-3">
-                        <select className="form-select form-select-sm" name="trackingCompany" onChange={(e) => handleChange(e, index)} value={tracking.trackingCompany}>
-                            <option value="">택배사를 선택하세요</option>
-                            {carriers.map((carrier) => (
-                                <option key={carrier.Code} value={carrier.Code}>
-                                    {carrier.Name}
-                                </option>
-                            ))}
-                        </select>
+                {trackingData.map((tracking, index) => (
+                    <div key={index} className="container card mt-5 p-4 seller-container">
+                        <h4><span class="badge text-bg-secondary" style={{ fontSize: '1.5rem' }}>{tracking.bookTitle}</span></h4>
+                        <h4 className="parcelNum">운송장 번호</h4>
+                        <div className="mb-3">
+                            <select className="form-select form-select-sm" name="trackingCompany" onChange={(e) => handleChange(e, index)} value={tracking.trackingCompany}>
+                                <option value="">택배사를 선택하세요</option>
+                                {carriers.map((carrier) => (
+                                    <option key={carrier.Code} value={carrier.Code}>
+                                        {carrier.Name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                name="trackingNumber"
+                                placeholder="하이픈(-)을 제외하고 입력하세요"
+                                className="parcelInput"
+                                value={tracking.trackingNumber}
+                                onChange={(e) => handleChange(e, index)}
+                                disabled={isSaved} // 저장 후 수정 불가능하도록 비활성화
+                            />
+                            <button className="btn parcelNumBtn" onClick={() => { handleConfirmSave(tracking) }} disabled={isSaved}>
+                                운송장 번호 저장
+                            </button>
+                        </div>
                     </div>
-                    <div className="mb-3">
-                        <input
-                            type="text"
-                            name="trackingNumber"
-                            placeholder="하이픈(-)을 제외하고 입력하세요"
-                            className="parcelInput"
-                            value={tracking.trackingNumber}
-                            onChange={(e) => handleChange(e, index)}
-                            disabled={isSaved} // 저장 후 수정 불가능하도록 비활성화
-                        />
-                        <button className="btn parcelNumBtn" onClick={()=>{handleConfirmSave(tracking)}} disabled={isSaved}>
-                            운송장 번호 저장
-                        </button>
-                    </div>
-                </div>
-            ))}
+                ))}
             </Desktop>
             <Tablet>
-                
-
+                {trackingData.map((tracking, index) => (
+                    <div key={index} className="container card mt-5 p-4 seller-container">
+                        <h4><span class="badge text-bg-secondary" style={{ fontSize: '1.5rem' }}>{tracking.bookTitle}</span></h4>
+                        <h4 className="parcelNum">운송장 번호</h4>
+                        <div className="mb-3">
+                            <select className="form-select form-select-sm" name="trackingCompany" onChange={(e) => handleChange(e, index)} value={tracking.trackingCompany}>
+                                <option value="">택배사를 선택하세요</option>
+                                {carriers.map((carrier) => (
+                                    <option key={carrier.Code} value={carrier.Code}>
+                                        {carrier.Name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                name="trackingNumber"
+                                placeholder="하이픈(-)을 제외하고 입력하세요"
+                                className="parcelInput"
+                                value={tracking.trackingNumber}
+                                onChange={(e) => handleChange(e, index)}
+                                disabled={isSaved} // 저장 후 수정 불가능하도록 비활성화
+                            />
+                            <button className="btn parcelNumBtn" onClick={() => { handleConfirmSave(tracking) }} disabled={isSaved}>
+                                운송장 번호 저장
+                            </button>
+                        </div>
+                    </div>
+                ))}
             </Tablet>
             <Mobile>
-                
+                {trackingData.map((tracking, index) => (
+                    <div key={index} className="container card mt-5 p-4 seller-container">
+                        <h4><span class="badge text-bg-secondary" style={{ fontSize: '1.5rem' }}>{tracking.bookTitle}</span></h4>
+                        <h4 className="parcelNum">운송장 번호</h4>
+                        <div className="mb-3">
+                            <select className="form-select form-select-sm" name="trackingCompany" onChange={(e) => handleChange(e, index)} value={tracking.trackingCompany}>
+                                <option value="">택배사를 선택하세요</option>
+                                {carriers.map((carrier) => (
+                                    <option key={carrier.Code} value={carrier.Code}>
+                                        {carrier.Name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                name="trackingNumber"
+                                placeholder="하이픈(-)을 제외하고 입력하세요"
+                                className="parcelInput"
+                                value={tracking.trackingNumber}
+                                onChange={(e) => handleChange(e, index)}
+                                disabled={isSaved} // 저장 후 수정 불가능하도록 비활성화
+                            />
+                            <button className="btn parcelNumBtn" onClick={() => { handleConfirmSave(tracking) }} disabled={isSaved}>
+                                운송장 번호 저장
+                            </button>
+                        </div>
+                    </div>
+                ))}
             </Mobile>
         </>
     );

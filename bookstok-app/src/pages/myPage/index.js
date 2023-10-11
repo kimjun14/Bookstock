@@ -267,20 +267,20 @@ const MyPage = () => {
                         </div>
                         <div className="col-md-12 mypageSidebar">
                             <div className="mb-4">
-                                <h5><Link to='/mypage'>경매 진행 내역</Link></h5>
+                                <h3><Link to='/mypage'>경매 진행 내역</Link></h3>
                                 <ul className="list-unstyled">
                                     <li>
-                                        <div onClick={toggleAuction} className="text-decoration-none" style={{ fontWeight: '400' }}>
-                                            경매 진행중
+                                        <div onClick={toggleAuction} className="text-decoration-none">
+                                            <h1>경매 진행중</h1>
                                         </div>
                                     </li>
                                     <li>
-                                        <div onClick={toggleTrading} className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                        <div onClick={toggleTrading} className="text-decoration-none">
                                             거래중
                                         </div>
                                     </li>
                                     <li>
-                                        <div onClick={toggleShowDone} className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                        <div onClick={toggleShowDone} className="text-decoration-none">
                                             경매 완료
                                         </div>
                                     </li>

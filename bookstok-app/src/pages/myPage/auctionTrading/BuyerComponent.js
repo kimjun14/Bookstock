@@ -41,7 +41,7 @@ function BuyerComponent() {
             return newData;
         });
     };
-    
+
     const handleModalInput = (input, index) => {
         console.log(input, "<-인풋 인덱스 ->", index);
         setAddressData(prevState => {
@@ -49,9 +49,10 @@ function BuyerComponent() {
             const newData = [...prevState];
             // 현재 인덱스의 주소 객체를 input으로 업데이트합니다.
             newData[currentIndex] = input; // 이 부분이 input 값을 해당 인덱스에 직접 할당합니다.
-            console.log(newData); 
+            console.log(newData);
             return newData; // 업데이트된 새 배열을 반환합니다.
-    })};
+        })
+    };
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -85,11 +86,11 @@ function BuyerComponent() {
     }
 
     const handleConfirmAddress = async (address) => {
-        const sendingData={
-            Addr:address.Addr,
-            Addr2:address.Addr2,
-            AddrPostal:address.AddrPostal,
-            tradingId:address.tradingId
+        const sendingData = {
+            Addr: address.Addr,
+            Addr2: address.Addr2,
+            AddrPostal: address.AddrPostal,
+            tradingId: address.tradingId
         }
         console.log(sendingData)
 
@@ -112,52 +113,57 @@ function BuyerComponent() {
     return (
         <>
             <Desktop>
-            {addressData.map((address, index) => (
-                <div key={index} className="text-center card mt-3 p-3">
-                    <h4>책 제목 : {address.bookTitle}</h4>
-                    <h4 className="addressTitle">주소</h4>
-                    <input type="button" onClick={()=>handleOpenModal(index)} value="우편번호 찾기" />
-                    <input className="user_enroll_text" type="text" name="Addr" placeholder="주소를 입력하세요" value={address.Addr} onChange={(e) => handleAddressInput(e, index)} />
-                    <input type="text" id="detailAddress" name="Addr2" placeholder="상세주소를 입력하세요" value={address.Addr2} onChange={(e) => handleAddressInput(e, index)} />
-                    {isModalOpen && currentIndex === index && <TradingAddress company={address} setcompany={(input) => handleModalInput(input, index)} closeModal={handleCloseModal}></TradingAddress>}
-                    <button className="btn btn-blue-address" onClick={() => handleConfirmAddress(address)}>주소 저장</button>
-                    판매자로 부터 입력된 송장 번호 {address.trackingNumber}
-
-                    <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
-                </div>
-            ))}
+                {addressData.map((address, index) => (
+                    <div key={index} className="text-center card mt-5 p-4 buyer-container">
+                        <h4><span class="badge text-bg-secondary" style={{ fontSize: '1.5rem' }}>{address.bookTitle}</span>
+                        </h4>
+                        <h4 className="addressTitle">주소</h4>
+                        <input type="button" onClick={() => handleOpenModal(index)} value="우편번호 찾기" />
+                        <input className="user_enroll_text" type="text" name="Addr" placeholder="주소를 입력하세요" value={address.Addr} onChange={(e) => handleAddressInput(e, index)} />
+                        <input type="text" id="detailAddress" name="Addr2" placeholder="상세주소를 입력하세요" value={address.Addr2} onChange={(e) => handleAddressInput(e, index)} />
+                        {isModalOpen && currentIndex === index && <TradingAddress company={address} setcompany={(input) => handleModalInput(input, index)} closeModal={handleCloseModal}></TradingAddress>}
+                        <button className="btn btn-blue-address" onClick={() => handleConfirmAddress(address)}>주소 저장</button>
+                        <span class="badge rounded-pill text-bg-secondary trackingNumber">운송장 번호  :  {address.trackingNumber}
+                        </span>
+                        <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
+                    </div>
+                ))}
             </Desktop>
 
             <Tablet>
             {addressData.map((address, index) => (
-                <div className="text-center card mt-3 p-3">
-                    <h4>책 제목 : {address.bookTitle}</h4>
-                    <h4 className="addressTitle">주소</h4>
-                    <input type="button" onClick={()=>handleOpenModal(index)} value="우편번호 찾기" />
-                    <input className="user_enroll_text" type="text" name="Addr" placeholder="주소를 입력하세요" value={address.Addr} onChange={(e) => handleAddressInput(e, index)} />
-                    <input className="w-100" type="text" id="detailAddress" name="Addr2" placeholder="상세주소를 입력하세요" value={address.Addr2} onChange={(e) => handleAddressInput(e, index)} />
-                    {isModalOpen && currentIndex === index && <TradingAddress company={address} setcompany={(input) => handleModalInput(input, index)} closeModal={handleCloseModal}></TradingAddress>}
-                    <button className="btn btn-blue-address mb-5" onClick={handleConfirmAddress}>주소 저장</button>
-                    판매자로 부터 입력된 송장 번호 {address.trackingNumber}
-                    <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
-                </div>
-            ))}
+                    <div key={index} className="text-center card mt-5 p-4 ">
+                        <h4><span class="badge text-bg-secondary" style={{ fontSize: '1.5rem' }}>{address.bookTitle}</span>
+                        </h4>
+                        <h4 className="addressTitle">주소</h4>
+                        <input type="button" onClick={() => handleOpenModal(index)} value="우편번호 찾기" />
+                        <input className="user_enroll_text" type="text" name="Addr" placeholder="주소를 입력하세요" value={address.Addr} onChange={(e) => handleAddressInput(e, index)} />
+                        <input type="text" id="detailAddress" name="Addr2" placeholder="상세주소를 입력하세요" value={address.Addr2} onChange={(e) => handleAddressInput(e, index)} />
+                        {isModalOpen && currentIndex === index && <TradingAddress company={address} setcompany={(input) => handleModalInput(input, index)} closeModal={handleCloseModal}></TradingAddress>}
+                        <button className="btn btn-blue-address" onClick={() => handleConfirmAddress(address)}>주소 저장</button>
+                        <span class="badge rounded-pill text-bg-secondary trackingNumber">운송장 번호  :  {address.trackingNumber}
+                        </span>
+                        <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
+                    </div>
+                ))}
             </Tablet>
 
             <Mobile>
             {addressData.map((address, index) => (
-                <div className="text-center card mt-3 p-3">
-                    <h4>책 제목 : {address.bookTitle}</h4>
-                    <h4 className="addressTitle">주소</h4>
-                    <input type="button" onClick={()=>handleOpenModal(index)} value="우편번호 찾기" />
-                    <input className="user_enroll_text" type="text" name="Addr" placeholder="주소를 입력하세요" value={address.Addr} onChange={(e) => handleAddressInput(e, index)} />
-                    <input className="w-100" type="text" id="detailAddress" name="Addr2" placeholder="상세주소를 입력하세요" value={address.Addr2} onChange={(e) => handleAddressInput(e, index)} />
-                    {isModalOpen && currentIndex === index && <TradingAddress company={address} setcompany={(input) => handleModalInput(input, index)} closeModal={handleCloseModal}></TradingAddress>}
-                    <button className="btn btn-blue-address mb-5" onClick={handleConfirmAddress}>주소 저장</button>
-                    판매자로 부터 입력된 송장 번호 {address.trackingNumber}
-                    <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
-                </div>
-            ))}
+                    <div key={index} className="text-center card mt-5 p-4 ">
+                        <h4><span class="badge text-bg-secondary" style={{ fontSize: '1.5rem' }}>{address.bookTitle}</span>
+                        </h4>
+                        <h4 className="addressTitle">주소</h4>
+                        <input type="button" onClick={() => handleOpenModal(index)} value="우편번호 찾기" />
+                        <input className="user_enroll_text" type="text" name="Addr" placeholder="주소를 입력하세요" value={address.Addr} onChange={(e) => handleAddressInput(e, index)} />
+                        <input type="text" id="detailAddress" name="Addr2" placeholder="상세주소를 입력하세요" value={address.Addr2} onChange={(e) => handleAddressInput(e, index)} />
+                        {isModalOpen && currentIndex === index && <TradingAddress company={address} setcompany={(input) => handleModalInput(input, index)} closeModal={handleCloseModal}></TradingAddress>}
+                        <button className="btn btn-blue-address" onClick={() => handleConfirmAddress(address)}>주소 저장</button>
+                        <span class="badge rounded-pill text-bg-secondary trackingNumber">운송장 번호  :  {address.trackingNumber}
+                        </span>
+                        <button className="btn btn-blue-confirm" onClick={handleConfirmPurchase}>구매확정</button>
+                    </div>
+                ))}
             </Mobile>
         </>
     );

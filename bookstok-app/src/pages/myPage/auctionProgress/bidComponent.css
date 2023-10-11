@@ -111,3 +111,18 @@ margin: auto;
   background-color: lightslategray;
 }
 
+@media screen and (max-width: 576px) {
+  .card-bid-container{
+    width: 95%;
+margin-left: -2rem;  }
+  
+  .bidBuyBtn, .bidChatBtn {
+    width: 80%;
+  }
+
+  .btn-seller {
+    width: 80%;
+    margin-right: 3px;
+  }
+  
+}

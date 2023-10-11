@@ -1,3 +1,7 @@
+.seller-container{
+  border: none;
+}
+
 .parcelNum {
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -14,6 +18,8 @@
     width: 80%;
     height: 2.5rem;
   }
+  .text-bg-secondary{
+font-size: medium;  }
 }
 
 @media screen and (min-width: 577px) and (max-width: 1023px) {

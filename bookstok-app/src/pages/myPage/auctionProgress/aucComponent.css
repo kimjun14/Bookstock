@@ -1,95 +1,18 @@
-.auction-slider-container {
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2.5rem;
-}
-
-.my-slider .slick-slide {
-    width: 100%;
-}
-
-.my-slider .card {
-  display: flex;
-  flex-direction: column;
-  height: 29rem;
-  border: 0px;
-  margin: 1rem;
-}
-
-.my-slider .card-img-top {
-  width: 100%;
-  height: auto;
-}
-
-.my-slider .card-body {
-  padding-top: 1rem;
+.auction-container{
+  margin-top: 3rem;
   text-align: center;
-  color: black;
-  border-radius: 10px;
+}
+
+.table-custom {
+  background-color: #F7F8F9;
+}
+
+/* 이미지 크기 조절 */
+.table img {
+  max-width: 8rem;
+}
+
+.auction-container td{
   height: auto;
 }
 
-.my-slider .card-body .card-title{
-    font-size: large;
-    font-weight: 700;
-}
-
-.my-slider .card-body .card-text{
-    font-size: medium;
-    font-weight: 500;
-    color: dimgray;
-}
-
-/* 원본 스타일 유지 */
-
-/* 태블릿 화면에 대한 스타일 */
-@media (max-width: 991px) {
-    .auction-slider-container {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 2rem;
-      }
-    .my-slider .slick-slide {
-      width: 50%; /* 슬라이드 너비를 50%로 설정하여 2개의 슬라이드가 한 줄에 표시되도록 합니다. */
-    }
-  
-    .my-slider .card {
-      height: auto; /* 카드 높이를 자동으로 설정하여 내용에 맞게 조절됩니다. */
-    }
-  }
-  
-  /* 모바일 화면에 대한 스타일 */
-  @media (max-width: 575px) {
-    .my-slider .slick-slide {
-      width: 100%; /* 슬라이드 너비를 100%로 설정하여 한 번에 하나의 슬라이드만 표시되도록 합니다. */
-    }
-  
-    .my-slider .card {
-      width: 100%; /* 카드 너비를 조절하여 화면 폭을 고려합니다. */
-      height: auto; /* 카드 높이를 자동으로 설정하여 내용에 맞게 조절됩니다. */
-      margin: 1rem auto; /* 카드를 가운데 정렬합니다. */
-    }
-    
-    .my-slider .card-img-top {
-      width: 100%;
-      height: auto;
-    }
-  
-    .my-slider .card-body {
-      padding-top: 0.5rem; /* padding 조정 */
-    }
-  
-    .my-slider .card-body .card-title{
-      font-size: medium; /* 폰트 크기 조정 */
-      font-weight: 700;
-    }
-  
-    .my-slider .card-body .card-text{
-      font-size: small; /* 폰트 크기 조정 */
-      font-weight: 500;
-      color: dimgray;
-    }
-  }
-  
