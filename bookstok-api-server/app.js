@@ -12,7 +12,8 @@ const sessionMiddleware = session({
     cookie: { 
         maxAge: 1000*60*60*24*7,
         httpOnly: false,
-        SameSite:'None'
+        SameSite:'None',
+        secure:true
     },
     secret: 'sometext', // 세션 데이터 암호화를 위한 비밀 키 (보안 목적)
     rolling: true,  // 매 응답마다 쿠키 시간 초기화
@@ -51,5 +52,7 @@ app.use((err, req, res, next) => {
     console.error(err.cause);
     res.json({error: {message: '요청을 처리할 수 없습니다. 잠시 후 다시 요청해 주세요.'}});
 });
+
+
 
 module.exports = { app, sessionMiddleware };
