@@ -7,8 +7,10 @@ const user = require('../models/aucboard.model');
 // 경매 검색 조회 [get] ip:12345/api/auctions/search?query(key)=value [req.body에 query]
 router.get('/search', async (req, res, next) => {
   try{
+    console.log(req.query.mode)
     const query = req.query.query;
-    const list = await user.auctionSearch(query);
+    const mode = req.query.mode;
+    const list = await user.auctionSearch(query,mode);
     res.json(list);
   }catch(err){
     next(err);

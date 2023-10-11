@@ -23,47 +23,12 @@ function BookSearchResult() {
   const searchKey = queryParams.get('query')
   // 자세한 설명은 Trading 참고, 쿼리 문자열의 query(key),검색어(value) 받아옴 
   const [books, setBooks] = useState([]);
+  const [filter, setFilter] = useState("");
 
-  const [bookData, setBookData] = useState([]);
-  const [bidData, setBidData] = useState([]);
-
-  useEffect(() => {
-      const fetchBookData = async () => {
-          try {
-              const response = await axiosConnect.get('test/mainpagetest');
-              setBookData(response.data);
-          } catch (err) {
-              console.log(err);
-          }
-      }
-
-      fetchBookData();
-  }, []);
-
-  useEffect(() => {
-      const fetchBidData = async () => {
-          try {
-              const promises = bookData.map(async (book) => {
-                  const bidResponse = await axiosConnect.get(`test/mainbidprice/${book.auctionId}`);
-                  console.log("비드데이터", bidResponse);
-                  return { auctionId: book.auctionId, bidData: bidResponse.data };
-              });
-
-              const bidResults = await Promise.all(promises);
-
-              setBidData(bidResults);
-          } catch (err) {
-              console.log(err);
-          }
-      }
-
-      if (bookData.length > 0) {
-          fetchBidData();
-      }
-  }, [bookData]);
   const fetchSearchList = async () => {
     try {
-      const response = await axiosConnect.get(`/auctions/search?query=${searchKey}`)
+      console.log(filter)
+      const response = await axiosConnect.get(`/auctions/search?query=${searchKey}&mode=${filter}`)
       setBooks(response.data);
     } catch (err) {
       console.error(err);
@@ -74,7 +39,7 @@ function BookSearchResult() {
     try {
       await axiosConnect.post(`/auctions/suggest/star`, { aId: data })
       console.log("OK")
-      fetchSearchList(searchKey)
+      fetchSearchList()
     } catch (err) {
       console.error(err);
     }
@@ -82,12 +47,12 @@ function BookSearchResult() {
 
   useEffect(() => {
     if (URLquery.search) {
-      fetchSearchList(searchKey);
+      fetchSearchList();
     } else {    // URL/searchResult 같이 쿼리 없이 접근하면
       alert("잘못 된 접근입니다.");    // id쿼리 없이 들어가면 오류 메세지 나오고
       navigation('/');                // 홈('/')화면으로 보내버림 (추후 변경 할 수도)
     }
-  }, [searchKey]);
+  }, [searchKey,filter]);
 
   const AuctionCreateAt = (dateString) => {
     const Date = moment(dateString).format("YYYY-MM-DD HH:mm:ss");
@@ -99,9 +64,9 @@ function BookSearchResult() {
       <h1 style={{ textAlign: 'center' }}>도서 검색 결과</h1>
       {/* 정렬 버튼 */}
       <div className="btn-group" role="group" aria-label="Basic example">
-        <button type="button" className="btn btn-recent">최신순</button>
-        <button type="button" className="btn btn-title">제목순</button>
-        <button type="button" className="btn btn-pop">인기순</button>
+        <button type="button" className="btn btn-recent" onClick={() => setFilter("")}>최신순</button>
+        <button type="button" className="btn btn-title" onClick={() => setFilter("1")}>제목순</button>
+        <button type="button" className="btn btn-pop" onClick={() => setFilter("2")}>인기순</button>
       </div>
       {/* 검색 결과 표 */}
       <table className={`searchTable ${isMobile ? 'mobile' : isTablet ? 'tablet' : ''}`}>
@@ -124,15 +89,7 @@ function BookSearchResult() {
               <td><img src={book.bookImgSrc ? book.bookImgSrc : "http://via.placeholder.com/120x160"} alt="" className='searchBookImg' /></td>
               <td><Link to={`/trading?id=${book.auctionId}`}>{book.bookTitle}</Link></td>
               <td>시작가: {book.auctionPrice}원
-              <br />현재가:
-                {bidData
-                .filter((bidItem) => bidItem.auctionId === book.auctionId)
-                .map((bidItem) => (
-                  <p className="presentPrice-text" key={bidItem.auctionId}>
-                    {bidItem.bidData[0]?.bidprice ? `${bidItem.bidData[0]?.bidprice}원` : '입찰 금액 없음'}
-                  </p>
-                ))
-              }                </td>
+                <br />현재가: 추후 구현 예정</td>
               <td><Link to={`/`}>{book.nickname} </Link></td>
               <td>{AuctionCreateAt(book.auctionStart)} /<br />{AuctionCreateAt(book.auctionEnd)}</td>
               <td>{book.viewCount}</td>
