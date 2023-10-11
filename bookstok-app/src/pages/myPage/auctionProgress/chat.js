@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 function Chat({ isOpen, bid, onClose }) {
     const [chatMessage, setChatMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
+    const [nickname, setNickname] = useState('');
     const socketRef = useRef(null);
 
     const handleInputChange = (e) => {  // 입력 한 내용을 chatMessage로 반영하는 이벤트 핸들러
@@ -20,26 +21,34 @@ function Chat({ isOpen, bid, onClose }) {
     const handleSendMessage = () => {
         if (chatMessage.trim() !== '') {
             // 웹소켓을 통해 서버에 메시지 전송
-            socketRef.current.emit('chat message', { text: chatMessage, sender: 'user', bId: bid.bidId, aId:bid.auctionId});
+            socketRef.current.emit('chat message', { text: chatMessage, sender: nickname, bId: bid.bidId, aId: bid.aId });
             // 메시지 입력 필드 초기화
             setChatMessage('');
         }
     };
 
     useEffect(() => {
-        socketRef.current = io.connect('http://localhost:12345');
-        if(bid!=null){  // bid값이 null인 초기엔 채팅 이력을 받아오지 않음
-            socketRef.current.emit('check chatId', { aId:bid.auctionId, bId: bid.bidId });
+        socketRef.current = io.connect('http://localhost:12345', {
+            withCredentials: true
+        });
+
+        socketRef.current.on('get nickname', (nick) => {
+            setNickname(nick)
+        })
+
+        if (bid != null) {  // bid값이 null인 초기엔 채팅 이력을 받아오지 않음
+            socketRef.current.emit('check chatId', { aId: bid.aId, bId: bid.bidId });
             socketRef.current.on('load previous messages', (previousMessages) => {
                 setChatHistory(previousMessages);
-        })};
+            })
+        };
 
         socketRef.current.on('new message', (message) => {
             setChatHistory((prevLog) => [...prevLog, message]);
         });
-    
+
         return () => {
-          socketRef.current.disconnect();
+            socketRef.current.disconnect();
         };
     }, [bid]);
 
@@ -60,16 +69,16 @@ function Chat({ isOpen, bid, onClose }) {
                                     {chatHistory.map((message, index) => (
                                         <div
                                             key={index}
-                                            className={`d-flex flex-row justify-content-${message.sender === 'user' ? 'start' : 'end'} mb-4`}
+                                            className={`d-flex flex-row justify-content-${message.sender === nickname ? 'start' : 'end'} mb-4`}
                                         >
-                                            {message.sender === 'user' ? (
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style={{ width: '45px', height: '100%' }} />
+                                            {message.sender === nickname ? (
+                                                <div style={{ width: '13%', height: '100%' }}>{message.sender}</div>
                                             ) : null}
-                                            <div className={`p-3 ${message.sender === 'user' ? 'ms-3' : 'me-3'} ${message.sender === 'user' ? 'bg-info' : 'bg-light'}`} style={{ borderRadius: '15px' }}>
+                                            <div className={`p-3 ${message.sender === nickname ? 'ms-3' : 'me-3'} ${message.sender === 'user' ? 'bg-info' : 'bg-light'}`} style={{ borderRadius: '15px' }}>
                                                 <p className="small mb-0">{message.text}</p>
                                             </div>
-                                            {message.sender !== 'user' ? (
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp" alt="avatar 2" style={{ width: '45px', height: '100%' }} />
+                                            {message.sender !== nickname ? (
+                                                <div style={{ width: '13%', height: '100%' }}>{message.sender}</div>
                                             ) : null}
                                         </div>
                                     ))}
@@ -80,6 +89,7 @@ function Chat({ isOpen, bid, onClose }) {
                                 </div>
                             </div>
                         )}
+
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" onClick={onClose}>
