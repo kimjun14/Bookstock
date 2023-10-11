@@ -100,10 +100,40 @@ function Trading() {
     });
   }
 
+  const handleBidPriceChange = (e) => {
+    // 입력된 값이 콤마가 포함된 숫자인지 확인
+    const newValue = e.target.value.replace(/[^0-9,]/g, '');
+
+    // 콤마로 값 나누기
+    const parts = newValue.split(',');
+
+    // 콤마 없이 값을 합쳐서 단일 문자열로 만들기
+    const joinedValue = parts.join('');
+
+    // 세 자리마다 콤마 추가
+    const formattedValue = joinedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    // bidData 상태 업데이트
+    setBidData({
+      ...bidData,
+      [e.target.name]: formattedValue
+    });
+  }
+
+
   const handleBidSubmit = async () => {
     try {
-      console.log("Bid data before submission:", bidData);
-      await axiosConnect.post(`/auctions/${queryParams.get('id')}`, bidData)
+      // 컴마 제거 및 숫자로 변환
+      const bidPriceWithoutComma = bidData.bidPrice.replace(/,/g, '');
+      const numericBidPrice = parseInt(bidPriceWithoutComma);
+
+      // bidData 업데이트
+      const updatedBidData = {
+        ...bidData,
+        bidPrice: numericBidPrice,
+      };
+      console.log("Bid data before submission:", updatedBidData);
+      await axiosConnect.post(`/auctions/${queryParams.get('id')}`, updatedBidData)
       window.alert("입찰 등록에 성공하였습니다.")
       console.log("Bid submission successful!");
 
@@ -126,16 +156,6 @@ function Trading() {
       fetchBidData();
     }
   }
-
-// // 판매자 아이디를 가져오는 함수 수정
-// const getSellerIdForBid = () => {
-//   // 현재는 첫 번째 입찰을 선택하도록 되어 있음. 원하는 방식으로 수정할 수 있음.
-//   const firstBid = auctionBidData[0];
-//   const sellerId = firstBid ? firstBid.nickname : 'Unknown Seller';
-//   console.log('Seller ID:', sellerId); // 추가된 부분
-//   return sellerId;
-// };
-
 
   const formatBidCreateAt = (dateString) => {
     const formattedDate = moment(dateString).format('YYYY-MM-DD HH:mm:ss');
@@ -235,7 +255,7 @@ function Trading() {
                     <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>작가</span> {auctionData.bookAuthor && auctionData.bookAuthor}</li>
                     <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>출판사</span> {auctionData.bookPub && auctionData.bookPub}</li>
                     <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>출판일</span> {auctionData.bookPubDate && auctionData.bookPubDate}</li>
-                    <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>시작가</span> {auctionData.auctionPrice && auctionData.auctionPrice}</li>
+                    <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>시작가</span> {auctionData.auctionPrice && auctionData.auctionPrice.toLocaleString()}</li>
                   </ul>
                 </div>
               </div>
@@ -258,11 +278,11 @@ function Trading() {
                   <div className="row g-0">
                     <div className="col-md-12">
                       <div className="card-body row align-items-center">
-                        <h3 className="card-title col-sm-1 ms-5 mt-4">{bid.nickname}</h3>
+                        <h6 className="card-title col-sm-1 ms-5 mt-4">{bid.nickname}</h6>
                         <p className="card-title col-sm-2 ms-2 mt-4">
                           <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
                         </p>
-                        <h6 className="card-title col-sm-2 mt-4">{bid.bidPrice} 원</h6>
+                        <h6 className="card-title col-sm-2 mt-4">{Number(bid.bidprice).toLocaleString()} 원</h6>
                         <div className="col-sm-2"></div>
                         <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={() => openModal(bid)}>즉시구매</button>
                         <button type="button" className="btn btn-info col-sm-2 mt-3 ms-2" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
@@ -313,7 +333,7 @@ function Trading() {
                     placeholder="입찰금액을 입력하세요"
                     name="bidPrice"
                     value={bidData.bidPrice}
-                    onChange={handleBidChange}
+                    onChange={handleBidPriceChange}
 
                   />
                   <Button className='bidBtn' onClick={handleBidSubmit}>
@@ -367,7 +387,7 @@ function Trading() {
                     <li className="list-group-item">책제목: {auctionData.bookTitle && auctionData.bookTitle}</li>
                     <li className="list-group-item">작가: {auctionData.bookAuthor && auctionData.bookAuthor}</li>
                     <li className="list-group-item">출판사: {auctionData.bookPub && auctionData.bookPub}</li>
-                    <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</li>
+                    <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice.toLocaleString()}</li>
                     <li className="list-group-item">출판일 : {auctionData.bookPubDate && auctionData.bookPubDate}</li>
                   </ul>
                 </div>
@@ -396,10 +416,9 @@ function Trading() {
                         <p className="card-title col mt-4">
                           <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
                         </p>
-                        <h6 className="card-title col mt-4">{bid.bidPrice} 원</h6>
+                        <h6 className="card-title col mt-4">{Number(bid.bidprice).toLocaleString()} 원</h6>
                         <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={() => openModal(bid)}>즉시구매</button>
                         <button type="button" className="btn btn-info col-sm-2 mt-3 ms-2 me-4" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
-
                       </div>
                     </div>
 
@@ -445,7 +464,7 @@ function Trading() {
                     placeholder="입찰금액을 입력하세요"
                     name="bidPrice"
                     value={bidData.bidPrice}
-                    onChange={handleBidChange}
+                    onChange={handleBidPriceChange}
 
                   />
                   <Button className='bidBtn' onClick={handleBidSubmit}>
@@ -500,7 +519,7 @@ function Trading() {
                   <li className="list-group-item">책제목: {auctionData.bookTitle && auctionData.bookTitle}</li>
                   <li className="list-group-item">작가: {auctionData.bookAuthor && auctionData.bookAuthor}</li>
                   <li className="list-group-item">출판사: {auctionData.bookPub && auctionData.bookPub}</li>
-                  <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice}</li>
+                  <li className="list-group-item">경매 시작가: {auctionData.auctionPrice && auctionData.auctionPrice.toLocaleString()}</li>
                   <li className="list-group-item">출판일 : {auctionData.bookPubDate && auctionData.bookPubDate}</li>
                 </ul>
               </div>
@@ -528,7 +547,7 @@ function Trading() {
                         <p className="card-title col-sm-2 mt-1">
                           <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
                         </p>
-                        <h6 className="card-title col-sm-2 mt-2">{bid.bidPrice} 원</h6>
+                        <h6 className="card-title col-sm-2 mt-2">{Number(bid.bidprice).toLocaleString()} 원</h6>
                         <div className="col-sm-2"></div>
                       </div>
                     </div>
@@ -602,7 +621,7 @@ function Trading() {
                   placeholder="입찰금액을 입력하세요"
                   name="bidPrice"
                   value={bidData.bidPrice}
-                  onChange={handleBidChange}
+                  onChange={handleBidPriceChange}
                 />
                 <Button className='bidBtn' onClick={handleBidSubmit}>
                   입찰 하기

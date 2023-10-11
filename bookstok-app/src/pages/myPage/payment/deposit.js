@@ -50,8 +50,54 @@ const Deposit = () => {
     }, [selectedBank]);
 
     const setCashHandler = (amount) => {
-        setCash((prevCash) => (parseFloat(prevCash || 0) + parseFloat(amount)).toString());
-    };
+        // 현재 cash 값을 불러와서 컴마 제거 및 숫자로 변환
+        const currentCash = cash.replace(/,/g, '');
+        const numericCurrentCash = parseFloat(currentCash || 0);
+      
+        // 정규식을 사용하여 콤마가 찍힌 숫자인지 확인
+        const isCommaSeparatedNumber = /^[0-9,]+$/.test(amount);
+      
+        let amountWithoutComma;
+      
+        if (isCommaSeparatedNumber) {
+          // 새로운 값에 3자리마다 콤마 추가
+          amountWithoutComma = amount.replace(/,/g, '');
+          const formattedAmount = parseFloat(amountWithoutComma || 0).toLocaleString();
+      
+          // setCash 업데이트
+          setCash(formattedAmount);
+        } else {
+          // 숫자 또는 콤마가 아닌 다른 문자가 포함된 경우 처리
+          console.error("Invalid input. Please enter a valid number with or without commas.");
+        }
+      
+        // 새로운 값에 3자리마다 콤마 추가하고 현재 cash 값을 더해서 다시 3자리마다 콤마 추가하여 setCash 업데이트
+        setCash((prevCash) => (numericCurrentCash + parseFloat(amountWithoutComma || 0)).toLocaleString());
+      };
+      
+      
+
+    const HandleCashChange = (e) => {
+        // 정규식을 사용하여 콤마가 찍힌 숫자인지 확인
+        const isCommaSeparatedNumber = /^[0-9,]+$/.test(e.target.value);
+      
+        if (isCommaSeparatedNumber) {
+          // 예전 콤마 제거하고 새로운 값에 3자리마다 콤마 추가
+          const amountWithoutComma = e.target.value.replace(/,/g, '');
+          const formattedAmount = parseInt(amountWithoutComma || 0, 10).toLocaleString();
+      
+          // setCash 업데이트
+          setCash(formattedAmount);
+        } else if (e.target.value === '' || e.nativeEvent.inputType === 'deleteContentBackward') {
+          // 입력 값이 비어있거나 Backspace 이벤트인 경우
+          setCash('');
+        } else {
+          // 숫자 또는 콤마가 아닌 다른 문자가 포함된 경우 처리
+          console.error("Invalid input. Please enter a valid number with or without commas.");
+        }
+      };
+      
+      
 
 
     const openModal = () => {
@@ -102,7 +148,7 @@ const Deposit = () => {
                     </div>
 
                     <div className="row justify-content-center">
-                        <input type="tel" className="col-sm-6" placeholder='충전할 금액을 입력해 주세요.' value={cash === '0' ? '' : cash} onChange={(e) => setCash(e.target.value)} />
+                        <input type="tel" className="col-sm-6" placeholder='충전할 금액을 입력해 주세요.' value={cash === '0' ? '' : cash} onChange={HandleCashChange} />
                     </div>
 
                     <div className="row justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
@@ -149,7 +195,7 @@ const Deposit = () => {
                     </div>
 
                     <div className="justify-content-center mb-2">
-                        <input type="tel" className="chargeInput" placeholder='충전할 금액을 입력해 주세요.' value={cash === '0' ? '' : cash} onChange={(e) => setCash(e.target.value)} />
+                        <input type="tel" className="chargeInput" placeholder='충전할 금액을 입력해 주세요.' value={cash === '0' ? '' : cash} onChange={HandleCashChange} />
                     </div>
 
                     <div className="row toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -194,7 +240,7 @@ const Deposit = () => {
                     </div>
 
                     <div className="justify-content-center mb-2">
-                        <input type="tel" className="chargeInput" placeholder='충전할 금액을 입력해 주세요.' value={cash === '0' ? '' : cash} onChange={(e) => setCash(e.target.value)} />
+                        <input type="tel" className="chargeInput" placeholder='충전할 금액을 입력해 주세요.' value={cash === '0' ? '' : cash} onChange={HandleCashChange} />
                     </div>
 
                     <div className="row toolbar" role="toolbar" aria-label="Toolbar with button groups">

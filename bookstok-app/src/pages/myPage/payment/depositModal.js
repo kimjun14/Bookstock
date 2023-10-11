@@ -17,8 +17,12 @@ const DepositModal = ({ openModal, closeModal, cash, selectedBank, account }) =>
 
   const handleConfirm = async () => {
     try {
+      // cash 값에서 콤마 제거하고 정수로 변환
+      const cashWithoutComma = cash.replace(/,/g, '');
+      const cashValue = parseInt(cashWithoutComma, 10);
+
       const response = await axiosConnect.post('/point', {
-        cash: parseInt(cash, 10),  // 문자열을 정수로 변환
+        cash: cashValue,
         bank: selectedBank,
         account: account,
       });

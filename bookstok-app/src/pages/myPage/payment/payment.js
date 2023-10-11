@@ -82,7 +82,7 @@ const Payment = () => {
                                     </ul>
                                 </div>
                                 <Link to="/deposit">
-                                    <p className="balance card-text mb-2">{balance}원 〉</p>
+                                    <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
                                 </Link>
                                 <div className="button-div d-flex justify-content-center">
                                     <Link to="/deposit">
@@ -118,7 +118,7 @@ const Payment = () => {
                                     </ul>
                                 </div>
                                 <Link to="/deposit">
-                                    <p className="balance card-text mb-2">{balance}원 〉</p>
+                                    <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
                                 </Link>
                                 <div className="button-div d-flex justify-content-center">
                                     <Link to="/deposit">
@@ -154,7 +154,7 @@ const Payment = () => {
                                     </ul>
                                 </div>
                                 <Link to="/deposit">
-                                    <p className="balance card-text mb-2">{balance}원 〉</p>
+                                    <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
                                 </Link>
                                 <div className="button-div d-flex justify-content-center">
                                     <Link to="/deposit">
