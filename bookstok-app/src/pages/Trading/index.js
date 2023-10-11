@@ -247,8 +247,8 @@ function Trading() {
                 <img
                   src={auctionData.bookImgSrc && auctionData.bookImgSrc}
                   alt="bookImg"
-                  className="img-fluid" // 이미지 플루이드 반응형
-                  style={{ width: "40%", marginLeft: '10%', marginBottom: '2rem' }}
+                  className="img" // 이미지 플루이드 반응형
+                  style={{ width: "50%", margin: 'auto', marginBottom: '2rem' }}
                 />
               </div>
               <div className="col">
@@ -282,10 +282,10 @@ function Trading() {
             </div>
             <div>
               {auctionBidData.map((bid) => (
-                <div className="bid-container card mb-3" style={{ minWidth: "25%" }} key={bid.id}>
+                <div className="bids-container card mb-3" style={{ minWidth: "25%" }} key={bid.id}>
                   <div className="row g-0">
                     <div className="col-md-12">
-                      <div className="card-body row align-items-center">
+                      <div className="card-body row align-items-center me-2">
                         <h6 className="card-title col-sm-1 ms-5 mt-4">{bid.nickname}</h6>
                         <p className="card-title col-sm-2 ms-2 mt-4">
                           <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
@@ -293,13 +293,13 @@ function Trading() {
                         <h6 className="card-title col-sm-2 mt-4">{Number(bid.bidprice).toLocaleString()} 원</h6>
                         <div className="col-sm-2"></div>
                         <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={() => openModal(bid)}>즉시구매</button>
-                        <button type="button" className="btn btn-info col-sm-2 mt-3 ms-2" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
+                        <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
 
                       </div>
                     </div>
 
                     <div className='card-body row'>
-                      <div className="alert alert-light col-sm-12" role="alert">
+                      <div className="ms-2 alert alert-light col-sm-12" role="alert">
                         <img src={bid.bidImgSrc} className="img-fluid mx-4" alt="..." style={{ width: "18%" }} />
                         {bid.bidContext ? bid.bidContext : "상세 설명이 없습니다."}
                       </div>
@@ -382,7 +382,7 @@ function Trading() {
                   src={auctionData.bookImgSrc && auctionData.bookImgSrc}
                   alt="bookImg"
                   className="img-fluid" // 이미지 플루이드 반응형
-                  style={{ width: "100%" }}
+                  style={{ width: "60%" }}
                 />
               </div>
               <div className="col">
@@ -426,7 +426,7 @@ function Trading() {
                         </p>
                         <h6 className="card-title col mt-4">{Number(bid.bidprice).toLocaleString()} 원</h6>
                         <button type="button" className="btn btn-primary col-sm-2 mt-3" onClick={() => openModal(bid)}>즉시구매</button>
-                        <button type="button" className="btn btn-info col-sm-2 mt-3 ms-2 me-4" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
+                        <button type="button" className="btn btn-primary col-sm-2 mt-3 ms-2 me-4" onClick={() => openChatPopUp(bid)}>1:1 채팅</button>
                       </div>
                     </div>
 
@@ -550,7 +550,7 @@ function Trading() {
                 <div className="card mb-3" style={{ minWidth: "25%" }} key={bid.id}>
                   <div className="row g-0">
                     <div className="col-md-12">
-                      <div className="card-body row align-items-center text-center">
+                      <div className="bid-card-body row align-items-center text-center">
                         <h3 className="card-title col-sm-1 mt-4">{bid.nickname}</h3>
                         <p className="card-title col-sm-2 mt-1">
                           <small className="text-body-secondary">{formatBidCreateAt(bid.bidCreateAt)}</small>
@@ -560,7 +560,7 @@ function Trading() {
                       </div>
                     </div>
 
-                    <div className='card-body'>
+                    <div className='TradingBid-card-body'>
                       <div className="row justify-content-center alert alert-light" role="alert">
                         <img src={bid.bidImgSrc} className="img-fluid" alt="..." style={{ width: "50%" }} />
                       </div>
@@ -571,7 +571,7 @@ function Trading() {
 
                     <div className='row justify-content-center'>
                       <button type="button" className=" btn btn-primary mt-1 ms-4" onClick={() => openModal(bid)} style={{ width: "80%" }}>즉시구매</button>
-                      <button type="button" className="btn btn-info mt-2 ms-4 mb-3" onClick={() => openChatPopUp(bid)} style={{ width: "80%" }}>1:1 채팅</button>
+                      <button type="button" className="btn btn-primary mt-2 ms-4 mb-3" onClick={() => openChatPopUp(bid)} style={{ width: "80%" }}>1:1 채팅</button>
                     </div>
                   </div>
                 </div>
