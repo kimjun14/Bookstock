@@ -16,6 +16,21 @@ const userModel = {
             throw new Error('DB Error');
         }
     },
+
+    // 메인페이지 입찰 금액 기능 테스트용 (분리예정)
+    async mainpageBidPrice(auctionId) {
+        try {
+            const [result] = await pool.query(
+                `select bidprice 
+                from bid where aId = ?
+                ORDER by bidprice ASC
+                LIMIT 1`, [auctionId]);
+            return result;
+        } catch (err) {
+            throw new Error('DB Error');
+        }
+    },
+    
     // 메인페이지 기능2 (랭킹) 테스트용 (분리예정)
     async mainpageRankingSearch() {
         try {
