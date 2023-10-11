@@ -2,12 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
 import './bidComponent.css'
-<<<<<<< HEAD
-=======
 import moment from 'moment';
 import Chat from './chat';
 
->>>>>>> 3e2eecd9ae1ea109edc573b8f8c7f9e3ce4e41ed
 
 const axiosConnect = axios.create({
   baseURL: 'http://localhost:12345/api',
