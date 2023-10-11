@@ -13,6 +13,16 @@ router.get('/mainpagetest', async (req, res, next) => {
     }
 });
 
+// 메인페이지 기능 추가를 위해 임시로 넣어뒀음. 하단 금액
+router.get('/mainbidprice/:auctionId', async (req, res, next) => {
+    try {
+        const list = await user.mainpageBidPrice(req.params.auctionId);
+        res.status(200).json(list);
+    } catch (err) {
+        next(err);
+    }
+});
+
 // 메인페이지 기능 추가를 위해 임시로 넣어뒀음. 분리할 예정임
 router.get('/mainpagetest2', async (req, res, next) => {
     try {

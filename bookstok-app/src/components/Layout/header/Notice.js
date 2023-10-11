@@ -4,8 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Notice.css';
 
-
-const Notice = ({ notifications = [] }) => {
+const Notice = ({ notifications = [], currentUserId }) => {
     const [unreadCount, setUnreadCount] = useState(0);
 
     useEffect(() => {
@@ -19,16 +18,26 @@ const Notice = ({ notifications = [] }) => {
             return;
         }
 
-        // 모든 알림을 토스트로 표시
-        notifications.forEach((notificationData) => {
-            const notificationMessage = 
-            <div>
-                새로운 판매자 입찰이 등록되었습니다.
-                가격: {notificationData.price} 원<br/>
-                상세내용: {notificationData.details}
-            </div>
-            console.log('Notification Message:', notificationMessage); // 추가된 부분
-            // 판매자 아이디: ${notificationData.sellerId};
+        // 게시글 작성자에게만 보이도록 필터링
+        const postAuthorNotifications = notifications.filter(
+            (notification) => notification.postAuthorId === currentUserId
+        );
+
+        if (postAuthorNotifications.length === 0) {
+            toast.info('게시글 작성자에게 새로운 알림이 없습니다.');
+            return;
+        }
+
+        // 각 알림을 토스트로 표시
+        postAuthorNotifications.forEach((notificationData) => {
+            const notificationMessage = (
+                <div>
+                    새로운 판매자 입찰이 등록되었습니다.
+                    가격: {notificationData.price} 원<br />
+                    상세내용: {notificationData.details}
+                </div>
+            );
+
             toast.success(notificationMessage);
         });
     };
@@ -37,7 +46,7 @@ const Notice = ({ notifications = [] }) => {
         <div className='header-notice'>
             <button
                 type="button"
-                onClick={notify} // 기존의 마지막 알림을 가져오는 로직 제거
+                onClick={notify}
                 className="btn btn-primary position-relative custom-button text-secondary-emphasis-notice"
             >
                 <svg

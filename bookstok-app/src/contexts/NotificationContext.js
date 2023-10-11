@@ -1,17 +1,18 @@
-// 새 파일을 만들어서, 예: NotificationContext.js
+// NotificationContext.js
 import React, { createContext, useContext, useState } from 'react';
 
 const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
+  const [loggedInUserId, setLoggedInUserId] = useState(null);
 
   const addNotification = (notification) => {
     setNotifications((prevNotifications) => [notification, ...prevNotifications]);
   };
 
   return (
-    <NotificationContext.Provider value={{ notifications, addNotification }}>
+    <NotificationContext.Provider value={{ notifications, addNotification, loggedInUserId, setLoggedInUserId }}>
       {children}
     </NotificationContext.Provider>
   );
