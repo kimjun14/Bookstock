@@ -229,6 +229,14 @@ function Trading() {
     }
   };
 
+  const AuctionCreateAt = (dateString) => {
+    if (dateString === undefined || dateString === null) {
+      return "출판일 미상";
+    }
+    const Date = moment(dateString).format("YYYY-MM-DD");
+    return Date;
+  }
+
   return (
     <>
       <Desktop>
@@ -254,7 +262,7 @@ function Trading() {
                       {auctionData.bookTitle && auctionData.bookTitle}</li>
                     <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>작가</span> {auctionData.bookAuthor && auctionData.bookAuthor}</li>
                     <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>출판사</span> {auctionData.bookPub && auctionData.bookPub}</li>
-                    <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>출판일</span> {auctionData.bookPubDate && auctionData.bookPubDate}</li>
+                    <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>출판일</span> {AuctionCreateAt(auctionData.bookPubDate && auctionData.bookPubDate)}</li>
                     <li className="list-group-item mb-1"><span class="badge" style={{ marginRight: '0.5rem' }}>시작가</span> {auctionData.auctionPrice && auctionData.auctionPrice.toLocaleString()}</li>
                   </ul>
                 </div>
