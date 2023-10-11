@@ -22,6 +22,7 @@ const Tablet = ({ children }) => {
 
 const Payment = () => {
     const [balance, setBalance] = useState(0);
+    const [myinfo, setMyInfo] = useState([]);
 
     const axiosConnect = axios.create({
         baseURL: 'http://localhost:12345/api',
@@ -50,18 +51,16 @@ const Payment = () => {
         fetchBalance();
     }, []);
 
-    const [userData, setUserData] = useState([]);
-
+    const fetchInfoList = async () => {
+        try {
+            const response = await axiosConnect.get(`/mypage/myinfo`)
+            setMyInfo(response.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }
     useEffect(() => {
-        axios.get('/api/user-info')
-            .then((response) => {
-                if (response.data.success) {
-                    setUserData(response.data.data);
-                }
-            })
-            .catch((error) => {
-                console.error('사용자 정보를 가져오는 중 오류:', error);
-            });
+        fetchInfoList();
     }, []);
 
     return (
@@ -73,13 +72,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-                                    <ul>
-                                        {userData.map((user, index) => (
-                                            <li key={index}>
-                                                닉네임: {user.nick}, 아이디: {user.userId}
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    닉네임: {myinfo.nick} 아이디: {myinfo.userId}
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
@@ -100,8 +93,8 @@ const Payment = () => {
                         </div>
                     </div>
                 </div>
-            </Desktop>
 
+            </Desktop>
             <Tablet>
                 <div className="card-container-pay text-center card">
                     <div className="card-body-pay">
@@ -110,11 +103,8 @@ const Payment = () => {
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
                                     <ul>
-                                        {userData.map((user, index) => (
-                                            <li key={index}>
-                                                닉네임: {user.nick}, 아이디: {user.userId}
-                                            </li>
-                                        ))}
+
+                                        닉네임: {myinfo.nick}, 아이디: {myinfo.userId}
                                     </ul>
                                 </div>
                                 <Link to="/deposit">
@@ -145,13 +135,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-                                    <ul>
-                                        {userData.map((user, index) => (
-                                            <li key={index}>
-                                                닉네임: {user.nick}, 아이디: {user.userId}
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    닉네임: {myinfo.nick}, 아이디: {myinfo.userId}
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
