@@ -332,8 +332,7 @@ const MyPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-9" style={{ marginTop: "2rem" }}>
-
+                    <div className="col-md-9">
                         <div className="fs-4 mt-5 mb-4 ms-2 fw-bold">경매 진행 내역</div>
                         <div className="border rounded" style={{ backgroundColor: '#F7F8F9', border: '0px' }}>
                             <div className="d-flex flex-row mb-3 justify-content-around">

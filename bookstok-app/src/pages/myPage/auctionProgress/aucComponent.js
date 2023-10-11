@@ -1,175 +1,143 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import './aucComponent.css'
 
 const axiosConnect = axios.create({
   baseURL: 'http://localhost:12345/api',
   withCredentials: true
 });
 
-const Desktop = ({ children }) => {
-  const isDesktop = useMediaQuery({ minWidth: 1024 })
-  return isDesktop ? children : null
-}
-
-const Mobile = ({ children }) => {
-  const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
-  return isMobile ? children : null
-}
-
-const Tablet = ({ children }) => {
-  const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
-  return isTablet ? children : null
-}
-
-
-const AuctionProgressInfoComponent = () => {
-  const [myAuctionInfo, setMyAuctionInfo] = useState([]);
-  const fetchData = async () => {
-    try {
-      const response = await axiosConnect.get(`/mypage/auction`)
-      setMyAuctionInfo(response.data);
-      console.log(myAuctionInfo, response)
-    } catch (err) {
-      console.error(err);
-    }
-  }
+function AuctionSlider() {
+  const [auctionData, setAuctionData] = useState([]);
 
   useEffect(() => {
-    fetchData()
+    const fetchData = async () => {
+      try {
+        const response = await axiosConnect.get('/mypage/auction');
+        setAuctionData(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchData();
   }, []);
+
+  const Desktop = ({ children }) => {
+    const isDesktop = useMediaQuery({ minWidth: 1024 })
+    return isDesktop ? children : null
+  }
+
+  const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 576 })
+    return isMobile ? children : null
+  }
+
+  const Tablet = ({ children }) => {
+    const isTablet = useMediaQuery({ minWidth: 577, maxWidth: 1023 })
+    return isTablet ? children : null
+  }
+
+  let sliderSettings;
+
+  if (Desktop) {
+    sliderSettings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 2
+    };
+  } else if (Tablet) {
+    sliderSettings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 2,
+      slidesToScroll: 1
+    };
+  } else if (Mobile) {
+    sliderSettings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+  }
 
   return (
     <>
       <Desktop>
-      <div id="bid" className="mt-5 mb-0">
-          <h2>경매 등록 내역</h2>
-        </div>
-        <div>
-          <div>
-            {myAuctionInfo.map((auction, index) => (
-
-              <div key={auction.auctionId} className="container text-center">
-                <Link to={`/trading?id=${auction.auctionId}`}>
-                  <div className="card mb-4">
-                    <div className="card-body d-flex justify-content-center align-items-center">
-                      <img src={auction.bookImgSrc} alt={auction.bookTitle} style={{ width: '30%' }} />
+        <div className="auction-slider-container">
+          {auctionData.length > 0 ? (
+            <Slider {...sliderSettings} className="my-slider">
+              {auctionData.map((auction, index) => (
+                <Link key={index} to={`/trading?id=${auction.auctionId}`} className="tradingLink card-link">
+                  <div className="card auction-card">
+                    <img src={auction.bookImgSrc} alt={auction.bookTitle} className="card-img-top" />
+                    <div className="card-body">
+                      <h4 className="card-title">{auction.bookTitle}</h4>
+                      <p className="card-text">{auction.bookAuthor}</p>
                     </div>
-                    <ul className="list-group list-group-flush">
-                      <li className='list-group-item'>
-                        <h5 className="card-title">{auction.auctionTitle}</h5>
-                      </li>
-                      <li className='list-group-item'>
-                        <strong>가격:</strong> {auction.auctionPrice}
-                      </li>
-                      <li className='list-group-item'>
-                        <p className="card-text">{auction.auctionContext}</p>
-                      </li>
-                      <li className="list-group-item">
-                        <strong>게시일:</strong> {new Date(auction.auctionStart).toLocaleDateString()}
-                      </li>
-                      <li className="list-group-item">
-                        <strong>책 제목:</strong> {auction.bookTitle}
-                      </li>
-                      <li className="list-group-item">
-                        <strong>출판사:</strong> {auction.bookPub}
-                      </li>
-                    </ul>
                   </div>
                 </Link>
-              </div>
-
-            ))}
-          </div>
+              ))}
+            </Slider>
+          ) : (
+            <p>No data available.</p>
+          )}
         </div>
       </Desktop>
       <Tablet>
-        <div id="bid" className="mt-5 mb-0">
-          <h2>경매 등록 내역</h2>
-        </div>
-        <div>
-          <div>
-            {myAuctionInfo.map((auction, index) => (
-
-              <div key={auction.auctionId} className="container text-center">
-                <Link to={`/trading?id=${auction.auctionId}`}>
-                  <div className="card mb-4">
-                    <div className="card-body d-flex justify-content-center align-items-center">
-                      <img src={auction.bookImgSrc} alt={auction.bookTitle} style={{ width: '50%' }} />
+        <div className="auction-slider-container">
+          {auctionData.length > 0 ? (
+            <Slider {...sliderSettings} className="my-slider">
+              {auctionData.map((auction, index) => (
+                <Link key={index} to={`/trading?id=${auction.auctionId}`} className="tradingLink card-link">
+                  <div className="card auction-card">
+                    <img src={auction.bookImgSrc} alt={auction.bookTitle} className="card-img-top" />
+                    <div className="card-body">
+                      <h4 className="card-title">{auction.bookTitle}</h4>
+                      <p className="card-text">{auction.bookAuthor}</p>
                     </div>
-                    <ul className="list-group list-group-flush">
-                      <li className='list-group-item'>
-                        <h5 className="card-title">{auction.auctionTitle}</h5>
-                      </li>
-                      <li className='list-group-item'>
-                        <strong>가격:</strong> {auction.auctionPrice}
-                      </li>
-                      <li className='list-group-item'>
-                        <p className="card-text">{auction.auctionContext}</p>
-                      </li>
-                      <li className="list-group-item">
-                        <strong>게시일:</strong> {new Date(auction.auctionStart).toLocaleDateString()}
-                      </li>
-                      <li className="list-group-item">
-                        <strong>책 제목:</strong> {auction.bookTitle}
-                      </li>
-                      <li className="list-group-item">
-                        <strong>출판사:</strong> {auction.bookPub}
-                      </li>
-                    </ul>
                   </div>
                 </Link>
-              </div>
-
-            ))}
-          </div>
+              ))}
+            </Slider>
+          ) : (
+            <p>No data available.</p>
+          )}
         </div>
       </Tablet>
       <Mobile>
-        <div id="bid" className="mt-5 mb-0">
-          <h2>경매 등록 내역</h2>
-        </div>
-        <div>
-          <div>
-            {myAuctionInfo.map((auction, index) => (
-
-              <div key={auction.auctionId} className="container text-center">
-                <Link to={`/trading?id=${auction.auctionId}`}>
-                  <div className="card mb-4">
-                    <div className="card-body d-flex align-items-center">
-                      <img src={auction.bookImgSrc} alt={auction.bookTitle} style={{ width: '100%' }} />
+        <div className="auction-slider-container">
+          {auctionData.length > 0 ? (
+            <Slider {...sliderSettings} className="my-slider">
+              {auctionData.map((auction, index) => (
+                <Link key={index} to={`/trading?id=${auction.auctionId}`} className="tradingLink card-link">
+                  <div className="card auction-card">
+                    <img src={auction.bookImgSrc} alt={auction.bookTitle} className="card-img-top" />
+                    <div className="card-body">
+                      <h4 className="card-title">{auction.bookTitle}</h4>
+                      <p className="card-text">{auction.bookAuthor}</p>
                     </div>
-                    <ul className="list-group list-group-flush">
-                      <li className='list-group-item'>
-                        <h5 className="card-title">{auction.auctionTitle}</h5>
-                      </li>
-                      <li className='list-group-item'>
-                        <strong>가격:</strong> {auction.auctionPrice}
-                      </li>
-                      <li className='list-group-item'>
-                        <p className="card-text">{auction.auctionContext}</p>
-                      </li>
-                      <li className="list-group-item">
-                        <strong>게시일:</strong> {new Date(auction.auctionStart).toLocaleDateString()}
-                      </li>
-                      <li className="list-group-item">
-                        <strong>책 제목:</strong> {auction.bookTitle}
-                      </li>
-                      <li className="list-group-item">
-                        <strong>출판사:</strong> {auction.bookPub}
-                      </li>
-                    </ul>
                   </div>
                 </Link>
-              </div>
-
-            ))}
-          </div>
+              ))}
+            </Slider>
+          ) : (
+            <p>No data available.</p>
+          )}
         </div>
       </Mobile>
     </>
   );
 }
 
-export default AuctionProgressInfoComponent;
+export default AuctionSlider;
