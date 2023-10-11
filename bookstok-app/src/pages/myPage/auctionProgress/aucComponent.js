@@ -103,7 +103,7 @@ function AuctionSlider() {
               ))}
             </Slider>
           ) : (
-            <p>No data available.</p>
+            <p>등록된 도서가 없습니다.</p>
           )}
         </div>
       </Desktop>
@@ -124,7 +124,7 @@ function AuctionSlider() {
               ))}
             </Slider>
           ) : (
-            <p>No data available.</p>
+            <p>등록한 역경매 도서가 없습니다.</p>
           )}
         </div>
       </Tablet>

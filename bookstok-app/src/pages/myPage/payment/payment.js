@@ -72,7 +72,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-                                    닉네임: {myinfo.nick} 아이디: {myinfo.userId}
+                                    닉네임: {myinfo.nick}
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
@@ -104,7 +104,7 @@ const Payment = () => {
                                 <div className="card-title-pay">
                                     <ul>
 
-                                        닉네임: {myinfo.nick}, 아이디: {myinfo.userId}
+                                        닉네임: {myinfo.nick}
                                     </ul>
                                 </div>
                                 <Link to="/deposit">
@@ -135,7 +135,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-                                    닉네임: {myinfo.nick}, 아이디: {myinfo.userId}
+                                    닉네임: {myinfo.nick}
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
