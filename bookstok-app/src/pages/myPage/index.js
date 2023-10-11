@@ -103,14 +103,6 @@ const MyPage = () => {
                                 <Payment />
                             </div>
                             <div className="col-md-12 mypageSidebar">
-                                <div className="mb-12">
-                                    <h5><Link to='/mypage'>마이 북스탁</Link></h5>
-                                    <ul className="list-unstyled">
-                                        <li onClick={toggleMyInfo} className="text-decoration-none" style={{ fontWeight: '400', cursor: 'pointer' }}>
-                                            내 정보 관리
-                                        </li>
-                                    </ul>
-                                </div>
                                 <div className="mb-3">
                                     <h5><Link to='/mypage'>경매 진행 내역</Link></h5>
                                     <ul className="list-unstyled">
