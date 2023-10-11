@@ -72,7 +72,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-                                    닉네임: {myinfo.nick} 아이디: {myinfo.userId}
+                                    <div>{myinfo.nick}님</div><div style={{ fontSize: '0.8rem', color: 'gainsboro', marginBottom: '0.5rem' }}>{myinfo.userId}</div>
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
@@ -102,10 +102,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-                                    <ul>
-
-                                        닉네임: {myinfo.nick}, 아이디: {myinfo.userId}
-                                    </ul>
+                                <div>{myinfo.nick}님</div><div style={{ fontSize: '0.8rem', color: 'gainsboro', marginBottom: '0.5rem' }}>{myinfo.userId}</div>
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
@@ -135,7 +132,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-                                    닉네임: {myinfo.nick}, 아이디: {myinfo.userId}
+                                <div>{myinfo.nick}님</div><div style={{ fontSize: '0.8rem', color: 'gainsboro', marginBottom: '0.5rem' }}>{myinfo.userId}</div>
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
