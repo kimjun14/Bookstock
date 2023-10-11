@@ -72,11 +72,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-<<<<<<< HEAD
-                                    닉네임: {myinfo.nick}
-=======
                                     <div>{myinfo.nick}님</div><div style={{ fontSize: '0.8rem', color: 'gainsboro', marginBottom: '0.5rem' }}>{myinfo.userId}</div>
->>>>>>> 635280d75bd1d5d6574e798bf175e60322adab96
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
@@ -106,14 +102,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-<<<<<<< HEAD
-                                    <ul>
-
-                                        닉네임: {myinfo.nick}
-                                    </ul>
-=======
                                 <div>{myinfo.nick}님</div><div style={{ fontSize: '0.8rem', color: 'gainsboro', marginBottom: '0.5rem' }}>{myinfo.userId}</div>
->>>>>>> 635280d75bd1d5d6574e798bf175e60322adab96
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
@@ -143,11 +132,7 @@ const Payment = () => {
                             <div className="card-body-pay2">
                                 <img src={icon} alt="프로필 사진" className="icon" />
                                 <div className="card-title-pay">
-<<<<<<< HEAD
-                                    닉네임: {myinfo.nick}
-=======
                                 <div>{myinfo.nick}님</div><div style={{ fontSize: '0.8rem', color: 'gainsboro', marginBottom: '0.5rem' }}>{myinfo.userId}</div>
->>>>>>> 635280d75bd1d5d6574e798bf175e60322adab96
                                 </div>
                                 <Link to="/deposit">
                                     <p className="balance card-text mb-2">{balance.toLocaleString()}원 〉</p>
