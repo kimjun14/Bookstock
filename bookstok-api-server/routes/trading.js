@@ -67,4 +67,15 @@ router.patch('/account', async (req, res, next) => {
     res.status(200).send("통신 성공");
 })
 
+// 경매 완료 페이지
+router.get('/list/done', async (req, res, next) => {
+    try{
+        const result = await model.tradeDoneList(req.session.userNo)
+        res.status(200).json(result);
+    }catch(err){
+        console.log(err);
+        next(err);
+    }
+})
+
 module.exports = router;

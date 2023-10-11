@@ -5,7 +5,7 @@ import { useAuth } from '../../AuthContext';
 import Payment from './payment/payment';
 import AuctionProgress from './auctionProgress/auctionProgress';
 import AuctionTrading from './auctionTrading/auctionTrading';
-import MyInfo from './myinfo/MyInfo';
+import TradeDone from './doneList';
 import './index.css'
 import axios from 'axios';
 
@@ -56,7 +56,7 @@ const Tablet = ({ children }) => {
 const MyPage = () => {
     const [showAuction, setShowAuction] = useState(false);
     const [showTrading, setShowTrading] = useState(false);
-    const [showMyInfo, setShowMyInfo] = useState(false);
+    const [showDone, setShowDone] = useState(false);
 
 
     // 로그인한 사용자가 화면이 랜더링 될 때 (useEffect) fetch를 시도함
@@ -77,16 +77,18 @@ const MyPage = () => {
 
     const toggleAuction = () => {
         setShowAuction(!showAuction);
+        setShowDone(false);
         setShowTrading(false);
     };
 
     const toggleTrading = () => {
         setShowTrading(!showTrading);
         setShowAuction(false);
+        setShowDone(false);
     };
 
-    const toggleMyInfo = () => {
-        setShowMyInfo((prev) => !prev);
+    const toggleShowDone = () => {
+        setShowDone(!showDone);
         setShowAuction(false);
         setShowTrading(false);
     };
@@ -117,9 +119,9 @@ const MyPage = () => {
                                             </div>
                                         </li>
                                         <li>
-                                            <Link to="/auction/completed" className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                            <div onClick={toggleShowDone} className="text-decoration-none" style={{ fontWeight: '400' }}>
                                                 경매 완료
-                                            </Link>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -152,7 +154,7 @@ const MyPage = () => {
                                         <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>거래중</p>
                                     </div>
 
-                                    <div className="p-2 ms-4">
+                                    <div className="p-2 ms-4" onClick={toggleShowDone}>
                                         <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>경매완료</p>
                                     </div>
                                 </div>
@@ -163,7 +165,7 @@ const MyPage = () => {
                                     {/* 상세 내역 보기 버튼과 상세 내역을 보여주는 부분 */}
                                     {showAuction && <AuctionProgress />}
                                     {showTrading && <AuctionTrading infoData={myinfo} />}
-                                    {showMyInfo && <MyInfo infoData={myinfo} />}
+                                    {showDone && <TradeDone/>}
                                 </div>
                             </div>
                         </div>
@@ -181,33 +183,23 @@ const MyPage = () => {
                             <Payment />
                         </div>
                         <div className="col-md-12 mypageSidebar">
-                            <div className="mb-12">
-                                <h5><Link to='/mypage'>마이 북스탁</Link></h5>
-                                <ul className="list-unstyled">
-                                    <li>
-                                        <li onClick={toggleMyInfo} className="text-decoration-none" style={{ fontWeight: '400', cursor: 'pointer' }}>
-                                            내 정보 관리
-                                        </li>
-                                    </li>
-                                </ul>
-                            </div>
                             <div className="mb-4">
                                 <h5><Link to='/mypage'>경매 진행 내역</Link></h5>
                                 <ul className="list-unstyled">
                                     <li>
-                                        <Link to="/auction/ongoing" className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                        <div onClick={toggleAuction} className="text-decoration-none" style={{ fontWeight: '400' }}>
                                             경매 진행중
-                                        </Link>
+                                        </div>
                                     </li>
                                     <li>
-                                        <Link to="/auction/trading" className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                        <div onClick={toggleTrading} className="text-decoration-none" style={{ fontWeight: '400' }}>
                                             거래중
-                                        </Link>
+                                        </div>
                                     </li>
                                     <li>
-                                        <Link to="/auction/completed" className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                        <div onClick={toggleShowDone} className="text-decoration-none" style={{ fontWeight: '400' }}>
                                             경매 완료
-                                        </Link>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -243,7 +235,7 @@ const MyPage = () => {
                                     <p className="text-center text-black">0</p>
                                 </div>
 
-                                <div className="p-2 ms-4">
+                                <div className="p-2 ms-4" onClick={toggleShowDone}>
                                     <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>경매완료</p>
                                     <p className="text-center text-black">0</p>
                                 </div>
@@ -255,7 +247,7 @@ const MyPage = () => {
                                 {/* 상세 내역 보기 버튼과 상세 내역을 보여주는 부분 */}
                                 {showAuction && <AuctionProgress />}
                                 {showTrading && <AuctionTrading infoData={myinfo} />}
-                                {showMyInfo && <MyInfo infoData={myinfo} />}
+                                {showDone && <TradeDone/>}
 
                             </div>
                         </div>
@@ -274,33 +266,23 @@ const MyPage = () => {
                             <Payment />
                         </div>
                         <div className="col-md-12 mypageSidebar">
-                            <div className="mb-12">
-                                <h5><Link to='/mypage'>마이 북스탁</Link></h5>
-                                <ul className="list-unstyled">
-                                    <li>
-                                        <li onClick={toggleMyInfo} className="text-decoration-none" style={{ fontWeight: '400', cursor: 'pointer' }}>
-                                            내 정보 관리
-                                        </li>
-                                    </li>
-                                </ul>
-                            </div>
                             <div className="mb-4">
                                 <h5><Link to='/mypage'>경매 진행 내역</Link></h5>
                                 <ul className="list-unstyled">
                                     <li>
-                                        <Link to="/auction/ongoing" className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                        <div onClick={toggleAuction} className="text-decoration-none" style={{ fontWeight: '400' }}>
                                             경매 진행중
-                                        </Link>
+                                        </div>
                                     </li>
                                     <li>
-                                        <Link to="/auction/trading" className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                        <div onClick={toggleTrading} className="text-decoration-none" style={{ fontWeight: '400' }}>
                                             거래중
-                                        </Link>
+                                        </div>
                                     </li>
                                     <li>
-                                        <Link to="/auction/completed" className="text-decoration-none" style={{ fontWeight: '400' }}>
+                                        <div onClick={toggleShowDone} className="text-decoration-none" style={{ fontWeight: '400' }}>
                                             경매 완료
-                                        </Link>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -335,7 +317,7 @@ const MyPage = () => {
                                     <p className="text-center text-black">0</p>
                                 </div>
 
-                                <div className="p-2 ms-4">
+                                <div className="p-2 ms-4" onClick={toggleShowDone}>
                                     <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>경매완료</p>
                                     <p className="text-center text-black">0</p>
                                 </div>
@@ -347,7 +329,7 @@ const MyPage = () => {
                                 {/* 상세 내역 보기 버튼과 상세 내역을 보여주는 부분 */}
                                 {showAuction && <AuctionProgress />}
                                 {showTrading && <AuctionTrading infoData={myinfo} />}
-                                {showMyInfo && <MyInfo infoData={myinfo} />}
+                                {showDone && <TradeDone/>}
 
                             </div>
                         </div>

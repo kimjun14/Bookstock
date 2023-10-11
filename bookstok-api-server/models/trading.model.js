@@ -80,6 +80,23 @@ const userModel = {
             console.error(err);
             throw new Error('DB Error');
         }
+    },
+    // 통장 변경
+    async tradeDoneList(userId){
+        try {
+            const [result] = await pool.query(
+            `
+            (SELECT *, 'buy' as role FROM trading WHERE buyerId = 63 AND done = 1)
+            UNION
+            (SELECT *, 'sell' as role FROM trading WHERE sellerId = 63 AND done = 1)
+            ORDER BY tradingId;
+            `
+            ,[userId]);
+            return result;
+        } catch (err) {
+            console.error(err);
+            throw new Error('DB Error');
+        }
     }
 }
 
