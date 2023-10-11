@@ -66,7 +66,7 @@ const Payment = () => {
     return (
         <>
             <Desktop>
-                <div className="card-container-pay text-center card">
+                <div className="card-container-pay text-center">
                     <div className="card-body-pay">
                         <div className="pay-container text-center card text-bg-primary">
                             <div className="card-body-pay2">
@@ -96,7 +96,7 @@ const Payment = () => {
 
             </Desktop>
             <Tablet>
-                <div className="card-container-pay text-center card">
+                <div className="card-container-pay text-center">
                     <div className="card-body-pay">
                         <div className="pay-container text-center card text-bg-primary">
                             <div className="card-body-pay2">
@@ -129,7 +129,7 @@ const Payment = () => {
             </Tablet>
 
             <Mobile>
-                <div className="card-container-pay text-center card">
+                <div className="card-container-pay text-center">
                     <div className="card-body-pay">
                         <div className="pay-container text-center card text-bg-primary">
                             <div className="card-body-pay2">
