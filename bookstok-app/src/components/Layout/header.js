@@ -56,6 +56,12 @@ const Header = function () {
         setShowModal(false);
     };
 
+    const handleCategorySelect = (category) => {
+        navigate(`searchResult?query=&category=${category.category}`);
+        console.log(category);
+        setShowModal(false); // 모달을 닫습니다.
+    };
+
     const isBookSignUpPage = location.pathname === "/booksignup";
 
     return (
@@ -106,7 +112,7 @@ const Header = function () {
                             <Button className="col-sm btn header-category" onClick={handleShowModal}>
                                 전체 카테고리
                             </Button>
-                            <CategoryModal show={showModal} onHide={handleCloseModal} />
+                            <CategoryModal show={showModal} onHide={handleCloseModal} onCategorySelect={handleCategorySelect} />
                         </div>
                     )}
                 </div>

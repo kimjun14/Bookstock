@@ -25,6 +25,7 @@ const BookSignUp = () => {
         bookAuthor: '',
         bookPub: '',
         auctionEnd: '',
+        mainCategory:''
     });
     const [selectedDays, setSelectedDays] = useState(1);
     const [showModal, setShowModal] = useState(false);
@@ -134,7 +135,11 @@ const BookSignUp = () => {
 
 
     const handleCategorySelect = (category) => {
-        setSelectedCategory(category); // 선택한 카테고리 업데이트
+        setSelectedCategory(category.name); // 선택한 카테고리 업데이트
+        setProduct((prevProduct) => ({
+            ...prevProduct,
+           mainCategory: category.category
+        }));
         setShowModal(false); // 모달을 닫습니다.
     };
 
