@@ -4,6 +4,8 @@ import './newIndex.css'
 import axios from 'axios';
 import moment from 'moment';
 import { useMediaQuery } from 'react-responsive';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+
 
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
@@ -30,10 +32,10 @@ function BookSearchResult() {
       console.error(err);
     }
   }
-  
-  const fetchSuggestion = async(data) =>{
+
+  const fetchSuggestion = async (data) => {
     try {
-      await axiosConnect.post(`/auctions/suggest/star`,{aId:data})
+      await axiosConnect.post(`/auctions/suggest/star`, { aId: data })
       console.log("OK")
       fetchSearchList(searchKey)
     } catch (err) {
@@ -92,14 +94,15 @@ function BookSearchResult() {
               <td>
 
                 {/* 관심등록 버튼 */}
-                <button onClick={()=>fetchSuggestion(book.auctionId)} className='interestBtn'>
+                <button onClick={() => fetchSuggestion(book.auctionId)} className='interestBtn'>{book.star ? <AiFillHeart color="black" size={20} /> : <AiOutlineHeart size={20} />}
+                  <br></br>{book.star}
                   <img
                     src="http://localhost:12345/images/star.png"
                     alt=""
                     width="20px"
-                  /> {book.star}
+                  />
                 </button>
-                
+
               </td>
             </tr>
           ))}
