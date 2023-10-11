@@ -16,19 +16,56 @@ function BookSearchResult() {
   const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 575 });
   // eslint-disable-next-line
   const [books, setBooks] = useState([]);
+  const [bookData, setBookData] = useState([]);
+  const [bidData, setBidData] = useState([]);
+
+  useEffect(() => {
+    const fetchBookData = async () => {
+      try {
+        const response = await axiosConnect.get('test/mainpagetest');
+        setBookData(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchBookData();
+  }, []);
+
+  useEffect(() => {
+    const fetchBidData = async () => {
+      try {
+        const promises = bookData.map(async (book) => {
+          const bidResponse = await axiosConnect.get(`test/mainbidprice/${book.auctionId}`);
+          console.log("비드데이터", bidResponse);
+          return { auctionId: book.auctionId, bidData: bidResponse.data };
+        });
+
+        const bidResults = await Promise.all(promises);
+
+        setBidData(bidResults);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    if (bookData.length > 0) {
+      fetchBidData();
+    }
+  }, [bookData]);
 
   const fetchSearchList = async () => {
-    try{
-        const response=await axiosConnect.get(`/mypage/recentpage`)
-        setBooks(response.data);
-    }catch(err){
-        console.error(err);
+    try {
+      const response = await axiosConnect.get(`/mypage/recentpage`)
+      setBooks(response.data);
+    } catch (err) {
+      console.error(err);
     }
   }
 
-  const fetchSuggestion = async(data) =>{
+  const fetchSuggestion = async (data) => {
     try {
-      await axiosConnect.post(`/auctions/suggest/star`,{aId:data})
+      await axiosConnect.post(`/auctions/suggest/star`, { aId: data })
       console.log("OK")
       fetchSearchList()
     } catch (err) {
@@ -36,9 +73,9 @@ function BookSearchResult() {
     }
   }
 
-  useEffect(()=>{
-      fetchSearchList();
-  },[]);
+  useEffect(() => {
+    fetchSearchList();
+  }, []);
 
   const AuctionCreateAt = (dateString) => {
     const Date = moment(dateString).format("YYYY-MM-DD HH:mm:ss");
@@ -77,21 +114,30 @@ function BookSearchResult() {
               <td><img src={book.bookImgSrc ? book.bookImgSrc : "http://via.placeholder.com/120x160"} alt="" className='searchBookImg' /></td>
               <td><Link to={`/trading?id=${book.auctionId}`}>{book.bookTitle}</Link></td>
               <td>시작가: {book.auctionPrice}원
-                <br />현재가: 추후 구현 예정</td>
+                <br />현재가:
+                {bidData
+                .filter((bidItem) => bidItem.auctionId === book.auctionId)
+                .map((bidItem) => (
+                  <p className="presentPrice-text" key={bidItem.auctionId}>
+                    {bidItem.bidData[0]?.bidprice ? `${bidItem.bidData[0]?.bidprice}원` : '입찰 금액 없음'}
+                  </p>
+                ))
+              }
+                 </td>
               <td><Link to={`/`}>{book.nickname} </Link></td>
               <td>{AuctionCreateAt(book.auctionStart)} /<br />{AuctionCreateAt(book.auctionEnd)}</td>
               <td>{book.viewCount}</td>
               <td>
 
                 {/* 관심등록 버튼 */}
-                <button onClick={()=>fetchSuggestion(book.auctionId)} className='interestBtn'>
+                <button onClick={() => fetchSuggestion(book.auctionId)} className='interestBtn'>
                   <img
                     src="http://localhost:12345/images/star.png"
                     alt=""
                     width="20px"
                   /> {book.star}
                 </button>
-                
+
               </td>
             </tr>
           ))}
