@@ -1,11 +1,13 @@
 .category-list {
   display: flex;
+  text-align: center;
+
 }
 
 .category-list ul {
   list-style-type: none;
   border: 0px solid red;
-  width: 15rem;
+  width: 100%;
   font-size: large;
   padding-left: 0;
   border-radius: 6px;
@@ -26,6 +28,7 @@
   transition:
     background-color 0.2s,
     color 0.2s;
+
 }
 
 .category-list .mainCate:hover {
@@ -47,20 +50,4 @@
   margin-top: 0.2rem;
   background-color: transparent;
   color: white;
-}
-
-.category-list .subCate {
-  border: 0px solid green;
-  height: 2.5rem;
-  padding-top: 0.4rem;
-  padding-left: 0.5rem;
-  background-color: transparent;
-  color: #424242;
-  transition:
-    background-color 0.2s,
-    color 0.2s;
-    
-}
-.category-list .subCate:hover {
-  color: #1187cf;
 }

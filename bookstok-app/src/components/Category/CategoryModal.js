@@ -12,7 +12,6 @@ const CategoryModal = ({ show, onHide, onCategorySelect, selectedCategory }) => 
             </Modal.Header>
             <Modal.Body>
                 <CategoryList onCategoryClick={(category) => {
-                    // 카테고리 클릭 시 실행할 로직을 여기에 추가
                     console.log(`선택한 카테고리: ${category}`);
                     onCategorySelect(category); // 선택한 카테고리를 부모 컴포넌트로 전달
                 }} />

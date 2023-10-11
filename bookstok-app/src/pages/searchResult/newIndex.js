@@ -70,7 +70,6 @@ function BookSearchResult() {
           backgroundColor: '#f3f3f3'
         }}>
           <tr>
-            <th scope="col">번호</th>
             <th scope="col">표지</th>
             <th scope="col">도서명</th>
             <th scope="col">가격</th>
@@ -83,7 +82,6 @@ function BookSearchResult() {
         <tbody className="table-group-divider" style={{ marginBottom: '2rem' }}>
           {books.map((book) => (
             <tr key={book.index}>
-              <th scope="row">{book.index}</th>
               <td><img src={book.bookImgSrc ? book.bookImgSrc : "http://via.placeholder.com/120x160"} alt="" className='searchBookImg' /></td>
               <td><Link to={`/trading?id=${book.auctionId}`}>{book.bookTitle}</Link></td>
               <td>시작가: {book.auctionPrice}원
