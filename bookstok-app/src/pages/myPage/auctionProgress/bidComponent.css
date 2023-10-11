@@ -28,6 +28,9 @@
   border: 0px;
   height: 8rem;
 }
+.card-bid-container{
+margin: auto;
+}
 
 /* 경매 제목 스타일링 */
 .card h4 {
@@ -107,3 +110,4 @@
   color: #fff;
   background-color: lightslategray;
 }
+
