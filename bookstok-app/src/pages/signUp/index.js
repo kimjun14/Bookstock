@@ -88,24 +88,6 @@ function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigation = useNavigate();
 
-    const KakaoRestApiKey = '861d57b9824340a31ae9c887397ac901'; // Kakao REST API Key
-    const KakaoRedirectUri = 'http://localhost:3000/oauth/callback/kakao'; // Kakao Redirect URI
-
-    const NaverClientId = 'YP_J3Qwb0dVPZzak0x8Q'; // Naver Client ID
-    const NaverRedirectUri = 'http://localhost:3000/auth/naver/callback'; // Naver Redirect URI
-
-    // OAuth 요청 URL
-    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${KakaoRestApiKey}&redirect_uri=${KakaoRedirectUri}&response_type=code`;
-    const naverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${NaverClientId}&redirect_uri=${NaverRedirectUri}&response_type=code`;
-
-    const handleLoginWithKakao = () => {
-        window.location.href = kakaoURL;
-    }
-
-    const handleLoginWithNaver = () => {
-        window.location.href = naverURL;
-    }
-
     const handleSignUpDataChange = (e) => {
         setSignUpData({
             ...signUpData,
@@ -335,20 +317,6 @@ function SignUp() {
                             <small className="text-muted or text-center">OR</small>
                             <div className="line"></div>
                         </div>
-
-                        <div className="socialLogin" style={{ width: '60%', margin: 'auto' }}>
-                            <div className="col-sm-6">
-                                <div className="d-flex align-items-center">
-                                    <img src="/assets/img/kakaoImg.png" style={{ width: '85%', height: '2.7rem', margin: 'auto', cursor: 'pointer', alignItems: 'center', marginRight: '0.5rem' }} alt="카카오 로그인" onClick={handleLoginWithKakao} />
-                                </div>
-                            </div>
-                            <div className="col-sm-6">
-                                <div className="d-flex align-items-center">
-                                    <img src="/assets/img/NaverImg.png" style={{ width: '85%', height: '2.7rem', margin: 'auto', cursor: 'pointer', alignItems: 'center', marginLeft: '0.5rem' }} alt="네이버 로그인" onClick={handleLoginWithNaver} />
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
