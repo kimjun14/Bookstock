@@ -46,7 +46,7 @@
   margin: auto;
 }
 
-.bid-container {
+.bids-container {
   width: 80%;
   margin: auto;
 }
@@ -59,4 +59,12 @@
 .itemExplain {
   width: 82%;
   margin: auto;
+}
+
+@media screen and (max-width: 576px) {
+  .TradingBid-card-body{
+    width: 80%;
+    margin: auto;
+  }
+  
 }

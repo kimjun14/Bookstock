@@ -2,13 +2,17 @@ const pool = require('./pool');
 
 const userModel = {
   // 경매 조회(기본값은 책 제목임)
-  async auctionSearch(bookName,mode) {
-    var category;
-    if(!mode){category="auctionId"}
-    else if(mode==1){category="bookTitle"}
-    else if(mode==2){category="viewCount"}
+  async auctionSearch(bookName,mode,category) {
+    var div,sql;
+    if(!mode){div="auctionId"}
+    else if(mode==1){div="bookTitle"}
+    else if(mode==2){div="viewCount"}
+    if(!category||category=="null"){
+      sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' and done = false order by ${div} DESC limit 10`;
+    }else{
+      sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' and mainCategory=${category} and done = false order by ${div} DESC limit 10`;
+    }
     try {
-      const sql = `SELECT * FROM auction WHERE bookTitle LIKE '%${bookName}%' and done = false order by ${category} DESC limit 10`;
       const [result] = await pool.query(sql);
       return result;
     } catch (err) {

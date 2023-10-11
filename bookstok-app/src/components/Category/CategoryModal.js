@@ -12,7 +12,7 @@ const CategoryModal = ({ show, onHide, onCategorySelect, selectedCategory }) => 
             </Modal.Header>
             <Modal.Body>
                 <CategoryList onCategoryClick={(category) => {
-                    console.log(`선택한 카테고리: ${category}`);
+                    console.log(`선택한 카테고리: ${category.name}`);
                     onCategorySelect(category); // 선택한 카테고리를 부모 컴포넌트로 전달
                 }} />
             </Modal.Body>

@@ -21,6 +21,7 @@ function BookSearchResult() {
   const URLquery = useLocation();
   const queryParams = new URLSearchParams(URLquery.search);
   const searchKey = queryParams.get('query')
+  const category = queryParams.get('category')
   // 자세한 설명은 Trading 참고, 쿼리 문자열의 query(key),검색어(value) 받아옴 
   const [books, setBooks] = useState([]);
   const [filter, setFilter] = useState("");
@@ -28,7 +29,7 @@ function BookSearchResult() {
   const fetchSearchList = async () => {
     try {
       console.log(filter)
-      const response = await axiosConnect.get(`/auctions/search?query=${searchKey}&mode=${filter}`)
+      const response = await axiosConnect.get(`/auctions/search?query=${searchKey}&mode=${filter}&category=${category}`)
       setBooks(response.data);
     } catch (err) {
       console.error(err);
@@ -52,7 +53,7 @@ function BookSearchResult() {
       alert("잘못 된 접근입니다.");    // id쿼리 없이 들어가면 오류 메세지 나오고
       navigation('/');                // 홈('/')화면으로 보내버림 (추후 변경 할 수도)
     }
-  }, [searchKey,filter]);
+  }, [searchKey,filter,category]);
 
   const AuctionCreateAt = (dateString) => {
     const Date = moment(dateString).format("YYYY-MM-DD HH:mm:ss");
