@@ -146,17 +146,14 @@ const MyPage = () => {
                                 <div className="d-flex flex-row mb-3 justify-content-around">
                                     <div className="p-2 ms-4" onClick={toggleAuction}>
                                         <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>경매진행중</p>
-                                        <p className="text-center text-black">0</p>
                                     </div>
 
                                     <div className="p-2 ms-4" onClick={toggleTrading}>
                                         <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>거래중</p>
-                                        <p className="text-center text-black">0</p>
                                     </div>
 
                                     <div className="p-2 ms-4">
                                         <p className="fs-6 mt-4 text-black" style={{ cursor: 'pointer' }}>경매완료</p>
-                                        <p className="text-center text-black">0</p>
                                     </div>
                                 </div>
                             </div>
