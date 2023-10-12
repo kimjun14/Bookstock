@@ -205,7 +205,7 @@ function Trading() {
           console.log(response.data.bidImgSrc)
           setBidData({
             ...bidData,
-            bidImgSrc: `http://localhost:12345/images/bidimg/${response.data.bidImgSrc}`
+            bidImgSrc: `${process.env.REACT_APP_BIDIMG_SERVER}/${response.data.bidImgSrc}`
           })
           console.log(bidData)
           console.log('Image uploaded successfully');

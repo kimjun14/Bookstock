@@ -28,7 +28,7 @@ function Chat({ isOpen, bid, onClose }) {
     };
 
     useEffect(() => {
-        socketRef.current = io.connect('http://localhost:12345', {
+        socketRef.current = io.connect(process.env.REACT_APP_API_SERVER, {
             withCredentials: true
         });
 
