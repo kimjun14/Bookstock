@@ -39,7 +39,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "..", "bookstok-app", "build")));
 app.use(sessionMiddleware);  // req.session 속성을 만들어서 세션 객체를 저장
 
 
@@ -49,6 +51,10 @@ app.use(express.static('public'));
 app.get('/notifications', (req, res) => {
     res.json({data:"응답 테스트"})
   });
+
+app.use("/", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "..", "board-app", "build", "index.html"));
+});
 
 // 404 에러 처리
 app.use((req, res, next) => {

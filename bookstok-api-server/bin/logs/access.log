@@ -1,0 +1,15 @@
+{"text":"테스트","sender":"user","bId":15,"aId":"45"}
+{"text":"hello","sender":"user","bId":4,"aId":"17"}
+{"text":"test","sender":"user","bId":27,"aId":"45"}
+{"text":"dd","sender":"user","bId":7,"aId":"87"}
+{"text":"test","sender":"user","bId":7,"aId":"87"}
+{"text":"test","sender":"user","bId":7,"aId":"87"}
+{"text":"test","sender":"user","bId":7,"aId":"87"}
+{"text":"test","sender":"user","bId":8,"aId":"88"}
+{"text":"test","sender":"user","bId":8,"aId":"88"}
+{"text":"ttest","sender":"user","bId":8,"aId":"88"}
+{"text":"test","sender":"test001","bId":7,"aId":"87"}
+{"text":"test","sender":"test001","bId":7,"aId":"87"}
+{"text":"test","sender":null,"bId":30,"aId":"91"}
+{"text":"test","sender":null,"bId":30,"aId":"91"}
+{"text":"test","sender":"22닉네임","bId":30,"aId":"91"}
