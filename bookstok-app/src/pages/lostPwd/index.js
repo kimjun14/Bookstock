@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser';
 import axios from "axios";
 
 const axiosConnect = axios.create({
-  baseURL: 'http://localhost:12345/api',
+  baseURL: process.env.REACT_APP_API_SERVER,
   withCredentials: true
 });
 

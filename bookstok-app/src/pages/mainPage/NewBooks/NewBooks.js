@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
 const axiosConnect = axios.create({
-    baseURL: 'http://localhost:12345/api',
+    baseURL: process.env.REACT_APP_API_SERVER,
     withCredentials: true
 });
 

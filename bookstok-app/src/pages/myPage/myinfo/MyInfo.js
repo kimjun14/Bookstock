@@ -7,7 +7,7 @@ import Address from "./address/Adress";
 
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
-    baseURL: 'http://localhost:12345/api',
+    baseURL: process.env.REACT_APP_API_SERVER,
     withCredentials: true
 });
 
@@ -17,24 +17,6 @@ const MyInfo = () => {
   const [selectedCategories, setSelectedCategories] = useState([]); // 선택한 카테고리 배열 추가
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigation = useNavigate();
-
-  const KakaoRestApiKey = '861d57b9824340a31ae9c887397ac901'; // Kakao REST API Key
-  const KakaoRedirectUri = 'http://localhost:3000/oauth/callback/kakao'; // Kakao Redirect URI
-
-  const NaverClientId = 'YP_J3Qwb0dVPZzak0x8Q'; // Naver Client ID
-  const NaverRedirectUri = 'http://localhost:3000/auth/naver/callback'; // Naver Redirect URI
-
-  // OAuth 요청 URL
-  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${KakaoRestApiKey}&redirect_uri=${KakaoRedirectUri}&response_type=code`;
-  const naverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${NaverClientId}&redirect_uri=${NaverRedirectUri}&response_type=code`;
-
-  const handleLoginWithKakao = () => {
-      window.location.href = kakaoURL;
-  }
-
-  const handleLoginWithNaver = () => {
-      window.location.href = naverURL;
-  }
 
   const handleSignUpDataChange = (e) => {
       setSignUpData({

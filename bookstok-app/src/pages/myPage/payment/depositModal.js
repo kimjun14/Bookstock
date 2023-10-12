@@ -10,7 +10,7 @@ const DepositModal = ({ openModal, closeModal, cash, selectedBank, account }) =>
   const navigate = useNavigate();
 
   const axiosConnect = axios.create({
-    baseURL: 'http://localhost:12345/api',
+    baseURL: process.env.REACT_APP_API_SERVER,
     withCredentials: true
   });
   

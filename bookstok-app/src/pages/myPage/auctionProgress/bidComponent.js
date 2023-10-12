@@ -7,7 +7,7 @@ import Chat from './chat';
 
 
 const axiosConnect = axios.create({
-  baseURL: 'http://localhost:12345/api',
+  baseURL: process.env.REACT_APP_API_SERVER,
   withCredentials: true
 });
 
@@ -41,7 +41,11 @@ const AuctionProgressInfoComponent = () => {
   // 1:1 채팅 모달 관련 상태
   const [chatPopUp, setChatPopUp] = useState(false);
   const [selectBid, setSelectBid] = useState(null);
-
+  
+  const [myBidInfo, setMyBidInfo] = useState([]);
+  const fetchData = async () =>{
+    try{
+        const response = await axiosConnect 
         } catch (err) {
             console.error(err);
         }
@@ -97,10 +101,9 @@ const AuctionProgressInfoComponent = () => {
                         ))}
                     </div>
                   </div>
-                ))}
               </div>
 
-            ))}
+          
             <Chat isOpen={chatPopUp} bid={selectBid} onClose={closeChatPopUp} />
           </div>
         </div>
@@ -152,7 +155,6 @@ const AuctionProgressInfoComponent = () => {
         </div>
       </Tablet>
 
-<<<<<<< HEAD
             <Mobile>
                 <div id="bid" className="mt-5 mb-3">
                 </div>
@@ -163,18 +165,6 @@ const AuctionProgressInfoComponent = () => {
                                 {/* 입찰한 책에대한 부분 */}
                                 <h4>{myBidInfo[aId][0].auctionTitle}</h4>
                                 {/* 필요한 정보가 더 있다면 myBidInfo[aId][0].key값 쓰면 됨<br />
-=======
-      <Mobile>
-        <div id="bid" className="mt-5 mb-3">
-        </div>
-        <div>
-          <div>
-            {Object.keys(myBidInfo).map(aId => (
-              <div className="card bid-container" key={aId}>
-                {/* 입찰한 책에대한 부분 */}
-                <h4>{myBidInfo[aId][0].auctionTitle}</h4>
-                {/* 필요한 정보가 더 있다면 myBidInfo[aId][0].key값 쓰면 됨<br />
->>>>>>> 3e2eecd9ae1ea109edc573b8f8c7f9e3ce4e41ed
                             없으면 API서버 mypage 모델 myAuctionBid 함수를 수정 */}
                 {/* 여러번 입찰 했다면 아래 메세지가 여러개 나옴 */}
                 {myBidInfo[aId].map(bid => (

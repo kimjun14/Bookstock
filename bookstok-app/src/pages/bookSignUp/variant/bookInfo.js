@@ -22,7 +22,7 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const axiosConnect = axios.create({
-        baseURL: 'http://localhost:12345/api',
+        baseURL: process.env.REACT_APP_API_SERVER,
         withCredentials: true
     });
 
@@ -85,7 +85,7 @@ const BookResearch = ({ aucToInfo, onImageUpload }) => {
                 const response = await axiosConnect.post('/upload/auction', formData);
 
                 if (response.status === 200) {
-                    const uploadedImageSrc = `http://localhost:12345/images/auctionimg/${response.data.bookImgSrc}`;
+                    const uploadedImageSrc = `${process.env.REACT_APP_AUCTIONIMG_SERVER}/${response.data.bookImgSrc}`;
                     // console.log(response.data.bookImgSrc);
                     setBookInfo((prevBookInfo) => ({
                         ...prevBookInfo,

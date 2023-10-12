@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './aucComponent.css';
 
 const axiosConnect = axios.create({
-  baseURL: 'http://localhost:12345/api',
+  baseURL: process.env.REACT_APP_API_SERVER,
   withCredentials: true,
 });
 

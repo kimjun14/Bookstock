@@ -16,7 +16,7 @@ function MainPage() {
     useEffect(() => {
         // 새로운 도서 데이터 가져오기
         const axiosConnect = axios.create({
-            baseURL: 'http://localhost:12345/api',
+            baseURL: process.env.REACT_APP_API_SERVER,
             withCredentials: true
         });
 

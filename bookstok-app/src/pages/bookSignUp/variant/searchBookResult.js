@@ -13,7 +13,7 @@ const SearchBookResult = ({ query, popupToResult }) => {
 
     async function fetchData(query) {
         try {
-            const response = await axios.post('http://localhost:12345/api/search', { query });
+            const response = await axios.post(process.env.REACT_APP_SEARCH_SERVER, { query });
             setData(response.data);
             console.log(data);
         } catch (error) {

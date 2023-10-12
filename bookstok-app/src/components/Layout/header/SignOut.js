@@ -6,7 +6,7 @@ import './SignOut.css'
 
 // axios 통신에 기본 url을 포함시키고 Credentials 옵션을 붙여서 쿠키전송 가능하게 함
 const axiosConnect = axios.create({
-  baseURL: 'http://localhost:12345/api',
+  baseURL: process.env.REACT_APP_API_SERVER,
   withCredentials: true
 });
 
