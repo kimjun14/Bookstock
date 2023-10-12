@@ -7,4 +7,4 @@ require("greenlock-express")
     maintainerEmail: "kimjun14@naver.com",
     cluster: false,
   })
-  .serve(app); // Serves on 80 and 443
+  .serve(app.app); // Serves on 80 and 443
