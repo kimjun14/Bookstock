@@ -116,8 +116,7 @@ function BookSearchResult() {
                     {bidItem.bidData[0]?.bidprice ? `${bidItem.bidData[0]?.bidprice}원` : '입찰 금액 없음'}
                   </p>
                 ))
-              }
-                 </td>
+              }</td>
               <td><Link to={`/`}>{book.nickname} </Link></td>
               <td>{AuctionCreateAt(book.auctionStart)} /<br />{AuctionCreateAt(book.auctionEnd)}</td>
               <td>{book.viewCount}</td>
