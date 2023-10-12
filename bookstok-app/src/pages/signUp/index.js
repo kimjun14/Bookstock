@@ -87,15 +87,38 @@ function SignUp() {
     const [selectedCategories, setSelectedCategories] = useState([]); // 선택한 카테고리 배열 추가
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigation = useNavigate();
+    const [checkEmail, setCheckEmail] = useState("")
+    const [isEmailValid, setIsEmailValid] = useState(false);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const handleSignUpDataChange = (e) => {
         setSignUpData({
             ...signUpData,
             [e.target.name]: e.target.value
-
         });
-        console.log(signUpData);
+        if ([e.target.name]=="userId"){setCheckEmail(e.target.value)}
     }
+    useEffect(()=>{
+        if (emailRegex.test(checkEmail)) {
+            setIsEmailValid(true);
+        }else {
+            setIsEmailValid(false);
+        }
+        console.log(signUpData,isEmailValid);
+        // checkList({userId:checkEmail})
+        setTimeout(()=>{},500)
+    },[checkEmail])
+
+    // const checkList = async(checkData)=>{
+    //     try{
+    //         console.log(checkData);
+    //         const result = await axiosConnect.patch('/users/', checkData);
+    //         console.log(result);
+    //     }catch (err){
+    //         console.error(err);
+    //     }
+    //     console.log("전송완료")
+    // }
 
     const handleConfirmPasswordChange = (e) => {
         const confirmPasswordValue = e.target.value;
@@ -228,6 +251,13 @@ function SignUp() {
                         <div className="row px-3">
                             <label className="mb-0">
                                 <h6 className="mb-0 text-sm">이메일 주소(아이디)</h6>
+                                {isEmailValid === true && (
+                                    <p style={{ color: 'green' }}>✅ 이 이메일 주소는 사용하셔도 괜찮습니다.</p>
+                                )}
+
+                                {isEmailValid === false && (
+                                    <p style={{ color: 'red' }}>✋🏻 이메일 주소를 입력해주세요.</p>
+                                )}
                             </label>
                             <input type="text" name="userId" placeholder="BookStock@email.com"
                                 value={signUpData.userId} onChange={handleSignUpDataChange} />
