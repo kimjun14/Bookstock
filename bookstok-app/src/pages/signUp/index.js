@@ -312,11 +312,6 @@ function SignUp() {
                                 <button className="btn btn-blue-signup text-center mb-1 py-2" onClick={handleSignUpSubmit} >계정 만들기</button>
                             </div>
                         </div>
-                        <div className="row px-3 mb-4 d-flex align-items-center">
-                            <div className="line"></div>
-                            <small className="text-muted or text-center">OR</small>
-                            <div className="line"></div>
-                        </div>
                     </div>
                 </div>
             </div>
