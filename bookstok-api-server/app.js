@@ -32,8 +32,9 @@ const sessionMiddleware = session({
   });
 
 app.use(cors({
-    origin:'http://localhost:12345', // 클라이언트 도메인 주소
-    credentials: true
+  origin: ["http://localhost:12345", "https://bookstock341239.aws2.store"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"],
+  credentials: true
 }));
 app.use(logger('dev'));
 app.use(express.json());

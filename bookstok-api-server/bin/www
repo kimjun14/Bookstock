@@ -27,11 +27,12 @@ app.set('port', port);
 var server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:12345",
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"], // 모든 일반적인 메서드를 여기에 포함시킵니다.
+    origin: ["http://localhost:12345", "https://bookstock341239.aws2.store"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"],
     credentials: true
   }
 });
+
 
 io.use(sharedsession(sessionMiddleware, {
   autoSave: true
