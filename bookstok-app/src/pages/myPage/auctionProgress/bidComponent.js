@@ -7,7 +7,7 @@ import Chat from './chat';
 
 
 const axiosConnect = axios.create({
-  baseURL: process.env.REACT_APP_API_SERVER,
+  baseURL: 'http://localhost:12345/api',
   withCredentials: true
 });
 
