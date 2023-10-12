@@ -40,12 +40,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static('public/images'));
 app.use(express.static(path.join(__dirname, "..", "bookstok-app", "build")));
+
+
 app.use(sessionMiddleware);  // req.session 속성을 만들어서 세션 객체를 저장
 
-
-app.use('/images', express.static('public/images'));
 app.use('/api', indexRouter);
 app.use(express.static('public'));
 app.get('/notifications', (req, res) => {
