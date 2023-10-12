@@ -32,7 +32,7 @@ const sessionMiddleware = session({
   });
 
 app.use(cors({
-    origin:'http://localhost:3000', // 클라이언트 도메인 주소
+    origin:'http://localhost:12345', // 클라이언트 도메인 주소
     credentials: true
 }));
 app.use(logger('dev'));
@@ -53,7 +53,7 @@ app.get('/notifications', (req, res) => {
   });
 
 app.use("/", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "board-app", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "bookstok-app", "build", "index.html"));
 });
 
 // 404 에러 처리
