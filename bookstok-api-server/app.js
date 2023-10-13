@@ -23,7 +23,7 @@ const sessionMiddleware = session({
         maxAge: 1000*60*60*24*7,
         httpOnly: false,
         SameSite:'None',
-        secure:true
+        // secure:true
     },
     secret: 'sometext', // 세션 데이터 암호화를 위한 비밀 키 (보안 목적)
     rolling: true,  // 매 응답마다 쿠키 시간 초기화
@@ -41,7 +41,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/images', express.static('public/images'));
+app.use(express.static(path.join(__dirname, "public", "images")));
 app.use(express.static(path.join(__dirname, "..", "bookstok-app", "build")));
 
 

@@ -128,7 +128,7 @@ const SignIn = function () {
             </Link>
           </div>
         </div>
-        <button className="btn btn-block btn-primary text-center my-3" style={{ width: '100%', fontWeight: '600', fontSize: 'large', height: '3rem', margin: 'auto' }}>
+        <button type="button" className="btn btn-block btn-primary text-center my-3" style={{ width: '100%', fontWeight: '600', fontSize: 'large', height: '3rem', margin: 'auto' }}>
           로그인
         </button>
 
