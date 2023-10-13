@@ -23,7 +23,7 @@ function Buying(props) {
       console.log(err)
     }finally{
       console.log("함수 실행 완료")
-      alert("거래가 완료 되었습니다 <- 수정예정")
+      alert("거래가 완료 되었습니다")
     }
     Nav('/mypage');
   }
